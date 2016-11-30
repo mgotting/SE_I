@@ -1,14 +1,14 @@
-
 package application;
 
-public class Adresse implements Cloneable {
+public class Adresse {
 	private String stra\u00DFe;
 	private String hausnummer;
 	private int postleitzahl;
 	private String ort;
-	private long telefonnummer;
 
-	Adresse(String stra\u00DFe, String hausnummer, int postleitzahl, String ort, long telefonnummer) throws AdressException{
+
+	Adresse(String stra\u00DFe, String hausnummer, int postleitzahl, String ort) throws AdressException{
+		//TODO für alle Attribute Exception-Handling
 		if(ort==null){
 			throw new AdressException("Es wurde kein Ort angegeben!");
 		}
@@ -16,7 +16,6 @@ public class Adresse implements Cloneable {
 		this.hausnummer = hausnummer;
 		this.postleitzahl = postleitzahl;
 		this.ort = ort;
-		this.telefonnummer = telefonnummer;
 	}
 
 	String getStra\u00DFe() {
@@ -30,17 +29,22 @@ public class Adresse implements Cloneable {
 	String getHausnummer() {
 		return hausnummer;
 	}
+	void setHausnummer(String hausnummer){
+		this.hausnummer=hausnummer;
+	}
 
 	int getPostleitzahl() {
 		return postleitzahl;
+	}
+	void setPostleitzahl (int plz){
+		this.postleitzahl=plz;
 	}
 
 	String getOrt() {
 		return ort;
 	}
-
-	long getTelefonnummer() {
-		return telefonnummer;
+	void setOrt (String ort){
+		this.ort=ort;
 	}
 
 	public String toString() {
@@ -64,11 +68,4 @@ public class Adresse implements Cloneable {
 				}
 			}
 		}
-	
-	/**
-	 * Redefinierte Methode, die die Adresse kopiert
-	 */
-	public Adresse clone() throws CloneNotSupportedException{
-		return (Adresse)super.clone();
-	}
 }

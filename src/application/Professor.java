@@ -1,52 +1,51 @@
 package application;
 
-public class Professor extends Hochschulperson implements Cloneable {
+public class Professor extends Person {
 	private String fakultaet;
 	
-	public Professor(String vollst\u00E4ndigerName, String hochschule, String fakultaet) throws NullPointerException{
-		super(vollst\u00E4ndigerName, hochschule);
+	public Professor(String name, String vorname, String fakultaet) throws NullPointerException{
+		super(name, vorname);
 		this.fakultaet=fakultaet;
 	}
 	
-	public Professor(String vollst\u00E4ndigerName, String hochschule, String fakultaet, String stra\u00DFe, String hausnummer, int postleitzahl, Ort ort, long telefonnummer) throws NullPointerException, AdressException{
-		super(vollst\u00E4ndigerName, hochschule, stra\u00DFe, hausnummer, postleitzahl, ort, telefonnummer);
+	public Professor(String name, String vorname, String fakultaet, String stra\u00DFe, String hausnummer, int postleitzahl, String ort) throws NullPointerException, AdressException{
+		super(name, vorname, stra\u00DFe, hausnummer, postleitzahl, ort);
 		this.fakultaet=fakultaet;
 	}
-		
-	public String getFaculty(){
+	
+	public Adresse getAdresse(){
+		return super.getAdresse();
+	}
+	
+	public String getName(){
+		return super.getName();
+	}
+	
+	public void setName(String name) throws NullPointerException{
+		super.setName(name);
+	}
+	
+	public String getVorname(){
+		return super.getVorname();
+	}
+	
+	public void setVorname(String vorname) throws NullPointerException{
+		super.setVorname(vorname);
+	}
+	
+	public String getFakultaet(){
 		return fakultaet;
 	}
 	
+	public void setFakultaet(String fakultaet) throws NullPointerException{
+		setFakultaet(fakultaet);
+	}
+	
 	public String toString(){
-		return getVollständigerName()+"\nFakult\u00E4t:\n"+getFaculty();
+		return "\nName:\n"+getName()+"\nVorname:\n"+getVorname()+"\nFakult\u00E4t:\n"+getFakultaet();
 	}
 	
 	public String getDetails(){
-		return super.getDetails()+"\nFakult\u00E4t:\n"+getFaculty();
-	}
-
-	@Override
-	public String getAssignment() {
-		if(getFaculty()==null){
-			return "Fakult\u00E4t nicht vorhanden";
-		} else {
-		return toString()+"\n"+super.getAssignment();
-		}
-	}
-	/**
-	 * Prüfung ob übergebener Professor mit original übereinstimmt
-	 * @param prof von Typ Professor6
-	 * @return true, bei Gleichheit
-	 */
-	public boolean isSame(Professor prof){
-		return (super.isSame(prof) && getFaculty().equals(prof.getFaculty()));
-	}
-	
-	/**
-	 * Kopiert den Professor
-	 */
-	public Professor clone() throws CloneNotSupportedException {
-		Professor copy = (Professor)super.clone();
-		return copy;
+		return super.getDetails()+"\nFakult\u00E4t:\n"+getFakultaet();
 	}
 }

@@ -1,15 +1,18 @@
 package application;
 
-public class Student extends Hochschulperson implements Cloneable {
+public class Student extends Person  {
+	private int matrikelnummer;
 	private Studiengruppe studiengruppe;
 	
-	public Student(String vollst\u00E4ndigerName, String hochschule, Studiengruppe studiengruppe) throws NullPointerException{
-		super(vollst\u00E4ndigerName, hochschule);
+	public Student(String name, String vorname, int matrikelnummer, Studiengruppe studiengruppe) throws NullPointerException{
+		super(name, vorname);
+		this.matrikelnummer=matrikelnummer;
 		this.studiengruppe=studiengruppe;
 	}
 	
-	public Student(String vollst\u00E4ndigerName, String hochschule, Studiengruppe studiengruppe, String stra\u00DFe, String hausnummer, int postleitzahl, Ort ort, long telefonnummer) throws NullPointerException, AdressException{
-		super(vollst\u00E4ndigerName, hochschule, stra\u00DFe, hausnummer, postleitzahl, ort, telefonnummer);
+	public Student(String name, String vorname, int matrikelnummer, Studiengruppe studiengruppe, String stra\u00DFe, String hausnummer, int postleitzahl, String ort) throws NullPointerException, AdressException{
+		super(name, vorname, stra\u00DFe, hausnummer, postleitzahl, ort);
+		this.matrikelnummer=matrikelnummer;
 		this.studiengruppe=studiengruppe;
 	}
 	
@@ -17,54 +20,43 @@ public class Student extends Hochschulperson implements Cloneable {
 		return super.getAdresse();
 	}
 	
-	public String getVollst\u00E4ndigerName(){
-		return super.getVollst\u00E4ndigerName();
+	public String getName(){
+		return super.getName();
 	}
 	
-	public void setVollst\u00E4ndigerName(String name) throws NullPointerException{
-		super.setVollständigerName(name);
+	public void setName(String name) throws NullPointerException{
+		super.setName(name);
 	}
 	
-	public Studiengruppe getStudygroup(){
+	public String getVorname(){
+		return super.getVorname();
+	}
+	
+	public void setVorname(String vorname)throws NullPointerException{
+		super.setVorname(vorname);
+	}
+	
+	public int getMatrikelnummer(){
+		return matrikelnummer;
+	}
+	
+	public void setMatrikelnummer(int matrikelnummer) throws NullPointerException{
+		setMatrikelnummer(matrikelnummer);
+	}
+	
+	public Studiengruppe getStudiengruppe(){
 		return studiengruppe;
 	}
 	
+	public void setStudiengruppe(Studiengruppe studiengruppe) throws NullPointerException{
+		setStudiengruppe(studiengruppe);
+	}
+	
 	public String toString(){
-		return getVollständigerName()+"\nStudiengruppe:\n"+getStudygroup();
+		return "\nName:\n"+getName()+"\nVorname:\n"+getVorname()+"\nMatrikelnummer:\n"+ getMatrikelnummer()+"\nStudiengruppe:\n"+getStudiengruppe();
 	}
 	
 	public String getDetails(){
-			return super.getDetails()+"\nStudiengruppe:\n"+getStudygroup();
-	}
-
-	@Override
-	public String getAssignment() {
-		if(getStudygroup()==null){
-			return "Studiengruppe nicht vorhanden";
-		} else {
-		return toString()+"\n"+super.getAssignment();
-		}
-	}
-	
-	/**
-	 * Überprüfung ob übergebener Student dem Student entspricht
-	 * @param stud
-	 * @return true bei Gleichheit, false bei Ungleichheit
-	 */
-	public boolean isSame(Student stud) {
-		return (super.isSame(stud) && getStudygroup()==stud.getStudygroup());
-	}
-	
-	public boolean equals(Object stud) {
-		if(!super.equals(stud))
-			return false;
-		return (super.equals(stud) && getStudygroup()==((Student) stud).getStudygroup());
-	}
-	
-	/**
-	 * kopiert Student
-	 */
-	public Student clone() throws CloneNotSupportedException {
-		return (Student) super.clone();
+			return super.getDetails()+"\nMatrikelnummer:\n"+getMatrikelnummer()+"\nStudiengruppe:\n"+getStudiengruppe();
 	}
 }
