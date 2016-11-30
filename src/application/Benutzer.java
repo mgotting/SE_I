@@ -23,6 +23,10 @@ public class Benutzer {
 		return ausgelieheneBuecher;
 	}
 	
+	public Person getPerson(){
+		return person;
+	}
+	
 	public String toString(){
 		return person.getDetails()+"\nBenutzername:\n"+getBenutzername()+"\nAnzahl ausgeliehene Bücher:\n"+getAusgelieheneBuecher();
 	}
