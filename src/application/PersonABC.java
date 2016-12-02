@@ -45,8 +45,6 @@ public abstract class PersonABC {
 	public void setAdresse(Adresse adresse) {
 		this.adresse = adresse;
 	}
-	
-	//TODO Setter&Getter für einzelne Adress-Attribute?
 
 	public String getDetails() {
 		if (getAdresse() == null) {

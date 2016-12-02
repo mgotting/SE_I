@@ -9,7 +9,7 @@ public class test {
 		Student sandra = new Student ("Speckmeier", "Sandra", 123, Studiengruppe.IB3A, "Weg", "1", 85586, "Poing");
 		System.out.println(sandra);
 		
-		sandra.setAdresse("Feld", "1", 85586, "Poing");
+		sandra.getAdresse().setOrt("München");
 		System.out.println(sandra);
 		} catch (AdressException e) {
 			// TODO Auto-generated catch block
