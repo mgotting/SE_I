@@ -4,9 +4,9 @@ public class Benutzer {
 	
 	private String benutzername;
 	private int ausgelieheneBuecher; 
-	private Person person;
+	private PersonABC person;
 	
-	public Benutzer (String benutzername, Person person, int ausgelieheneBuecher){
+	public Benutzer (String benutzername, PersonABC person, int ausgelieheneBuecher){
 		this.benutzername=benutzername;
 		this.person=person;
 		this.ausgelieheneBuecher=ausgelieheneBuecher;
@@ -22,8 +22,11 @@ public class Benutzer {
 	public int getAusgelieheneBuecher(){
 		return ausgelieheneBuecher;
 	}
+	public void setAusgelieheneBuecher(int ausgehlieheneBuecher){
+		setAusgelieheneBuecher(ausgelieheneBuecher);
+	}
 	
-	public Person getPerson(){
+	public PersonABC getPerson(){
 		return person;
 	}
 	

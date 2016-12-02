@@ -1,6 +1,6 @@
 package application;
 
-public class Student extends Person  {
+public class Student extends PersonABC  {
 	private int matrikelnummer;
 	private Studiengruppe studiengruppe;
 	
@@ -14,26 +14,6 @@ public class Student extends Person  {
 		super(name, vorname, stra\u00DFe, hausnummer, postleitzahl, ort);
 		this.matrikelnummer=matrikelnummer;
 		this.studiengruppe=studiengruppe;
-	}
-	
-	public Adresse getAdresse(){
-		return super.getAdresse();
-	}
-	
-	public String getName(){
-		return super.getName();
-	}
-	
-	public void setName(String name) throws NullPointerException{
-		super.setName(name);
-	}
-	
-	public String getVorname(){
-		return super.getVorname();
-	}
-	
-	public void setVorname(String vorname)throws NullPointerException{
-		super.setVorname(vorname);
 	}
 	
 	public int getMatrikelnummer(){
@@ -51,9 +31,9 @@ public class Student extends Person  {
 	public void setStudiengruppe(Studiengruppe studiengruppe) throws NullPointerException{
 		setStudiengruppe(studiengruppe);
 	}
-	
+	//nur zum Testen
 	public String toString(){
-		return "\nName:\n"+getName()+"\nVorname:\n"+getVorname()+"\nMatrikelnummer:\n"+ getMatrikelnummer()+"\nStudiengruppe:\n"+getStudiengruppe();
+		return "\nName:\n"+getName()+"\nVorname:\n"+getVorname()+"\nMatrikelnummer:\n"+ getMatrikelnummer()+"\nStudiengruppe:\n"+getStudiengruppe()+"\nAdresse:\n"+ getAdresse();
 	}
 	
 	public String getDetails(){

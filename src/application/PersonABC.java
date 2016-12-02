@@ -1,12 +1,12 @@
 package application;
 
-public abstract class Person {
+public abstract class PersonABC {
 
 	private String name;
 	private String vorname;
 	private Adresse adresse;
 
-	public Person(String name, String vorname) throws NullPointerException  {
+	public PersonABC(String name, String vorname) throws NullPointerException  {
 		if (name == null || vorname == null){
 			throw new NullPointerException("Es wurde kein Name angegeben!");
 		} else {
@@ -15,42 +15,38 @@ public abstract class Person {
 		}
 	}
 
-	public Person(String name, String vorname, String stra\u00DFe, String hausnummer, int postleitzahl, String ort) throws NullPointerException, AdressException {
+	public PersonABC(String name, String vorname, String stra\u00DFe, String hausnummer, int postleitzahl, String ort) throws NullPointerException, AdressException {
 		this(name, vorname);
-		//TODO Exception-Handling für alle Attribute
-		if(ort!=null){
 		adresse = new Adresse(stra\u00DFe, hausnummer, postleitzahl, ort);
-		} else {
-			throw new AdressException("Es wurde kein Ort angegeben!");
-		}
 	}
 
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) throws NullPointerException {
 		this.name = name;
 	}
+	
 	public String getVorname() {
 		return vorname;
 	}
-
 	public void setVorname(String vorname) throws NullPointerException {
 		this.vorname = vorname;
 	}
 
 	public Adresse getAdresse() {
-		return adresse;
-	}
-
-	public void setStrasse(String strasse){
-	 adresse.setStraße(strasse);
+		if(adresse==null){
+			return null;
+		}else{
+			return adresse;
+		}
 	}
 	
 	public void setAdresse(Adresse adresse) {
 		this.adresse = adresse;
 	}
+	
+	//TODO Setter&Getter für einzelne Adress-Attribute?
 
 	public String getDetails() {
 		if (getAdresse() == null) {

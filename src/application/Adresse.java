@@ -8,10 +8,6 @@ public class Adresse {
 
 
 	Adresse(String stra\u00DFe, String hausnummer, int postleitzahl, String ort) throws AdressException{
-		//TODO für alle Attribute Exception-Handling
-		if(ort==null){
-			throw new AdressException("Es wurde kein Ort angegeben!");
-		}
 		this.stra\u00DFe = stra\u00DFe;
 		this.hausnummer = hausnummer;
 		this.postleitzahl = postleitzahl;
