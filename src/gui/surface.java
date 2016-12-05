@@ -17,7 +17,6 @@ public class surface {
 	JComboBox benutzerAuswahl = new JComboBox(benutzerliste);
 	private static String[] menueliste = {"Menü:", "Ausleihe", "Rückgabe", "Bücher anzeigen", "Bücher inventarisieren", "Benutzer anlegen/anzeigen", "Person ändern"};
 	JComboBox menueAuswahl = new JComboBox (menueliste);
-	//evtl. unnötig
 	private static String[] menuelisteAllg = {"Menü:", "Ausleihe", "Rückgabe", "Bücher anzeigen", "Bücher inventarisieren", "Benutzer anlegen/anzeigen", "Person ändern", "Logout"};
 	JComboBox menue2Auswahl = new JComboBox (menuelisteAllg);
 	private static String[] statusliste = {"Status wählen", "ausleihbar", "ausgeliehen", "nicht ausleihbar"};
