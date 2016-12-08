@@ -13,8 +13,8 @@ public class test {
 		//gui.launchRent();
 		//gui.launchReturn();
 		//gui.launchStatus();
-		//gui.launchInventar();
-		gui.launchCreate();
+		gui.launchInventar();
+		//gui.launchCreate();
 
 	}
 
