@@ -13,7 +13,11 @@ public class test {
 		//gui.launchRent();
 		//gui.launchReturn();
 		//gui.launchStatus();
+<<<<<<< HEAD
 		//gui.launchInventar();
+=======
+		gui.launchInventar();
+>>>>>>> branch 'master' of https://github.com/mgotting/SE_I.git
 		//gui.launchCreate();
 
 	}
