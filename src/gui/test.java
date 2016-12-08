@@ -14,7 +14,7 @@ public class test {
 		//gui.launchReturn();
 		//gui.launchStatus();
 		//gui.launchInventar();
-		gui.launchInventar();
+		//gui.launchInventar();
 		//gui.launchCreate();
 	}
 
