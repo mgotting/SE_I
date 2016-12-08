@@ -6,7 +6,7 @@ import java.awt.*;
 
 // Erstellt die Oberfläche der GUI
 
-public class surface {
+public class surface /*extends JFrame*/{
 	public JFrame login, rent, back, status, inventory, create;	//warum public?
 	private Container contentpane, contentpane2, contentpane3, contentpane4, contentpane5, contentpane6;
 	private JButton ok, ausleihen, zurückgeben ;
