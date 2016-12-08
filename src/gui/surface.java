@@ -8,7 +8,7 @@ import java.awt.*;
 
 public class surface /*extends JFrame*/{
 	public JFrame login, rent, back, status, inventory, create;	//warum public?
-	private Container contentpane, contentpane2, contentpane3, contentpane4, contentpane5, contentpane6;
+	private JPanel contentpane, contentpane2, contentpane3, contentpane4, contentpane5, contentpane6;
 	private JButton ok, ausleihen, zurückgeben ;
 	public JTextField username, pw, titel, autor, isbn, name, vorname, matnr, sg, fak, str, hausnr, plz, ort;	//warum public?
 	public JLabel benutzername, passwort, bTitel, bAutor, bISBN, pName, pVorname, matrikelnummer, studiengruppe, fakultaet, strasse, hausnummer, postleitzahl, pOrt;
@@ -54,7 +54,7 @@ public class surface /*extends JFrame*/{
 	public surface (){
 		//LOGIN-GUI
 		login = new JFrame ("Login");
-		contentpane = new Container();
+		contentpane = new JPanel();
 		login.setContentPane(contentpane);
 		contentpane.setLayout(null);
 		ok = new JButton("OK");
@@ -69,7 +69,7 @@ public class surface /*extends JFrame*/{
 		
 		//AUSLEIH-GUI
 		rent = new JFrame ("Ausleihe");
-		contentpane2 = new Container();
+		contentpane2 = new JPanel();
 		rent.setContentPane(contentpane2);
 		contentpane2.setLayout(null);
 		ausleihen = new JButton ("ausleihen");
@@ -83,27 +83,27 @@ public class surface /*extends JFrame*/{
 		
 		//RÜCKGABE-GUI
 		back = new JFrame ("Rückgabe");
-		contentpane3 = new Container();
+		contentpane3 = new JPanel();
 		back.setContentPane(contentpane3);
 		contentpane3.setLayout(null);
 		zurückgeben = new JButton ("zurückgeben");
 		
 		//STATUS-GUI
 		status = new JFrame ("Buchstatus");
-		contentpane4 = new Container();
+		contentpane4 = new JPanel();
 		status.setContentPane(contentpane4);
 		contentpane4.setLayout(null);
 		statusAuswahl.setBackground(Color.white);
 		
 		//INVENT-GUI
 		inventory = new JFrame ("Buch inventarisieren");
-		contentpane5 = new Container();
+		contentpane5 = new JPanel();
 		inventory.setContentPane(contentpane5);
 		contentpane5.setLayout(null);
 		
 		//CREATE-GUI
 		create = new JFrame ("Benutzer anlegen");
-		contentpane6 = new Container();
+		contentpane6 = new JPanel();
 		create.setContentPane(contentpane6);
 		contentpane6.setLayout(null);
 		//TODO
