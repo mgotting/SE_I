@@ -21,8 +21,6 @@ public class surface {
 	JComboBox menue2Auswahl = new JComboBox (menuelisteAllg);
 	private static String[] statusliste = {"Status wählen", "ausleihbar", "ausgeliehen", "nicht ausleihbar"};
 	JComboBox statusAuswahl = new JComboBox (statusliste);
-	private static String[] personenliste = {"Person wählen", "Student", "Professor"};
-	JComboBox personAuswahl = new JComboBox (personenliste);
 	
 	//Layout LOGIN-GUI:
 	int ylogin_north = 20;

@@ -5,9 +5,11 @@ public class Benutzer {
 	private String benutzername;
 	private int ausgelieheneBuecher; 
 	private PersonABC person;
+	private String passwort;
 	
-	public Benutzer (String benutzername, PersonABC person, int ausgelieheneBuecher){
+	public Benutzer (String benutzername, String passwort, PersonABC person, int ausgelieheneBuecher){
 		this.benutzername=benutzername;
+		this.passwort=passwort;
 		this.person=person;
 		this.ausgelieheneBuecher=ausgelieheneBuecher;
 	}
@@ -19,6 +21,14 @@ public class Benutzer {
 		setBenutzername(benutzername);
 	}
 	
+	public String getPasswort() {
+		return passwort;
+	}
+
+	public void setPasswort(String passwort) {
+		this.passwort = passwort;
+	}
+
 	public int getAusgelieheneBuecher(){
 		return ausgelieheneBuecher;
 	}

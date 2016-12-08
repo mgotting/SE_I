@@ -9,12 +9,12 @@ public class test {
 		surface gui;
 		
 		gui = new surface();
-		//gui.launchLogin();
+		gui.launchLogin();
 		//gui.launchRent();
 		//gui.launchReturn();
 		//gui.launchStatus();
 		//gui.launchInventar();
-		gui.launchCreate();
+		//gui.launchCreate();
 
 	}
 
