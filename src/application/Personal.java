@@ -16,4 +16,5 @@ public class Personal extends PersonABC {
 	public void setBibID(String bibID) {
 		this.bibID = bibID;
 	}
+	
 }
