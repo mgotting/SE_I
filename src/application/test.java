@@ -11,6 +11,8 @@ public class test {
 		
 		sandra.getAdresse().setOrt("München");
 		System.out.println(sandra);
+		
+		System.out.println("INSERT INTO student(Name, Gruppe) VALUES ('Gottinger', 'IB3A');");
 		} catch (AdressException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
