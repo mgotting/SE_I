@@ -34,10 +34,17 @@ public class ButtonHandler implements ActionListener {
 				//1. einfügen in Tabelle Person
 				String insertPerson = "INSERT INTO person(Vorname, Name) VALUES ('"+student.getVorname()+"','"+student.getName()+"');";
 				boolean personVerbucht = con.executequery(insertPerson);
-				//TODO PersonID erhalten, die in Datenbank per AI erstellt wurde
+				//erhalten der generierten PersonID
+				int generatedID = con.executequery_autoKey(insertPerson, true);
 				//2. einfügen in Tabelle Student
-				String insertStudent = "INSERT INTO student(Matrikelnummer, Studiengruppe, PersonID) VALUES ('"+student.getMatrikelnummer()+"',"+student.getStudiengruppe().toString()+"');";
+				String insertStudent = "INSERT INTO student(Matrikelnummer, Studiengruppe, PersonID) VALUES ('"+student.getMatrikelnummer()+"',"+student.getStudiengruppe().toString()+"',"+generatedID+");";
 				boolean studentVerbucht = con.executequery(insertStudent);
+				//3. einfügen in Tabelle Benutzer
+				//TODO: Wo sind in der GUI die Daten hinterlegt?
+				Benutzer benutzer = new Benutzer(benutzername, passwort, student, ausgelieheneBuecher);
+				//Wenn Studentenobjekt erfolgreich erstellt, dann in Datenbank sichern
+				String insertBenutzer = "INSERT INTO benutzer(Benutzername, Passwort) VALUES ('"+benutzer.getBenutzername()+"',"+benutzer.getPasswort()+"');";
+				boolean benutzerVerbucht = con.executequery(insertBenutzer);
 				con.disconnect();
 			}
 		} catch (Exception f){
