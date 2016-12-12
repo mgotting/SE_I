@@ -8,25 +8,37 @@ public class Adresse {
 
 
 	Adresse(String stra\u00DFe, String hausnummer, int postleitzahl, String ort) throws AdressException{
-		this.stra\u00DFe = stra\u00DFe;
-		this.hausnummer = hausnummer;
-		this.postleitzahl = postleitzahl;
-		this.ort = ort;
+		if(stra\u00DFe==null || hausnummer==null || ort==null){
+			throw new AdressException("Es fehlt eine Eingabe!");
+		}else{
+			this.stra\u00DFe = stra\u00DFe;
+			this.hausnummer = hausnummer;
+			this.postleitzahl = postleitzahl;
+			this.ort = ort;
+		}
 	}
 
 	String getStra\u00DFe() {
 		return stra\u00DFe;
 	}
 
-	void setStra\u00DFe(String stra\u00DFe) {
-		this.stra\u00DFe = stra\u00DFe;
+	void setStra\u00DFe(String stra\u00DFe) throws AdressException{
+		if(stra\u00DFe==null){
+			throw new AdressException ("Es wurde keine Straﬂe eingetragen");
+		}else{
+			this.stra\u00DFe = stra\u00DFe;
+		}
 	}
 
 	String getHausnummer() {
 		return hausnummer;
 	}
-	void setHausnummer(String hausnummer){
-		this.hausnummer=hausnummer;
+	void setHausnummer(String hausnummer) throws AdressException{
+		if(hausnummer==null){
+			throw new AdressException ("Es wurde keine Hausnummer eingetragen");
+		}else{
+			this.hausnummer=hausnummer;
+		}
 	}
 
 	int getPostleitzahl() {
@@ -39,8 +51,12 @@ public class Adresse {
 	String getOrt() {
 		return ort;
 	}
-	void setOrt (String ort){
-		this.ort=ort;
+	void setOrt (String ort) throws AdressException{
+		if(ort==null){
+			throw new AdressException ("Es wurde kein Ort eingetragen");
+		}else{
+			this.ort=ort;
+		}
 	}
 
 	public String toString() {

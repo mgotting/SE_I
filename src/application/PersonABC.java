@@ -17,21 +17,33 @@ public abstract class PersonABC {
 
 	public PersonABC(String name, String vorname, String stra\u00DFe, String hausnummer, int postleitzahl, String ort) throws NullPointerException, AdressException {
 		this(name, vorname);
-		adresse = new Adresse(stra\u00DFe, hausnummer, postleitzahl, ort);
+		if (adresse==null){
+			throw new AdressException("Es wurde kein Adresse angegeben!");
+		}else{
+			adresse = new Adresse(stra\u00DFe, hausnummer, postleitzahl, ort);
+		}
 	}
 
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) throws NullPointerException {
-		this.name = name;
+		if(name==null){
+			throw new NullPointerException ("Es wurde keine Name eingetragen");
+		}else{
+			this.name = name;
+		}
 	}
 	
 	public String getVorname() {
 		return vorname;
 	}
 	public void setVorname(String vorname) throws NullPointerException {
-		this.vorname = vorname;
+		if(vorname==null){
+			throw new NullPointerException ("Es wurde keine Vorname eingetragen");
+		}else{
+			this.vorname = vorname;
+		}
 	}
 
 	public Adresse getAdresse() {
@@ -42,8 +54,12 @@ public abstract class PersonABC {
 		}
 	}
 	
-	public void setAdresse(Adresse adresse) {
-		this.adresse = adresse;
+	public void setAdresse(Adresse adresse)throws AdressException {
+		if(adresse==null){
+			throw new AdressException ("Es wurde keine Adresse eingetragen");
+		}else{
+			this.adresse = adresse;
+		}
 	}
 
 	public String getDetails() {

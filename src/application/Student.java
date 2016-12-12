@@ -7,20 +7,28 @@ public class Student extends PersonABC  {
 	public Student(String name, String vorname, int matrikelnummer, Studiengruppe studiengruppe) throws NullPointerException{
 		super(name, vorname);
 		this.matrikelnummer=matrikelnummer;
-		this.studiengruppe=studiengruppe;
+			if (studiengruppe==null){
+				throw new NullPointerException("Es wurde keine Studiengruppe eingetragen!");	
+		}else{			
+			this.studiengruppe=studiengruppe;
+		}
 	}
 	
 	public Student(String name, String vorname, int matrikelnummer, Studiengruppe studiengruppe, String stra\u00DFe, String hausnummer, int postleitzahl, String ort) throws NullPointerException, AdressException{
 		super(name, vorname, stra\u00DFe, hausnummer, postleitzahl, ort);
 		this.matrikelnummer=matrikelnummer;
-		this.studiengruppe=studiengruppe;
+			if (studiengruppe==null){
+				throw new NullPointerException("Es wurde keine Studiengruppe eingetragen!");	
+			}else{			
+				this.studiengruppe=studiengruppe;
+			}
 	}
 	
 	public int getMatrikelnummer(){
 		return matrikelnummer;
 	}
 	
-	public void setMatrikelnummer(int matrikelnummer) throws NullPointerException{
+	public void setMatrikelnummer(int matrikelnummer){
 		setMatrikelnummer(matrikelnummer);
 	}
 	
@@ -29,7 +37,11 @@ public class Student extends PersonABC  {
 	}
 	
 	public void setStudiengruppe(Studiengruppe studiengruppe) throws NullPointerException{
-		setStudiengruppe(studiengruppe);
+		if(studiengruppe==null){
+			throw new NullPointerException ("Es wurde keine Studiengruppe eingetragen");
+		}else{
+			setStudiengruppe(studiengruppe);
+		}
 	}
 	//nur zum Testen
 	public String toString(){

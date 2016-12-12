@@ -6,14 +6,22 @@ public class Professor extends PersonABC {
 	
 	public Professor(String name, String vorname, String fakultaet, int profID) throws NullPointerException{
 		super(name, vorname);
-		this.fakultaet=fakultaet;
 		this.profID=profID;
+			if (fakultaet == null){			
+				throw new NullPointerException("Es wurde keine Fakultät eingetragen!");			
+			}else{
+				this.fakultaet=fakultaet;
+			}
 	}
 	
 	public Professor(String name, String vorname, String fakultaet, int profID, String stra\u00DFe, String hausnummer, int postleitzahl, String ort) throws NullPointerException, AdressException{
 		super(name, vorname, stra\u00DFe, hausnummer, postleitzahl, ort);
-		this.fakultaet=fakultaet;
 		this.profID=profID;
+			if (fakultaet != null){			
+				this.fakultaet=fakultaet;			
+			}else{
+				throw new NullPointerException("Es wurde keine Fakultät eingetragen!");
+			}
 	}
 	
 	public String getFakultaet(){
@@ -21,7 +29,11 @@ public class Professor extends PersonABC {
 	}
 	
 	public void setFakultaet(String fakultaet) throws NullPointerException{
-		setFakultaet(fakultaet);
+		if(fakultaet==null){
+			throw new NullPointerException ("Es wurde keine Fakultät eingetragen");
+		}else{
+			setFakultaet(fakultaet);
+		}
 	}
 	
 	public int getProfID() {
