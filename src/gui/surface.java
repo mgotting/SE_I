@@ -3,248 +3,428 @@ package gui;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * @author Sandra
+ *
+ */
 
 // Erstellt die Oberfläche der GUI
 
-public class surface /*extends JFrame*/{
-	public JFrame login, rent, back, status, inventory, create;	//warum public?
-	private JPanel contentpane, contentpane2, contentpane3, contentpane4, contentpane5, contentpane6;
-	private JButton ok, ausleihen, zurückgeben ;
-	public JTextField username, pw, titel, autor, isbn, name, vorname, matnr, sg, fak, str, hausnr, plz, ort;	//warum public?
-	public JLabel benutzername, passwort, bTitel, bAutor, bISBN, pName, pVorname, matrikelnummer, studiengruppe, fakultaet, strasse, hausnummer, postleitzahl, pOrt;
-	
-	private static String[] benutzerliste = {"Benutzer wählen", "Student", "Professor", "Personal"};
+public class surface /* extends JFrame */ {
+	public JFrame login, rent, back, status, inventory, create, alter; // warum public?
+	private JPanel contentpane, contentpane2, contentpane3, contentpane4, contentpane5, contentpane6, contentpane7;
+	private JButton ok, ausleihen, zurückgeben, ändern, löschen;
+	public JTextField username, pw, titel, autor, isbn, name, vorname, matnr, sg, fak, str, hausnr, plz, ort; // warum public?
+	public JLabel benutzername, passwort, bTitel, bAutor, bISBN, pName, pVorname, matrikelnummer, studiengruppe,
+			fakultaet, strasse, hausnummer, postleitzahl, pOrt;
+
+	private static String[] benutzerliste = { "Benutzer wählen", "Student", "Professor", "Personal" };
 	JComboBox benutzerAuswahl = new JComboBox(benutzerliste);
-	private static String[] menueliste = {"Menü:", "Ausleihe", "Rückgabe", "Bücher anzeigen", "Bücher inventarisieren", "Benutzer anlegen/anzeigen", "Person ändern"};
-	JComboBox menueAuswahl = new JComboBox (menueliste);
-	private static String[] menuelisteAllg = {"Menü:", "Ausleihe", "Rückgabe", "Bücher anzeigen", "Bücher inventarisieren", "Benutzer anlegen/anzeigen", "Person ändern", "Logout"};
-	JComboBox menue2Auswahl = new JComboBox (menuelisteAllg);
-	private static String[] statusliste = {"Status wählen", "ausleihbar", "ausgeliehen", "nicht ausleihbar"};
-	JComboBox statusAuswahl = new JComboBox (statusliste);
-	
-	//Layout LOGIN-GUI:
+	private static String[] menueliste = { "Menü:", "Ausleihe", "Rückgabe", "Bücher anzeigen", "Bücher inventarisieren",
+			"Benutzer anlegen/anzeigen", "Person ändern" };
+	JComboBox menueAuswahl = new JComboBox(menueliste);
+	private static String[] menuelisteAllg = { "Menü:", "Ausleihe", "Rückgabe", "Bücher anzeigen",
+			"Bücher inventarisieren", "Benutzer anlegen/anzeigen", "Person ändern", "Logout" };
+	JComboBox menue2Auswahl = new JComboBox(menuelisteAllg);
+	private static String[] statusliste = { "Status wählen", "ausleihbar", "ausgeliehen", "nicht ausleihbar" };
+	JComboBox statusAuswahl = new JComboBox(statusliste);
+
+	// Layout LOGIN-GUI:
 	int ylogin_north = 20;
 	int ylogin_center = 70;
 	int yloginUser_center = 120;
 	int yloginUser2_center = 140;
 	int yloginPW_center = 180;
 	int yloginPW2_center = 200;
-	
-	//Layout allgemein:
+
+	// Layout allgemein:
 	int xOK_width = 70;
-	int xRENT_width = 90;
+	int xButton_width = 90;
 	int yMENU_north = 10;
-	
+
 	int y_north = 60;
 	int y_north2 = 80;
+	int y_north3 = 100;
 	int y_center = 120;
 	int y_center2 = 140;
+	int y_center3 = 160;
 	int y_south = 180;
 	int y_south2 = 200;
-	int y_south3 = 250;
-	//int y_south4 = 260;
+	int y_south3 = 220;
+	int y_south4 = 240;
+	int y_south5 = 250;
+	int y_south6 = 260;
+	int y_opt1 = 300;
+	int y_opt2 = 320;
+	int y_opt3 = 340;
+	int y_opt4 = 360;
+	int y_opt5 = 390;
 	int y_bottom = 350;
 	int x_left = 10;
 	int x_center = 140;
 	int x_right = 330;
 	int x_width = 160;
 	int y_height = 20;
-	
-	
-	public surface (){
-		//LOGIN-GUI
-		login = new JFrame ("Login");
+
+	public surface() {
+		// LOGIN-GUI
+		login = new JFrame("Login");
 		contentpane = new JPanel();
 		login.setContentPane(contentpane);
 		contentpane.setLayout(null);
 		ok = new JButton("OK");
+		benutzername = new JLabel("Benutzername:", JLabel.LEFT);
+		passwort = new JLabel("Passwort:", JLabel.LEFT);
 		username = new JTextField(45);
 		pw = new JTextField(10);
-		benutzername = new JLabel("Benutzername:", JLabel.LEFT);
-		benutzername.setBackground(Color.white);
-		passwort = new JLabel("Passwort:", JLabel.LEFT);
-		passwort.setBackground(Color.white);
-		benutzerAuswahl.setBackground(Color.white);
 		menueAuswahl.setBackground(Color.white);
-		
-		//AUSLEIH-GUI
-		rent = new JFrame ("Ausleihe");
+
+		// AUSLEIH-GUI
+		rent = new JFrame("Ausleihe");
 		contentpane2 = new JPanel();
 		rent.setContentPane(contentpane2);
 		contentpane2.setLayout(null);
-		ausleihen = new JButton ("ausleihen");
-		titel = new JTextField(50);
-		autor = new JTextField(45);
-		isbn = new JTextField(20);
+		ausleihen = new JButton("ausleihen");
 		bTitel = new JLabel("Buchtitel:", JLabel.LEFT);
 		bAutor = new JLabel("Autor:", JLabel.LEFT);
 		bISBN = new JLabel("ISBN-Nummer:", JLabel.LEFT);
+		titel = new JTextField(50);
+		autor = new JTextField(45);
+		isbn = new JTextField(20);
+
 		menue2Auswahl.setBackground(Color.white);
-		
-		//RÜCKGABE-GUI
-		back = new JFrame ("Rückgabe");
+		benutzerAuswahl.setBackground(Color.white);
+
+		// RÜCKGABE-GUI
+		back = new JFrame("Rückgabe");
 		contentpane3 = new JPanel();
 		back.setContentPane(contentpane3);
 		contentpane3.setLayout(null);
-		zurückgeben = new JButton ("zurückgeben");
-		
-		//STATUS-GUI
-		status = new JFrame ("Buchstatus");
+		zurückgeben = new JButton("zurückgeben");
+
+		// STATUS-GUI
+		status = new JFrame("Buchstatus");
 		contentpane4 = new JPanel();
 		status.setContentPane(contentpane4);
 		contentpane4.setLayout(null);
 		statusAuswahl.setBackground(Color.white);
-		
-		//INVENT-GUI
-		inventory = new JFrame ("Buch inventarisieren");
+
+		// INVENT-GUI
+		inventory = new JFrame("Buch inventarisieren");
 		contentpane5 = new JPanel();
 		inventory.setContentPane(contentpane5);
 		contentpane5.setLayout(null);
-		
-		//CREATE-GUI
-		create = new JFrame ("Benutzer anlegen");
+
+		// CREATE-GUI
+		create = new JFrame("Benutzer anlegen");
 		contentpane6 = new JPanel();
 		create.setContentPane(contentpane6);
 		contentpane6.setLayout(null);
-		//TODO
+		pName = new JLabel("Name:", JLabel.LEFT);
+		pVorname = new JLabel("Vorname:", JLabel.LEFT);
+		matrikelnummer = new JLabel("Matrikelnummer:", JLabel.LEFT);
+		studiengruppe = new JLabel("Studiengruppe:", JLabel.LEFT);
+		fakultaet = new JLabel("Fakultät:", JLabel.LEFT);
+		strasse = new JLabel("Straße:", JLabel.LEFT);
+		hausnummer = new JLabel("Hausnummer:", JLabel.LEFT);
+		postleitzahl = new JLabel("Postleitzahl:", JLabel.LEFT);
+		pOrt = new JLabel("Ort:", JLabel.LEFT);
+		name = new JTextField(45);
+		vorname = new JTextField(45);
+		matnr = new JTextField(10);
+		sg = new JTextField(4);
+		fak = new JTextField(30);
+		str = new JTextField(80);
+		hausnr = new JTextField(4);
+		plz = new JTextField(5);
+		ort = new JTextField(30);
+
+		
+		 //ALTER-GUI 
+		alter = new JFrame ("Person ändern"); 
+		contentpane7 = new JPanel(); 
+		alter.setContentPane(contentpane7);
+		contentpane7.setLayout(null); 
+		ändern = new JButton ("ändern");
+		löschen = new JButton ("löschen");
+		 
 	}
-	
-	public void launchLogin(){
+
+	public void launchLogin() {
 		login.setBounds(x_right, y_north, x_width, y_height);
-		
-		//JButtons:
+
+		// JButtons:
 		ok.setBounds(x_right, yloginPW2_center, xOK_width, y_height);
-		contentpane.add(ok);	
-		
-		//JComboBoxes:
+		contentpane.add(ok);
+
+		// JComboBoxes:
 		benutzerAuswahl.setBounds(x_center, ylogin_north, x_width, y_height);
-		contentpane.add(benutzerAuswahl);	
+		contentpane.add(benutzerAuswahl);
 		menueAuswahl.setBounds(x_center, ylogin_center, x_width, y_height);
 		contentpane.add(menueAuswahl);
-		
-		//JLables:
+
+		// JLables:
 		benutzername.setBounds(x_center, yloginUser_center, x_width, y_height);
 		contentpane.add(benutzername);
 		passwort.setBounds(x_center, yloginPW_center, x_width, y_height);
 		contentpane.add(passwort);
-		
-		//JTextFields:
+
+		// JTextFields:
 		username.setBounds(x_center, yloginUser2_center, x_width, y_height);
 		contentpane.add(username);
 		pw.setBounds(x_center, yloginPW2_center, x_width, y_height);
 		contentpane.add(pw);
-		
+
 		login.setSize(450, 500);
-		login.setLocation(100,100);
-		login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Schließen des Fensters ist möglich
+		login.setLocation(100, 100);
+		login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Schließen des Fensters ist möglich
 		login.setVisible(true);
 
 	}
-	
-	public void launchRent(){
+
+	public void launchRent() {
 		rent.setBounds(x_right, y_north, x_width, y_height);
-		
-		//JButton:
+
+		// JButton:
 		ok.setBounds(x_right, yloginPW2_center, xOK_width, y_height);
 		contentpane2.add(ok);
-		ausleihen.setBounds(x_right, y_bottom, xRENT_width, y_height);
+		ausleihen.setBounds(x_right, y_bottom, xButton_width, y_height);
 		contentpane2.add(ausleihen);
-		
-		//JLabels:
+
+		// JLabels:
 		bTitel.setBounds(x_center, y_north, x_width, y_height);
 		contentpane2.add(bTitel);
 		bAutor.setBounds(x_center, y_center, x_width, y_height);
 		contentpane2.add(bAutor);
 		bISBN.setBounds(x_center, y_south, x_width, y_height);
 		contentpane2.add(bISBN);
-		
-		//JTextField:
+
+		// JTextField:
 		titel.setBounds(x_center, y_north2, x_width, y_height);
 		contentpane2.add(titel);
 		autor.setBounds(x_center, y_center2, x_width, y_height);
 		contentpane2.add(autor);
 		isbn.setBounds(x_center, y_south2, x_width, y_height);
 		contentpane2.add(isbn);
-		
-		//JComboBox
+
+		// JComboBox
 		menue2Auswahl.setBounds(x_left, yMENU_north, x_width, y_height);
 		contentpane2.add(menue2Auswahl);
-		
+
 		rent.setSize(450, 500);
-		rent.setLocation(100,100);
-		rent.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Schließen des Fensters ist möglich
+		rent.setLocation(100, 100);
+		rent.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Schließen des Fensters ist möglich
 		rent.setVisible(true);
 	}
 
-	public void launchReturn(){
+	public void launchReturn() {
 		back.setBounds(x_right, y_north, x_width, y_height);
-		
-		//JButtons:
+
+		// JButtons:
 		zurückgeben.setBounds(x_center, y_bottom, x_width, y_height);
 		contentpane3.add(zurückgeben);
-		
-		//JComboBox
+
+		// JComboBox
 		menue2Auswahl.setBounds(x_left, yMENU_north, x_width, y_height);
 		contentpane3.add(menue2Auswahl);
-		
+
 		back.setSize(450, 500);
-		back.setLocation(100,100);
-		back.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Schließen des Fensters ist möglich
-		back.setVisible(true);		
+		back.setLocation(100, 100);
+		back.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Schließen des Fensters ist möglich
+		back.setVisible(true);
 	}
-	
-	public void launchStatus(){
+
+	public void launchStatus() {
 		status.setBounds(x_right, y_north, x_width, y_height);
-		
-		//JComboBox
+
+		// JComboBox
 		menue2Auswahl.setBounds(x_left, yMENU_north, x_width, y_height);
 		contentpane4.add(menue2Auswahl);
 		statusAuswahl.setBounds(x_center, y_north2, x_width, y_height);
 		contentpane4.add(statusAuswahl);
-		
+
 		status.setSize(450, 500);
-		status.setLocation(100,100);
-		status.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Schließen des Fensters ist möglich
-		status.setVisible(true);	
+		status.setLocation(100, 100);
+		status.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Schließen des Fensters ist möglich
+		status.setVisible(true);
 	}
 
-	public void launchInventar(){
+	public void launchInventar() {
 		inventory.setBounds(x_right, y_north, x_width, y_height);
-		
-		//JButton:
-		ok.setBounds(x_right, y_south3, xOK_width, y_height);
+
+		// JButton:
+		ok.setBounds(x_right, y_south5, xOK_width, y_height);
 		contentpane5.add(ok);
-		
-		//JLabels:
+
+		// JLabels:
 		bTitel.setBounds(x_center, y_north, x_width, y_height);
 		contentpane5.add(bTitel);
 		bAutor.setBounds(x_center, y_center, x_width, y_height);
 		contentpane5.add(bAutor);
 		bISBN.setBounds(x_center, y_south, x_width, y_height);
 		contentpane5.add(bISBN);
-				
-		//JTextField:
+
+		// JTextField:
 		titel.setBounds(x_center, y_north2, x_width, y_height);
 		contentpane5.add(titel);
 		autor.setBounds(x_center, y_center2, x_width, y_height);
 		contentpane5.add(autor);
 		isbn.setBounds(x_center, y_south2, x_width, y_height);
 		contentpane5.add(isbn);
-		
-		//JComboBox
+
+		// JComboBox
 		menue2Auswahl.setBounds(x_left, yMENU_north, x_width, y_height);
 		contentpane5.add(menue2Auswahl);
-		statusAuswahl.setBounds(x_center, y_south3, x_width, y_height);
+		statusAuswahl.setBounds(x_center, y_south5, x_width, y_height);
 		contentpane5.add(statusAuswahl);
-		
+
 		inventory.setSize(450, 500);
-		inventory.setLocation(100,100);
-		inventory.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Schließen des Fensters ist möglich
+		inventory.setLocation(100, 100);
+		inventory.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Schließen des Fensters ist möglich
 		inventory.setVisible(true);
 	}
 
-	public void launchCreate(){
-		//TODO 
-		
+	public void launchCreate() {
+		create.setBounds(x_right, y_north, x_width, y_height);
+
+		// JButton:
+		ok.setBounds(x_right, y_opt4, xOK_width, y_height);
+		contentpane6.add(ok);
+
+		// JLabels:
+		pName.setBounds(x_left, y_north3, x_width, y_height);
+		contentpane6.add(pName);
+		pVorname.setBounds(x_left, y_center, x_width, y_height);
+		contentpane6.add(pVorname);
+		benutzername.setBounds(x_left, y_center2, x_width, y_height);
+		contentpane6.add(benutzername);
+		passwort.setBounds(x_left, y_center3, x_width, y_height);
+		contentpane6.add(passwort);
+		matrikelnummer.setBounds(x_left, y_south2, x_width, y_height);
+		contentpane6.add(matrikelnummer);
+		studiengruppe.setBounds(x_left, y_south3, x_width, y_height);
+		contentpane6.add(studiengruppe);
+		fakultaet.setBounds(x_left, y_south6, x_width, y_height);
+		contentpane6.add(fakultaet);
+
+		// optional
+		strasse.setBounds(x_left, y_opt1, x_width, y_height);
+		contentpane6.add(strasse);
+		hausnummer.setBounds(x_left, y_opt2, x_width, y_height);
+		contentpane6.add(hausnummer);
+		postleitzahl.setBounds(x_left, y_opt3, x_width, y_height);
+		contentpane6.add(postleitzahl);
+		pOrt.setBounds(x_left, y_opt4, x_width, y_height);
+		contentpane6.add(pOrt);
+
+		// JTextField:
+		name.setBounds(x_center, y_north3, x_width, y_height);
+		contentpane6.add(name);
+		vorname.setBounds(x_center, y_center, x_width, y_height);
+		contentpane6.add(vorname);
+		username.setBounds(x_center, y_center2, x_width, y_height);
+		contentpane6.add(username);
+		pw.setBounds(x_center, y_center3, x_width, y_height);
+		contentpane6.add(pw);
+		matnr.setBounds(x_center, y_south2, x_width, y_height);
+		contentpane6.add(matnr);
+		sg.setBounds(x_center, y_south3, x_width, y_height);
+		contentpane6.add(sg);
+		fak.setBounds(x_center, y_south6, x_width, y_height);
+		contentpane6.add(fak);
+
+		// optional
+		str.setBounds(x_center, y_opt1, x_width, y_height);
+		contentpane6.add(str);
+		hausnr.setBounds(x_center, y_opt2, x_width, y_height);
+		contentpane6.add(hausnr);
+		plz.setBounds(x_center, y_opt3, x_width, y_height);
+		contentpane6.add(plz);
+		ort.setBounds(x_center, y_opt4, x_width, y_height);
+		contentpane6.add(ort);
+
+		// JComboBoxes:
+		menue2Auswahl.setBounds(x_left, yMENU_north, x_width, y_height);
+		contentpane6.add(menue2Auswahl);
+		benutzerAuswahl.setBounds(x_center, y_north, x_width, y_height);
+		contentpane6.add(benutzerAuswahl);
+
+		create.setSize(450, 600);
+		create.setLocation(100, 100);
+		create.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Schließen des Fensters ist möglich
+		create.setVisible(true);
+
+	}
+
+	public void launchAlter() {
+		alter.setBounds(x_right, y_north, x_width, y_height);
+
+		// JButton:
+		ändern.setBounds(x_right, y_opt4, xButton_width, y_height);
+		contentpane7.add(ändern);
+		löschen.setBounds(x_right, y_opt5, xButton_width, y_height);
+		contentpane7.add(löschen);
+
+		// JLabels:
+		pName.setBounds(x_left, y_north3, x_width, y_height);
+		contentpane7.add(pName);
+		pVorname.setBounds(x_left, y_center, x_width, y_height);
+		contentpane7.add(pVorname);
+		benutzername.setBounds(x_left, y_center2, x_width, y_height);
+		contentpane7.add(benutzername);
+		passwort.setBounds(x_left, y_center3, x_width, y_height);
+		contentpane7.add(passwort);
+		matrikelnummer.setBounds(x_left, y_south2, x_width, y_height);
+		contentpane7.add(matrikelnummer);
+		studiengruppe.setBounds(x_left, y_south3, x_width, y_height);
+		contentpane7.add(studiengruppe);
+		fakultaet.setBounds(x_left, y_south6, x_width, y_height);
+		contentpane7.add(fakultaet);
+
+		strasse.setBounds(x_left, y_opt1, x_width, y_height);
+		contentpane7.add(strasse);
+		hausnummer.setBounds(x_left, y_opt2, x_width, y_height);
+		contentpane7.add(hausnummer);
+		postleitzahl.setBounds(x_left, y_opt3, x_width, y_height);
+		contentpane7.add(postleitzahl);
+		pOrt.setBounds(x_left, y_opt4, x_width, y_height);
+		contentpane7.add(pOrt);
+
+		// JTextField:
+		name.setBounds(x_center, y_north3, x_width, y_height);
+		contentpane7.add(name);
+		vorname.setBounds(x_center, y_center, x_width, y_height);
+		contentpane7.add(vorname);
+		username.setBounds(x_center, y_center2, x_width, y_height);
+		contentpane7.add(username);
+		pw.setBounds(x_center, y_center3, x_width, y_height);
+		contentpane7.add(pw);
+		matnr.setBounds(x_center, y_south2, x_width, y_height);
+		contentpane7.add(matnr);
+		sg.setBounds(x_center, y_south3, x_width, y_height);
+		contentpane7.add(sg);
+		fak.setBounds(x_center, y_south6, x_width, y_height);
+		contentpane7.add(fak);
+
+		str.setBounds(x_center, y_opt1, x_width, y_height);
+		contentpane7.add(str);
+		hausnr.setBounds(x_center, y_opt2, x_width, y_height);
+		contentpane7.add(hausnr);
+		plz.setBounds(x_center, y_opt3, x_width, y_height);
+		contentpane7.add(plz);
+		ort.setBounds(x_center, y_opt4, x_width, y_height);
+		contentpane7.add(ort);
+
+		// JComboBoxes:
+		menue2Auswahl.setBounds(x_left, yMENU_north, x_width, y_height);
+		contentpane7.add(menue2Auswahl);
+		benutzerAuswahl.setBounds(x_center, y_north, x_width, y_height);
+		contentpane7.add(benutzerAuswahl);
+
+		alter.setSize(450, 600);
+		alter.setLocation(100, 100);
+		alter.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Schließen des Fensters ist möglich
+		alter.setVisible(true);
+
 	}
 }
