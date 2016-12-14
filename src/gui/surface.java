@@ -607,6 +607,7 @@ public class surface /* extends JFrame */ {
 	
 	public void Benutzer(){
 		while(benutzerAuswahl.getSelectedIndex()==0){
+			System.out.println("in While loop");
 			if(benutzerAuswahl.getSelectedIndex()==1){
 				ok.setActionCommand(ACTION_CREATE_STUD);
 				ok.addActionListener(control);
