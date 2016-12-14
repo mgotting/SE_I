@@ -42,7 +42,7 @@ public class surface /* extends JFrame */ {
 	public final static String ACTION_CREATE_STUD = "CREATE_STUDENT";
 	public final static String ACTION_CREATE_PROF = "CREATE_PROFESSOR";
 	public final static String ACTION_CREATE_PERS = "CREATE_PERSONAL";
-	//TODO ACTION_NEXT 
+	//TODO ACTION_NEXT  
 	
 	// Layout LOGIN-GUI:
 	int ylogin_north = 20;
