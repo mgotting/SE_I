@@ -40,9 +40,7 @@ public class ButtonHandler implements ActionListener {
 				DB_connection con = DB_connection.getDbConnection();
 				//1. einfügen in Tabelle Person
 				String insertPerson = "INSERT INTO person(Vorname, Name, Art) VALUES ('"+student.getVorname()+"','"+student.getName()+"','s');";
-				boolean personVerbucht = con.executequery(insertPerson);
-				System.out.println("Person erfolgreich verbucht: "+personVerbucht);
-				//erhalten der generierten PersonID
+				//erhalten der generierten PersonID und Verbuchung
 				int generatedID = con.executequery_autoKey(insertPerson, true);
 				System.out.println(generatedID);
 				//2. einfügen in Tabelle Student
