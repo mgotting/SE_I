@@ -43,8 +43,9 @@ public class ButtonHandler implements ActionListener {
 				System.out.println("Person erfolgreich verbucht: "+personVerbucht);
 				//erhalten der generierten PersonID
 				int generatedID = con.executequery_autoKey(insertPerson, true);
+				System.out.println(generatedID);
 				//2. einfügen in Tabelle Student
-				String insertStudent = "INSERT INTO student(Matrikelnummer, Studiengruppe, PersonID) VALUES ('"+student.getMatrikelnummer()+"',"+student.getStudiengruppe().toString()+"',"+generatedID+");";
+				String insertStudent = "INSERT INTO student(Matrikelnummer, Studiengruppe, PersonID) VALUES ("+student.getMatrikelnummer()+",'"+student.getStudiengruppe().toString()+"',"+generatedID+");";
 				boolean studentVerbucht = con.executequery(insertStudent);
 				System.out.println("Student erfolgreich verbucht: "+studentVerbucht);
 				//3. einfügen in Tabelle Benutzer
