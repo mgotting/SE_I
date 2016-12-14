@@ -2,7 +2,7 @@ package application;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
+import java.sql.*;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -11,7 +11,7 @@ import connectionToDatabase.DB_connection;
 import gui.surface;
 
 /**
- * @author Gotti
+ * @author Michael Gottinger
  *
  */
 
@@ -38,13 +38,15 @@ public class ButtonHandler implements ActionListener {
 				//Wenn Studentenobjekt erfolgreich erstellt, dann in Datenbank sichern
 				DB_connection con = DB_connection.getDbConnection();
 				//1. einfügen in Tabelle Person
-				String insertPerson = "INSERT INTO person(Vorname, Name) VALUES ('"+student.getVorname()+"','"+student.getName()+"');";
+				String insertPerson = "INSERT INTO person(Vorname, Name, Art) VALUES ('"+student.getVorname()+"','"+student.getName()+"','s');";
 				boolean personVerbucht = con.executequery(insertPerson);
+				System.out.println("Person erfolgreich verbucht: "+personVerbucht);
 				//erhalten der generierten PersonID
 				int generatedID = con.executequery_autoKey(insertPerson, true);
 				//2. einfügen in Tabelle Student
 				String insertStudent = "INSERT INTO student(Matrikelnummer, Studiengruppe, PersonID) VALUES ('"+student.getMatrikelnummer()+"',"+student.getStudiengruppe().toString()+"',"+generatedID+");";
 				boolean studentVerbucht = con.executequery(insertStudent);
+				System.out.println("Student erfolgreich verbucht: "+studentVerbucht);
 				//3. einfügen in Tabelle Benutzer
 				Benutzer benutzer = new Benutzer(benutzername, passwort, student);
 				//Wenn Studentenobjekt erfolgreich erstellt, dann in Datenbank sichern
