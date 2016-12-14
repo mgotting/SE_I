@@ -122,8 +122,8 @@ public class surface /* extends JFrame */ {
 		this.vorname.setText(firstname);
 	}
 	
-	public String getMatrikelnummer(){
-		String matrikelnr = matnr.getText();
+	public int getMatrikelnummer(){
+		int matrikelnr = Integer.parseInt(matnr.getText());
 		return matrikelnr;
 	}
 	public void setMatrikelnummer(String matrikelnr){
@@ -136,6 +136,22 @@ public class surface /* extends JFrame */ {
 	}
 	public void setStudiengruppe(String studygroup){
 		this.sg.setText(studygroup);
+	}
+	
+	public String getFakult‰t(){
+		String fakult‰t = fak.getText();
+		return fakult‰t;
+	}
+	public void setFakult‰t(String fakult‰t){
+		this.fak.setText(fakult‰t);
+	}
+	
+	public String getStraﬂe(){
+		String straﬂe = str.getText();
+		return straﬂe;
+	}
+	public void setStraﬂe(String straﬂe){
+		this.str.setText(straﬂe);
 	}
 	
 	public surface() {
