@@ -42,6 +42,12 @@ public class surface /* extends JFrame */ {
 	public final static String ACTION_CREATE_STUD = "CREATE_STUDENT";
 	public final static String ACTION_CREATE_PROF = "CREATE_PROFESSOR";
 	public final static String ACTION_CREATE_PERS = "CREATE_PERSONAL";
+	public final static String ACTION_NEXT_AUSLEIHE = "NEXT_AUSLEIHE";
+	public final static String ACTION_NEXT_RÜCKGABE = "NEXT_RÜCKGABE";
+	public final static String ACTION_NEXT_ANZEIGE = "NEXT_ANZEIGE";
+	public final static String ACTION_NEXT_INVENTARISIERUNG = "NEXT_INVENTARISIERUNG";
+	public final static String ACTION_NEXT_ANLEGEN = "NEXT_ANLEGEN";
+	public final static String ACTION_NEXT_ÄNDERN = "NEXT_ÄNDERN";
 	//TODO ACTION_NEXT  
 	
 	// Layout LOGIN-GUI:
@@ -305,6 +311,29 @@ public class surface /* extends JFrame */ {
 		login.setLocation(100, 100);
 		login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Schließen des Fensters ist möglich
 		login.setVisible(true);
+		
+		//TODO Berechtigungen?
+		while(menueAuswahl.getSelectedIndex()==0){
+			if(menueAuswahl.getSelectedIndex()==1){
+				ok.setActionCommand(ACTION_NEXT_AUSLEIHE);
+				ok.addActionListener(control);
+			}if(menueAuswahl.getSelectedIndex()==2){
+				ok.setActionCommand(ACTION_NEXT_RÜCKGABE);
+				ok.addActionListener(control);
+			}if(menueAuswahl.getSelectedIndex()==3){
+				ok.setActionCommand(ACTION_NEXT_ANZEIGE);
+				ok.addActionListener(control);
+			}if(menueAuswahl.getSelectedIndex()==4){
+				ok.setActionCommand(ACTION_NEXT_INVENTARISIERUNG);
+				ok.addActionListener(control);
+			}if(menueAuswahl.getSelectedIndex()==5){
+				ok.setActionCommand(ACTION_NEXT_ANLEGEN);
+				ok.addActionListener(control);
+			}if(menueAuswahl.getSelectedIndex()==6){
+				ok.setActionCommand(ACTION_NEXT_ÄNDERN);
+				ok.addActionListener(control);
+			}
+		}
 
 	}
 
@@ -555,12 +584,25 @@ public class surface /* extends JFrame */ {
 
 	}
 	
-	public static String getAllUser(){
-		return "SELECT * FROM benutzer";
-	}
-	
+	//TODO Frame-Wechsel & Berechtigungen
 	public void Menü(){
-		//TODO Dropdown-Auswahl
+		while(menueAuswahl.getSelectedIndex()==0){
+			if(menueAuswahl.getSelectedIndex()==1){
+				
+			}if(menueAuswahl.getSelectedIndex()==2){
+				
+			}if(menueAuswahl.getSelectedIndex()==3){
+				
+			}if(menueAuswahl.getSelectedIndex()==4){
+				
+			}if(menueAuswahl.getSelectedIndex()==5){
+				
+			}if(menueAuswahl.getSelectedIndex()==6){
+				
+			}if(menueAuswahl.getSelectedIndex()==7){
+				
+			}
+		}
 	}
 	
 	public void Benutzer(){
