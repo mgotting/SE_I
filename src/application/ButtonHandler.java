@@ -32,7 +32,7 @@ public class ButtonHandler implements ActionListener {
 				String vorname = this.gui.getVorname();
 				int matrikelnummer = this.gui.getMatrikelnummer();
 				Studiengruppe studiengruppe = this.gui.getStudiengruppe();
-				String benutzername = this.gui.getBenutzername();
+				String benutzername = this.gui.getUsername();
 				String passwort = this.gui.getPasswort();
 				Student student = new Student(name, vorname, matrikelnummer, studiengruppe);
 				//Wenn Studentenobjekt erfolgreich erstellt, dann in Datenbank sichern
@@ -46,8 +46,7 @@ public class ButtonHandler implements ActionListener {
 				String insertStudent = "INSERT INTO student(Matrikelnummer, Studiengruppe, PersonID) VALUES ('"+student.getMatrikelnummer()+"',"+student.getStudiengruppe().toString()+"',"+generatedID+");";
 				boolean studentVerbucht = con.executequery(insertStudent);
 				//3. einfügen in Tabelle Benutzer
-				//TODO: Wo sind in der GUI die Daten hinterlegt?
-				Benutzer benutzer = new Benutzer(benutzername, passwort, student, ausgelieheneBuecher);
+				Benutzer benutzer = new Benutzer(benutzername, passwort, student);
 				//Wenn Studentenobjekt erfolgreich erstellt, dann in Datenbank sichern
 				String insertBenutzer = "INSERT INTO benutzer(Benutzername, Passwort) VALUES ('"+benutzer.getBenutzername()+"',"+benutzer.getPasswort()+"');";
 				boolean benutzerVerbucht = con.executequery(insertBenutzer);
