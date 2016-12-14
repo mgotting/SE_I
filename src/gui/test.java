@@ -17,11 +17,11 @@ public class test {
 		//gui.launchLogin();
 		//gui.launchRent();
 		//gui.launchReturn();
-		gui.launchStatus();
+		//gui.launchStatus();
 		//gui.launchInventar();
 		//gui.launchInventar();
 		//gui.launchCreate();
-		//gui.launchAlter();
+		gui.launchAlter();
 	}
 
 }

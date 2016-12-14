@@ -66,6 +66,78 @@ public class surface /* extends JFrame */ {
 	int x_width = 160;
 	int y_height = 20;
 
+	public String getUsername(){
+		String name = username.getText();
+		return name;
+	}
+	public void setUsername(String name){
+		this.username.setText(name);
+	}
+	
+	public String getPasswort(){
+		String passwort = pw.getText();
+		return passwort;
+	}
+	public void setPasswort(String passwort){
+		this.pw.setText(passwort);
+	}
+	
+	public String getTitel(){
+		String buchtitel = titel.getText();
+		return buchtitel;
+	}
+	public void setTitel(String buchtitel){
+		this.titel.setText(buchtitel);
+	}
+	
+	public String getAutor(){
+		String buchautor = autor.getText();
+		return buchautor;
+	}
+	public void setAutor(String buchautor){
+		this.autor.setText(buchautor);
+	}
+	
+	public String getIsbn(){
+		String buchisbn = isbn.getText();
+		return buchisbn;
+	}
+	public void setIsbn(String buchisbn){
+		this.isbn.setText(buchisbn);
+	}
+	
+	public String getName(){
+		String nachname = name.getText();
+		return nachname;
+	}
+	public void setName(String nachname){
+		this.name.setText(nachname);
+	}
+	
+	public String getVorname(){
+		String firstname = vorname.getText();
+		return firstname;
+	}
+	public void setVorname(String firstname){
+		this.vorname.setText(firstname);
+	}
+	
+	public String getMatrikelnummer(){
+		String matrikelnr = matnr.getText();
+		return matrikelnr;
+	}
+	public void setMatrikelnummer(String matrikelnr){
+		this.matnr.setText(matrikelnr);
+	}
+	
+	public String getStudiengruppe(){
+		String studygroup = sg.getText();
+		return studygroup;
+	}
+	public void setStudiengruppe(String studygroup){
+		this.sg.setText(studygroup);
+	}
+	
 	public surface() {
 		// LOGIN-GUI
 		login = new JFrame("Login");
