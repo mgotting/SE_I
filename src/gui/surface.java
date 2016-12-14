@@ -1,6 +1,9 @@
 package gui;
 
 import javax.swing.*;
+
+import application.Studiengruppe;
+
 import java.awt.*;
 
 /**
@@ -130,8 +133,8 @@ public class surface /* extends JFrame */ {
 		this.matnr.setText(matrikelnr);
 	}
 	
-	public String getStudiengruppe(){
-		String studygroup = sg.getText();
+	public Studiengruppe getStudiengruppe(){
+		Studiengruppe studygroup = Studiengruppe.valueOf(sg.getText());
 		return studygroup;
 	}
 	public void setStudiengruppe(String studygroup){
