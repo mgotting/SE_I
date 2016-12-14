@@ -195,6 +195,7 @@ public class surface /* extends JFrame */ {
 	
 	public surface() {
 		// LOGIN-GUI
+		control = new ButtonHandler(this);
 		login = new JFrame("Login");
 		contentpane = new JPanel();
 		login.setContentPane(contentpane);
@@ -273,24 +274,6 @@ public class surface /* extends JFrame */ {
 		contentpane7.setLayout(null); 
 		ändern = new JButton ("ändern");
 		löschen = new JButton ("löschen");
-		
-		//TODO SetActionCommand
-		if(benutzerAuswahl.getSelectedIndex()==1){
-			ok.setActionCommand(ACTION_CREATE_STUD);
-			ok.addActionListener(control);
-		}if(benutzerAuswahl.getSelectedIndex()==2){
-			ok.setActionCommand(ACTION_CREATE_PROF);
-			ok.addActionListener(control);
-		}if(benutzerAuswahl.getSelectedIndex()==3){
-			ok.setActionCommand(ACTION_CREATE_PERS);
-			ok.addActionListener(control);
-		}else{
-			//TODO
-		}
-		/*benutzerAuswahl.addActionListener(control);
-		menueAuswahl.addActionListener(control);
-		menue2Auswahl.addActionListener(control);
-		statusAuswahl.addActionListener(control);*/
 	}
 
 	public void launchLogin() {
@@ -496,7 +479,20 @@ public class surface /* extends JFrame */ {
 		create.setLocation(100, 100);
 		create.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Schließen des Fensters ist möglich
 		create.setVisible(true);
-
+		
+		//TODO SetActionCommand
+		while(benutzerAuswahl.getSelectedIndex()==0){
+		if(benutzerAuswahl.getSelectedIndex()==1){
+			ok.setActionCommand(ACTION_CREATE_STUD);
+			ok.addActionListener(control);
+		}if(benutzerAuswahl.getSelectedIndex()==2){
+			ok.setActionCommand(ACTION_CREATE_PROF);
+			ok.addActionListener(control);
+		}if(benutzerAuswahl.getSelectedIndex()==3){
+			ok.setActionCommand(ACTION_CREATE_PERS);
+			ok.addActionListener(control);
+		}
+		}
 	}
 
 	public void launchAlter() {
