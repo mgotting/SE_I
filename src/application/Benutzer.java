@@ -6,7 +6,7 @@ public class Benutzer {
 	private PersonABC person;
 	private String passwort;
 	
-	public Benutzer (String benutzername, String passwort, PersonABC person, int ausgelieheneBuecher) throws NullPointerException{
+	public Benutzer (String benutzername, String passwort, PersonABC person) throws NullPointerException{
 		if(benutzername==null || passwort==null || person==null){
 			throw new NullPointerException("Es fehlt eine Eingabe");
 		}else{
