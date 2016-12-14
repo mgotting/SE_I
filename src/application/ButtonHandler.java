@@ -27,7 +27,7 @@ public class ButtonHandler implements ActionListener {
 		try{
 			//Prüfen, welches Kommando kommt
 			//TODO: welches Kommando kommt?
-			if(e.getActionCommand().equals("CREATE_STUD")){ 
+			if(e.getActionCommand().equals("CREATE_STUDENT")){ 
 				String name = this.gui.getName();
 				String vorname = this.gui.getVorname();
 				int matrikelnummer = this.gui.getMatrikelnummer();
