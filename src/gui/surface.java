@@ -610,12 +610,15 @@ public class surface /* extends JFrame */ {
 			if(benutzerAuswahl.getSelectedIndex()==1){
 				ok.setActionCommand(ACTION_CREATE_STUD);
 				ok.addActionListener(control);
+				System.out.println(benutzerAuswahl.getSelectedIndex());
 			}if(benutzerAuswahl.getSelectedIndex()==2){
 				ok.setActionCommand(ACTION_CREATE_PROF);
 				ok.addActionListener(control);
+				System.out.println(benutzerAuswahl.getSelectedIndex());
 			}if(benutzerAuswahl.getSelectedIndex()==3){
 				ok.setActionCommand(ACTION_CREATE_PERS);
 				ok.addActionListener(control);
+				System.out.println(benutzerAuswahl.getSelectedIndex());
 			}
 		}
 	}

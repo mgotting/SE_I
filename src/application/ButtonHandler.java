@@ -28,6 +28,7 @@ public class ButtonHandler implements ActionListener {
 			//Prüfen, welches Kommando kommt
 			//TODO: welches Kommando kommt?
 			if(e.getActionCommand().equals("CREATE_STUDENT")){ 
+				System.out.println("ActionCommand erhalten");
 				String name = this.gui.getName();
 				String vorname = this.gui.getVorname();
 				int matrikelnummer = this.gui.getMatrikelnummer();
@@ -51,8 +52,9 @@ public class ButtonHandler implements ActionListener {
 				//3. einfügen in Tabelle Benutzer
 				Benutzer benutzer = new Benutzer(benutzername, passwort, student);
 				//Wenn Studentenobjekt erfolgreich erstellt, dann in Datenbank sichern
-				String insertBenutzer = "INSERT INTO benutzer(Benutzername, Passwort) VALUES ('"+benutzer.getBenutzername()+"',"+benutzer.getPasswort()+"');";
+				String insertBenutzer = "INSERT INTO benutzer(Benutzername, Passwort, PersonID) VALUES ('"+benutzer.getBenutzername()+"','"+benutzer.getPasswort()+"',"+generatedID+");";
 				boolean benutzerVerbucht = con.executequery(insertBenutzer);
+				System.out.println("Benutzer erfolgreich verbucht: "+benutzerVerbucht);
 				con.disconnect();
 			}
 		} catch (Exception f){
