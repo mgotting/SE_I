@@ -480,19 +480,7 @@ public class surface /* extends JFrame */ {
 		create.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Schließen des Fensters ist möglich
 		create.setVisible(true);
 		
-		//TODO SetActionCommand
-		while(benutzerAuswahl.getSelectedIndex()==0){
-		if(benutzerAuswahl.getSelectedIndex()==1){
-			ok.setActionCommand(ACTION_CREATE_STUD);
-			ok.addActionListener(control);
-		}if(benutzerAuswahl.getSelectedIndex()==2){
-			ok.setActionCommand(ACTION_CREATE_PROF);
-			ok.addActionListener(control);
-		}if(benutzerAuswahl.getSelectedIndex()==3){
-			ok.setActionCommand(ACTION_CREATE_PERS);
-			ok.addActionListener(control);
-		}
-		}
+		Benutzer();
 	}
 
 	public void launchAlter() {
@@ -565,5 +553,28 @@ public class surface /* extends JFrame */ {
 		alter.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Schließen des Fensters ist möglich
 		alter.setVisible(true);
 
+	}
+	
+	public static String getAllUser(){
+		return "SELECT * FROM benutzer";
+	}
+	
+	public void Menü(){
+		//TODO Dropdown-Auswahl
+	}
+	
+	public void Benutzer(){
+		while(benutzerAuswahl.getSelectedIndex()==0){
+			if(benutzerAuswahl.getSelectedIndex()==1){
+				ok.setActionCommand(ACTION_CREATE_STUD);
+				ok.addActionListener(control);
+			}if(benutzerAuswahl.getSelectedIndex()==2){
+				ok.setActionCommand(ACTION_CREATE_PROF);
+				ok.addActionListener(control);
+			}if(benutzerAuswahl.getSelectedIndex()==3){
+				ok.setActionCommand(ACTION_CREATE_PERS);
+				ok.addActionListener(control);
+			}
+		}
 	}
 }
