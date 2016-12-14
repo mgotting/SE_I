@@ -2,7 +2,9 @@ package gui;
 
 import javax.swing.*;
 
+import application.ButtonHandler;
 import application.Studiengruppe;
+import connectionToDatabase.JTableview;
 
 import java.awt.*;
 
@@ -31,7 +33,17 @@ public class surface /* extends JFrame */ {
 	JComboBox menue2Auswahl = new JComboBox(menuelisteAllg);
 	private static String[] statusliste = { "Status wählen", "ausleihbar", "ausgeliehen", "nicht ausleihbar" };
 	JComboBox statusAuswahl = new JComboBox(statusliste);
+	
+	public ButtonHandler control;
+	public JTableview tableview;
+	public JScrollPane scrollPane;
 
+	//Action Commands for Action Listener
+	public final static String ACTION_CREATE_STUD = "CREATE_STUDENT";
+	public final static String ACTION_CREATE_PROF = "CREATE_PROFESSOR";
+	public final static String ACTION_CREATE_PERS = "CREATE_PERSONAL";
+	//TODO ACTION_NEXT 
+	
 	// Layout LOGIN-GUI:
 	int ylogin_north = 20;
 	int ylogin_center = 70;
@@ -157,6 +169,30 @@ public class surface /* extends JFrame */ {
 		this.str.setText(straße);
 	}
 	
+	public String getHausnummer(){
+		String hausnummer = hausnr.getText();
+		return hausnummer;
+	}
+	public void setHausnummer(String hausnummer){
+		this.hausnr.setText(hausnummer);
+	}
+	
+	public String getPLZ(){
+		String postleitzahl = plz.getText();
+		return postleitzahl;
+	}
+	public void setPLZ(String postleitzahl){
+		this.plz.setText(postleitzahl);
+	}
+	
+	public String getOrt(){
+		String place = ort.getText();
+		return place;
+	}
+	public void setOrt(String place){
+		this.plz.setText(place);
+	}
+	
 	public surface() {
 		// LOGIN-GUI
 		login = new JFrame("Login");
@@ -229,7 +265,6 @@ public class surface /* extends JFrame */ {
 		hausnr = new JTextField(4);
 		plz = new JTextField(5);
 		ort = new JTextField(30);
-
 		
 		 //ALTER-GUI 
 		alter = new JFrame ("Person ändern"); 
@@ -238,7 +273,24 @@ public class surface /* extends JFrame */ {
 		contentpane7.setLayout(null); 
 		ändern = new JButton ("ändern");
 		löschen = new JButton ("löschen");
-		 
+		
+		//TODO SetActionCommand
+		if(benutzerAuswahl.getSelectedIndex()==1){
+			ok.setActionCommand(ACTION_CREATE_STUD);
+			ok.addActionListener(control);
+		}if(benutzerAuswahl.getSelectedIndex()==2){
+			ok.setActionCommand(ACTION_CREATE_PROF);
+			ok.addActionListener(control);
+		}if(benutzerAuswahl.getSelectedIndex()==3){
+			ok.setActionCommand(ACTION_CREATE_PERS);
+			ok.addActionListener(control);
+		}else{
+			//TODO
+		}
+		/*benutzerAuswahl.addActionListener(control);
+		menueAuswahl.addActionListener(control);
+		menue2Auswahl.addActionListener(control);
+		statusAuswahl.addActionListener(control);*/
 	}
 
 	public void launchLogin() {

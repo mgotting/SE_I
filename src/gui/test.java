@@ -20,8 +20,8 @@ public class test {
 		//gui.launchStatus();
 		//gui.launchInventar();
 		//gui.launchInventar();
-		//gui.launchCreate();
-		gui.launchAlter();
+		gui.launchCreate();
+		//gui.launchAlter();
 	}
 
 }
