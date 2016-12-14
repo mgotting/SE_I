@@ -26,8 +26,14 @@ public class ButtonHandler implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		try{
 			//Prüfen, welches Kommando kommt
-			//TODO: welches Kommando kommt? Wo in der GUI sind die Daten hinterlegt?
+			//TODO: welches Kommando kommt?
 			if(e.getActionCommand().equals("CREATE_STUD")){ 
+				String name = this.gui.getName();
+				String vorname = this.gui.getVorname();
+				int matrikelnummer = this.gui.getMatrikelnummer();
+				Studiengruppe studiengruppe = this.gui.getStudiengruppe();
+				String benutzername = this.gui.getBenutzername();
+				String passwort = this.gui.getPasswort();
 				Student student = new Student(name, vorname, matrikelnummer, studiengruppe);
 				//Wenn Studentenobjekt erfolgreich erstellt, dann in Datenbank sichern
 				DB_connection con = DB_connection.getDbConnection();
