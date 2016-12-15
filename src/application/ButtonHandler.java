@@ -126,7 +126,11 @@ public class ButtonHandler implements ActionListener {
 					//Check Konsole
 					System.out.println("ActionCommand erhalten: "+e.getActionCommand());
 					//Daten aus der GUI
-					//Exemplar exemplar = new Exemplar (...);
+					//Exemplar exemplar = new Exemplar (status, buch);
+					con = DB_connection.getDbConnection();
+					//1. einfügen in Tabelle
+					//insertBuch = "INSERT INTO Inventar (status, ISBN) VALUES ('"+Exemplar.getStatus()+"', '"+exemplar.getISBN()+"');"
+					
 					break;
 			}
 		} catch (IllegalArgumentException ex){
