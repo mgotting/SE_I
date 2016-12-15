@@ -57,6 +57,8 @@ public class ButtonHandler implements ActionListener {
 				String insertBenutzer = "INSERT INTO benutzer(Benutzername, Passwort, PersonID) VALUES ('"+benutzer.getBenutzername()+"','"+benutzer.getPasswort()+"',"+generatedID+");";
 				boolean benutzerVerbucht = con.executequery(insertBenutzer);
 				System.out.println("Benutzer erfolgreich verbucht: "+benutzerVerbucht);
+				JOptionPane.showMessageDialog(new JFrame(), "Student und Benutzer mit folgenden Daten integriert angelegt:\n\nBenutzername: "
+				+benutzer.getBenutzername()+student.toString());
 				con.disconnect();
 				break;
 				//Fall Professor erstellen:
@@ -84,6 +86,8 @@ public class ButtonHandler implements ActionListener {
 					insertBenutzer = "INSERT INTO benutzer(Benutzername, Passwort, PersonID) VALUES ('"+benutzer.getBenutzername()+"','"+benutzer.getPasswort()+"',"+generatedID+");";
 					benutzerVerbucht = con.executequery(insertBenutzer);
 					System.out.println("Benutzer erfolgreich verbucht: "+benutzerVerbucht);
+					JOptionPane.showMessageDialog(new JFrame(), "Professor und Benutzer mit folgenden Daten integriert angelegt:\n\nBenutzername: "
+					+benutzer.getBenutzername()+professor.toString());
 					con.disconnect();
 					break;
 				case "CREATE_PERSONAL":
@@ -109,11 +113,16 @@ public class ButtonHandler implements ActionListener {
 					insertBenutzer = "INSERT INTO benutzer(Benutzername, Passwort, PersonID) VALUES ('"+benutzer.getBenutzername()+"','"+benutzer.getPasswort()+"',"+generatedID+");";
 					benutzerVerbucht = con.executequery(insertBenutzer);
 					System.out.println("Benutzer erfolgreich verbucht: "+benutzerVerbucht);
+					JOptionPane.showMessageDialog(new JFrame(), "Personal und Benutzer mit folgenden Daten integriert angelegt:\n\nBenutzername: "
+					+benutzer.getBenutzername()+personal.toString());
 					con.disconnect();
 					break;
 			}
-		} catch (Exception f){
-			f.printStackTrace();
+		} catch (IllegalArgumentException ex){
+			this.gui.setStudiengruppe(null);
+			JOptionPane.showMessageDialog(new JFrame(), ex.getMessage());
+		} catch (SQLException ex){
+			JOptionPane.showMessageDialog(new JFrame(), ex.getMessage());
 		}
 	}
 	
