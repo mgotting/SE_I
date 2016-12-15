@@ -45,7 +45,11 @@ public class Student extends PersonABC  {
 	}
 	//nur zum Testen
 	public String toString(){
-		return "\nName:\n"+getName()+"\nVorname:\n"+getVorname()+"\nMatrikelnummer:\n"+ getMatrikelnummer()+"\nStudiengruppe:\n"+getStudiengruppe()+"\nAdresse:\n"+ getAdresse();
+		if(getAdresse()!=null){
+			return "\nName:\n"+getName()+"\nVorname:\n"+getVorname()+"\nMatrikelnummer:\n"+ getMatrikelnummer()+"\nStudiengruppe:\n"+getStudiengruppe()+"\nAdresse:\n"+ getAdresse();
+		}else{
+			return "\nName:\n"+getName()+"\nVorname:\n"+getVorname()+"\nMatrikelnummer:\n"+ getMatrikelnummer()+"\nStudiengruppe:\n"+getStudiengruppe();
+		}
 	}
 	
 	public String getDetails(){

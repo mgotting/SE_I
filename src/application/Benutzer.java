@@ -44,7 +44,7 @@ public class Benutzer {
 	}
 	
 	public String toString(){
-		return person.getDetails()+"\nBenutzername:\n"+getBenutzername();
+		return person.getDetails()+"\nBenutzername: "+getBenutzername();
 	}
 
 }

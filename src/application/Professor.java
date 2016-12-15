@@ -38,7 +38,7 @@ public class Professor extends PersonABC {
 		if(getAdresse()!=null){
 			return "\nName: "+getName()+"\nVorname: "+getVorname()+"\nFakult\u00E4t: "+getFakultaet()+"\nAdresse: "+getAdresse();
 		}else{
-			return "\nName: "+getName()+"\nVorname: "+getVorname()+"\nFakult\u00E4t: "+getFakultaet()+"\nAdresse: ";
+			return "\nName: "+getName()+"\nVorname: "+getVorname()+"\nFakult\u00E4t: "+getFakultaet();
 		}
 	}
 		
