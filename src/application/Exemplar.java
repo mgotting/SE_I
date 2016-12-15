@@ -7,11 +7,11 @@ public class Exemplar {
 	private int ISBN;
 	
 	
-	public Exemplar (BuchstatusET status, int ISBN)  
+	public Exemplar (BuchstatusET status, Buchtyp buch)  
 	{
 			
 		this.status = status;
-		this.ISBN = ISBN;	
+		this.ISBN = buch.getISBN();	
 	
 	}
 	
@@ -21,18 +21,7 @@ public class Exemplar {
 		{
 			return;
 		}
-		if (st == BuchstatusET.ausleihbar)
-		{
-			this.status = st;
-		}
-		if (st == BuchstatusET.ausgeliehen)
-		{
-			this.status = st;
-		}
-		if (st == BuchstatusET.nichtausleihbar)
-		{
-			this.status = st;
-		}
+		this.status = st;
 		
 	}
 	
@@ -51,10 +40,10 @@ public class Exemplar {
 		this.ISBN = ISBN; 
 	}
 	
-	public void inventarisieren (Buchtyp buch)
+	/*public void inventarisieren (Buchtyp buch)
 	{
 		new Exemplar (BuchstatusET.ausleihbar, buch.getISBN());
-	}
+	}*/
 	
 	public void ausleihen()
 	{

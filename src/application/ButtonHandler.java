@@ -121,6 +121,13 @@ public class ButtonHandler implements ActionListener {
 					+benutzer.getBenutzername()+personal.toString());
 					con.disconnect();
 					break;
+				//TODO
+					case "INVENTAR":
+					//Check Konsole
+					System.out.println("ActionCommand erhalten: "+e.getActionCommand());
+					//Daten aus der GUI
+					//Exemplar exemplar = new Exemplar (...);
+					break;
 			}
 		} catch (IllegalArgumentException ex){
 			this.gui.setStudiengruppe(null);
