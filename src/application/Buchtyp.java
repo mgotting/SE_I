@@ -19,6 +19,36 @@ public class Buchtyp {
 		this.Titel = Titel;
 		this.ISBN = ISBN;
 	}
-	// test , muss eingefügt werden wegen Sandra
+	
+	public void setISBN(int ISBN)
+	{
+		this.ISBN = ISBN;
+	}
+	
+	public int getISBN()
+	{
+		return this.ISBN;
+	}
+	
+	public void setAutor (String Autor)
+	{
+		this.Autor = Autor;
+	} 
+	
+	public String getAutor()
+	{
+		return this.Autor;
+	}	
+	
+	public void setTitel (String Titel)
+	{
+		this.Titel = Titel;
+	}
+	
+	public String getTitel()
+	{
+		return this.Titel;
+	}
+	
 
 }
