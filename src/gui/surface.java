@@ -334,7 +334,6 @@ public class surface /* extends JFrame */ {
 				ok.addActionListener(control);
 			}
 		}
-
 	}
 
 	public void launchRent() {
