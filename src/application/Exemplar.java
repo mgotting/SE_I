@@ -53,7 +53,7 @@ public class Exemplar {
 	
 	public void inventarisieren (Buchtyp buch)
 	{
-		ex = new Exemplar (BuchstatusET.ausleihbar, buch.getISBN());
+		new Exemplar (BuchstatusET.ausleihbar, buch.getISBN());
 	}
 	
 	public void ausleihen()
