@@ -19,5 +19,6 @@ public class Buchtyp {
 		this.Titel = Titel;
 		this.ISBN = ISBN;
 	}
+	// test , muss eingefügt werden wegen Sandra
 
 }
