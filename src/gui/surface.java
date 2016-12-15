@@ -637,7 +637,7 @@ public class surface /* extends JFrame */ {
 			}if(benutzerAuswahl.getSelectedIndex()==3){
 				ok.setActionCommand(ACTION_CREATE_PERS);
 				ok.addActionListener(control);
-				System.out.println(benutzerAuswahl.getSelectedIndex());
+				System.out.println(benutzerAuswahl.getSelectedIndex()); 
 			}
 		}
 	}
