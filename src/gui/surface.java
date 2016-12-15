@@ -643,9 +643,7 @@ public class surface /* extends JFrame */ {
 		}
 	}
 	
-<<<<<<< HEAD
 
-=======
 	public void setLoginJFrame(){
 		tableview.updateSQLTable(DB_connection.getAllUsers());
 		this.login.setVisible(true);
@@ -658,5 +656,5 @@ public class surface /* extends JFrame */ {
 	}
 	
 	//TODO setJFrame
->>>>>>> branch 'master' of https://github.com/mgotting/SE_I
+
 }
