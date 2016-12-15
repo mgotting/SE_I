@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import application.ButtonHandler;
 import application.Studiengruppe;
+import connectionToDatabase.DB_connection;
 import connectionToDatabase.JTableview;
 
 import java.awt.*;
@@ -25,12 +26,9 @@ public class surface /* extends JFrame */ {
 
 	private static String[] benutzerliste = { "Benutzer wählen", "Student", "Professor", "Personal" };
 	JComboBox benutzerAuswahl = new JComboBox(benutzerliste);
-	private static String[] menueliste = { "Menü:", "Ausleihe", "Rückgabe", "Bücher anzeigen", "Bücher inventarisieren",
-			"Benutzer anlegen/anzeigen", "Person ändern" };
-	JComboBox menueAuswahl = new JComboBox(menueliste);
-	private static String[] menuelisteAllg = { "Menü:", "Ausleihe", "Rückgabe", "Bücher anzeigen",
+	private static String[] menueliste = { "Menü:", "Ausleihe", "Rückgabe", "Bücher anzeigen",
 			"Bücher inventarisieren", "Benutzer anlegen/anzeigen", "Person ändern", "Logout" };
-	JComboBox menue2Auswahl = new JComboBox(menuelisteAllg);
+	JComboBox menueAuswahl = new JComboBox(menueliste);
 	private static String[] statusliste = { "Status wählen", "ausleihbar", "ausgeliehen", "nicht ausleihbar" };
 	JComboBox statusAuswahl = new JComboBox(statusliste);
 	
@@ -48,11 +46,12 @@ public class surface /* extends JFrame */ {
 	public final static String ACTION_NEXT_INVENTARISIERUNG = "NEXT_INVENTARISIERUNG";
 	public final static String ACTION_NEXT_ANLEGEN = "NEXT_ANLEGEN";
 	public final static String ACTION_NEXT_ÄNDERN = "NEXT_ÄNDERN";
+	public final static String ACTION_NEXT_LOGOUT = "NEXT_LOGOUT";
 	//TODO ACTION_NEXT  
 	
 	// Layout LOGIN-GUI:
-	int ylogin_north = 20;
-	int ylogin_center = 70;
+	//int ylogin_north = 20;
+	//int ylogin_center = 70;
 	int yloginUser_center = 120;
 	int yloginUser2_center = 140;
 	int yloginPW_center = 180;
@@ -80,12 +79,17 @@ public class surface /* extends JFrame */ {
 	int y_opt3 = 340;
 	int y_opt4 = 360;
 	int y_opt5 = 390;
+	int y_Library = 420;
 	int y_bottom = 350;
 	int x_left = 10;
 	int x_center = 140;
+	int x_centerLibrary = 90;
 	int x_right = 330;
 	int x_width = 160;
 	int y_height = 20;
+	int x_widthLibrary = 260;
+	int y_heightLibrary = 100;
+	
 
 	public String getUsername(){
 		String name = username.getText();
@@ -211,7 +215,6 @@ public class surface /* extends JFrame */ {
 		passwort = new JLabel("Passwort:", JLabel.LEFT);
 		username = new JTextField(45);
 		pw = new JTextField(10);
-		menueAuswahl.setBackground(Color.white);
 
 		// AUSLEIH-GUI
 		rent = new JFrame("Ausleihe");
@@ -226,7 +229,7 @@ public class surface /* extends JFrame */ {
 		autor = new JTextField(45);
 		isbn = new JTextField(20);
 
-		menue2Auswahl.setBackground(Color.white);
+		menueAuswahl.setBackground(Color.white);
 		benutzerAuswahl.setBackground(Color.white);
 
 		// RÜCKGABE-GUI
@@ -286,25 +289,19 @@ public class surface /* extends JFrame */ {
 		login.setBounds(x_right, y_north, x_width, y_height);
 
 		// JButtons:
-		ok.setBounds(x_right, yloginPW2_center, xOK_width, y_height);
+		ok.setBounds(x_right, y_center2, xOK_width, y_height);
 		contentpane.add(ok);
 
-		// JComboBoxes:
-		benutzerAuswahl.setBounds(x_center, ylogin_north, x_width, y_height);
-		contentpane.add(benutzerAuswahl);
-		menueAuswahl.setBounds(x_center, ylogin_center, x_width, y_height);
-		contentpane.add(menueAuswahl);
-
 		// JLables:
-		benutzername.setBounds(x_center, yloginUser_center, x_width, y_height);
+		benutzername.setBounds(x_center, y_north, x_width, y_height);
 		contentpane.add(benutzername);
-		passwort.setBounds(x_center, yloginPW_center, x_width, y_height);
+		passwort.setBounds(x_center, y_center, x_width, y_height);
 		contentpane.add(passwort);
 
 		// JTextFields:
-		username.setBounds(x_center, yloginUser2_center, x_width, y_height);
+		username.setBounds(x_center, y_north2, x_width, y_height);
 		contentpane.add(username);
-		pw.setBounds(x_center, yloginPW2_center, x_width, y_height);
+		pw.setBounds(x_center, y_center2, x_width, y_height);
 		contentpane.add(pw);
 
 		login.setSize(450, 500);
@@ -312,27 +309,11 @@ public class surface /* extends JFrame */ {
 		login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Schließen des Fensters ist möglich
 		login.setVisible(true);
 		
-		//TODO Berechtigungen?
-		while(menueAuswahl.getSelectedIndex()==0){
-			if(menueAuswahl.getSelectedIndex()==1){
-				ok.setActionCommand(ACTION_NEXT_AUSLEIHE);
-				ok.addActionListener(control);
-			}if(menueAuswahl.getSelectedIndex()==2){
-				ok.setActionCommand(ACTION_NEXT_RÜCKGABE);
-				ok.addActionListener(control);
-			}if(menueAuswahl.getSelectedIndex()==3){
-				ok.setActionCommand(ACTION_NEXT_ANZEIGE);
-				ok.addActionListener(control);
-			}if(menueAuswahl.getSelectedIndex()==4){
-				ok.setActionCommand(ACTION_NEXT_INVENTARISIERUNG);
-				ok.addActionListener(control);
-			}if(menueAuswahl.getSelectedIndex()==5){
-				ok.setActionCommand(ACTION_NEXT_ANLEGEN);
-				ok.addActionListener(control);
-			}if(menueAuswahl.getSelectedIndex()==6){
-				ok.setActionCommand(ACTION_NEXT_ÄNDERN);
-				ok.addActionListener(control);
-			}
+		if(tableview==null){
+			tableview = new JTableview(DB_connection.getAllUsers());
+			scrollPane = new JScrollPane(tableview.getSQLTable());
+			scrollPane.setBounds(x_centerLibrary, y_south2, x_widthLibrary, y_heightLibrary);
+			contentpane.add(scrollPane);
 		}
 	}
 
@@ -362,8 +343,8 @@ public class surface /* extends JFrame */ {
 		contentpane2.add(isbn);
 
 		// JComboBox
-		menue2Auswahl.setBounds(x_left, yMENU_north, x_width, y_height);
-		contentpane2.add(menue2Auswahl);
+		menueAuswahl.setBounds(x_left, yMENU_north, x_width, y_height);
+		contentpane2.add(menueAuswahl);
 
 		rent.setSize(450, 500);
 		rent.setLocation(100, 100);
@@ -379,8 +360,8 @@ public class surface /* extends JFrame */ {
 		contentpane3.add(zurückgeben);
 
 		// JComboBox
-		menue2Auswahl.setBounds(x_left, yMENU_north, x_width, y_height);
-		contentpane3.add(menue2Auswahl);
+		menueAuswahl.setBounds(x_left, yMENU_north, x_width, y_height);
+		contentpane3.add(menueAuswahl);
 
 		back.setSize(450, 500);
 		back.setLocation(100, 100);
@@ -392,8 +373,8 @@ public class surface /* extends JFrame */ {
 		status.setBounds(x_right, y_north, x_width, y_height);
 
 		// JComboBox
-		menue2Auswahl.setBounds(x_left, yMENU_north, x_width, y_height);
-		contentpane4.add(menue2Auswahl);
+		menueAuswahl.setBounds(x_left, yMENU_north, x_width, y_height);
+		contentpane4.add(menueAuswahl);
 		statusAuswahl.setBounds(x_center, y_north2, x_width, y_height);
 		contentpane4.add(statusAuswahl);
 
@@ -427,8 +408,8 @@ public class surface /* extends JFrame */ {
 		contentpane5.add(isbn);
 
 		// JComboBox
-		menue2Auswahl.setBounds(x_left, yMENU_north, x_width, y_height);
-		contentpane5.add(menue2Auswahl);
+		menueAuswahl.setBounds(x_left, yMENU_north, x_width, y_height);
+		contentpane5.add(menueAuswahl);
 		statusAuswahl.setBounds(x_center, y_south5, x_width, y_height);
 		contentpane5.add(statusAuswahl);
 
@@ -498,8 +479,8 @@ public class surface /* extends JFrame */ {
 		contentpane6.add(ort);
 
 		// JComboBoxes:
-		menue2Auswahl.setBounds(x_left, yMENU_north, x_width, y_height);
-		contentpane6.add(menue2Auswahl);
+		menueAuswahl.setBounds(x_left, yMENU_north, x_width, y_height);
+		contentpane6.add(menueAuswahl);
 		benutzerAuswahl.setBounds(x_center, y_north, x_width, y_height);
 		contentpane6.add(benutzerAuswahl);
 
@@ -508,7 +489,16 @@ public class surface /* extends JFrame */ {
 		create.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Schließen des Fensters ist möglich
 		create.setVisible(true);
 		
+		if(tableview==null){
+			tableview = new JTableview(DB_connection.getAllUsers());
+			scrollPane = new JScrollPane(tableview.getSQLTable());
+			scrollPane.setBounds(x_centerLibrary, y_Library, x_widthLibrary, y_heightLibrary);
+			contentpane6.add(scrollPane);
+		}	
+		
 		Benutzer();
+		
+
 	}
 
 	public void launchAlter() {
@@ -571,8 +561,8 @@ public class surface /* extends JFrame */ {
 		contentpane7.add(ort);
 
 		// JComboBoxes:
-		menue2Auswahl.setBounds(x_left, yMENU_north, x_width, y_height);
-		contentpane7.add(menue2Auswahl);
+		menueAuswahl.setBounds(x_left, yMENU_north, x_width, y_height);
+		contentpane7.add(menueAuswahl);
 		benutzerAuswahl.setBounds(x_center, y_north, x_width, y_height);
 		contentpane7.add(benutzerAuswahl);
 
@@ -580,6 +570,13 @@ public class surface /* extends JFrame */ {
 		alter.setLocation(100, 100);
 		alter.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Schließen des Fensters ist möglich
 		alter.setVisible(true);
+		
+		if(tableview==null){
+			tableview = new JTableview(DB_connection.getAllUsers());
+			scrollPane = new JScrollPane(tableview.getSQLTable());
+			scrollPane.setBounds(x_centerLibrary, y_Library, x_widthLibrary, y_heightLibrary);
+			contentpane7.add(scrollPane);
+		}
 
 	}
 	
@@ -602,6 +599,28 @@ public class surface /* extends JFrame */ {
 				
 			}
 		}
+		//TODO Erst überprüfen wenn ok geklickt wird! Wie umsetzten?
+		while(menueAuswahl.getSelectedIndex()==0){
+			if(menueAuswahl.getSelectedIndex()==1){
+				ok.setActionCommand(ACTION_NEXT_AUSLEIHE);
+				ok.addActionListener(control);
+			}if(menueAuswahl.getSelectedIndex()==2){
+				ok.setActionCommand(ACTION_NEXT_RÜCKGABE);
+				ok.addActionListener(control);
+			}if(menueAuswahl.getSelectedIndex()==3){
+				ok.setActionCommand(ACTION_NEXT_ANZEIGE);
+				ok.addActionListener(control);
+			}if(menueAuswahl.getSelectedIndex()==4){
+				ok.setActionCommand(ACTION_NEXT_INVENTARISIERUNG);
+				ok.addActionListener(control);
+			}if(menueAuswahl.getSelectedIndex()==5){
+				ok.setActionCommand(ACTION_NEXT_ANLEGEN);
+				ok.addActionListener(control);
+			}if(menueAuswahl.getSelectedIndex()==6){
+				ok.setActionCommand(ACTION_NEXT_ÄNDERN);
+				ok.addActionListener(control);
+			}
+		}
 	}
 	
 	public void Benutzer(){
@@ -622,4 +641,17 @@ public class surface /* extends JFrame */ {
 			}
 		}
 	}
+	
+	public void setLoginJFrame(){
+		tableview.updateSQLTable(DB_connection.getAllUsers());
+		this.login.setVisible(true);
+	}
+	
+	public void setRentJFrame(){
+		//TODO tableview getAllBücher
+		//hide vorherige Fenster?
+		this.launchRent();
+	}
+	
+	//TODO setJFrame
 }
