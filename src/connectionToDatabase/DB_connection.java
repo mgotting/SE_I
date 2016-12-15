@@ -54,7 +54,7 @@ public class DB_connection {
 
 	// define generic SQL query for table 'benutzer'
 	public static String getAllUsers() {
-		return "SELECT * FROM benutzer";
+		return "SELECT * FROM library.benutzer";
 	}
 
 	// connect and execute input query and return boolean
