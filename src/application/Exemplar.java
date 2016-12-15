@@ -2,27 +2,63 @@ package application;
 
 public class Exemplar {
 
-	private String BuchID;
-	private BuchstatusET status;
-	private String ISBN;
-	private Exemplar buch;
 	
-	public Exemplar (String BuchID, BuchstatusET status, String ISBN)  
+	private BuchstatusET status;
+	private int ISBN;
+	
+	
+	public Exemplar (BuchstatusET status, int ISBN)  
 	{
-		this.BuchID = BuchID;	
+			
 		this.status = status;
-		this.ISBN = ISBN;		
+		this.ISBN = ISBN;	
+	
+	}
+	
+	public void setStatus( BuchstatusET st)
+	{
+		if(st == null)
+		{
+			return;
+		}
+		if (st == BuchstatusET.ausleihbar)
+		{
+			this.status = st;
+		}
+		if (st == BuchstatusET.ausgeliehen)
+		{
+			this.status = st;
+		}
+		if (st == BuchstatusET.nichtausleihbar)
+		{
+			this.status = st;
+		}
 		
 	}
 	
-	public void inventarisieren (String BuchID, BuchstatusET Status, String ISBN)
+	public BuchstatusET getStatus()
 	{
-		buch = new Exemplar (BuchID,Status,ISBN);
+		return this.status;
+	}
+	
+	public int getISBN()
+	{
+		return this.ISBN;
+	}
+	
+	public void setISBN(int ISBN)
+	{
+		this.ISBN = ISBN; 
+	}
+	
+	public void inventarisieren (Buchtyp buch)
+	{
+		ex = new Exemplar (BuchstatusET.ausleihbar, buch.getISBN());
 	}
 	
 	public void ausleihen()
 	{
-		
+		this.setStatus(BuchstatusET.ausgeliehen);
 	}
-	//danke Sandra
+	
 }
