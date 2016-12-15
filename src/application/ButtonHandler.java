@@ -96,7 +96,7 @@ public class ButtonHandler implements ActionListener {
 					//Daten aus GUI abziehen und Personalobjekt erstellen
 					GUIDaten();
 					Personal personal = new Personal(name, vorname);
-					//Wenn Personobjekt erfolgreich erstellt, dann in Datenbank sichern
+					//Wenn Personobjekt erfolgreich erstellt, dann in Datenbank sichern 
 					con = DB_connection.getDbConnection();
 					//1. einfügen in Tabelle Person
 					insertPerson = "INSERT INTO person(Vorname, Name, Art) VALUES ('"+personal.getVorname()+"','"+personal.getName()+"','b');";
