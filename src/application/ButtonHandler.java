@@ -21,6 +21,10 @@ public class ButtonHandler implements ActionListener {
 	String vorname;
 	String benutzername;
 	String passwort;
+	String straße;
+	String postleitzahl;
+	String ort;
+	String hausnummer;
 	
 	// create reference to GUI
 	public ButtonHandler(gui.surface gui) { 
@@ -126,11 +130,15 @@ public class ButtonHandler implements ActionListener {
 		}
 	}
 	
-	//befüllt für jeden Case die Grundinformationen
+	//befüllt für jeden Case die Grundinformationen TODO ADRESSE?
 	private void GUIDaten(){
 		name = this.gui.getName();
 		vorname = this.gui.getVorname();
 		benutzername = this.gui.getUsername();
 		passwort = this.gui.getPasswort();
+		straße = this.gui.getStraße();
+		hausnummer = this.gui.getHausnummer();
+		postleitzahl = this.gui.getPLZ();
+		ort = this.gui.getOrt();
 	}
 }
