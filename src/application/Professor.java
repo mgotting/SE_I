@@ -35,8 +35,13 @@ public class Professor extends PersonABC {
 	
 	//nur zum Testen
 	public String toString(){
-		return "\nName:\n"+getName()+"\nVorname:\n"+getVorname()+"\nFakult\u00E4t:\n"+getFakultaet()+"\nAdresse:\n"+getAdresse();
+		if(getAdresse()!=null){
+			return "\nName: "+getName()+"\nVorname: "+getVorname()+"\nFakult\u00E4t: "+getFakultaet()+"\nAdresse: "+getAdresse();
+		}else{
+			return "\nName: "+getName()+"\nVorname: "+getVorname()+"\nFakult\u00E4t: "+getFakultaet()+"\nAdresse: ";
+		}
 	}
+		
 	
 	public String getDetails(){
 		return super.getDetails()+"\nFakult\u00E4t:\n"+getFakultaet();
