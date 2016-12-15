@@ -126,6 +126,7 @@ public class ButtonHandler implements ActionListener {
 		}
 	}
 	
+	//befüllt für jeden Case die Grundinformationen
 	private void GUIDaten(){
 		name = this.gui.getName();
 		vorname = this.gui.getVorname();
