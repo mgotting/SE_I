@@ -426,6 +426,7 @@ public class surface /* extends JFrame */ {
 		inventory.setLocation(100, 100);
 		inventory.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Schließen des Fensters ist möglich
 		inventory.setVisible(true);
+		
 	}
 
 	public void launchCreate() {
@@ -623,6 +624,7 @@ public class surface /* extends JFrame */ {
 //		}
 //	}
 	
+
 	public void setLoginJFrame(){
 		tableview.updateSQLTable(DB_connection.getAllUsers());
 		this.login.setVisible(true);
@@ -636,4 +638,5 @@ public class surface /* extends JFrame */ {
 	
 	
 	//TODO setJFrame
+
 }

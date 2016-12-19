@@ -145,6 +145,17 @@ public class ButtonHandler implements ActionListener {
 					+benutzer.getBenutzername()+personal.toString());
 					con.disconnect();
 					break;
+				//TODO
+					case "INVENTAR":
+					//Check Konsole
+					System.out.println("ActionCommand erhalten: "+e.getActionCommand());
+					//Daten aus der GUI
+					//Exemplar exemplar = new Exemplar (status, buch);
+					con = DB_connection.getDbConnection();
+					//1. einfügen in Tabelle
+					//insertBuch = "INSERT INTO Inventar (status, ISBN) VALUES ('"+Exemplar.getStatus()+"', '"+exemplar.getISBN()+"');"
+					
+					break;
 			}
 		}catch (AdressException e1) {
 			// TODO Auto-generated catch block
