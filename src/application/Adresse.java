@@ -1,32 +1,32 @@
 package application;
 
 public class Adresse {
-	private String stra\u00DFe;
+	private String straﬂe;
 	private String hausnummer;
 	private int postleitzahl;
 	private String ort;
 
 
-	Adresse(String stra\u00DFe, String hausnummer, int postleitzahl, String ort) throws AdressException{
-		if(stra\u00DFe==null || hausnummer==null || ort==null){
-			throw new AdressException("Es fehlt eine Eingabe!");
-		}else{
-			this.stra\u00DFe = stra\u00DFe;
+	Adresse(String straﬂe, String hausnummer, int postleitzahl, String ort) throws AdressException{
+//		if(straﬂe==null || hausnummer==null || ort==null){
+//			throw new AdressException("Es fehlt eine Eingabe!");
+//		}else{
+			this.straﬂe = straﬂe;
 			this.hausnummer = hausnummer;
 			this.postleitzahl = postleitzahl;
 			this.ort = ort;
-		}
+//		}
 	}
 
 	String getStra\u00DFe() {
-		return stra\u00DFe;
+		return straﬂe;
 	}
 
 	void setStra\u00DFe(String stra\u00DFe) throws AdressException{
 		if(stra\u00DFe==null){
 			throw new AdressException ("Es wurde keine Straﬂe eingetragen");
 		}else{
-			this.stra\u00DFe = stra\u00DFe;
+			this.straﬂe = stra\u00DFe;
 		}
 	}
 
@@ -76,7 +76,7 @@ public class Adresse {
 				return false;
 				} else {
 					Adresse ad = (Adresse) other;
-					return (stra\u00DFe.equals(ad.getStra\u00DFe()) && hausnummer.equals(ad.getHausnummer()) && postleitzahl == ad.getPostleitzahl() && ort.equals(ad.getOrt()));
+					return (straﬂe.equals(ad.getStra\u00DFe()) && hausnummer.equals(ad.getHausnummer()) && postleitzahl == ad.getPostleitzahl() && ort.equals(ad.getOrt()));
 				}
 			}
 		}

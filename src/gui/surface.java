@@ -8,6 +8,8 @@ import connectionToDatabase.DB_connection;
 import connectionToDatabase.JTableview;
 
 import java.awt.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 /**
  * @author Sandra
@@ -35,11 +37,12 @@ public class surface /* extends JFrame */ {
 	public ButtonHandler control;
 	public JTableview tableview;
 	public JScrollPane scrollPane;
+	public Object selectedItem;
 
 	//Action Commands for Action Listener
-	public final static String ACTION_CREATE_STUD = "CREATE_STUDENT";
-	public final static String ACTION_CREATE_PROF = "CREATE_PROFESSOR";
-	public final static String ACTION_CREATE_PERS = "CREATE_PERSONAL";
+	public final static String ACTION_CREATE_USER = "CREATE_USER";
+	//public final static String ACTION_CREATE_PROF = "CREATE_PROFESSOR";
+	//public final static String ACTION_CREATE_PERS = "CREATE_PERSONAL";
 	public final static String ACTION_NEXT_AUSLEIHE = "NEXT_AUSLEIHE";
 	public final static String ACTION_NEXT_RÜCKGABE = "NEXT_RÜCKGABE";
 	public final static String ACTION_NEXT_ANZEIGE = "NEXT_ANZEIGE";
@@ -47,6 +50,7 @@ public class surface /* extends JFrame */ {
 	public final static String ACTION_NEXT_ANLEGEN = "NEXT_ANLEGEN";
 	public final static String ACTION_NEXT_ÄNDERN = "NEXT_ÄNDERN";
 	public final static String ACTION_NEXT_LOGOUT = "NEXT_LOGOUT";
+	public final static String ACTION_ITEMSELECTED = "ITEM_SELECTED";
 	//TODO ACTION_NEXT  
 	
 	// Layout LOGIN-GUI:
@@ -147,6 +151,11 @@ public class surface /* extends JFrame */ {
 		this.vorname.setText(firstname);
 	}
 	
+	public String getSelectedItem(){
+		String item = selectedItem.toString();
+		return item;
+	}
+	
 	public int getMatrikelnummer(){
 		int matrikelnr = Integer.parseInt(matnr.getText());
 		return matrikelnr;
@@ -187,8 +196,8 @@ public class surface /* extends JFrame */ {
 		this.hausnr.setText(hausnummer);
 	}
 	
-	public String getPLZ(){
-		String postleitzahl = plz.getText();
+	public int getPLZ(){
+		int postleitzahl = Integer.parseInt(plz.getText());
 		return postleitzahl;
 	}
 	public void setPLZ(String postleitzahl){
@@ -495,9 +504,23 @@ public class surface /* extends JFrame */ {
 			scrollPane.setBounds(x_centerLibrary, y_Library, x_widthLibrary, y_heightLibrary);
 			contentpane6.add(scrollPane);
 		}	
+		benutzerAuswahl.addItemListener(new ItemListener(){
+			@Override
+			public void itemStateChanged(ItemEvent e){
+			//getItem returns an object so it gets cast
+			//as a String to retrieve the item value
+			String item = (String)e.getItem();
+				if (e.getStateChange() == ItemEvent.SELECTED){
+					selectedItem = e.getItem();
+				}else{
+				}
+			}
+		});
 		
-		Benutzer();
 		
+		//Benutzer();
+		ok.setActionCommand(ACTION_CREATE_USER);
+		ok.addActionListener(control);
 
 	}
 
@@ -579,68 +602,26 @@ public class surface /* extends JFrame */ {
 		}
 
 	}
+
 	
-	//TODO Frame-Wechsel & Berechtigungen
-	public void Menü(){
-		while(menueAuswahl.getSelectedIndex()==0){
-			if(menueAuswahl.getSelectedIndex()==1){
-				
-			}if(menueAuswahl.getSelectedIndex()==2){
-				
-			}if(menueAuswahl.getSelectedIndex()==3){
-				
-			}if(menueAuswahl.getSelectedIndex()==4){
-				
-			}if(menueAuswahl.getSelectedIndex()==5){
-				
-			}if(menueAuswahl.getSelectedIndex()==6){
-				
-			}if(menueAuswahl.getSelectedIndex()==7){
-				
-			}
-		}
-		//TODO Erst überprüfen wenn ok geklickt wird! Wie umsetzten?
-		while(menueAuswahl.getSelectedIndex()==0){
-			if(menueAuswahl.getSelectedIndex()==1){
-				ok.setActionCommand(ACTION_NEXT_AUSLEIHE);
-				ok.addActionListener(control);
-			}if(menueAuswahl.getSelectedIndex()==2){
-				ok.setActionCommand(ACTION_NEXT_RÜCKGABE);
-				ok.addActionListener(control);
-			}if(menueAuswahl.getSelectedIndex()==3){
-				ok.setActionCommand(ACTION_NEXT_ANZEIGE);
-				ok.addActionListener(control);
-			}if(menueAuswahl.getSelectedIndex()==4){
-				ok.setActionCommand(ACTION_NEXT_INVENTARISIERUNG);
-				ok.addActionListener(control);
-			}if(menueAuswahl.getSelectedIndex()==5){
-				ok.setActionCommand(ACTION_NEXT_ANLEGEN);
-				ok.addActionListener(control);
-			}if(menueAuswahl.getSelectedIndex()==6){
-				ok.setActionCommand(ACTION_NEXT_ÄNDERN);
-				ok.addActionListener(control);
-			}
-		}
-	}
-	
-	public void Benutzer(){
-		while(benutzerAuswahl.getSelectedIndex()==0){
-			System.out.println("in While loop");
-			if(benutzerAuswahl.getSelectedIndex()==1){
-				ok.setActionCommand(ACTION_CREATE_STUD);
-				ok.addActionListener(control);
-				System.out.println(benutzerAuswahl.getSelectedIndex());
-			}if(benutzerAuswahl.getSelectedIndex()==2){
-				ok.setActionCommand(ACTION_CREATE_PROF);
-				ok.addActionListener(control);
-				System.out.println(benutzerAuswahl.getSelectedIndex());
-			}if(benutzerAuswahl.getSelectedIndex()==3){
-				ok.setActionCommand(ACTION_CREATE_PERS);
-				ok.addActionListener(control);
-				System.out.println(benutzerAuswahl.getSelectedIndex()); 
-			}
-		}
-	}
+//	public void Benutzer(){
+//		while(benutzerAuswahl.getSelectedIndex()==0){
+//			System.out.println("in While loop");
+//			if(benutzerAuswahl.getSelectedIndex()==1){
+//	//			ok.setActionCommand(ACTION_CREATE_STUD);
+//				ok.addActionListener(control);
+//				System.out.println(benutzerAuswahl.getSelectedIndex());
+//			}if(benutzerAuswahl.getSelectedIndex()==2){
+//	//			ok.setActionCommand(ACTION_CREATE_PROF);
+//				ok.addActionListener(control);
+//				System.out.println(benutzerAuswahl.getSelectedIndex());
+//			}if(benutzerAuswahl.getSelectedIndex()==3){
+//	//			ok.setActionCommand(ACTION_CREATE_PERS);
+//				ok.addActionListener(control);
+//				System.out.println(benutzerAuswahl.getSelectedIndex()); 
+//			}
+//		}
+//	}
 	
 	public void setLoginJFrame(){
 		tableview.updateSQLTable(DB_connection.getAllUsers());
@@ -652,6 +633,7 @@ public class surface /* extends JFrame */ {
 		//hide vorherige Fenster?
 		this.launchRent();
 	}
+	
 	
 	//TODO setJFrame
 }

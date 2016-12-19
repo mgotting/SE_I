@@ -7,11 +7,13 @@ import java.sql.*;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import com.sun.javafx.scene.control.skin.ComboBoxPopupControl.FakeFocusTextField;
+
 import connectionToDatabase.DB_connection;
 import gui.surface;
 
 /**
- * @author Michael Gottinger
+ * @author Michael Gottinger 
  *
  */
 
@@ -22,28 +24,37 @@ public class ButtonHandler implements ActionListener {
 	String benutzername;
 	String passwort;
 	String straße;
-	String postleitzahl;
+	int postleitzahl;
 	String ort;
 	String hausnummer;
+	String selectedItem;
 	
 	// create reference to GUI
 	public ButtonHandler(gui.surface gui) { 
 		this.gui = gui;
 	}
-
+	
 	public void actionPerformed(ActionEvent e) {
 		try{
 			//Prüfen, welches Kommando kommt
 			switch (e.getActionCommand()){ 
-			//Fall Student erstellen:
+			//TEST DD
+			case "CREATE_USER":
+				selectedItem = this.gui.getSelectedItem();
+				System.out.println(selectedItem);
+				
 			case "CREATE_STUDENT":
 				//Check Konsole
+				System.out.println();
 				System.out.println("ActionCommand erhalten: "+e.getActionCommand());
 				//Daten aus GUI abziehen und Studentenobjekt erstellen
+				
 				GUIDaten();
 				int matrikelnummer = this.gui.getMatrikelnummer();
 				Studiengruppe studiengruppe = this.gui.getStudiengruppe();
 				Student student = new Student(name, vorname, matrikelnummer, studiengruppe);
+				//mit Adresse
+				student = new Student(name, vorname, matrikelnummer, studiengruppe, straße, hausnummer, postleitzahl, ort);
 				//Wenn Studentenobjekt erfolgreich erstellt, dann in Datenbank sichern
 				DB_connection con = DB_connection.getDbConnection();
 				//1. einfügen in Tabelle Person
@@ -61,18 +72,26 @@ public class ButtonHandler implements ActionListener {
 				String insertBenutzer = "INSERT INTO benutzer(Benutzername, Passwort, PersonID) VALUES ('"+benutzer.getBenutzername()+"','"+benutzer.getPasswort()+"',"+generatedID+");";
 				boolean benutzerVerbucht = con.executequery(insertBenutzer);
 				System.out.println("Benutzer erfolgreich verbucht: "+benutzerVerbucht);
+				//4. einfügen in Tabelle Adresse
+				Adresse adresse = new Adresse (straße, hausnummer, postleitzahl, ort);
+				String insertAdresse = "INSERT INTO adresse(AdressID, Straße, Hausnummer, Postleitzahl, Ort) VALUES ('"+generatedID+"','"+adresse.getStraße()+"','"+adresse.getHausnummer()+"','"+adresse.getPostleitzahl()+"','"+adresse.getOrt()+"');";
+				boolean adresseVerbucht = con.executequery(insertAdresse);
+				System.out.println("Adresse erfolgreich verbucht: "+adresseVerbucht);
 				JOptionPane.showMessageDialog(new JFrame(), "Student und Benutzer mit folgenden Daten integriert angelegt:\n\nBenutzername: "
 				+benutzer.getBenutzername()+student.toString());
 				con.disconnect();
 				break;
+				
 				//Fall Professor erstellen:
 				case "CREATE_PROFESSOR":
 					//Check Konsole
+					System.out.println();
 					System.out.println("ActionCommand erhalten: "+e.getActionCommand());
 					//Daten aus GUI abziehen und Professorobjekt erstellen
 					GUIDaten();
 					String fakultät = this.gui.getFakultät();
 					Professor professor = new Professor(name, vorname, fakultät);
+					professor = new Professor (name, vorname, fakultät, straße, hausnummer, postleitzahl, ort);
 					//Wenn Professorenobjekt erfolgreich erstellt, dann in Datenbank sichern
 					con = DB_connection.getDbConnection();
 					//1. einfügen in Tabelle Person
@@ -90,6 +109,11 @@ public class ButtonHandler implements ActionListener {
 					insertBenutzer = "INSERT INTO benutzer(Benutzername, Passwort, PersonID) VALUES ('"+benutzer.getBenutzername()+"','"+benutzer.getPasswort()+"',"+generatedID+");";
 					benutzerVerbucht = con.executequery(insertBenutzer);
 					System.out.println("Benutzer erfolgreich verbucht: "+benutzerVerbucht);
+					//4. einfügen in Tabelle Adresse
+					adresse = new Adresse (straße, hausnummer, postleitzahl, ort);
+					insertAdresse = "INSERT INTO adresse(AdressID, Straße, Hausnummer, Postleitzahl, Ort) VALUES ('"+generatedID+"','"+adresse.getStraße()+"','"+adresse.getHausnummer()+"','"+adresse.getPostleitzahl()+"','"+adresse.getOrt()+"');";
+					adresseVerbucht = con.executequery(insertAdresse);
+					System.out.println("Adresse erfolgreich verbucht: "+adresseVerbucht);
 					JOptionPane.showMessageDialog(new JFrame(), "Professor und Benutzer mit folgenden Daten integriert angelegt:\n\nBenutzername: "
 					+benutzer.getBenutzername()+professor.toString());
 					con.disconnect();
@@ -122,12 +146,18 @@ public class ButtonHandler implements ActionListener {
 					con.disconnect();
 					break;
 			}
+		}catch (AdressException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		} catch (IllegalArgumentException ex){
 			this.gui.setStudiengruppe(null);
 			JOptionPane.showMessageDialog(new JFrame(), ex.getMessage());
 		} catch (SQLException ex){
 			JOptionPane.showMessageDialog(new JFrame(), ex.getMessage());
-		}
+		} catch (NullPointerException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} 
 	}
 	
 	//befüllt für jeden Case die Grundinformationen TODO ADRESSE?

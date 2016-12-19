@@ -14,14 +14,14 @@ public class Student extends PersonABC  {
 		}
 	}
 	
-	public Student(String name, String vorname, int matrikelnummer, Studiengruppe studiengruppe, String stra\u00DFe, String hausnummer, int postleitzahl, String ort) throws NullPointerException, AdressException{
-		super(name, vorname, stra\u00DFe, hausnummer, postleitzahl, ort);
+	public Student(String name, String vorname, int matrikelnummer, Studiengruppe studiengruppe, String straﬂe, String hausnummer, int postleitzahl, String ort) throws NullPointerException, AdressException{
+		super(name, vorname, straﬂe, hausnummer, postleitzahl, ort);
 		this.matrikelnummer=matrikelnummer;
-			if (studiengruppe==null){
-				throw new NullPointerException("Es wurde keine Studiengruppe eingetragen!");	
-			}else{			
+//			if (studiengruppe==null){
+//				throw new NullPointerException("Es wurde keine Studiengruppe eingetragen!");	
+//			}else{			
 				this.studiengruppe=studiengruppe;
-			}
+//			}
 	}
 	
 	public int getMatrikelnummer(){
