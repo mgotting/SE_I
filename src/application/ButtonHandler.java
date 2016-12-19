@@ -19,7 +19,7 @@ public class ButtonHandler implements ActionListener {
 	private BenutzerAnlegen benutzerAnlegen;
 	private DB_connection con;
 	private String name, vorname, benutzername, passwort, straße, ort, hausnummer;
-	private int postleitzahl, generatedID;
+	private int postleitzahl, generatedID, generatedAdressID;
 	private char art;
 	private Benutzer benutzer;
 
@@ -37,6 +37,10 @@ public class ButtonHandler implements ActionListener {
 			case "ANLEGEN":
 				GUIDaten();
 				con = DB_connection.getDbConnection();
+				//4. einfügen in Tabelle Adresse
+				Adresse adresse = new Adresse (straße, hausnummer, postleitzahl, ort);
+				String insertAdresse = "INSERT INTO adresse(Straße, Hausnummer, Postleitzahl, Ort) VALUES ('"+adresse.getStraße()+"','"+adresse.getHausnummer()+"','"+adresse.getPostleitzahl()+"','"+adresse.getOrt()+"');";
+				generatedAdressID = con.executequery_autoKey(insertAdresse, true);
 				switch (this.benutzerAnlegen.getBenutzerArt()) {
 				case "Student":
 					int matrikelnummer = this.benutzerAnlegen.getMatrikelnummer();
@@ -49,11 +53,6 @@ public class ButtonHandler implements ActionListener {
 					String insertStudent = "INSERT INTO student(Matrikelnummer, Studiengruppe, PersonID) VALUES ("+ student.getMatrikelnummer()+ ",'"+ student.getStudiengruppe().toString()+ "',"+ generatedID + ");";
 					boolean studentVerbucht = con.executequery(insertStudent);
 					System.out.println("Student erfolgreich verbucht: "+ studentVerbucht);
-					//4. einfügen in Tabelle Adresse
-					Adresse adresse = new Adresse (straße, hausnummer, postleitzahl, ort);
-					String insertAdresse = "INSERT INTO adresse(AdressID, Straße, Hausnummer, Postleitzahl, Ort) VALUES ('"+generatedID+"','"+adresse.getStraße()+"','"+adresse.getHausnummer()+"','"+adresse.getPostleitzahl()+"','"+adresse.getOrt()+"');";
-					boolean adresseVerbucht = con.executequery(insertAdresse);
-					System.out.println("Adresse erfolgreich verbucht: "+adresseVerbucht);
 					JOptionPane.showMessageDialog(new JFrame(),"Student und Benutzer mit folgenden Daten integriert angelegt:\n\nBenutzername: "+ benutzer.getBenutzername()+ student.toString());
 					benutzerAnlegen.tableview.updateSQLTable(DB_connection.getAllUsers());
 					EintragLöschen();
@@ -70,11 +69,6 @@ public class ButtonHandler implements ActionListener {
 					String insertProfessor = "INSERT INTO professor(Fakultät, PersonID) VALUES ('"+professor.getFakultaet()+"',"+generatedID+");";
 					boolean professorVerbucht = con.executequery(insertProfessor);
 					System.out.println("Professert erfolgreich verbucht: "+professorVerbucht);
-					//4. einfügen in Tabelle Adresse
-					adresse = new Adresse (straße, hausnummer, postleitzahl, ort);
-					insertAdresse = "INSERT INTO adresse(AdressID, Straße, Hausnummer, Postleitzahl, Ort) VALUES ('"+generatedID+"','"+adresse.getStraße()+"','"+adresse.getHausnummer()+"','"+adresse.getPostleitzahl()+"','"+adresse.getOrt()+"');";
-					adresseVerbucht = con.executequery(insertAdresse);
-					System.out.println("Adresse erfolgreich verbucht: "+adresseVerbucht);
 					JOptionPane.showMessageDialog(new JFrame(), "Professor und Benutzer mit folgenden Daten integriert angelegt:\n\nBenutzername: "+benutzer.getBenutzername()+professor.toString());
 					benutzerAnlegen.tableview.updateSQLTable(DB_connection.getAllUsers());
 					EintragLöschen();
@@ -89,11 +83,6 @@ public class ButtonHandler implements ActionListener {
 					String insertPersonal = "INSERT INTO personal(PersonID) VALUES ("+generatedID+");";
 					boolean personalVerbucht = con.executequery(insertPersonal);
 					System.out.println("Personal erfolgreich verbucht: "+personalVerbucht);
-					//4. einfügen in Tabelle Adresse
-					adresse = new Adresse (straße, hausnummer, postleitzahl, ort);
-					insertAdresse = "INSERT INTO adresse(AdressID, Straße, Hausnummer, Postleitzahl, Ort) VALUES ('"+generatedID+"','"+adresse.getStraße()+"','"+adresse.getHausnummer()+"','"+adresse.getPostleitzahl()+"','"+adresse.getOrt()+"');";
-					adresseVerbucht = con.executequery(insertAdresse);
-					System.out.println("Adresse erfolgreich verbucht: "+adresseVerbucht);
 					JOptionPane.showMessageDialog(new JFrame(), "Personal und Benutzer mit folgenden Daten integriert angelegt:\n\nBenutzername: "+benutzer.getBenutzername()+personal.toString());
 					this.benutzerAnlegen.tableview.updateSQLTable(DB_connection.getAllUsers());
 					EintragLöschen();
@@ -139,7 +128,7 @@ public class ButtonHandler implements ActionListener {
 	private void ObjektErstellung(PersonABC person){
 		try{
 		// 1. einfügen in Tabelle Person
-		String insertPerson = "INSERT INTO person(Vorname, Name, Art) VALUES ('"+ person.getVorname()+ "','"+ person.getName()+ "','"+art+"');";
+		String insertPerson = "INSERT INTO person(Vorname, Name, AdressID, Art) VALUES ('"+ person.getVorname()+ "','"+ person.getName()+ "',"+generatedAdressID+"'"+art+"');";
 			// erhalten der generierten PersonID und Verbuchung
 			generatedID = con.executequery_autoKey(insertPerson, true);
 			System.out.println("Erstellte PersonID: " + generatedID);
