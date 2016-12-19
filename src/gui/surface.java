@@ -522,7 +522,7 @@ public class surface /* extends JFrame */ {
 		//Benutzer();
 		ok.setActionCommand(ACTION_CREATE_USER);
 		ok.addActionListener(control);
-
+ 
 	}
 
 	public void launchAlter() {
