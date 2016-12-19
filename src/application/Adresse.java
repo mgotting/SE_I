@@ -8,14 +8,14 @@ public class Adresse {
 
 
 	Adresse(String straﬂe, String hausnummer, int postleitzahl, String ort) throws AdressException{
-//		if(straﬂe==null || hausnummer==null || ort==null){
-//			throw new AdressException("Es fehlt eine Eingabe!");
-//		}else{
+		if(straﬂe==null || hausnummer==null || ort==null){
+			throw new AdressException("Es fehlt eine Eingabe!");
+		}else{
 			this.straﬂe = straﬂe;
 			this.hausnummer = hausnummer;
 			this.postleitzahl = postleitzahl;
 			this.ort = ort;
-//		}
+		}
 	}
 
 	String getStra\u00DFe() {

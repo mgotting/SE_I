@@ -17,11 +17,7 @@ public abstract class PersonABC {
 
 	public PersonABC(String name, String vorname, String straﬂe, String hausnummer, int postleitzahl, String ort) throws NullPointerException, AdressException {
 		this(name, vorname);
-//		if (adresse==null){
-//			throw new NullPointerException("Es wurde kein Adresse angegeben!");
-//		}else{
-			adresse = new Adresse(straﬂe, hausnummer, postleitzahl, ort);
-//		}
+		adresse = new Adresse(straﬂe, hausnummer, postleitzahl, ort);
 	}
 
 	public String getName() {
