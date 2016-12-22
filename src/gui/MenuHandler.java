@@ -1,5 +1,5 @@
 /**
- * Klasse, die die Events der MenuAuswahl bearbeitet
+ * Klasse, die die Events der Startmenu bearbeitet
  */
 package gui;
 
@@ -10,12 +10,12 @@ import java.awt.event.*;
  *
  */
 public class MenuHandler implements ActionListener {
-	MenuAuswahl menuAuswahl;
+	Startmenu startmenu;
 	BenutzerAnlegen benutzerAnlegen;
 	
 	// create reference to GUI
-	public MenuHandler(MenuAuswahl gui) { 
-		this.menuAuswahl = gui;
+	public MenuHandler(Startmenu gui) { 
+		this.startmenu = gui;
 	}
 
 	@Override
@@ -28,7 +28,7 @@ public class MenuHandler implements ActionListener {
 			case "BENUTZER_ANLEGEN":
 				benutzerAnlegen = new BenutzerAnlegen();
 				benutzerAnlegen.LaunchBenutzerAnlegen();
-				menuAuswahl.auswahl.setVisible(false);
+				startmenu.auswahl.setVisible(false);
 				break;
 			}
 		} catch (Exception ex){

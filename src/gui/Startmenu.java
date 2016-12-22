@@ -9,7 +9,7 @@ import javax.swing.*;
  * @author Michael Gottinger, Sandra Speckmeier
  *
  */
-public class MenuAuswahl {
+public class Startmenu {
 	JFrame auswahl;
 	JPanel panel;
 	JMenuBar bar;
@@ -26,7 +26,7 @@ public class MenuAuswahl {
 	
 	public MenuHandler controlMenu;
 	
-	public MenuAuswahl(){
+	public Startmenu(){
 		controlMenu = new MenuHandler(this);
 		// Erzeugung eines neuen Frames mit dem Titel "Menupunkt wählen "
 		auswahl = new JFrame("Menupunkt wählen");
