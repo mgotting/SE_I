@@ -6,7 +6,7 @@ package gui;
 import javax.swing.*;
 
 /**
- * @author Michael Gottinger
+ * @author Michael Gottinger, Sandra Speckmeier
  *
  */
 public class MenuAuswahl {

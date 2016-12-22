@@ -22,6 +22,7 @@ public class ButtonHandler implements ActionListener {
 	private int postleitzahl, generatedID, generatedAdressID;
 	private char art;
 	private Benutzer benutzer;
+	private boolean adresseVorhanden;
 
 	// create reference to GUI
 	public ButtonHandler(BenutzerAnlegen benutzerAnlegen) {
@@ -37,16 +38,23 @@ public class ButtonHandler implements ActionListener {
 			case "ANLEGEN":
 				GUIDaten();
 				con = DB_connection.getDbConnection();
+				if(adresseVorhanden == true){
 				//4. einfügen in Tabelle Adresse
 				Adresse adresse = new Adresse (straße, hausnummer, postleitzahl, ort);
 				String insertAdresse = "INSERT INTO adresse(Straße, Hausnummer, Postleitzahl, Ort) VALUES ('"+adresse.getStraße()+"','"+adresse.getHausnummer()+"','"+adresse.getPostleitzahl()+"','"+adresse.getOrt()+"');";
 				generatedAdressID = con.executequery_autoKey(insertAdresse, true);
+				}
 				switch (this.benutzerAnlegen.getBenutzerArt()) {
 				case "Student":
 					int matrikelnummer = this.benutzerAnlegen.getMatrikelnummer();
 					Studiengruppe studiengruppe = this.benutzerAnlegen.getStudiengruppe();
-					Student student = new Student(name, vorname,matrikelnummer, studiengruppe);
+					Student student;
 					art = 's';
+					if(adresseVorhanden == false){
+					student = new Student(name, vorname,matrikelnummer, studiengruppe);
+					} else {
+					student = new Student(name, vorname,matrikelnummer, studiengruppe, straße, hausnummer, postleitzahl, ort);
+					}
 					// Wenn Studentenobjekt erfolgreich erstellt, dann in Datenbank sichern
 					ObjektErstellung(student);
 					// 2. einfügen in Tabelle Student
@@ -112,24 +120,36 @@ public class ButtonHandler implements ActionListener {
 		}
 	}
 
-	// befüllt für jeden Benutzer die Grundinformationen
+	// befüllt für jeden Benutzer die Grundinformationen und prüft ob Adresse vorhanden.
 	private void GUIDaten() {
 		name = this.benutzerAnlegen.getName();
 		vorname = this.benutzerAnlegen.getVorname();
 		benutzername = this.benutzerAnlegen.getBenutzername();
 		passwort = this.benutzerAnlegen.getPasswort();
-		straße = this.benutzerAnlegen.getStraße();
-		hausnummer = this.benutzerAnlegen.getHausnummer();
-		postleitzahl = this.benutzerAnlegen.getPLZ();
-		ort = this.benutzerAnlegen.getOrt();
+		if(this.benutzerAnlegen.getStraße().equals("")||this.benutzerAnlegen.getHausnummer().equals("") || this.benutzerAnlegen.getPLZ()==0 || this.benutzerAnlegen.getOrt().equals("")){
+			adresseVorhanden = false;
+		} else {
+			adresseVorhanden = true;
+			straße = this.benutzerAnlegen.getStraße();
+			hausnummer = this.benutzerAnlegen.getHausnummer();
+			postleitzahl = this.benutzerAnlegen.getPLZ();
+			ort = this.benutzerAnlegen.getOrt();
+		}
+		System.out.println("Adresse vorhanden: "+adresseVorhanden);
 	}
 	
 	// befüllt die für jedes Objekt identischen Tabellen
 	private void ObjektErstellung(PersonABC person){
 		try{
+			String insertPerson;
+			if(adresseVorhanden == true){
 		// 1. einfügen in Tabelle Person
-		String insertPerson = "INSERT INTO person(Vorname, Name, AdressID, Art) VALUES ('"+ person.getVorname()+ "','"+ person.getName()+ "',"+generatedAdressID+"'"+art+"');";
-			// erhalten der generierten PersonID und Verbuchung
+			insertPerson = "INSERT INTO person(Vorname, Name, AdressID, Art) VALUES ('"+ person.getVorname()+ "','"+ person.getName()+ "',"+generatedAdressID+",'"+art+"');";
+			adresseVorhanden=false;
+			} else {
+		// 1. einfügen in Tabelle Person
+			insertPerson = "INSERT INTO person(Vorname, Name, Art) VALUES ('"+ person.getVorname()+ "','"+ person.getName()+ "','"+art+"');";
+			}
 			generatedID = con.executequery_autoKey(insertPerson, true);
 			System.out.println("Erstellte PersonID: " + generatedID);
 			// 3. einfügen in Tabelle Benutzer

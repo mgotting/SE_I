@@ -182,6 +182,7 @@ public class BenutzerAnlegen {
 		String straﬂe = this.straﬂe.getText();
 		return straﬂe;
 	}
+	
 	public void setStraﬂe(String straﬂe){
 		this.straﬂe.setText(straﬂe);
 	}
@@ -190,6 +191,7 @@ public class BenutzerAnlegen {
 		String hausnummer = this.hausnummer.getText();
 		return hausnummer;
 	}
+	
 	public void setHausnummer(String hausnummer){
 		this.hausnummer.setText(hausnummer);
 	}
@@ -198,14 +200,16 @@ public class BenutzerAnlegen {
 		int postleitzahl = Integer.parseInt(this.postleitzahl.getText());
 		return postleitzahl;
 	}
+	
 	public void setPLZ(String postleitzahl){
 		this.postleitzahl.setText(postleitzahl);
 	}
 	
 	public String getOrt(){
-		String ort = this.ort.getText();
+		 String ort = this.ort.getText();
 		return ort;
 	}
+	
 	public void setOrt(String ort){
 		this.ort.setText(ort);
 	}
