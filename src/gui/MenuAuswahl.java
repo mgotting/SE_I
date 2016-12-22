@@ -41,7 +41,7 @@ public class MenuAuswahl {
 		panel.setLayout(null);
 	}
 	
-	public void LaunchAuswahl(){
+	public void launchAuswahl(){
 		auswahl.setBounds(x_right, y_north, x_width, y_height);
 		auswahl.setJMenuBar(bar);
 		// Menü wird der Menüleiste hinzugefügt

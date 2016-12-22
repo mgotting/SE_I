@@ -40,6 +40,10 @@ public class ComboBoxHandler implements ItemListener {
            	this.benutzerAnlegen.fakult‰t.setEditable(false);
         	this.benutzerAnlegen.matrikelnummer.setEditable(false);
         	this.benutzerAnlegen.studiengruppe.setEditable(false);
+        	this.benutzerAnlegen.straﬂe.setEditable(false);
+        	this.benutzerAnlegen.hausnummer.setEditable(false);
+        	this.benutzerAnlegen.postleitzahl.setEditable(false);
+        	this.benutzerAnlegen.ort.setEditable(false);
         }
     }
 }

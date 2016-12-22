@@ -10,9 +10,9 @@ package gui;
 public class test {
 
 	public static void main(String[] args) {
-	       MenuAuswahl gui;
-	       gui = new MenuAuswahl();
-	       gui.LaunchAuswahl();
+	       Login gui;
+	       gui = new Login();
+	       gui.launchLogin();
 	}
 
 }

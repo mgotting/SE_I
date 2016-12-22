@@ -54,7 +54,11 @@ public class DB_connection {
 
 	// define generic SQL query for table 'benutzer'
 	public static String getAllUsers() {
-		return "SELECT * FROM library.benutzer";
+		return "SELECT library.benutzer.PersonID, Benutzername, Vorname, Name FROM library.benutzer, library.person WHERE library.benutzer.PersonID = library.person.PersonID";
+	}
+	
+	public static String checkAnmeldung(String benutzername, String passwort){
+		return "SELECT Benutzername FROM library.benutzer WHERE Benutzername='"+benutzername+"' AND Passwort='"+passwort+"'";
 	}
 
 	// connect and execute input query and return boolean

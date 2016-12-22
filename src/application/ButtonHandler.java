@@ -17,6 +17,7 @@ import javax.swing.*;
 
 public class ButtonHandler implements ActionListener {
 	private BenutzerAnlegen benutzerAnlegen;
+	private Login login;
 	private DB_connection con;
 	private String name, vorname, benutzername, passwort, straße, ort, hausnummer;
 	private int postleitzahl, generatedID, generatedAdressID;
@@ -28,12 +29,23 @@ public class ButtonHandler implements ActionListener {
 	public ButtonHandler(BenutzerAnlegen benutzerAnlegen) {
 		this.benutzerAnlegen = benutzerAnlegen;
 	}
+	
+	public ButtonHandler(Login login) {
+		this.login = login;
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		try {
 			// Prüfen, welches Kommando kommt
 			switch (e.getActionCommand()) {
+			// Fall anmelden
+			case "ANMELDEN":
+				MenuAuswahl menuAuswahl = new MenuAuswahl();
+				menuAuswahl.launchAuswahl();
+				login.login.setVisible(false);
+				System.out.println("Benutzer erfolgreich angemeldet");
+				break;
 			// Fall Student erstellen:
 			case "ANLEGEN":
 				GUIDaten();
@@ -69,8 +81,13 @@ public class ButtonHandler implements ActionListener {
 				case "Professor":
 					//Daten aus GUI abziehen und Professorobjekt erstellen
 					String fakultät = this.benutzerAnlegen.getFakultät();
-					Professor professor = new Professor(name, vorname, fakultät);
+					Professor professor;
 					art = 'p';
+					if(adresseVorhanden == false){
+					professor = new Professor(name, vorname, fakultät);
+					} else {
+					professor = new Professor(name, vorname,fakultät, straße, hausnummer, postleitzahl, ort);
+					}
 					//Wenn Professorenobjekt erfolgreich erstellt, dann in Datenbank sichern
 					ObjektErstellung(professor);
 					//2. einfügen in Tabelle Professor
