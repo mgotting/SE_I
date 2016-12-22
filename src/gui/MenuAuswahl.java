@@ -15,6 +15,7 @@ public class MenuAuswahl {
 	JMenuBar bar;
 	JMenu menu;
 	JMenuItem benutzerAnlegen;
+	Login login;
 	
 	int x_right = 330;
 	int y_north = 60;

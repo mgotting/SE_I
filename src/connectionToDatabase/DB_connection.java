@@ -3,6 +3,7 @@ package connectionToDatabase;
 
 
 import java.sql.*;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -74,8 +75,7 @@ public class DB_connection {
 	}
 
 	// connect and execute input query and return result set
-	public ResultSet executequery_rs(String SQLquery) throws SQLException { // select
-																			// entries
+	public ResultSet executequery_rs(String SQLquery) throws SQLException { // selectentries
 		if (cn == null)
 			throw new SQLException("Keine gültige Verbindung zur Datenbank");
 		if (SQLquery == null)
@@ -85,8 +85,16 @@ public class DB_connection {
 		return rs;
 	}
 
-	// 2. connect, execute input query and return generatedID of the generated
-	// key
+	public String executequery_Value(String SQLquery) throws SQLException{
+		Statement st = cn.createStatement();
+		ResultSet rs = st.executeQuery(SQLquery);
+		String values = null;
+		if (rs.next())
+			values = rs.getString(1);
+		return values;
+	}
+
+	// 2. connect, execute input query and return generatedID of the generated key
 	public int executequery_autoKey(String SQLquery, boolean autoKey)
 			throws SQLException {
 		if (cn == null)

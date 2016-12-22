@@ -41,10 +41,18 @@ public class ButtonHandler implements ActionListener {
 			switch (e.getActionCommand()) {
 			// Fall anmelden
 			case "ANMELDEN":
+				con = DB_connection.getDbConnection();
+				if(login.getBenutzername().equals(con.executequery_Value(DB_connection.checkAnmeldung(login.getBenutzername(),login.getPasswort())))){
 				MenuAuswahl menuAuswahl = new MenuAuswahl();
 				menuAuswahl.launchAuswahl();
 				login.login.setVisible(false);
+				//TODO Über PersonDB nach Art abfragen und dann je nach Art entsprechendes Objekt erstellen
 				System.out.println("Benutzer erfolgreich angemeldet");
+				} else {
+				JOptionPane.showMessageDialog(new JFrame(), "Benutzername / Passwort falsch");
+				login.setBenutzername(null);
+				login.setPasswort(null);
+				}
 				break;
 			// Fall Student erstellen:
 			case "ANLEGEN":
