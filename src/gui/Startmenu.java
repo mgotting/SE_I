@@ -14,7 +14,7 @@ public class Startmenu {
 	JPanel panel;
 	JMenuBar bar;
 	JMenu menu;
-	JMenuItem benutzerAnlegen;
+	JMenuItem benutzerAnlegen, benutzerÄndern;
 	Login login;
 	
 	int x_right = 330;
@@ -37,6 +37,7 @@ public class Startmenu {
 		menu = new JMenu("Menu");
 		// Erzeugung eines Objektes der Klasse JMenuItem
 		benutzerAnlegen = new JMenuItem("Benutzer anlegen");
+		benutzerÄndern = new JMenuItem("Benutzer ändern");
 		
 		auswahl.setContentPane(panel);
 		panel.setLayout(null);
@@ -51,6 +52,7 @@ public class Startmenu {
 		menu.add(benutzerAnlegen);
 		benutzerAnlegen.setActionCommand(ACTION_BENUTZER_ANLEGEN);
 		benutzerAnlegen.addActionListener(controlMenu);
+		menu.add(benutzerÄndern);
         // Wir setzen die Breite und die Höhe unseres Fensters auf 500 Pixel */ 
 		auswahl.setSize(500, 500);
 		auswahl.setLocation(100, 100);
