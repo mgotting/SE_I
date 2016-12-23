@@ -24,7 +24,7 @@ import connectionToDatabase.JTableview;
  *
  */
 public class BenutzerÄndern {
-	JFrame auswahl;
+	JFrame änderung;
 	JPanel panel;
 	JMenuBar bar;
 	JMenu menu;
@@ -34,7 +34,7 @@ public class BenutzerÄndern {
 	JScrollPane scrollPane;
 	
 	ButtonHandler controlButton;
-	ComboBoxHandler controlComboBox;
+//	ComboBoxHandler controlComboBox;
 	
 	public final static String ACTION_CHANGE = "ÄNDERN";
 	public final static String ACTION_AUSWAHL = "AUSWÄHLEN";
@@ -75,7 +75,7 @@ public class BenutzerÄndern {
 	
 	public BenutzerÄndern(){
 		// Erzeugung eines neuen Frames mit dem Titel "BenutzerAnlegen"
-		auswahl = new JFrame("Benutzer ändern");
+		änderung = new JFrame("Benutzer ändern");
 		panel = new JPanel();
 		// Erstellen einer Menüleiste
 		bar = new JMenuBar();
@@ -89,7 +89,7 @@ public class BenutzerÄndern {
 		// Erzeugung eines Objektes um ActionEvents zu handeln
 		controlButton = new ButtonHandler(this);
 		
-		auswahl.setContentPane(panel);
+		änderung.setContentPane(panel);
 		panel.setLayout(null);
 		
 		//Erzeugung der JLabels
@@ -216,8 +216,8 @@ public class BenutzerÄndern {
 	}
 		
 	public void launchBenutzerÄndern(){
-		auswahl.setBounds(x_right, y_north, x_width, y_height);
-		auswahl.setJMenuBar(bar);
+		änderung.setBounds(x_right, y_north, x_width, y_height);
+		änderung.setJMenuBar(bar);
 		// Menü wird der Menüleiste hinzugefügt
 		bar.add(menu);
 		// Wir fügen das JMenuItem unserem JMenu hinzu
@@ -290,12 +290,12 @@ public class BenutzerÄndern {
 		panel.add(ort);
 	
         // Wir setzen die Breite und die Höhe unseres Fensters auf 500 Pixel */ 
-		auswahl.setSize(520, 600);
-		auswahl.setLocation(100, 100);
+		änderung.setSize(520, 600);
+		änderung.setLocation(100, 100);
 		// Beim schließen des GUI-Fensters wird JFrame geschlossen
-		auswahl.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+		änderung.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 		// Wir lassen unseren Frame anzeigen
-		auswahl.setVisible(true);
+		änderung.setVisible(true);
 		
 		if(tableviewUser==null){
 			tableviewUser = new JTableview(DB_connection.getAllUsers());

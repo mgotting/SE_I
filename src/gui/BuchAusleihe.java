@@ -24,18 +24,17 @@ import connectionToDatabase.JTableview;
  */
 public class BuchAusleihe {
 
-	JFrame auswahl;
+	JFrame ausleihe;
 	JPanel panel;
 	JMenuBar bar;
 	JMenu menu;
 	JMenuItem benutzerAnlegen, benutzerÄndern, buchAusleihen;
 	JButton ausleihen, buchAuswählen;
-	//JComboBox ;
 	public JTableview tableviewBooks;
 	JScrollPane scrollPane;
 	
 	ButtonHandler controlButton;
-	ComboBoxHandler controlComboBox;
+//	ComboBoxHandler controlComboBox;
 	
 	public final static String ACTION_BUCH_AUSLEIHEN = "BUCH_AUSLEIHEN";
 	public final static String ACTION_BUCH_AUSWAHL = "BUCH_AUSWÄHLEN";
@@ -66,7 +65,7 @@ public class BuchAusleihe {
 	
 	public BuchAusleihe(){
 		// Erzeugung eines neuen Frames mit dem Titel "BenutzerAnlegen"
-		auswahl = new JFrame("BenutzerAnlegen");
+		ausleihe = new JFrame("BenutzerAnlegen");
 		panel = new JPanel();
 		// Erstellen einer Menüleiste
 		bar = new JMenuBar();
@@ -82,7 +81,7 @@ public class BuchAusleihe {
 		// Erzeugung eines Objektes um ActionEvents zu handeln
 		controlButton = new ButtonHandler(this);
 		
-		auswahl.setContentPane(panel);
+		ausleihe.setContentPane(panel);
 		panel.setLayout(null);
 		
 		//Erzeugung der JLabels
@@ -97,8 +96,8 @@ public class BuchAusleihe {
 	}
 		
 	public void launchBuchAusleihen(){
-		auswahl.setBounds(x_right, y_north, x_width, y_height);
-		auswahl.setJMenuBar(bar);
+		ausleihe.setBounds(x_right, y_north, x_width, y_height);
+		ausleihe.setJMenuBar(bar);
 		// Menü wird der Menüleiste hinzugefügt
 		bar.add(menu);
 		// Wir fügen das JMenuItem unserem JMenu hinzu
@@ -139,12 +138,12 @@ public class BuchAusleihe {
 		panel.add(isbn);
 	
         // Wir setzen die Breite und die Höhe unseres Fensters auf 500 Pixel */ 
-		auswahl.setSize(520, 600);
-		auswahl.setLocation(100, 100);
+		ausleihe.setSize(520, 600);
+		ausleihe.setLocation(100, 100);
 		// Beim schließen des GUI-Fensters wird JFrame geschlossen
-		auswahl.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+		ausleihe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 		// Wir lassen unseren Frame anzeigen
-		auswahl.setVisible(true);
+		ausleihe.setVisible(true);
 		
 //		if(tableviewBooks==null){
 //			tableviewBooks = new JTableview(DB_connection.getAllBooks());

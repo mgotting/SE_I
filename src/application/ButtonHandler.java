@@ -19,6 +19,7 @@ public class ButtonHandler implements ActionListener {
 	private BenutzerAnlegen benutzerAnlegen;
 	private BenutzerÄndern benutzerÄndern;
 	private BuchAusleihe buchAusleihen;
+	private BuchRueckgabe buchRückgabe;
 	private Login login;
 	private DB_connection con;
 	private String name, vorname, benutzername, passwort, straße, ort, hausnummer;
@@ -38,6 +39,10 @@ public class ButtonHandler implements ActionListener {
 	
 	public ButtonHandler(BuchAusleihe buchAusleihen){
 		this.buchAusleihen = buchAusleihen;
+	}
+	
+	public ButtonHandler(BuchRueckgabe buchRückgabe){
+		this.buchRückgabe = buchRückgabe;
 	}
 	
 	public ButtonHandler(Login login) {
