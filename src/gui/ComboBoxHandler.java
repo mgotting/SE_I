@@ -11,6 +11,7 @@ import java.awt.event.*;
  */
 public class ComboBoxHandler implements ItemListener {
 	BenutzerAnlegen benutzerAnlegen;
+	BenutzerÄndern benutzerÄndern;
 	
 	// create reference to GUI
 	public ComboBoxHandler(BenutzerAnlegen benutzer) { 

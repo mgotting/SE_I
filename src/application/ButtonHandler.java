@@ -17,6 +17,7 @@ import javax.swing.*;
 
 public class ButtonHandler implements ActionListener {
 	private BenutzerAnlegen benutzerAnlegen;
+	private BenutzerÄndern benutzerÄndern;
 	private Login login;
 	private DB_connection con;
 	private String name, vorname, benutzername, passwort, straße, ort, hausnummer;
@@ -30,6 +31,9 @@ public class ButtonHandler implements ActionListener {
 		this.benutzerAnlegen = benutzerAnlegen;
 	}
 	
+	public ButtonHandler(BenutzerÄndern benutzerändern){
+		this.benutzerÄndern = benutzerÄndern;
+	}
 	public ButtonHandler(Login login) {
 		this.login = login;
 	}
@@ -123,6 +127,9 @@ public class ButtonHandler implements ActionListener {
 					break;
 				}
 				break;
+			case "ÄNDERN":
+				
+			
 				//TODO
 			case "INVENTAR":
 			//Check Konsole

@@ -12,6 +12,7 @@ import java.awt.event.*;
 public class MenuHandler implements ActionListener {
 	Startmenu startmenu;
 	BenutzerAnlegen benutzerAnlegen;
+	BenutzerÄndern benutzerÄndern;
 	
 	// create reference to GUI
 	public MenuHandler(Startmenu gui) { 
@@ -28,6 +29,11 @@ public class MenuHandler implements ActionListener {
 			case "BENUTZER_ANLEGEN":
 				benutzerAnlegen = new BenutzerAnlegen();
 				benutzerAnlegen.LaunchBenutzerAnlegen();
+				startmenu.auswahl.setVisible(false);
+				break;
+			case "BENUTZER_ÄNDERN":
+				benutzerÄndern = new BenutzerÄndern();
+				benutzerÄndern.LaunchBenutzerÄndern();
 				startmenu.auswahl.setVisible(false);
 				break;
 			}

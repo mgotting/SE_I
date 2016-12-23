@@ -23,6 +23,7 @@ public class Startmenu {
 	int y_height = 20;
 	
 	public final static String ACTION_BENUTZER_ANLEGEN = "BENUTZER_ANLEGEN";
+	public final static String ACTION_BENUTZER_ÄNDERN = "BENUTZER_ÄNDERN";
 	
 	public MenuHandler controlMenu;
 	
@@ -53,6 +54,9 @@ public class Startmenu {
 		benutzerAnlegen.setActionCommand(ACTION_BENUTZER_ANLEGEN);
 		benutzerAnlegen.addActionListener(controlMenu);
 		menu.add(benutzerÄndern);
+		benutzerÄndern.setActionCommand(ACTION_BENUTZER_ÄNDERN);
+		benutzerÄndern.addActionListener(controlMenu);
+		
         // Wir setzen die Breite und die Höhe unseres Fensters auf 500 Pixel */ 
 		auswahl.setSize(500, 500);
 		auswahl.setLocation(100, 100);
