@@ -18,6 +18,7 @@ import javax.swing.*;
 public class ButtonHandler implements ActionListener {
 	private BenutzerAnlegen benutzerAnlegen;
 	private BenutzerÄndern benutzerÄndern;
+	private BuchAusleihe buchAusleihen;
 	private Login login;
 	private DB_connection con;
 	private String name, vorname, benutzername, passwort, straße, ort, hausnummer;
@@ -33,6 +34,10 @@ public class ButtonHandler implements ActionListener {
 	
 	public ButtonHandler(BenutzerÄndern benutzerÄndern){
 		this.benutzerÄndern = benutzerÄndern;
+	}
+	
+	public ButtonHandler(BuchAusleihe buchAusleihen){
+		this.buchAusleihen = buchAusleihen;
 	}
 	
 	public ButtonHandler(Login login) {
@@ -87,7 +92,7 @@ public class ButtonHandler implements ActionListener {
 					boolean studentVerbucht = con.executequery(insertStudent);
 					System.out.println("Student erfolgreich verbucht: "+ studentVerbucht);
 					JOptionPane.showMessageDialog(new JFrame(),"Student und Benutzer mit folgenden Daten integriert angelegt:\n\nBenutzername: "+ benutzer.getBenutzername()+ student.toString());
-					benutzerAnlegen.tableview.updateSQLTable(DB_connection.getAllUsers());
+					benutzerAnlegen.tableviewUser.updateSQLTable(DB_connection.getAllUsers());
 					EintragLöschen();
 					con.disconnect();
 					break;
@@ -108,7 +113,7 @@ public class ButtonHandler implements ActionListener {
 					boolean professorVerbucht = con.executequery(insertProfessor);
 					System.out.println("Professert erfolgreich verbucht: "+professorVerbucht);
 					JOptionPane.showMessageDialog(new JFrame(), "Professor und Benutzer mit folgenden Daten integriert angelegt:\n\nBenutzername: "+benutzer.getBenutzername()+professor.toString());
-					benutzerAnlegen.tableview.updateSQLTable(DB_connection.getAllUsers());
+					benutzerAnlegen.tableviewUser.updateSQLTable(DB_connection.getAllUsers());
 					EintragLöschen();
 					con.disconnect();
 					break;
@@ -122,16 +127,16 @@ public class ButtonHandler implements ActionListener {
 					boolean personalVerbucht = con.executequery(insertPersonal);
 					System.out.println("Personal erfolgreich verbucht: "+personalVerbucht);
 					JOptionPane.showMessageDialog(new JFrame(), "Personal und Benutzer mit folgenden Daten integriert angelegt:\n\nBenutzername: "+benutzer.getBenutzername()+personal.toString());
-					this.benutzerAnlegen.tableview.updateSQLTable(DB_connection.getAllUsers());
+					this.benutzerAnlegen.tableviewUser.updateSQLTable(DB_connection.getAllUsers());
 					EintragLöschen();
 					con.disconnect();
 					break;
 				}
 				break;
 			case "AUSWÄHLEN":
-				if(benutzerÄndern.tableview.getSQLTable().getSelectedRow()==-1)
+				if(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow()==-1)
 						throw new JTableException("Fehler: Zeile nicht markiert!");
-				String personID = (String) benutzerÄndern.tableview.getSQLTable().getValueAt(benutzerÄndern.tableview.getSQLTable().getSelectedRow(), 0).toString();
+				String personID = (String) benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 0).toString();
 				System.out.println(personID);
 				System.out.println("ActionCommand erhalten: "+e.getActionCommand());
 				con = DB_connection.getDbConnection();

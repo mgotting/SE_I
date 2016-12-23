@@ -14,7 +14,7 @@ public class Startmenu {
 	JPanel panel;
 	JMenuBar bar;
 	JMenu menu;
-	JMenuItem benutzerAnlegen, benutzerÄndern, buchZurückgeben;
+	JMenuItem benutzerAnlegen, benutzerÄndern, buchZurückgeben, buchAusleihen;
 	Login login;
 	
 	int x_right = 330;
@@ -25,6 +25,7 @@ public class Startmenu {
 	public final static String ACTION_BENUTZER_ANLEGEN = "BENUTZER_ANLEGEN";
 	public final static String ACTION_BENUTZER_ÄNDERN = "BENUTZER_ÄNDERN";
 	public final static String ACTION_BUCH_ZURÜCKGEBEN = "BUCH_ZURÜCKGEBEN";
+	public final static String ACTION_BUCH_AUSLEIHEN = "BUCH_AUSLEIHEN";
 	
 	public MenuHandler controlMenu;
 	
@@ -41,6 +42,7 @@ public class Startmenu {
 		benutzerAnlegen = new JMenuItem("Benutzer anlegen");
 		benutzerÄndern = new JMenuItem("Benutzer ändern");
 		buchZurückgeben = new JMenuItem("Buch zurückgeben");
+		buchAusleihen = new JMenuItem("Buch ausleihen");
 		auswahl.setContentPane(panel);
 		panel.setLayout(null);
 	}
@@ -57,9 +59,13 @@ public class Startmenu {
 		menu.add(benutzerÄndern);
 		benutzerÄndern.setActionCommand(ACTION_BENUTZER_ÄNDERN);
 		benutzerÄndern.addActionListener(controlMenu);
+		menu.add(buchZurückgeben);
 		buchZurückgeben.setActionCommand(ACTION_BUCH_ZURÜCKGEBEN);
 		buchZurückgeben.addActionListener(controlMenu);
-		menu.add(buchZurückgeben);
+		menu.add(buchAusleihen);
+		buchAusleihen.setActionCommand(ACTION_BUCH_AUSLEIHEN);
+		buchAusleihen.addActionListener(controlMenu);
+		
 		
         // Wir setzen die Breite und die Höhe unseres Fensters auf 500 Pixel */ 
 		auswahl.setSize(500, 500);

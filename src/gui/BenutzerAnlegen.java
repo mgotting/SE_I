@@ -19,7 +19,7 @@ public class BenutzerAnlegen {
 	JMenuItem benutzerAnlegen, benutzerÄndern;
 	JButton anlegen;
 	JComboBox benutzer;
-	public JTableview tableview;
+	public JTableview tableviewUser;
 	JScrollPane scrollPane;
 	
 	ButtonHandler controlButton;
@@ -303,9 +303,9 @@ public class BenutzerAnlegen {
 		// Wir lassen unseren Frame anzeigen
 		auswahl.setVisible(true);
 		
-		if(tableview==null){
-			tableview = new JTableview(DB_connection.getAllUsers());
-			scrollPane = new JScrollPane(tableview.getSQLTable());
+		if(tableviewUser==null){
+			tableviewUser = new JTableview(DB_connection.getAllUsers());
+			scrollPane = new JScrollPane(tableviewUser.getSQLTable());
 			scrollPane.setBounds(x_left, y_Library, x_widthLibrary, y_heightLibrary);
 			panel.add(scrollPane);
 		}	

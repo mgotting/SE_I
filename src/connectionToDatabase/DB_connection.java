@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
- * @author Gotti
+ * @author Michael Gottinger, Sandra Speckmeier
  * Klasse mithilfe derer eine Verbindung zur Datenbank hergestellt wird sowie Abfragen ausgeführt werden können.
  */
 
@@ -66,9 +66,11 @@ public class DB_connection {
 		return "SELECT BuchID, Titel, Autor, Status FROM library.exemplar, library.buchtyp, library.ausleihe WHERE library.exemplar.ISBN = library.buchtyp.ISBN AND library.exemplar.Status = 'ausleihbar' AND library.ausleihe.Benutzername ='"+benutzername+"';";
 	}
 	
-	public static String getUserInfo(){
-		
-	}
+	//TODO getAllBooks
+	
+//	public static String getUserInfo(){
+//		
+//	}
 	
 	public static String getAdress(String personID){
 		return "SELECT Straße, Hausnummer, Postleitzahl, Ort FROM library.adresse, library.person WHERE library.adresse.AdressID=library.person.AdressID AND library.person.PersonID='"+personID+"'";

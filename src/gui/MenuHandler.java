@@ -15,6 +15,7 @@ public class MenuHandler implements ActionListener {
 	BenutzerAnlegen benutzerAnlegen;
 	BenutzerÄndern benutzerÄndern;
 	BuchRueckgabe buchRückgabe;
+	BuchAusleihe buchAusleihen;
 	
 	// create reference to GUI
 	public MenuHandler(Startmenu gui) { 
@@ -35,13 +36,19 @@ public class MenuHandler implements ActionListener {
 				break;
 			case "BENUTZER_ÄNDERN":
 				benutzerÄndern = new BenutzerÄndern();
-				benutzerÄndern.LaunchBenutzerÄndern();
+				benutzerÄndern.launchBenutzerÄndern();
 				startmenu.auswahl.setVisible(false);
 				break;
 			case "BUCH_ZURÜCKGEBEN":
 				buchRückgabe = new BuchRueckgabe();
 				buchRückgabe.launchRückgabe();
 				startmenu.auswahl.setVisible(false);
+				break;
+			case "BUCH_AUSLEIHEN":
+				buchAusleihen = new BuchAusleihe();
+				buchAusleihen.launchBuchAusleihen();
+				startmenu.auswahl.setVisible(false);
+				break;
 			}
 		} catch (Exception ex){
 			ex.printStackTrace();
