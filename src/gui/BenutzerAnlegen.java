@@ -16,7 +16,7 @@ public class BenutzerAnlegen {
 	JPanel panel;
 	JMenuBar bar;
 	JMenu menu;
-	JMenuItem benutzerAnlegen;
+	JMenuItem benutzerAnlegen, benutzerÄndern;
 	JButton anlegen;
 	JComboBox benutzer;
 	public JTableview tableview;
@@ -26,13 +26,16 @@ public class BenutzerAnlegen {
 	ComboBoxHandler controlComboBox;
 	
 	public final static String ACTION_CREATE = "ANLEGEN";
+	public final static String ACTION_BENUTZER_ANLEGEN = "BENUTZER_ANLEGEN";
+	public final static String ACTION_BENUTZER_ÄNDERN = "BENUTZER_ÄNDERN";
+	
+	public MenuHandler controlMenu;
 	
 	int x_right = 330;
 	int y_north = 60;
 	int x_width = 160;
 	int y_height = 20;
-	int x_anlegen_width = 90;
-	int y_anlegen_center = 200;
+	int x_anlegen_width = 120;
 	int x_left = 10;
 	int y_north_label = 100;
 	int y_center = 120;
@@ -50,9 +53,8 @@ public class BenutzerAnlegen {
 	int y_center_textField = 140;
 	int y_center_textField2 = 160;
 	int y_MENU_north = 10;
-	int x_widthLibrary = 260;
+	int x_widthLibrary = 450;
 	int y_heightLibrary = 100;
-	int x_centerLibrary = 90;
 	int y_Library = 420;
 	
 	public JTextField benutzername, passwort, name, vorname, matrikelnummer, studiengruppe, fakultät, straße, hausnummer, postleitzahl, ort;
@@ -70,6 +72,7 @@ public class BenutzerAnlegen {
 		menu = new JMenu("Menu");
 		// Erzeugung eines Objektes der Klasse JMenuItem
 		benutzerAnlegen = new JMenuItem("Benutzer anlegen");
+		benutzerÄndern = new JMenuItem("Benutzer ändern");
 		// Erzeugung eines Objektes der Klasse JButton
 		anlegen = new JButton("anlegen");
 		// Erzeugung eines Objektes um ActionEvents zu handeln
@@ -221,9 +224,14 @@ public class BenutzerAnlegen {
 		bar.add(menu);
 		// Wir fügen das JMenuItem unserem JMenu hinzu
 		menu.add(benutzerAnlegen);
+		menu.add(benutzerÄndern);
+		benutzerAnlegen.setActionCommand(ACTION_BENUTZER_ANLEGEN);
+		benutzerÄndern.setActionCommand(ACTION_BENUTZER_ÄNDERN);
+		benutzerAnlegen.addActionListener(controlMenu);
+		benutzerÄndern.addActionListener(controlMenu);
 		
 		// Wir fügen den JButton unserem Panel hinzu:
-		anlegen.setBounds(x_right, y_anlegen_center, x_anlegen_width, y_height);
+		anlegen.setBounds(x_right, y_opt4, x_anlegen_width, y_height);
 		panel.add(anlegen);
 		anlegen.setActionCommand(ACTION_CREATE);
 		anlegen.addActionListener(controlButton);
@@ -288,7 +296,7 @@ public class BenutzerAnlegen {
 		panel.add(benutzer);
 	
         // Wir setzen die Breite und die Höhe unseres Fensters auf 500 Pixel */ 
-		auswahl.setSize(500, 800);
+		auswahl.setSize(520, 600);
 		auswahl.setLocation(100, 100);
 		// Beim schließen des GUI-Fensters wird JFrame geschlossen
 		auswahl.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
@@ -298,7 +306,7 @@ public class BenutzerAnlegen {
 		if(tableview==null){
 			tableview = new JTableview(DB_connection.getAllUsers());
 			scrollPane = new JScrollPane(tableview.getSQLTable());
-			scrollPane.setBounds(x_centerLibrary, y_Library, x_widthLibrary, y_heightLibrary);
+			scrollPane.setBounds(x_left, y_Library, x_widthLibrary, y_heightLibrary);
 			panel.add(scrollPane);
 		}	
 	}
