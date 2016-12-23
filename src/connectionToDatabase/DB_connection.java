@@ -61,6 +61,10 @@ public class DB_connection {
 	public static String checkAnmeldung(String benutzername, String passwort){
 		return "SELECT Benutzername FROM library.benutzer WHERE Benutzername='"+benutzername+"' AND Passwort='"+passwort+"'";
 	}
+	
+	public static String getAllRentBooks(String benutzername) {
+		return "SELECT BuchID, Titel, Autor, Status FROM library.exemplar, library.buchtyp, library.ausleihe WHERE library.exemplar.ISBN = library.buchtyp.ISBN AND library.exemplar.Status = 'ausleihbar' AND library.ausleihe.Benutzername ='"+benutzername+"';";
+	}
 
 	// connect and execute input query and return boolean
 	public boolean executequery(String SQLquery) throws SQLException {
