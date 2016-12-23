@@ -12,10 +12,6 @@ import java.awt.event.*;
 
 public class MenuHandler implements ActionListener {
 	Startmenu startmenu;
-	BenutzerAnlegen benutzerAnlegen;
-	BenutzerÄndern benutzerÄndern;
-	BuchRueckgabe buchRückgabe;
-	BuchAusleihe buchAusleihen;
 	
 	// create reference to GUI
 	public MenuHandler(Startmenu gui) { 
@@ -30,25 +26,20 @@ public class MenuHandler implements ActionListener {
 			switch (e.getActionCommand()){ 
 			//Fall Student erstellen:
 			case "BENUTZER_ANLEGEN":
-				benutzerAnlegen = new BenutzerAnlegen();
-				benutzerAnlegen.LaunchBenutzerAnlegen();
-				startmenu.auswahl.setVisible(false);
+				BenutzerAnlegen benutzerAnlegen = new BenutzerAnlegen();
+				benutzerAnlegen.LaunchBenutzerAnlegen(this.startmenu.frame);
 				break;
 			case "BENUTZER_ÄNDERN":
-				benutzerÄndern = new BenutzerÄndern();
-				benutzerÄndern.launchBenutzerÄndern();
-				startmenu.auswahl.setVisible(false);
+				BenutzerÄndern benutzerÄndern = new BenutzerÄndern();
+				benutzerÄndern.launchBenutzerÄndern(this.startmenu.frame);
 				break;
 			case "BUCH_ZURÜCKGEBEN":
-				buchRückgabe = new BuchRueckgabe();
-				buchRückgabe.launchRückgabe();
-				startmenu.auswahl.setVisible(false);
+				BuchRueckgabe buchRückgabe = new BuchRueckgabe();
+				buchRückgabe.launchRückgabe(this.startmenu.frame);
 				break;
 			case "BUCH_AUSLEIHEN":
-				buchAusleihen = new BuchAusleihe();
-				buchAusleihen.launchBuchAusleihen();
-				startmenu.auswahl.setVisible(false);
-				break;
+				BuchAusleihe buchAusleihe = new BuchAusleihe();
+				buchAusleihe.launchBuchAusleihen(this.startmenu.frame);
 			}
 		} catch (Exception ex){
 			ex.printStackTrace();

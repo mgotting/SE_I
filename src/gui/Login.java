@@ -15,7 +15,7 @@ import application.ButtonHandler;
 
 public class Login {
 	public JFrame login;
-	private JPanel panel;
+	public JPanel panel;
 	private JButton anmelden;
 	private ButtonHandler controlButton;
 	private JLabel labelBenutzername, labelPasswort;
@@ -94,7 +94,7 @@ public class Login {
 		passwort.setBounds(x_center, y_center2, x_width, y_height);
 		panel.add(passwort);
 
-		login.setSize(500, 500);
+		login.setSize(520, 600);
 		login.setLocation(100, 100);
 		login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Schließen des Fensters ist möglich
 		login.setVisible(true);

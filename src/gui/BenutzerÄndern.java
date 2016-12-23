@@ -24,24 +24,15 @@ import connectionToDatabase.JTableview;
  *
  */
 public class BenutzerÄndern {
-	JFrame änderung;
 	JPanel panel;
-	JMenuBar bar;
-	JMenu menu;
-	JMenuItem benutzerÄndern, benutzerAnlegen;
 	JButton ändern, auswählen;
 	public JTableview tableviewUser;
 	JScrollPane scrollPane;
 	
 	ButtonHandler controlButton;
-//	ComboBoxHandler controlComboBox;
 	
 	public final static String ACTION_CHANGE = "ÄNDERN";
 	public final static String ACTION_AUSWAHL = "AUSWÄHLEN";
-	public final static String ACTION_BENUTZER_ANLEGEN = "BENUTZER_ANLEGEN";
-	public final static String ACTION_BENUTZER_ÄNDERN = "BENUTZER_ÄNDERN";
-	
-	public MenuHandler controlMenu;
 	
 	int x_right = 330;
 	int y_north = 60;
@@ -75,21 +66,12 @@ public class BenutzerÄndern {
 	
 	public BenutzerÄndern(){
 		// Erzeugung eines neuen Frames mit dem Titel "BenutzerAnlegen"
-		änderung = new JFrame("Benutzer ändern");
 		panel = new JPanel();
-		// Erstellen einer Menüleiste
-		bar = new JMenuBar();
-		// Erzeugung eines Objektes der Klasse JMenu
-		menu = new JMenu("Menu");
-		// Erzeugung eines Objektes der Klasse JMenuItem
-		benutzerÄndern = new JMenuItem("Benutzer ändern");
 		// Erzeugung eines Objektes der Klasse JButton
 		ändern = new JButton("ändern");
 		auswählen = new JButton("auswählen");
 		// Erzeugung eines Objektes um ActionEvents zu handeln
 		controlButton = new ButtonHandler(this);
-		
-		änderung.setContentPane(panel);
 		panel.setLayout(null);
 		
 		//Erzeugung der JLabels
@@ -215,16 +197,9 @@ public class BenutzerÄndern {
 		this.ort.setText(ort);
 	}
 		
-	public void launchBenutzerÄndern(){
-		änderung.setBounds(x_right, y_north, x_width, y_height);
-		änderung.setJMenuBar(bar);
-		// Menü wird der Menüleiste hinzugefügt
-		bar.add(menu);
-		// Wir fügen das JMenuItem unserem JMenu hinzu
-		menu.add(benutzerÄndern);
-		
+	public void launchBenutzerÄndern(JFrame auswahl){
+		auswahl.getContentPane().setVisible(false);
 		// Wir fügen den JButton unserem Panel hinzu:
-		ändern.setBounds(x_right, y_opt4, x_BUTTON_width, y_height);
 		panel.add(ändern);
 		ändern.setActionCommand(ACTION_CHANGE);
 		ändern.addActionListener(controlButton);
@@ -288,14 +263,6 @@ public class BenutzerÄndern {
 		panel.add(postleitzahl);
 		ort.setBounds(x_center, y_opt4, x_width, y_height);
 		panel.add(ort);
-	
-        // Wir setzen die Breite und die Höhe unseres Fensters auf 500 Pixel */ 
-		änderung.setSize(520, 600);
-		änderung.setLocation(100, 100);
-		// Beim schließen des GUI-Fensters wird JFrame geschlossen
-		änderung.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-		// Wir lassen unseren Frame anzeigen
-		änderung.setVisible(true);
 		
 		if(tableviewUser==null){
 			tableviewUser = new JTableview(DB_connection.getAllUsers());
@@ -303,6 +270,8 @@ public class BenutzerÄndern {
 			scrollPane.setBounds(x_left, y_Library, x_widthLibrary, y_heightLibrary);
 			panel.add(scrollPane);
 		}	
+		auswahl.setTitle("Benutzer/Person integriert ändern");
+		auswahl.setContentPane(panel);
 	}
 
 }

@@ -31,11 +31,19 @@ public class ComboBoxHandler implements ItemListener {
         	this.benutzerAnlegen.matrikelnummer.setEditable(true);
         	this.benutzerAnlegen.studiengruppe.setEditable(true);
         	this.benutzerAnlegen.fakult‰t.setEditable(false);
+        	this.benutzerAnlegen.straﬂe.setEditable(true);
+        	this.benutzerAnlegen.hausnummer.setEditable(true);
+        	this.benutzerAnlegen.postleitzahl.setEditable(true);
+        	this.benutzerAnlegen.ort.setEditable(true);
         	break;
         case "Professor":
         	this.benutzerAnlegen.fakult‰t.setEditable(true);
         	this.benutzerAnlegen.matrikelnummer.setEditable(false);
         	this.benutzerAnlegen.studiengruppe.setEditable(false);
+        	this.benutzerAnlegen.straﬂe.setEditable(true);
+        	this.benutzerAnlegen.hausnummer.setEditable(true);
+        	this.benutzerAnlegen.postleitzahl.setEditable(true);
+        	this.benutzerAnlegen.ort.setEditable(true);
         	break;
         case "Personal":
            	this.benutzerAnlegen.fakult‰t.setEditable(false);

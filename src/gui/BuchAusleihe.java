@@ -23,25 +23,15 @@ import connectionToDatabase.JTableview;
  *
  */
 public class BuchAusleihe {
-
-	JFrame ausleihe;
 	JPanel panel;
-	JMenuBar bar;
-	JMenu menu;
-	JMenuItem benutzerAnlegen, benutzerÄndern, buchAusleihen;
 	JButton ausleihen, buchAuswählen;
 	public JTableview tableviewBooks;
 	JScrollPane scrollPane;
 	
 	ButtonHandler controlButton;
-//	ComboBoxHandler controlComboBox;
 	
-	public final static String ACTION_BUCH_AUSLEIHEN = "BUCH_AUSLEIHEN";
-	public final static String ACTION_BUCH_AUSWAHL = "BUCH_AUSWÄHLEN";
-	public final static String ACTION_BENUTZER_ANLEGEN = "BENUTZER_ANLEGEN";
-	public final static String ACTION_BENUTZER_ÄNDERN = "BENUTZER_ÄNDERN";
-	
-	public MenuHandler controlMenu;
+	public final static String ACTION_BUCH_AUSLEIHEN = "AUSLEIHEN";
+	public final static String ACTION_BUCH_AUSWAHL = "BUCH_AUSWAHL";
 	
 	int y_north = 60;
 	int y_north2 = 80;
@@ -64,24 +54,13 @@ public class BuchAusleihe {
 	//private String benutzerArt;
 	
 	public BuchAusleihe(){
-		// Erzeugung eines neuen Frames mit dem Titel "BenutzerAnlegen"
-		ausleihe = new JFrame("BenutzerAnlegen");
 		panel = new JPanel();
-		// Erstellen einer Menüleiste
-		bar = new JMenuBar();
-		// Erzeugung eines Objektes der Klasse JMenu
-		menu = new JMenu("Menu");
-		// Erzeugung eines Objektes der Klasse JMenuItem
-		buchAusleihen = new JMenuItem("Buch ausleihen");
-		benutzerAnlegen = new JMenuItem("Benutzer anlegen");
-		benutzerÄndern = new JMenuItem("Benutzer ändern");
 		// Erzeugung eines Objektes der Klasse JButton
 		ausleihen = new JButton("ausleihen");
 		buchAuswählen = new JButton("auswählen");
 		// Erzeugung eines Objektes um ActionEvents zu handeln
 		controlButton = new ButtonHandler(this);
-		
-		ausleihe.setContentPane(panel);
+
 		panel.setLayout(null);
 		
 		//Erzeugung der JLabels
@@ -95,22 +74,8 @@ public class BuchAusleihe {
 		isbn = new JTextField(20);
 	}
 		
-	public void launchBuchAusleihen(){
-		ausleihe.setBounds(x_right, y_north, x_width, y_height);
-		ausleihe.setJMenuBar(bar);
-		// Menü wird der Menüleiste hinzugefügt
-		bar.add(menu);
-		// Wir fügen das JMenuItem unserem JMenu hinzu
-		menu.add(benutzerAnlegen);
-		menu.add(benutzerÄndern);
-		menu.add(buchAusleihen);
-		benutzerAnlegen.setActionCommand(ACTION_BENUTZER_ANLEGEN);
-		benutzerÄndern.setActionCommand(ACTION_BENUTZER_ÄNDERN);
-		buchAusleihen.setActionCommand(ACTION_BUCH_AUSLEIHEN);
-		benutzerAnlegen.addActionListener(controlMenu);
-		benutzerÄndern.addActionListener(controlMenu);
-		buchAusleihen.addActionListener(controlMenu);
-		
+	public void launchBuchAusleihen(JFrame auswahl){
+		auswahl.getContentPane().setVisible(false);
 		// Wir fügen den JButton unserem Panel hinzu:
 		ausleihen.setBounds(x_right, y_south2, x_BUTTON_width, y_height);
 		panel.add(ausleihen);
@@ -136,14 +101,6 @@ public class BuchAusleihe {
 		panel.add(autor);
 		isbn.setBounds(x_center, y_south2, x_width, y_height);
 		panel.add(isbn);
-	
-        // Wir setzen die Breite und die Höhe unseres Fensters auf 500 Pixel */ 
-		ausleihe.setSize(520, 600);
-		ausleihe.setLocation(100, 100);
-		// Beim schließen des GUI-Fensters wird JFrame geschlossen
-		ausleihe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-		// Wir lassen unseren Frame anzeigen
-		ausleihe.setVisible(true);
 		
 //		if(tableviewBooks==null){
 //			tableviewBooks = new JTableview(DB_connection.getAllBooks());
@@ -151,5 +108,7 @@ public class BuchAusleihe {
 //			scrollPane.setBounds(x_left, y_Library, x_widthLibrary, y_heightLibrary);
 //			panel.add(scrollPane);
 //		}	
+		auswahl.setTitle("Buch ausleihen");
+		auswahl.setContentPane(panel);
 	}
 }

@@ -10,12 +10,11 @@ import javax.swing.*;
  *
  */
 public class Startmenu {
-	JFrame auswahl;
+	JFrame frame;
 	JPanel panel;
 	JMenuBar bar;
 	JMenu menu;
 	JMenuItem benutzerAnlegen, benutzerÄndern, buchZurückgeben, buchAusleihen;
-	Login login;
 	
 	int x_right = 330;
 	int y_north = 60;
@@ -31,8 +30,6 @@ public class Startmenu {
 	
 	public Startmenu(){
 		controlMenu = new MenuHandler(this);
-		// Erzeugung eines neuen Frames mit dem Titel "Menupunkt wählen "
-		auswahl = new JFrame("Menupunkt wählen");
 		panel = new JPanel();
 		// Erstellen einer Menüleiste
 		bar = new JMenuBar();
@@ -43,13 +40,12 @@ public class Startmenu {
 		benutzerÄndern = new JMenuItem("Benutzer ändern");
 		buchZurückgeben = new JMenuItem("Buch zurückgeben");
 		buchAusleihen = new JMenuItem("Buch ausleihen");
-		auswahl.setContentPane(panel);
 		panel.setLayout(null);
 	}
 	
-	public void launchAuswahl(){
-		auswahl.setBounds(x_right, y_north, x_width, y_height);
-		auswahl.setJMenuBar(bar);
+	public void launchAuswahl(JFrame frame){
+		this.frame = frame;
+		frame.setJMenuBar(bar);
 		// Menü wird der Menüleiste hinzugefügt
 		bar.add(menu);
 		// Wir fügen das JMenuItem unserem JMenu hinzu
@@ -65,15 +61,8 @@ public class Startmenu {
 		menu.add(buchAusleihen);
 		buchAusleihen.setActionCommand(ACTION_BUCH_AUSLEIHEN);
 		buchAusleihen.addActionListener(controlMenu);
-		
-		
-        // Wir setzen die Breite und die Höhe unseres Fensters auf 500 Pixel */ 
-		auswahl.setSize(500, 500);
-		auswahl.setLocation(100, 100);
-		// Beim schließen des GUI-Fensters wird JFrame geschlossen
-		auswahl.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-		// Wir lassen unseren Frame anzeigen
-		auswahl.setVisible(true);
+		frame.setTitle("Menu Punkt wählen");
+		frame.setContentPane(panel);
 	}
 
 }

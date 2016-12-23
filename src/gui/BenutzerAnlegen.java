@@ -4,6 +4,7 @@
 package gui;
 
 import javax.swing.*;
+
 import connectionToDatabase.*;
 import application.*;
 
@@ -12,11 +13,7 @@ import application.*;
  *
  */
 public class BenutzerAnlegen {
-	JFrame auswahl;
 	JPanel panel;
-	JMenuBar bar;
-	JMenu menu;
-	JMenuItem benutzerAnlegen, benutzerÄndern;
 	JButton anlegen;
 	JComboBox benutzer;
 	public JTableview tableviewUser;
@@ -26,10 +23,6 @@ public class BenutzerAnlegen {
 	ComboBoxHandler controlComboBox;
 	
 	public final static String ACTION_CREATE = "ANLEGEN";
-	public final static String ACTION_BENUTZER_ANLEGEN = "BENUTZER_ANLEGEN";
-	public final static String ACTION_BENUTZER_ÄNDERN = "BENUTZER_ÄNDERN";
-	
-	public MenuHandler controlMenu;
 	
 	int x_right = 330;
 	int y_north = 60;
@@ -63,16 +56,7 @@ public class BenutzerAnlegen {
 	private String benutzerArt;
 	
 	public BenutzerAnlegen(){
-		// Erzeugung eines neuen Frames mit dem Titel "BenutzerAnlegen"
-		auswahl = new JFrame("BenutzerAnlegen");
 		panel = new JPanel();
-		// Erstellen einer Menüleiste
-		bar = new JMenuBar();
-		// Erzeugung eines Objektes der Klasse JMenu
-		menu = new JMenu("Menu");
-		// Erzeugung eines Objektes der Klasse JMenuItem
-		benutzerAnlegen = new JMenuItem("Benutzer anlegen");
-		benutzerÄndern = new JMenuItem("Benutzer ändern");
 		// Erzeugung eines Objektes der Klasse JButton
 		anlegen = new JButton("anlegen");
 		// Erzeugung eines Objektes um ActionEvents zu handeln
@@ -82,8 +66,6 @@ public class BenutzerAnlegen {
 		// Erzeugung eines Objekt um
 		controlComboBox = new ComboBoxHandler(this);
 		benutzer.addItemListener(controlComboBox);
-		
-		auswahl.setContentPane(panel);
 		panel.setLayout(null);
 		
 		//Erzeugung der JLabels
@@ -217,19 +199,8 @@ public class BenutzerAnlegen {
 		this.ort.setText(ort);
 	}
 		
-	public void LaunchBenutzerAnlegen(){
-		auswahl.setBounds(x_right, y_north, x_width, y_height);
-		auswahl.setJMenuBar(bar);
-		// Menü wird der Menüleiste hinzugefügt
-		bar.add(menu);
-		// Wir fügen das JMenuItem unserem JMenu hinzu
-		menu.add(benutzerAnlegen);
-		menu.add(benutzerÄndern);
-		benutzerAnlegen.setActionCommand(ACTION_BENUTZER_ANLEGEN);
-		benutzerÄndern.setActionCommand(ACTION_BENUTZER_ÄNDERN);
-		benutzerAnlegen.addActionListener(controlMenu);
-		benutzerÄndern.addActionListener(controlMenu);
-		
+	public void LaunchBenutzerAnlegen(JFrame auswahl){	
+		auswahl.getContentPane().setVisible(false);
 		// Wir fügen den JButton unserem Panel hinzu:
 		anlegen.setBounds(x_right, y_opt4, x_anlegen_width, y_height);
 		panel.add(anlegen);
@@ -294,14 +265,6 @@ public class BenutzerAnlegen {
 		// JComboBoxes:
 		benutzer.setBounds(x_left, y_MENU_north, x_width, y_height);
 		panel.add(benutzer);
-	
-        // Wir setzen die Breite und die Höhe unseres Fensters auf 500 Pixel */ 
-		auswahl.setSize(520, 600);
-		auswahl.setLocation(100, 100);
-		// Beim schließen des GUI-Fensters wird JFrame geschlossen
-		auswahl.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-		// Wir lassen unseren Frame anzeigen
-		auswahl.setVisible(true);
 		
 		if(tableviewUser==null){
 			tableviewUser = new JTableview(DB_connection.getAllUsers());
@@ -309,5 +272,7 @@ public class BenutzerAnlegen {
 			scrollPane.setBounds(x_left, y_Library, x_widthLibrary, y_heightLibrary);
 			panel.add(scrollPane);
 		}	
+		auswahl.setTitle("Benutzer/Person integriert Anlegen");
+		auswahl.setContentPane(panel);
 	}
 }

@@ -58,9 +58,9 @@ public class ButtonHandler implements ActionListener {
 			case "ANMELDEN":
 				con = DB_connection.getDbConnection();
 				if(login.getBenutzername().equals(con.executequery_Value(DB_connection.checkAnmeldung(login.getBenutzername(),login.getPasswort())))){
+				login.panel.setVisible(false);
 				Startmenu startmenu = new Startmenu();
-				startmenu.launchAuswahl();
-				login.login.setVisible(false);
+				startmenu.launchAuswahl(this.login.login);
 				//TODO Über PersonDB nach Art abfragen und dann je nach Art entsprechendes Objekt erstellen
 				System.out.println("Benutzer erfolgreich angemeldet");
 				} else {
