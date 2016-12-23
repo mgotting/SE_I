@@ -6,13 +6,15 @@ package gui;
 import java.awt.event.*;
 
 /**
- * @author Gotti
+ * @author Michael Gottinger, Sandra Speckmeier
  *
  */
+
 public class MenuHandler implements ActionListener {
 	Startmenu startmenu;
 	BenutzerAnlegen benutzerAnlegen;
 	BenutzerÄndern benutzerÄndern;
+	BuchRueckgabe buchRückgabe;
 	
 	// create reference to GUI
 	public MenuHandler(Startmenu gui) { 
@@ -36,6 +38,10 @@ public class MenuHandler implements ActionListener {
 				benutzerÄndern.LaunchBenutzerÄndern();
 				startmenu.auswahl.setVisible(false);
 				break;
+			case "BUCH_ZURÜCKGEBEN":
+				buchRückgabe = new BuchRueckgabe();
+				buchRückgabe.launchRückgabe();
+				startmenu.auswahl.setVisible(false);
 			}
 		} catch (Exception ex){
 			ex.printStackTrace();
