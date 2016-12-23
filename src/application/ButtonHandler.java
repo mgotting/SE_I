@@ -31,9 +31,10 @@ public class ButtonHandler implements ActionListener {
 		this.benutzerAnlegen = benutzerAnlegen;
 	}
 	
-	public ButtonHandler(BenutzerÄndern benutzerändern){
+	public ButtonHandler(BenutzerÄndern benutzerÄndern){
 		this.benutzerÄndern = benutzerÄndern;
 	}
+	
 	public ButtonHandler(Login login) {
 		this.login = login;
 	}
@@ -127,9 +128,16 @@ public class ButtonHandler implements ActionListener {
 					break;
 				}
 				break;
-			case "ÄNDERN":
-				
-			
+			case "AUSWÄHLEN":
+				if(benutzerÄndern.tableview.getSQLTable().getSelectedRow()==-1)
+						throw new JTableException("Fehler: Zeile nicht markiert!");
+				String personID = (String) benutzerÄndern.tableview.getSQLTable().getValueAt(benutzerÄndern.tableview.getSQLTable().getSelectedRow(), 0).toString();
+				System.out.println(personID);
+				System.out.println("ActionCommand erhalten: "+e.getActionCommand());
+				con = DB_connection.getDbConnection();
+				String rs = con.executequery_Value(DB_connection.getAdress(personID));
+				benutzerÄndern.setStraße(rs);
+				break;
 				//TODO
 			case "INVENTAR":
 			//Check Konsole

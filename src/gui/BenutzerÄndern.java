@@ -222,10 +222,6 @@ public class BenutzerÄndern {
 		bar.add(menu);
 		// Wir fügen das JMenuItem unserem JMenu hinzu
 		menu.add(benutzerÄndern);
-		benutzerAnlegen.setActionCommand(ACTION_BENUTZER_ANLEGEN);
-		benutzerÄndern.setActionCommand(ACTION_BENUTZER_ÄNDERN);
-		benutzerAnlegen.addActionListener(controlMenu);
-		benutzerÄndern.addActionListener(controlMenu);
 		
 		// Wir fügen den JButton unserem Panel hinzu:
 		ändern.setBounds(x_right, y_opt4, x_BUTTON_width, y_height);

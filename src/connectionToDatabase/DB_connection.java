@@ -65,6 +65,14 @@ public class DB_connection {
 	public static String getAllRentBooks(String benutzername) {
 		return "SELECT BuchID, Titel, Autor, Status FROM library.exemplar, library.buchtyp, library.ausleihe WHERE library.exemplar.ISBN = library.buchtyp.ISBN AND library.exemplar.Status = 'ausleihbar' AND library.ausleihe.Benutzername ='"+benutzername+"';";
 	}
+	
+	public static String getUserInfo(){
+		
+	}
+	
+	public static String getAdress(String personID){
+		return "SELECT Straﬂe, Hausnummer, Postleitzahl, Ort FROM library.adresse, library.person WHERE library.adresse.AdressID=library.person.AdressID AND library.person.PersonID='"+personID+"'";
+	}
 
 	// connect and execute input query and return boolean
 	public boolean executequery(String SQLquery) throws SQLException {
@@ -97,6 +105,9 @@ public class DB_connection {
 			values = rs.getString(1);
 		return values;
 	}
+	
+	//TODO 
+
 
 	// 2. connect, execute input query and return generatedID of the generated key
 	public int executequery_autoKey(String SQLquery, boolean autoKey)
