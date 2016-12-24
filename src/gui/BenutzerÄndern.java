@@ -270,7 +270,7 @@ public class BenutzerÄndern {
 			scrollPane.setBounds(x_left, y_Library, x_widthLibrary, y_heightLibrary);
 			panel.add(scrollPane);
 		}	
-		auswahl.setTitle("Benutzer/Person integriert ändern");
+		auswahl.setTitle("Benutzer ändern");
 		auswahl.setContentPane(panel);
 	}
 

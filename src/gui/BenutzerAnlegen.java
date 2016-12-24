@@ -272,7 +272,7 @@ public class BenutzerAnlegen {
 			scrollPane.setBounds(x_left, y_Library, x_widthLibrary, y_heightLibrary);
 			panel.add(scrollPane);
 		}	
-		auswahl.setTitle("Benutzer/Person integriert Anlegen");
+		auswahl.setTitle("Benutzer anlegen");
 		auswahl.setContentPane(panel);
 	}
 }
