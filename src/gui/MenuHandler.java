@@ -40,6 +40,7 @@ public class MenuHandler implements ActionListener {
 			case "BUCH_AUSLEIHEN":
 				BuchAusleihe buchAusleihe = new BuchAusleihe();
 				buchAusleihe.launchBuchAusleihen(this.startmenu.frame);
+				break;
 			}
 		} catch (Exception ex){
 			ex.printStackTrace();
