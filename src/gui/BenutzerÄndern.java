@@ -200,6 +200,7 @@ public class BenutzerÄndern {
 	public void launchBenutzerÄndern(JFrame auswahl){
 		auswahl.getContentPane().setVisible(false);
 		// Wir fügen den JButton unserem Panel hinzu:
+		ändern.setBounds(x_right, y_opt4, x_BUTTON_width, y_height);
 		panel.add(ändern);
 		ändern.setActionCommand(ACTION_CHANGE);
 		ändern.addActionListener(controlButton);
