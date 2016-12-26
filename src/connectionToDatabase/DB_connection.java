@@ -108,7 +108,26 @@ public class DB_connection {
 		return values;
 	}
 	
-	//TODO 
+	//TODO Sanny
+	
+	public String executequery_ValueAdress(String SQLquery) throws SQLException{
+		Statement st = cn.createStatement();
+		ResultSet resultset = st.executeQuery(SQLquery);
+		ResultSetMetaData rsmd = resultset.getMetaData();
+		int spaltenanzahl = rsmd.getColumnCount();
+		String values = null;
+		
+		while (resultset.next()){
+			System.out.println("Gehe in die while-Schleife");
+			for(int i=1; i<=spaltenanzahl; i++){
+				System.out.println("Gehe in die for-Schleife "+ i);
+				values = resultset.getString(i);
+				System.out.println("FOR: "+values);				
+			}
+		}
+		System.out.println(values); //Falsches VALUES immer das von i=4
+		return values;
+	}
 
 
 	// 2. connect, execute input query and return generatedID of the generated key

@@ -141,12 +141,17 @@ public class ButtonHandler implements ActionListener {
 			case "AUSWÄHLEN":
 				if(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow()==-1)
 						throw new JTableException("Fehler: Zeile nicht markiert!");
-				String personID = (String) benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 0).toString();
+				String personID = (String) 
+				benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 0).toString();
 				System.out.println(personID);
 				System.out.println("ActionCommand erhalten: "+e.getActionCommand());
 				con = DB_connection.getDbConnection();
-				String rs = con.executequery_Value(DB_connection.getAdress(personID));
-				benutzerÄndern.setStraße(rs);
+				
+				String resultset = con.executequery_ValueAdress(DB_connection.getAdress(personID));
+				benutzerÄndern.setStraße(resultset);
+				benutzerÄndern.setHausnummer(resultset);
+				benutzerÄndern.setPLZ(resultset);
+				benutzerÄndern.setOrt(resultset);
 				break;
 				//TODO
 			case "INVENTAR":
