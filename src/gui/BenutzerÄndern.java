@@ -26,7 +26,7 @@ import connectionToDatabase.JTableview;
 public class BenutzerÄndern {
 	JPanel panel;
 	JButton ändern, auswählen;
-	public JTableview tableviewUser;
+	public JTableview tableviewUser, tableviewAdress;
 	JScrollPane scrollPane;
 	
 	ButtonHandler controlButton;
@@ -271,6 +271,12 @@ public class BenutzerÄndern {
 			scrollPane.setBounds(x_left, y_Library, x_widthLibrary, y_heightLibrary);
 			panel.add(scrollPane);
 		}	
+		
+		//TODO Übergabeparameter personID
+//		if (tableviewAdress == null){
+//			tableviewAdress = new JTableview(DB_connection.getAdress());
+//		}
+		
 		auswahl.setTitle("Benutzer ändern");
 		auswahl.setContentPane(panel);
 	}

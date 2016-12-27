@@ -145,13 +145,23 @@ public class ButtonHandler implements ActionListener {
 				benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 0).toString();
 				System.out.println(personID);
 				System.out.println("ActionCommand erhalten: "+e.getActionCommand());
-				con = DB_connection.getDbConnection();
 				
-				String resultset = con.executequery_ValueAdress(DB_connection.getAdress(personID));
-				benutzerÄndern.setStraße(resultset);
-				benutzerÄndern.setHausnummer(resultset);
-				benutzerÄndern.setPLZ(resultset);
-				benutzerÄndern.setOrt(resultset);
+				String benutzername = (String)
+				benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 1).toString();		
+				benutzerÄndern.setBenutzername(benutzername);
+				String vorname = (String)
+				benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 2).toString();		
+				benutzerÄndern.setVorname(vorname);	
+				String name = (String)
+				benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 3).toString();		
+				benutzerÄndern.setName(name);	
+				
+				con = DB_connection.getDbConnection();
+//				String resultset = con.executequery_ValueAdress(DB_connection.getAdress(personID));
+//				benutzerÄndern.setStraße(resultset);
+//				benutzerÄndern.setHausnummer(resultset);
+//				benutzerÄndern.setPLZ(resultset);
+//				benutzerÄndern.setOrt(resultset);
 				break;
 				//TODO
 			case "INVENTAR":
