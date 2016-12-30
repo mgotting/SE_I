@@ -94,7 +94,7 @@ public class Login {
 		passwort.setBounds(x_center, y_center2, x_width, y_height);
 		panel.add(passwort);
 
-		login.setSize(520, 600);
+		login.setSize(1200, 600);
 		login.setLocation(100, 100);
 		login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Schließen des Fensters ist möglich
 		login.setVisible(true);

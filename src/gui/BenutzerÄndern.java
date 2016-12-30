@@ -28,6 +28,7 @@ public class BenutzerÄndern {
 	JButton ändern, auswählen;
 	public JTableview tableviewUser, tableviewAdress;
 	JScrollPane scrollPane;
+	private String benutzerArt;
 	
 	ButtonHandler controlButton;
 	
@@ -35,6 +36,7 @@ public class BenutzerÄndern {
 	public final static String ACTION_AUSWAHL = "AUSWÄHLEN";
 	
 	int x_right = 330;
+	int x_right2=1070;
 	int y_north = 60;
 	int x_width = 160;
 	int y_height = 20;
@@ -56,8 +58,8 @@ public class BenutzerÄndern {
 	int y_center_textField = 140;
 	int y_center_textField2 = 160;
 	int y_MENU_north = 10;
-	int x_widthLibrary = 300;
-	int x_BUTTON_width = 120;
+	int x_widthLibrary = 1060;
+	int x_BUTTON_width = 110;
 	int y_heightLibrary = 100;
 	int y_Library = 420;
 	
@@ -196,6 +198,14 @@ public class BenutzerÄndern {
 	public void setOrt(String ort){
 		this.ort.setText(ort);
 	}
+	
+	public String getBenutzerArt(){
+		return benutzerArt;
+	}
+	
+	public void setBenutzerArt(String benutzerArt){
+		this.benutzerArt = benutzerArt;
+	}
 		
 	public void launchBenutzerÄndern(JFrame auswahl){
 		auswahl.getContentPane().setVisible(false);
@@ -204,7 +214,7 @@ public class BenutzerÄndern {
 		panel.add(ändern);
 		ändern.setActionCommand(ACTION_CHANGE);
 		ändern.addActionListener(controlButton);
-		auswählen.setBounds(x_right, y_Library, x_BUTTON_width, y_height);
+		auswählen.setBounds(x_right2, y_Library, x_BUTTON_width, y_height);
 		panel.add(auswählen);
 		auswählen.setActionCommand(ACTION_AUSWAHL);
 		auswählen.addActionListener(controlButton);
@@ -265,17 +275,17 @@ public class BenutzerÄndern {
 		ort.setBounds(x_center, y_opt4, x_width, y_height);
 		panel.add(ort);
 		
+		matrikelnummer.setEditable(true);
+    	studiengruppe.setEditable(true);
+    	fakultät.setEditable(true);
+		
+
 		if(tableviewUser==null){
-			tableviewUser = new JTableview(DB_connection.getAllUsers());
+			tableviewUser = new JTableview(DB_connection.getUserInfo());
 			scrollPane = new JScrollPane(tableviewUser.getSQLTable());
 			scrollPane.setBounds(x_left, y_Library, x_widthLibrary, y_heightLibrary);
 			panel.add(scrollPane);
 		}	
-		
-		//TODO Übergabeparameter personID
-//		if (tableviewAdress == null){
-//			tableviewAdress = new JTableview(DB_connection.getAdress());
-//		}
 		
 		auswahl.setTitle("Benutzer ändern");
 		auswahl.setContentPane(panel);

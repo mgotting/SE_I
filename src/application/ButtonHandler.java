@@ -141,29 +141,80 @@ public class ButtonHandler implements ActionListener {
 			case "AUSWÄHLEN":
 				if(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow()==-1)
 						throw new JTableException("Fehler: Zeile nicht markiert!");
-				String personID = (String) 
-				benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 0).toString();
-				System.out.println(personID);
-				System.out.println("ActionCommand erhalten: "+e.getActionCommand());
-				
-				String benutzername = (String)
-				benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 1).toString();		
-				benutzerÄndern.setBenutzername(benutzername);
-				String vorname = (String)
-				benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 2).toString();		
-				benutzerÄndern.setVorname(vorname);	
+				String art = (String)
+					benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 12).toString();		
+					benutzerÄndern.setBenutzerArt(art);	
+					System.out.println("Welcher Benutzer bist du? "+art);
+					
+					benutzerÄndern.matrikelnummer.setEditable(false);
+		        	benutzerÄndern.studiengruppe.setEditable(false);
+		        	benutzerÄndern.fakultät.setEditable(false);
+		        	benutzerÄndern.straße.setEditable(false);
+		        	benutzerÄndern.hausnummer.setEditable(false);
+		        	benutzerÄndern.postleitzahl.setEditable(false);
+		        	benutzerÄndern.ort.setEditable(false);
+		        	
 				String name = (String)
-				benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 3).toString();		
-				benutzerÄndern.setName(name);	
+					benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 1).toString();		
+					benutzerÄndern.setName(name);
+				String vorname = (String)
+					benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 2).toString();		
+					benutzerÄndern.setVorname(vorname);
+				String benutzername = (String)
+					benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 3).toString();		
+					benutzerÄndern.setBenutzername(benutzername);
+				String passwort = (String)
+					benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 4).toString();		
+					benutzerÄndern.setPasswort(passwort);	
 				
-				con = DB_connection.getDbConnection();
-//				String resultset = con.executequery_ValueAdress(DB_connection.getAdress(personID));
-//				benutzerÄndern.setStraße(resultset);
-//				benutzerÄndern.setHausnummer(resultset);
-//				benutzerÄndern.setPLZ(resultset);
-//				benutzerÄndern.setOrt(resultset);
-				break;
-				//TODO
+				String straße = (String)
+					benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 8).toString();		
+					benutzerÄndern.setStraße(straße);	
+				String hausnummer = (String)
+					benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 9).toString();		
+					benutzerÄndern.setHausnummer(hausnummer);	
+				String postleitzahl = (String)
+					benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 10).toString();		
+					benutzerÄndern.setPLZ(postleitzahl);
+				String ort = (String)
+					benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 11).toString();		
+					benutzerÄndern.setOrt(ort);	
+					
+				switch(art){
+				case "s":
+				String matrikelnummer = (String)
+					benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 5).toString();		
+					benutzerÄndern.setMatrikelnummer(matrikelnummer);
+				String studiengruppe = (String)
+					benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 6).toString();		
+					benutzerÄndern.setStudiengruppe(studiengruppe);
+//					benutzerÄndern.fakultät.setEditable(false);
+					benutzerÄndern.matrikelnummer.setEditable(true);
+					benutzerÄndern.studiengruppe.setEditable(true);
+					benutzerÄndern.straße.setEditable(true);
+					benutzerÄndern.hausnummer.setEditable(true);
+					benutzerÄndern.postleitzahl.setEditable(true);
+					benutzerÄndern.ort.setEditable(true);
+					break;
+				case "p":
+					String fakultät = (String)
+					benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 7).toString();		
+					benutzerÄndern.setFakultät(fakultät);
+					benutzerÄndern.fakultät.setEditable(true);
+					benutzerÄndern.straße.setEditable(true);
+					benutzerÄndern.hausnummer.setEditable(true);
+					benutzerÄndern.postleitzahl.setEditable(true);
+					benutzerÄndern.ort.setEditable(true);
+//					benutzerÄndern.matrikelnummer.setEditable(false);
+//					benutzerÄndern.studiengruppe.setEditable(false);
+					break;
+				
+				}
+				
+					break;
+				
+
+				
 			case "INVENTAR":
 			//Check Konsole
 			System.out.println("ActionCommand erhalten: "+e.getActionCommand());
