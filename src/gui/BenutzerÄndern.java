@@ -29,6 +29,7 @@ public class BenutzerÄndern {
 	public JTableview tableviewUser, tableviewAdress;
 	JScrollPane scrollPane;
 	private String benutzerArt;
+	private String personID;
 	
 	ButtonHandler controlButton;
 	
@@ -205,6 +206,13 @@ public class BenutzerÄndern {
 	
 	public void setBenutzerArt(String benutzerArt){
 		this.benutzerArt = benutzerArt;
+	}
+	
+	public String getPersonID(){
+		return personID;
+	}
+	public void setPersonID(String personID){
+		this.personID = personID;
 	}
 		
 	public void launchBenutzerÄndern(JFrame auswahl){

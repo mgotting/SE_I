@@ -138,6 +138,7 @@ public class ButtonHandler implements ActionListener {
 					break;
 				}
 				break;
+			//zu ändernden Benutzer auswählen, damit sich die GUI mit den DB-Werten befüllt
 			case "AUSWÄHLEN":
 				if(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow()==-1)
 						throw new JTableException("Fehler: Zeile nicht markiert!");
@@ -195,9 +196,7 @@ public class ButtonHandler implements ActionListener {
 //					benutzerÄndern.matrikelnummer.setEditable(false);
 //					benutzerÄndern.studiengruppe.setEditable(false);
 					break;
-				
 				}
-				
 				String straße = (String)
 						benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 8).toString();		
 						benutzerÄndern.setStraße(straße);	
@@ -210,11 +209,22 @@ public class ButtonHandler implements ActionListener {
 					String ort = (String)
 						benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 11).toString();		
 						benutzerÄndern.setOrt(ort);
+						break;
+			//DB-Werte werden in den jeweiligen Tabellen aktualisiert		
+			case "ÄNDERN":
+				//TODO
+				String personID = (String)
+				benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 0).toString();		
+				benutzerÄndern.setPersonID(personID);
+				System.out.println("Welche PersonID hat der ausgewählte Benutzer: "+personID);
 				
-					break;
-				
-
-				
+				con = DB_connection.getDbConnection();
+				System.out.println(benutzerÄndern.getVorname()+" "+benutzerÄndern.getName());
+				String updatePersonal = "UPDATE library.person SET Name = '"+benutzerÄndern.getName()+"' WHERE library.person.PersonID= ("+benutzerÄndern.getPersonID()+")";
+				boolean personalGeändert = con.executequery(updatePersonal);
+				System.out.println("Personal erfolgreich geändert: "+ personalGeändert);
+				benutzerÄndern.tableviewUser.updateSQLTable(DB_connection.getUserInfo());
+				break;
 			case "INVENTAR":
 			//Check Konsole
 			System.out.println("ActionCommand erhalten: "+e.getActionCommand());
