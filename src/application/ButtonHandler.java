@@ -165,20 +165,7 @@ public class ButtonHandler implements ActionListener {
 					benutzerÄndern.setBenutzername(benutzername);
 				String passwort = (String)
 					benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 4).toString();		
-					benutzerÄndern.setPasswort(passwort);	
-				
-				String straße = (String)
-					benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 8).toString();		
-					benutzerÄndern.setStraße(straße);	
-				String hausnummer = (String)
-					benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 9).toString();		
-					benutzerÄndern.setHausnummer(hausnummer);	
-				String postleitzahl = (String)
-					benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 10).toString();		
-					benutzerÄndern.setPLZ(postleitzahl);
-				String ort = (String)
-					benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 11).toString();		
-					benutzerÄndern.setOrt(ort);	
+					benutzerÄndern.setPasswort(passwort);		
 					
 				switch(art){
 				case "s":
@@ -210,6 +197,19 @@ public class ButtonHandler implements ActionListener {
 					break;
 				
 				}
+				
+				String straße = (String)
+						benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 8).toString();		
+						benutzerÄndern.setStraße(straße);	
+					String hausnummer = (String)
+						benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 9).toString();		
+						benutzerÄndern.setHausnummer(hausnummer);	
+					String postleitzahl = (String)
+						benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 10).toString();		
+						benutzerÄndern.setPLZ(postleitzahl);
+					String ort = (String)
+						benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 11).toString();		
+						benutzerÄndern.setOrt(ort);
 				
 					break;
 				
