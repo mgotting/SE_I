@@ -220,9 +220,13 @@ public class ButtonHandler implements ActionListener {
 				
 				con = DB_connection.getDbConnection();
 				System.out.println(benutzerÄndern.getVorname()+" "+benutzerÄndern.getName());
-				String updatePersonal = "UPDATE library.person SET Name = '"+benutzerÄndern.getName()+"' WHERE library.person.PersonID= ("+benutzerÄndern.getPersonID()+")";
-				boolean personalGeändert = con.executequery(updatePersonal);
-				System.out.println("Personal erfolgreich geändert: "+ personalGeändert);
+				String updatePersonal = "UPDATE library.person SET Vorname = '"+benutzerÄndern.getVorname()+"', Name = '"+benutzerÄndern.getName()+"' WHERE library.person.PersonID = ("+benutzerÄndern.getPersonID()+")";
+				boolean personalPersonGeändert = con.executequery(updatePersonal);
+				System.out.println("Person zum Personal erfolgreich geändert: "+ personalPersonGeändert);
+				
+				String updatePersonalBenuzter = "UPDATE library.benutzer SET Benutzername = '"+benutzerÄndern.getBenutzername()+"', Passwort = '"+benutzerÄndern.getPasswort()+"' WHERE library.benutzer.PersonID= ("+benutzerÄndern.getPersonID()+")";
+				boolean personalBenutzerGeändert =con.executequery(updatePersonalBenuzter);
+				System.out.println("Benutzer zum Personal erfolgreich geändert: " + personalBenutzerGeändert);
 				benutzerÄndern.tableviewUser.updateSQLTable(DB_connection.getUserInfo());
 				break;
 			case "INVENTAR":
