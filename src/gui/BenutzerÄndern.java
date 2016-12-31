@@ -30,6 +30,7 @@ public class BenutzerÄndern {
 	JScrollPane scrollPane;
 	private String benutzerArt;
 	private String personID;
+	private String adressID;
 	
 	ButtonHandler controlButton;
 	
@@ -213,6 +214,13 @@ public class BenutzerÄndern {
 	}
 	public void setPersonID(String personID){
 		this.personID = personID;
+	}
+	
+	public String getAdressID(){
+		return adressID;
+	}
+	public void setAdressID(String adressID){
+		this.adressID = adressID;
 	}
 		
 	public void launchBenutzerÄndern(JFrame auswahl){

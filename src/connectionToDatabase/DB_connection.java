@@ -73,11 +73,11 @@ public class DB_connection {
 	//TODO getAllBooks
 	
 	public static String getUserInfo(){
-		return "SELECT library.person.PersonID, Name, Vorname, Benutzername, Passwort, Matrikelnummer, Studiengruppe, Fakult‰t, Straﬂe, Hausnummer, Postleitzahl, Ort, Art FROM library.person LEFT JOIN library.adresse ON library.adresse.AdressID=library.person.AdressID JOIN library.benutzer ON library.person.PersonID=library.benutzer.PersonID LEFT JOIN library.student ON library.person.PersonID=library.student.PersonID LEFT JOIN library.professor ON library.person.PersonID=library.professor.PersonID LEFT JOIN library.personal ON library.person.PersonID=library.personal.PersonID";
+		return "SELECT library.person.PersonID, Name, Vorname, Benutzername, Passwort, Matrikelnummer, Studiengruppe, Fakult‰t, Straﬂe, Hausnummer, Postleitzahl, Ort, Art, library.adresse.AdressID FROM library.person LEFT JOIN library.adresse ON library.adresse.AdressID=library.person.AdressID JOIN library.benutzer ON library.person.PersonID=library.benutzer.PersonID LEFT JOIN library.student ON library.person.PersonID=library.student.PersonID LEFT JOIN library.professor ON library.person.PersonID=library.professor.PersonID LEFT JOIN library.personal ON library.person.PersonID=library.personal.PersonID";
 	}
 	
 	public static String getAdress(){
-		return "SELECT Straﬂe, Hausnummer, Postleitzahl, Ort FROM library.adresse, library.person WHERE library.adresse.AdressID=library.person.AdressID";
+		return "SELECT AdressID FROM library.adresse, library.person WHERE library.adresse.AdressID=library.person.AdressID";
 	}
 
 	// connect and execute input query and return boolean
@@ -113,24 +113,19 @@ public class DB_connection {
 	}
 	
 //	//TODO Sanny	
-//	public String executequery_ValueAdress(String SQLquery) throws SQLException{
+//	public String executequery_AdressID() throws SQLException{
 //		Statement st = cn.createStatement();
-//		ResultSet resultset = st.executeQuery(SQLquery);
-//		ResultSetMetaData rsmd = resultset.getMetaData();
-//		int spaltenanzahl = rsmd.getColumnCount();
+//		ResultSet resultset = st.executeQuery("SELECT library.adresse.AdressID FROM library.adresse LEFT JOIN library.person ON library.adresse.AdressID=library.person.AdressID");
 //		String values = null;
 //		
-//		while (resultset.next()){
-//			System.out.println("Gehe in die while-Schleife");
-//			for(int i=1; i<=spaltenanzahl; i++){
-//				System.out.println("Gehe in die for-Schleife "+ i);
-//				values = resultset.getString(i);
-//				System.out.println("FOR: "+values);				
-//			}
-//		}
-//		System.out.println(values); //Falsches VALUES immer das von i=4
+//		//while (resultset.next()){
+//		resultset.next();
+//				values = resultset.getString(1);
+//				System.out.println("Welche AdressID wurde ausgew‰hlt?: "+values);				
+////			}
 //		return values;
-//	}
+//		}
+		
 
 
 	// 2. connect, execute input query and return generatedID of the generated key

@@ -81,7 +81,7 @@ public class ButtonHandler implements ActionListener {
 				}
 				switch (this.benutzerAnlegen.getBenutzerArt()) {
 				case "Student":
-					int matrikelnummer = this.benutzerAnlegen.getMatrikelnummer();
+					int matrikelnummer = this.benutzerAnlegen.getMatrikelnummer(); //einmal festlegen, nicht mehr änderbar
 					Studiengruppe studiengruppe = this.benutzerAnlegen.getStudiengruppe();
 					Student student;
 					art = 's';
@@ -177,7 +177,7 @@ public class ButtonHandler implements ActionListener {
 					benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 6).toString();		
 					benutzerÄndern.setStudiengruppe(studiengruppe);
 //					benutzerÄndern.fakultät.setEditable(false);
-					benutzerÄndern.matrikelnummer.setEditable(true);
+//					benutzerÄndern.matrikelnummer.setEditable(true);
 					benutzerÄndern.studiengruppe.setEditable(true);
 					benutzerÄndern.straße.setEditable(true);
 					benutzerÄndern.hausnummer.setEditable(true);
@@ -209,26 +209,62 @@ public class ButtonHandler implements ActionListener {
 					String ort = (String)
 						benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 11).toString();		
 						benutzerÄndern.setOrt(ort);
+				
+						
+//					String adressID = (String)
+//						benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 13).toString();		
+//						benutzerÄndern.setAdressID(adressID);
+//						System.out.println("Welche AdressID hat der ausgewählte Benutzer: "+adressID);
 						break;
+						
 			//DB-Werte werden in den jeweiligen Tabellen aktualisiert		
 			case "ÄNDERN":
 				//TODO
+				//Informationen Name, Vorname, Benutzername, Passwort können zu allen Benutzern geändern werden
+				con = DB_connection.getDbConnection();
+				
 				String personID = (String)
-				benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 0).toString();		
-				benutzerÄndern.setPersonID(personID);
+					benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 0).toString();		
+					benutzerÄndern.setPersonID(personID);
 				System.out.println("Welche PersonID hat der ausgewählte Benutzer: "+personID);
 				
-				con = DB_connection.getDbConnection();
-				System.out.println(benutzerÄndern.getVorname()+" "+benutzerÄndern.getName());
-				String updatePersonal = "UPDATE library.person SET Vorname = '"+benutzerÄndern.getVorname()+"', Name = '"+benutzerÄndern.getName()+"' WHERE library.person.PersonID = ("+benutzerÄndern.getPersonID()+")";
-				boolean personalPersonGeändert = con.executequery(updatePersonal);
-				System.out.println("Person zum Personal erfolgreich geändert: "+ personalPersonGeändert);
+				art = (String)
+						benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 12).toString();		
+						benutzerÄndern.setBenutzerArt(art);	
+				System.out.println("Welcher Benutzer bist du? "+art);
+						
+							
+						
+//				boolean adressID = con.executequery_AdressID().isEmpty();
+//				System.out.println("Ist eine keine AdressID vorhanden?: "+adressID);
 				
-				String updatePersonalBenuzter = "UPDATE library.benutzer SET Benutzername = '"+benutzerÄndern.getBenutzername()+"', Passwort = '"+benutzerÄndern.getPasswort()+"' WHERE library.benutzer.PersonID= ("+benutzerÄndern.getPersonID()+")";
-				boolean personalBenutzerGeändert =con.executequery(updatePersonalBenuzter);
-				System.out.println("Benutzer zum Personal erfolgreich geändert: " + personalBenutzerGeändert);
+				//Personen-Informationen werden geändert
+				System.out.println(benutzerÄndern.getVorname()+" "+benutzerÄndern.getName());
+				String updatePerson = "UPDATE library.person SET Vorname = '"+benutzerÄndern.getVorname()+"', Name = '"+benutzerÄndern.getName()+"' WHERE library.person.PersonID = ("+benutzerÄndern.getPersonID()+")";
+				boolean personalPersonGeändert = con.executequery(updatePerson);
+				System.out.println("Person erfolgreich geändert: "+ personalPersonGeändert);
+				//Benutzer-Informationen werden geändert
+				String updateBenuzter = "UPDATE library.benutzer SET Benutzername = '"+benutzerÄndern.getBenutzername()+"', Passwort = '"+benutzerÄndern.getPasswort()+"' WHERE library.benutzer.PersonID= ("+benutzerÄndern.getPersonID()+")";
+				boolean BenutzerGeändert =con.executequery(updateBenuzter);
+				System.out.println("Benutzer erfolgreich geändert: " + BenutzerGeändert);
 				benutzerÄndern.tableviewUser.updateSQLTable(DB_connection.getUserInfo());
+				
+				switch(art){
+				//Studenten-Infmormationen werden geändert, Matrikelnummer ausgeschlossen (diese wird eimal festgelegt)!
+				case "s": 
+					String updateStudent = "UPDATE library.student SET Studiengruppe = '"+benutzerÄndern.getStudiengruppe()+"' WHERE library.student.PersonID= ("+benutzerÄndern.getPersonID()+")";
+					boolean studentGeändert =con.executequery(updateStudent);
+					System.out.println("Student erfolgreich geändert: " + studentGeändert);
+					benutzerÄndern.tableviewUser.updateSQLTable(DB_connection.getUserInfo());
+				//Professoren-Infmormationen werden geändert	
+				case "p":
+					String updateProfessor = "UPDATE library.professor SET Fakultät = '"+benutzerÄndern.getFakultät()+"' WHERE library.professor.PersonID= ("+benutzerÄndern.getPersonID()+")";
+					boolean professorGeändert =con.executequery(updateProfessor);
+					System.out.println("Professor erfolgreich geändert: " + professorGeändert);
+					benutzerÄndern.tableviewUser.updateSQLTable(DB_connection.getUserInfo());
+				}
 				break;
+				
 			case "INVENTAR":
 			//Check Konsole
 			System.out.println("ActionCommand erhalten: "+e.getActionCommand());
