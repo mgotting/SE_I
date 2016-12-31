@@ -27,6 +27,7 @@ public class ButtonHandler implements ActionListener {
 	private char art;
 	private Benutzer benutzer;
 	private boolean adresseVorhanden;
+	private boolean adresseEingetragen;
 
 	// create reference to GUI
 	public ButtonHandler(BenutzerAnlegen benutzerAnlegen) {
@@ -140,6 +141,7 @@ public class ButtonHandler implements ActionListener {
 				break;
 			//zu ändernden Benutzer auswählen, damit sich die GUI mit den DB-Werten befüllt
 			case "AUSWÄHLEN":
+				
 				if(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow()==-1)
 						throw new JTableException("Fehler: Zeile nicht markiert!");
 				String art = (String)
@@ -176,8 +178,6 @@ public class ButtonHandler implements ActionListener {
 				String studiengruppe = (String)
 					benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 6).toString();		
 					benutzerÄndern.setStudiengruppe(studiengruppe);
-//					benutzerÄndern.fakultät.setEditable(false);
-//					benutzerÄndern.matrikelnummer.setEditable(true);
 					benutzerÄndern.studiengruppe.setEditable(true);
 					benutzerÄndern.straße.setEditable(true);
 					benutzerÄndern.hausnummer.setEditable(true);
@@ -193,11 +193,10 @@ public class ButtonHandler implements ActionListener {
 					benutzerÄndern.hausnummer.setEditable(true);
 					benutzerÄndern.postleitzahl.setEditable(true);
 					benutzerÄndern.ort.setEditable(true);
-//					benutzerÄndern.matrikelnummer.setEditable(false);
-//					benutzerÄndern.studiengruppe.setEditable(false);
 					break;
 				}
-				String straße = (String)
+				
+					String straße = (String)
 						benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 8).toString();		
 						benutzerÄndern.setStraße(straße);	
 					String hausnummer = (String)
@@ -209,8 +208,7 @@ public class ButtonHandler implements ActionListener {
 					String ort = (String)
 						benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 11).toString();		
 						benutzerÄndern.setOrt(ort);
-				
-						
+										
 //					String adressID = (String)
 //						benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 13).toString();		
 //						benutzerÄndern.setAdressID(adressID);
@@ -219,8 +217,8 @@ public class ButtonHandler implements ActionListener {
 						
 			//DB-Werte werden in den jeweiligen Tabellen aktualisiert		
 			case "ÄNDERN":
+				GUIDatenÄndern();
 				//TODO
-				//Informationen Name, Vorname, Benutzername, Passwort können zu allen Benutzern geändern werden
 				con = DB_connection.getDbConnection();
 				
 				String personID = (String)
@@ -256,12 +254,31 @@ public class ButtonHandler implements ActionListener {
 					boolean studentGeändert =con.executequery(updateStudent);
 					System.out.println("Student erfolgreich geändert: " + studentGeändert);
 					benutzerÄndern.tableviewUser.updateSQLTable(DB_connection.getUserInfo());
+					break;
 				//Professoren-Infmormationen werden geändert	
 				case "p":
 					String updateProfessor = "UPDATE library.professor SET Fakultät = '"+benutzerÄndern.getFakultät()+"' WHERE library.professor.PersonID= ("+benutzerÄndern.getPersonID()+")";
 					boolean professorGeändert =con.executequery(updateProfessor);
 					System.out.println("Professor erfolgreich geändert: " + professorGeändert);
 					benutzerÄndern.tableviewUser.updateSQLTable(DB_connection.getUserInfo());
+					break;
+				}
+				
+				
+				//TODO wenn eine Adresse eingetragen ist, überprüfe ob diese schon angelegt war oder nicht
+				if (adresseEingetragen == true){
+//					if(adressID==null)
+//					Adresse adresse = new Adresse (straße, hausnummer, postleitzahl, ort);
+//					String insertAdresse = "INSERT INTO adresse(Straße, Hausnummer, Postleitzahl, Ort) VALUES ('"+adresse.getStraße()+"','"+adresse.getHausnummer()+"','"+adresse.getPostleitzahl()+"','"+adresse.getOrt()+"');";
+//					generatedAdressID = con.executequery_autoKey(insertAdresse, true);
+//					boolean adresseVerbucht = con.executequery(insertAdresse);
+//					System.out.println("Adresse erfolgreich verbucht: "+insertAdresse);
+//					}else{
+//					String updateAdresse = "UPDATE library.adresse SET Straße = '"+benutzerÄndern.getStraße()+"', Hausnummer = '"+benutzerÄndern.getHausnummer()+"', Postleitzahl = '"+benutzerÄndern.getPLZ()+"', Ort = '"+benutzerÄndern.getOrt()+"' WHERE library.person.AdressID= ("+benutzerÄndern.getAdressID()+")";
+//					boolean adresseGeändert =con.executequery(updateAdresse);
+//					System.out.println("Adresse erfolgreich geändert: " + adresseGeändert);
+//					benutzerÄndern.tableviewUser.updateSQLTable(DB_connection.getUserInfo());
+//					}
 				}
 				break;
 				
@@ -302,6 +319,24 @@ public class ButtonHandler implements ActionListener {
 			ort = this.benutzerAnlegen.getOrt();
 		}
 		System.out.println("Adresse vorhanden: "+adresseVorhanden);
+	}
+	
+	private void GUIDatenÄndern(){
+		name = this.benutzerÄndern.getName();
+		vorname = this.benutzerÄndern.getVorname();
+		benutzername = this.benutzerÄndern.getBenutzername();
+		passwort = this.benutzerÄndern.getPasswort();
+		
+		if(this.benutzerÄndern.getStraße().equals("")||this.benutzerÄndern.getHausnummer().equals("") || this.benutzerÄndern.getPLZ()==0 || this.benutzerÄndern.getOrt().equals("")){
+			adresseEingetragen = false;
+		} else {
+			adresseEingetragen = true;
+			straße = this.benutzerÄndern.getStraße();
+			hausnummer = this.benutzerÄndern.getHausnummer();
+			postleitzahl = this.benutzerÄndern.getPLZ();
+			ort = this.benutzerÄndern.getOrt();
+		}
+		System.out.println("Adresse eingetragen: "+adresseEingetragen);
 	}
 	
 	// befüllt die für jedes Objekt identischen Tabellen
