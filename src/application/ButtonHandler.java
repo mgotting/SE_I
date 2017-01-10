@@ -22,7 +22,7 @@ public class ButtonHandler implements ActionListener {
 	private BuchRueckgabe buchRückgabe;
 	private Login login;
 	private DB_connection con;
-	private String name, vorname, benutzername, passwort, straße, ort, hausnummer;
+	private String name, vorname, benutzername, passwort, straße, ort, hausnummer, angemeldeterUser;
 	private int postleitzahl, generatedID, generatedAdressID;
 	private char art;
 	private Benutzer benutzer;
@@ -59,10 +59,10 @@ public class ButtonHandler implements ActionListener {
 			case "ANMELDEN":
 				con = DB_connection.getDbConnection();
 				if(login.getBenutzername().equals(con.executequery_Value(DB_connection.checkAnmeldung(login.getBenutzername(),login.getPasswort())))){
+				angemeldeterUser = login.getBenutzername();
 				login.panel.setVisible(false);
-				Startmenu startmenu = new Startmenu();
+				Startmenu startmenu = new Startmenu(angemeldeterUser);
 				startmenu.launchAuswahl(this.login.login);
-				//TODO Über PersonDB nach Art abfragen und dann je nach Art entsprechendes Objekt erstellen
 				System.out.println("Benutzer erfolgreich angemeldet");
 				} else {
 				JOptionPane.showMessageDialog(new JFrame(), "Benutzername / Passwort falsch");
@@ -291,8 +291,18 @@ public class ButtonHandler implements ActionListener {
 			//1. einfügen in Tabelle
 			//insertBuch = "INSERT INTO Inventar (status, ISBN) VALUES ('"+Exemplar.getStatus()+"', '"+exemplar.getISBN()+"');"
 			break;
-			}
 			
+			
+			case "BUCH_ZURÜCKGEBEN":
+				String buchID = (String)
+				buchRückgabe.tableview.getSQLTable().getValueAt(buchRückgabe.tableview.getSQLTable().getSelectedRow(), 0).toString();
+				con = DB_connection.getDbConnection();
+				con.executequery(DB_connection.buchZurückgegeben(buchID));
+				con.executequery("UPDATE library.exemplar SET Status = 'ausleihbar' WHERE library.exemplar.BUCHID="+buchID);
+				buchRückgabe.tableview.updateSQLTable(DB_connection.getAllRentBooks(angemeldeterUser));
+				JOptionPane.showMessageDialog(new JFrame(), "Der angemeldete User hat das Buch mit der ID: "+buchID+" erfolgreich zurückgegeben.");
+				System.out.println("Buch erfolgreich zurückgegeben");
+			}
 		} catch (AdressException ex){
 			JOptionPane.showMessageDialog(new JFrame(), ex.getMessage());
 		} catch (IllegalArgumentException ex) {

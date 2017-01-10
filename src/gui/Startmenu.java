@@ -15,6 +15,7 @@ public class Startmenu {
 	JMenuBar bar;
 	JMenu menu;
 	JMenuItem benutzerAnlegen, benutzerÄndern, buchZurückgeben, buchAusleihen;
+	String angemeldeterUser;
 	
 	int x_right = 330;
 	int y_north = 60;
@@ -28,7 +29,8 @@ public class Startmenu {
 	
 	public MenuHandler controlMenu;
 	
-	public Startmenu(){
+	public Startmenu(String angemeldeterUser){
+		this.angemeldeterUser=angemeldeterUser;
 		controlMenu = new MenuHandler(this);
 		panel = new JPanel();
 		// Erstellen einer Menüleiste
