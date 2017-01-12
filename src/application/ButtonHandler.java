@@ -27,7 +27,6 @@ public class ButtonHandler implements ActionListener {
 	private char art;
 	private Benutzer benutzer;
 	private boolean adresseVorhanden;
-	private boolean adresseEingetragen;
 	private Adresse adresse;
 
 	// create reference to GUI
@@ -82,13 +81,13 @@ public class ButtonHandler implements ActionListener {
 				generatedAdressID = con.executequery_autoKey(insertAdresse, true);
 				}
 				
-				if(benutzerAnlegen.name.getText().isEmpty() || benutzerAnlegen.vorname.getText().isEmpty() || benutzerAnlegen.benutzername.getText().isEmpty() || benutzerAnlegen.passwort.getText().isEmpty()){
+				if(benutzerAnlegen.tfName.getText().isEmpty() || benutzerAnlegen.tfVorname.getText().isEmpty() || benutzerAnlegen.tfBenutzername.getText().isEmpty() || benutzerAnlegen.tfPasswort.getText().isEmpty()){
 					//kein DB Eintrag
 					JOptionPane.showMessageDialog(new JFrame(), "Fehler: Standardeingaben wurden nicht eingetragen!");
 				}else{
 				switch (this.benutzerAnlegen.getBenutzerArt()) {
 				case "Student":
-					if(benutzerAnlegen.matrikelnummer.getText().isEmpty() || benutzerAnlegen.studiengruppe.getText().isEmpty()){
+					if(benutzerAnlegen.tfMatrikelnummer.getText().isEmpty() || benutzerAnlegen.tfStudiengruppe.getText().isEmpty()){
 						//kein DB Eintrag
 						JOptionPane.showMessageDialog(new JFrame(), "Fehler: Matrikelnummer oder Studiengruppe wurden nicht eingetragen!");
 					}else{
@@ -114,7 +113,7 @@ public class ButtonHandler implements ActionListener {
 					}
 					break;
 				case "Professor":
-					if(benutzerAnlegen.fakultät.getText().isEmpty()){
+					if(benutzerAnlegen.tfFakultät.getText().isEmpty()){
 						//kein DB Eintrag
 						JOptionPane.showMessageDialog(new JFrame(), "Fehler: Matrikelnummer oder Studiengruppe wurden nicht eingetragen!");
 					
@@ -167,13 +166,13 @@ public class ButtonHandler implements ActionListener {
 					benutzerÄndern.setBenutzerArt(art);	
 					System.out.println("Welcher Benutzer bist du? "+art);
 					
-					benutzerÄndern.matrikelnummer.setEditable(false);
-		        	benutzerÄndern.studiengruppe.setEditable(false);
-		        	benutzerÄndern.fakultät.setEditable(false);
-		        	benutzerÄndern.straße.setEditable(false);
-		        	benutzerÄndern.hausnummer.setEditable(false);
-		        	benutzerÄndern.postleitzahl.setEditable(false);
-		        	benutzerÄndern.ort.setEditable(false);
+					benutzerÄndern.tfMatrikelnummer.setEditable(false);
+		        	benutzerÄndern.tfStudiengruppe.setEditable(false);
+		        	benutzerÄndern.tfFakultät.setEditable(false);
+		        	benutzerÄndern.tfStraße.setEditable(false);
+		        	benutzerÄndern.tfHausnummer.setEditable(false);
+		        	benutzerÄndern.tfPostleitzahl.setEditable(false);
+		        	benutzerÄndern.tfOrt.setEditable(false);
 		        	
 				String name = (String)
 					benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 1).toString();		
@@ -196,21 +195,21 @@ public class ButtonHandler implements ActionListener {
 				String studiengruppe = (String)
 					benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 6).toString();		
 					benutzerÄndern.setStudiengruppe(studiengruppe);
-					benutzerÄndern.studiengruppe.setEditable(true);
-					benutzerÄndern.straße.setEditable(true);
-					benutzerÄndern.hausnummer.setEditable(true);
-					benutzerÄndern.postleitzahl.setEditable(true);
-					benutzerÄndern.ort.setEditable(true);
+					benutzerÄndern.tfStudiengruppe.setEditable(true);
+					benutzerÄndern.tfStraße.setEditable(true);
+					benutzerÄndern.tfHausnummer.setEditable(true);
+					benutzerÄndern.tfPostleitzahl.setEditable(true);
+					benutzerÄndern.tfOrt.setEditable(true);
 					break;
 				case "p":
 					String fakultät = (String)
 					benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 7).toString();		
 					benutzerÄndern.setFakultät(fakultät);
-					benutzerÄndern.fakultät.setEditable(true);
-					benutzerÄndern.straße.setEditable(true);
-					benutzerÄndern.hausnummer.setEditable(true);
-					benutzerÄndern.postleitzahl.setEditable(true);
-					benutzerÄndern.ort.setEditable(true);
+					benutzerÄndern.tfFakultät.setEditable(true);
+					benutzerÄndern.tfStraße.setEditable(true);
+					benutzerÄndern.tfHausnummer.setEditable(true);
+					benutzerÄndern.tfPostleitzahl.setEditable(true);
+					benutzerÄndern.tfOrt.setEditable(true);
 					break;
 				}
 						
@@ -278,7 +277,7 @@ public class ButtonHandler implements ActionListener {
 				
 				if (adressID==-1){
 					System.out.println("LEEEEEEEERRRRR");
-					if(benutzerÄndern.straße.getText().isEmpty() || benutzerÄndern.hausnummer.getText().isEmpty() || benutzerÄndern.postleitzahl.getText().isEmpty() || benutzerÄndern.ort.getText().isEmpty()){
+					if(benutzerÄndern.tfStraße.getText().isEmpty() || benutzerÄndern.tfHausnummer.getText().isEmpty() || benutzerÄndern.tfPostleitzahl.getText().isEmpty() || benutzerÄndern.tfOrt.getText().isEmpty()){
 						//kein DB Eintrag
 						JOptionPane.showMessageDialog(new JFrame(), "Keine Adresse eingetragen");
 					}else{
@@ -289,12 +288,13 @@ public class ButtonHandler implements ActionListener {
 						String updPerson = "UPDATE library.person SET AdressID = "+generatedAdressID+" WHERE library.person.PersonID = "+Integer.parseInt(personID)+";";
 						boolean updPersonVerbucht = con.executequery(updPerson);
 						boolean adresseVerbucht = con.executequery(insertAdresse);
+						System.out.println("AdresseID erfolgreich in Tabelle Person verbucht: "+updPersonVerbucht);
 						System.out.println("Adresse erfolgreich verbucht: "+adresseVerbucht);
 					}
 					
 				}else{
 					System.out.println("Welche AdressID hast du? " +adressID);
-					adresse = new Adresse (benutzerÄndern.straße.getText().toString(), benutzerÄndern.hausnummer.getText().toString(), Integer.parseInt(benutzerÄndern.postleitzahl.getText().toString()), benutzerÄndern.ort.getText().toString());
+					adresse = new Adresse (benutzerÄndern.tfStraße.getText().toString(), benutzerÄndern.tfHausnummer.getText().toString(), Integer.parseInt(benutzerÄndern.tfPostleitzahl.getText().toString()), benutzerÄndern.tfOrt.getText().toString());
 					String updateAdresse = "UPDATE library.adresse SET Straße = '"+adresse.getStraße()+"', Hausnummer = '"+adresse.getHausnummer()+"', Postleitzahl = "+adresse.getPostleitzahl()+", Ort = '"+adresse.getOrt()+"' WHERE library.adresse.AdressID= "+adressID+"";
 					System.out.println(updateAdresse);
 					boolean adresseGeändert =con.executequery(updateAdresse);
@@ -307,7 +307,8 @@ public class ButtonHandler implements ActionListener {
 				EintragLöschenÄndern();
 				con.disconnect();
 				break;
-				
+			
+			//TODO Was passiert mit klicken auf Button in inventarisieren	
 			case "INVENTAR":
 			//Check Konsole
 			System.out.println("ActionCommand erhalten: "+e.getActionCommand());
@@ -317,6 +318,8 @@ public class ButtonHandler implements ActionListener {
 			//1. einfügen in Tabelle
 			//insertBuch = "INSERT INTO Inventar (status, ISBN) VALUES ('"+Exemplar.getStatus()+"', '"+exemplar.getISBN()+"');"
 			break;
+			
+			//TODO case "AUSLEIHE:"
 			
 			
 			case "BUCH_ZURÜCKGEBEN":

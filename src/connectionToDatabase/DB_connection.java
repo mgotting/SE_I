@@ -74,7 +74,7 @@ public class DB_connection {
 		return "DELETE FROM library.ausleihe WHERE BUCHID ="+buchID;
 	}
 	
-	//TODO getAllBooks
+	//TODO getAllBooks alles was in der JTable angezeigt werden soll
 	
 	public static String getUserInfo(){
 		return "SELECT library.person.PersonID, Name, Vorname, Benutzername, Passwort, Matrikelnummer, Studiengruppe, Fakult‰t, Straﬂe, Hausnummer, Postleitzahl, Ort, Art, library.adresse.AdressID FROM library.person LEFT JOIN library.adresse ON library.adresse.AdressID=library.person.AdressID JOIN library.benutzer ON library.person.PersonID=library.benutzer.PersonID LEFT JOIN library.student ON library.person.PersonID=library.student.PersonID LEFT JOIN library.professor ON library.person.PersonID=library.professor.PersonID LEFT JOIN library.personal ON library.person.PersonID=library.personal.PersonID";
@@ -116,22 +116,6 @@ public class DB_connection {
 		return values;
 	}
 	
-//	//TODO Sanny	
-//	public String executequery_AdressID() throws SQLException{
-//		Statement st = cn.createStatement();
-//		ResultSet resultset = st.executeQuery("SELECT library.adresse.AdressID FROM library.adresse LEFT JOIN library.person ON library.adresse.AdressID=library.person.AdressID");
-//		String values = null;
-//		
-//		//while (resultset.next()){
-//		resultset.next();
-//				values = resultset.getString(1);
-//				System.out.println("Welche AdressID wurde ausgew‰hlt?: "+values);				
-////			}
-//		return values;
-//		}
-		
-
-
 	// 2. connect, execute input query and return generatedID of the generated key
 	public int executequery_autoKey(String SQLquery, boolean autoKey)
 			throws SQLException {

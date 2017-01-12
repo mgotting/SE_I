@@ -65,7 +65,7 @@ public class Benutzerƒndern {
 	int y_heightLibrary = 100;
 	int y_Library = 420;
 	
-	public JTextField benutzername, passwort, name, vorname, matrikelnummer, studiengruppe, fakult‰t, straﬂe, hausnummer, postleitzahl, ort;
+	public JTextField tfBenutzername, tfPasswort, tfName, tfVorname, tfMatrikelnummer, tfStudiengruppe, tfFakult‰t, tfStraﬂe, tfHausnummer, tfPostleitzahl, tfOrt;
 	public JLabel labelBenutzername, labelPasswort, labelName, labelVorname, labelMatrikelnummer, labelStudiengruppe, labelFakult‰t, labelStraﬂe, labelHausnummer, labelPostleitzahl, labelOrt;
 	
 	public Benutzerƒndern(){
@@ -92,113 +92,113 @@ public class Benutzerƒndern {
 		labelOrt = new JLabel("Ort:", JLabel.LEFT);
 		
 		//Erzeugung der JTextFields
-		benutzername = new JTextField(45);
-		passwort = new JTextField(45);
-		name = new JTextField(45);
-		vorname = new JTextField(45);
-		matrikelnummer = new JTextField(10);
-		studiengruppe = new JTextField(4);
-		fakult‰t = new JTextField(30);
-		straﬂe = new JTextField(80);
-		hausnummer = new JTextField(4);
-		postleitzahl = new JTextField(5);
-		ort = new JTextField(30);
+		tfBenutzername = new JTextField(45);
+		tfPasswort = new JTextField(45);
+		tfName = new JTextField(45);
+		tfVorname = new JTextField(45);
+		tfMatrikelnummer = new JTextField(10);
+		tfStudiengruppe = new JTextField(4);
+		tfFakult‰t = new JTextField(30);
+		tfStraﬂe = new JTextField(80);
+		tfHausnummer = new JTextField(4);
+		tfPostleitzahl = new JTextField(5);
+		tfOrt = new JTextField(30);
 	}
 	
 	
 	public String getBenutzername(){
-		String benutzername = this.benutzername.getText();
+		String benutzername = this.tfBenutzername.getText();
 		return benutzername;
 	}
 	
 	public void setBenutzername(String benutzername){
-		this.benutzername.setText(benutzername);
+		this.tfBenutzername.setText(benutzername);
 	}
 	
 	public String getPasswort(){
-		String passwort = this.passwort.getText();
+		String passwort = this.tfPasswort.getText();
 		return passwort;
 	}
 	
 	public void setPasswort(String passwort){
-		this.passwort.setText(passwort);
+		this.tfPasswort.setText(passwort);
 	}
 	
 	public String getName(){
-		String name = this.name.getText();
+		String name = this.tfName.getText();
 		return name;
 	}
 	
 	public void setName(String nachname){
-		this.name.setText(nachname);
+		this.tfName.setText(nachname);
 	}
 	
 	public String getVorname(){
-		String vorname = this.vorname.getText();
+		String vorname = this.tfVorname.getText();
 		return vorname;
 	}
 	public void setVorname(String vorname){
-		this.vorname.setText(vorname);
+		this.tfVorname.setText(vorname);
 	}
 	
 	public int getMatrikelnummer(){
-		int matrikelnummer = Integer.parseInt(this.matrikelnummer.getText());
+		int matrikelnummer = Integer.parseInt(this.tfMatrikelnummer.getText());
 		return matrikelnummer;
 	}
 	public void setMatrikelnummer(String matrikelnummer){
-		this.matrikelnummer.setText(matrikelnummer);
+		this.tfMatrikelnummer.setText(matrikelnummer);
 	}
 	
 	public Studiengruppe getStudiengruppe(){
-		Studiengruppe studiengruppe = Studiengruppe.valueOf(this.studiengruppe.getText());
+		Studiengruppe studiengruppe = Studiengruppe.valueOf(this.tfStudiengruppe.getText());
 		return studiengruppe;
 	}
 	public void setStudiengruppe(String studiengruppe){
-		this.studiengruppe.setText(studiengruppe);
+		this.tfStudiengruppe.setText(studiengruppe);
 	}
 	
 	public String getFakult‰t(){
-		String fakult‰t = this.fakult‰t.getText();
+		String fakult‰t = this.tfFakult‰t.getText();
 		return fakult‰t;
 	}
 	public void setFakult‰t(String fakult‰t){
-		this.fakult‰t.setText(fakult‰t);
+		this.tfFakult‰t.setText(fakult‰t);
 	}
 	
 	public String getStraﬂe(){
-		String straﬂe = this.straﬂe.getText();
+		String straﬂe = this.tfStraﬂe.getText();
 		return straﬂe;
 	}
 	
 	public void setStraﬂe(String straﬂe){
-		this.straﬂe.setText(straﬂe);
+		this.tfStraﬂe.setText(straﬂe);
 	}
 	
 	public String getHausnummer(){
-		String hausnummer = this.hausnummer.getText();
+		String hausnummer = this.tfHausnummer.getText();
 		return hausnummer;
 	}
 	
 	public void setHausnummer(String hausnummer){
-		this.hausnummer.setText(hausnummer);
+		this.tfHausnummer.setText(hausnummer);
 	}
 	
 	public int getPLZ(){
-		int postleitzahl = Integer.parseInt(this.postleitzahl.getText());
+		int postleitzahl = Integer.parseInt(this.tfPostleitzahl.getText());
 		return postleitzahl;
 	}
 	
 	public void setPLZ(String postleitzahl){
-		this.postleitzahl.setText(postleitzahl);
+		this.tfPostleitzahl.setText(postleitzahl);
 	}
 	
 	public String getOrt(){
-		 String ort = this.ort.getText();
+		 String ort = this.tfOrt.getText();
 		return ort;
 	}
 	
 	public void setOrt(String ort){
-		this.ort.setText(ort);
+		this.tfOrt.setText(ort);
 	}
 	
 	public String getBenutzerArt(){
@@ -263,37 +263,37 @@ public class Benutzerƒndern {
 		panel.add(labelOrt);
 
 		// JTextField:
-		name.setBounds(x_center, y_north_textField, x_width, y_height);
-		panel.add(name);
-		vorname.setBounds(x_center, y_center, x_width, y_height);
-		panel.add(vorname);
-		benutzername.setBounds(x_center, y_center_textField, x_width, y_height);
-		panel.add(benutzername);
-		passwort.setBounds(x_center, y_center_textField2, x_width, y_height);
-		panel.add(passwort);
-		matrikelnummer.setBounds(x_center, y_south, x_width, y_height);
-		panel.add(matrikelnummer);
-		matrikelnummer.setEditable(false);
-		studiengruppe.setBounds(x_center, y_south_label2, x_width, y_height);
-		panel.add(studiengruppe);
-		studiengruppe.setEditable(false);
-		fakult‰t.setBounds(x_center, y_south_label3, x_width, y_height);
-		panel.add(fakult‰t);
-		fakult‰t.setEditable(false);
+		tfName.setBounds(x_center, y_north_textField, x_width, y_height);
+		panel.add(tfName);
+		tfVorname.setBounds(x_center, y_center, x_width, y_height);
+		panel.add(tfVorname);
+		tfBenutzername.setBounds(x_center, y_center_textField, x_width, y_height);
+		panel.add(tfBenutzername);
+		tfPasswort.setBounds(x_center, y_center_textField2, x_width, y_height);
+		panel.add(tfPasswort);
+		tfMatrikelnummer.setBounds(x_center, y_south, x_width, y_height);
+		panel.add(tfMatrikelnummer);
+		tfMatrikelnummer.setEditable(false);
+		tfStudiengruppe.setBounds(x_center, y_south_label2, x_width, y_height);
+		panel.add(tfStudiengruppe);
+		tfStudiengruppe.setEditable(false);
+		tfFakult‰t.setBounds(x_center, y_south_label3, x_width, y_height);
+		panel.add(tfFakult‰t);
+		tfFakult‰t.setEditable(false);
 
 		// optional
-		straﬂe.setBounds(x_center, y_opt1, x_width, y_height);
-		panel.add(straﬂe);
-		hausnummer.setBounds(x_center, y_opt2, x_width, y_height);
-		panel.add(hausnummer);
-		postleitzahl.setBounds(x_center, y_opt3, x_width, y_height);
-		panel.add(postleitzahl);
-		ort.setBounds(x_center, y_opt4, x_width, y_height);
-		panel.add(ort);
+		tfStraﬂe.setBounds(x_center, y_opt1, x_width, y_height);
+		panel.add(tfStraﬂe);
+		tfHausnummer.setBounds(x_center, y_opt2, x_width, y_height);
+		panel.add(tfHausnummer);
+		tfPostleitzahl.setBounds(x_center, y_opt3, x_width, y_height);
+		panel.add(tfPostleitzahl);
+		tfOrt.setBounds(x_center, y_opt4, x_width, y_height);
+		panel.add(tfOrt);
 		
-		matrikelnummer.setEditable(true);
-    	studiengruppe.setEditable(true);
-    	fakult‰t.setEditable(true);
+		tfMatrikelnummer.setEditable(true);
+    	tfStudiengruppe.setEditable(true);
+    	tfFakult‰t.setEditable(true);
 		
 
 		if(tableviewUser==null){

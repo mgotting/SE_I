@@ -11,7 +11,7 @@ import java.awt.event.*;
  */
 public class ComboBoxHandler implements ItemListener {
 	BenutzerAnlegen benutzerAnlegen;
-	Benutzerƒndern benutzerƒndern;
+//	Benutzerƒndern benutzerƒndern;
 	
 	// create reference to GUI
 	public ComboBoxHandler(BenutzerAnlegen benutzer) { 
@@ -28,31 +28,31 @@ public class ComboBoxHandler implements ItemListener {
         }
         switch (item){
         case "Student":
-        	this.benutzerAnlegen.matrikelnummer.setEditable(true);
-        	this.benutzerAnlegen.studiengruppe.setEditable(true);
-        	this.benutzerAnlegen.fakult‰t.setEditable(false);
-        	this.benutzerAnlegen.straﬂe.setEditable(true);
-        	this.benutzerAnlegen.hausnummer.setEditable(true);
-        	this.benutzerAnlegen.postleitzahl.setEditable(true);
-        	this.benutzerAnlegen.ort.setEditable(true);
+        	this.benutzerAnlegen.tfMatrikelnummer.setEditable(true);
+        	this.benutzerAnlegen.tfStudiengruppe.setEditable(true);
+        	this.benutzerAnlegen.tfFakult‰t.setEditable(false);
+        	this.benutzerAnlegen.tfStraﬂe.setEditable(true);
+        	this.benutzerAnlegen.tfHausnummer.setEditable(true);
+        	this.benutzerAnlegen.tfPostleitzahl.setEditable(true);
+        	this.benutzerAnlegen.tfOrt.setEditable(true);
         	break;
         case "Professor":
-        	this.benutzerAnlegen.fakult‰t.setEditable(true);
-        	this.benutzerAnlegen.matrikelnummer.setEditable(false);
-        	this.benutzerAnlegen.studiengruppe.setEditable(false);
-        	this.benutzerAnlegen.straﬂe.setEditable(true);
-        	this.benutzerAnlegen.hausnummer.setEditable(true);
-        	this.benutzerAnlegen.postleitzahl.setEditable(true);
-        	this.benutzerAnlegen.ort.setEditable(true);
+        	this.benutzerAnlegen.tfFakult‰t.setEditable(true);
+        	this.benutzerAnlegen.tfMatrikelnummer.setEditable(false);
+        	this.benutzerAnlegen.tfStudiengruppe.setEditable(false);
+        	this.benutzerAnlegen.tfStraﬂe.setEditable(true);
+        	this.benutzerAnlegen.tfHausnummer.setEditable(true);
+        	this.benutzerAnlegen.tfPostleitzahl.setEditable(true);
+        	this.benutzerAnlegen.tfOrt.setEditable(true);
         	break;
         case "Personal":
-           	this.benutzerAnlegen.fakult‰t.setEditable(false);
-        	this.benutzerAnlegen.matrikelnummer.setEditable(false);
-        	this.benutzerAnlegen.studiengruppe.setEditable(false);
-        	this.benutzerAnlegen.straﬂe.setEditable(false);
-        	this.benutzerAnlegen.hausnummer.setEditable(false);
-        	this.benutzerAnlegen.postleitzahl.setEditable(false);
-        	this.benutzerAnlegen.ort.setEditable(false);
+           	this.benutzerAnlegen.tfFakult‰t.setEditable(false);
+        	this.benutzerAnlegen.tfMatrikelnummer.setEditable(false);
+        	this.benutzerAnlegen.tfStudiengruppe.setEditable(false);
+        	this.benutzerAnlegen.tfStraﬂe.setEditable(false);
+        	this.benutzerAnlegen.tfHausnummer.setEditable(false);
+        	this.benutzerAnlegen.tfPostleitzahl.setEditable(false);
+        	this.benutzerAnlegen.tfOrt.setEditable(false);
         }
     }
 }

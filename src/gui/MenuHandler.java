@@ -41,6 +41,8 @@ public class MenuHandler implements ActionListener {
 				BuchAusleihe buchAusleihe = new BuchAusleihe();
 				buchAusleihe.launchBuchAusleihen(this.startmenu.frame);
 				break;
+				
+			//TODO case "BUCH_AKTUELLER_STATUS:"
 			}
 		} catch (Exception ex){
 			ex.printStackTrace();

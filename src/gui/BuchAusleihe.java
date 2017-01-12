@@ -49,7 +49,7 @@ public class BuchAusleihe {
 	int x_widthLibrary = 450;
 	int y_heightLibrary = 100;
 	
-	public JTextField titel, autor, isbn;
+	public JTextField tfTitel, tfAutor, tfIsbn;
 	public JLabel labelTitel, labelAutor, labelISBN;
 	//private String benutzerArt;
 	
@@ -69,9 +69,9 @@ public class BuchAusleihe {
 		labelISBN = new JLabel("ISBN-Nummer:", JLabel.LEFT);
 				
 		//Erzeugung der JTextFields
-		titel = new JTextField(50);
-		autor = new JTextField(45);
-		isbn = new JTextField(20);
+		tfTitel = new JTextField(50);
+		tfAutor = new JTextField(45);
+		tfIsbn = new JTextField(20);
 	}
 		
 	public void launchBuchAusleihen(JFrame auswahl){
@@ -95,13 +95,14 @@ public class BuchAusleihe {
 		panel.add(labelISBN);
 
 		// JTextField:
-		titel.setBounds(x_center, y_north2, x_width, y_height);
-		panel.add(titel);
-		autor.setBounds(x_center, y_center2, x_width, y_height);
-		panel.add(autor);
-		isbn.setBounds(x_center, y_south2, x_width, y_height);
-		panel.add(isbn);
+		tfTitel.setBounds(x_center, y_north2, x_width, y_height);
+		panel.add(tfTitel);
+		tfAutor.setBounds(x_center, y_center2, x_width, y_height);
+		panel.add(tfAutor);
+		tfIsbn.setBounds(x_center, y_south2, x_width, y_height);
+		panel.add(tfIsbn);
 		
+		//TODO JTableView
 //		if(tableviewBooks==null){
 //			tableviewBooks = new JTableview(DB_connection.getAllBooks());
 //			scrollPane = new JScrollPane(tableviewBooks.getSQLTable());
