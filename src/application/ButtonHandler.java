@@ -220,8 +220,6 @@ public class ButtonHandler implements ActionListener {
 						
 			//DB-Werte werden in den jeweiligen Tabellen aktualisiert		
 			case "ÄNDERN":
-				GUIDatenÄndern();
-				//TODO
 				con = DB_connection.getDbConnection();
 				
 				String personID = (String)
@@ -244,7 +242,6 @@ public class ButtonHandler implements ActionListener {
 				String updateBenuzter = "UPDATE library.benutzer SET Benutzername = '"+benutzerÄndern.getBenutzername()+"', Passwort = '"+benutzerÄndern.getPasswort()+"' WHERE library.benutzer.PersonID= ("+benutzerÄndern.getPersonID()+")";
 				boolean BenutzerGeändert =con.executequery(updateBenuzter);
 				System.out.println("Benutzer erfolgreich geändert: " + BenutzerGeändert);
-//				benutzerÄndern.tableviewUser.updateSQLTable(DB_connection.getUserInfo());
 
 				
 				switch(art){
@@ -253,24 +250,20 @@ public class ButtonHandler implements ActionListener {
 					String updateStudent = "UPDATE library.student SET Studiengruppe = '"+benutzerÄndern.getStudiengruppe()+"' WHERE library.student.PersonID= ("+benutzerÄndern.getPersonID()+")";
 					boolean studentGeändert =con.executequery(updateStudent);
 					System.out.println("Student erfolgreich geändert: " + studentGeändert);
-//					benutzerÄndern.tableviewUser.updateSQLTable(DB_connection.getUserInfo());
 					break;
 				//Professoren-Infmormationen werden geändert	
 				case "p":
 					String updateProfessor = "UPDATE library.professor SET Fakultät = '"+benutzerÄndern.getFakultät()+"' WHERE library.professor.PersonID= ("+benutzerÄndern.getPersonID()+")";
 					boolean professorGeändert =con.executequery(updateProfessor);
 					System.out.println("Professor erfolgreich geändert: " + professorGeändert);
-//					benutzerÄndern.tableviewUser.updateSQLTable(DB_connection.getUserInfo());
 					break;
 				}
 				
-				
-				//TODO wenn eine Adresse eingetragen ist, überprüfe ob diese schon angelegt war oder nicht
 				if (adressID==-1){
 					System.out.println("LEEEEEEEERRRRR");
 					if(benutzerÄndern.straße.getText().isEmpty() || benutzerÄndern.hausnummer.getText().isEmpty() || benutzerÄndern.postleitzahl.getText().isEmpty() || benutzerÄndern.ort.getText().isEmpty()){
 						//kein DB Eintrag
-						JOptionPane.showMessageDialog(new JFrame(), "Adresse fehlt");
+						JOptionPane.showMessageDialog(new JFrame(), "Keine Adresse eingetragen");
 					}else{
 						adresse = new Adresse (this.straße, this.hausnummer, this.postleitzahl, this.ort);
 						
@@ -280,7 +273,6 @@ public class ButtonHandler implements ActionListener {
 						boolean updPersonVerbucht = con.executequery(updPerson);
 						boolean adresseVerbucht = con.executequery(insertAdresse);
 						System.out.println("Adresse erfolgreich verbucht: "+adresseVerbucht);
-//						benutzerÄndern.tableviewUser.updateSQLTable(DB_connection.getUserInfo());
 					}
 					
 				}else{
@@ -294,6 +286,9 @@ public class ButtonHandler implements ActionListener {
 				}
 				
 				benutzerÄndern.tableviewUser.updateSQLTable(DB_connection.getUserInfo());
+				JOptionPane.showMessageDialog(new JFrame(), "Änderungen wurden erfolgreich verbucht!");
+				EintragLöschenÄndern();
+				con.disconnect();
 				break;
 				
 			case "INVENTAR":
@@ -320,7 +315,7 @@ public class ButtonHandler implements ActionListener {
 		} catch (AdressException ex){
 			JOptionPane.showMessageDialog(new JFrame(), ex.getMessage());
 		} catch (IllegalArgumentException ex) {
-//			this.benutzerAnlegen.setStudiengruppe(null);
+			this.benutzerAnlegen.setStudiengruppe(null);
 			JOptionPane.showMessageDialog(new JFrame(), ex.getMessage());
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(new JFrame(), ex.getMessage());
@@ -343,25 +338,6 @@ public class ButtonHandler implements ActionListener {
 			ort = this.benutzerAnlegen.getOrt();
 		}
 		System.out.println("Adresse vorhanden: "+adresseVorhanden);
-	}
-	
-	private void GUIDatenÄndern(){
-		name = this.benutzerÄndern.getName();
-		vorname = this.benutzerÄndern.getVorname();
-		benutzername = this.benutzerÄndern.getBenutzername();
-		passwort = this.benutzerÄndern.getPasswort();
-		
-		if(this.benutzerÄndern.getStraße().equals("")||this.benutzerÄndern.getHausnummer().equals("") || this.benutzerÄndern.getPLZ()==0 || this.benutzerÄndern.getOrt().equals("")){
-			adresseEingetragen = false;
-		} else {
-			adresseEingetragen = true;
-			straße = this.benutzerÄndern.getStraße();
-			hausnummer = this.benutzerÄndern.getHausnummer();
-			postleitzahl = this.benutzerÄndern.getPLZ();
-			ort = this.benutzerÄndern.getOrt();
-		}
-
-		System.out.println("Adresse eingetragen: "+adresseEingetragen);
 	}
 	
 	// befüllt die für jedes Objekt identischen Tabellen
@@ -402,5 +378,19 @@ public class ButtonHandler implements ActionListener {
 		benutzerAnlegen.setHausnummer(null);
 		benutzerAnlegen.setOrt(null);
 		benutzerAnlegen.setPLZ(null);
+	}
+	
+	private void EintragLöschenÄndern(){
+		benutzerÄndern.setName(null);
+		benutzerÄndern.setVorname(null);
+		benutzerÄndern.setBenutzername(null);
+		benutzerÄndern.setPasswort(null);
+		benutzerÄndern.setFakultät(null);
+		benutzerÄndern.setMatrikelnummer(null);
+		benutzerÄndern.setStudiengruppe(null);
+		benutzerÄndern.setStraße(null);
+		benutzerÄndern.setHausnummer(null);
+		benutzerÄndern.setOrt(null);
+		benutzerÄndern.setPLZ(null);
 	}
 }
