@@ -81,8 +81,17 @@ public class ButtonHandler implements ActionListener {
 				String insertAdresse = "INSERT INTO adresse(Straße, Hausnummer, Postleitzahl, Ort) VALUES ('"+adresse.getStraße()+"','"+adresse.getHausnummer()+"','"+adresse.getPostleitzahl()+"','"+adresse.getOrt()+"');";
 				generatedAdressID = con.executequery_autoKey(insertAdresse, true);
 				}
+				
+				if(benutzerAnlegen.name.getText().isEmpty() || benutzerAnlegen.vorname.getText().isEmpty() || benutzerAnlegen.benutzername.getText().isEmpty() || benutzerAnlegen.passwort.getText().isEmpty()){
+					//kein DB Eintrag
+					JOptionPane.showMessageDialog(new JFrame(), "Fehler: Standardeingaben wurden nicht eingetragen!");
+				}else{
 				switch (this.benutzerAnlegen.getBenutzerArt()) {
 				case "Student":
+					if(benutzerAnlegen.matrikelnummer.getText().isEmpty() || benutzerAnlegen.studiengruppe.getText().isEmpty()){
+						//kein DB Eintrag
+						JOptionPane.showMessageDialog(new JFrame(), "Fehler: Matrikelnummer oder Studiengruppe wurden nicht eingetragen!");
+					}else{
 					int matrikelnummer = this.benutzerAnlegen.getMatrikelnummer(); //einmal festlegen, nicht mehr änderbar
 					Studiengruppe studiengruppe = this.benutzerAnlegen.getStudiengruppe();
 					Student student;
@@ -102,9 +111,15 @@ public class ButtonHandler implements ActionListener {
 					benutzerAnlegen.tableviewUser.updateSQLTable(DB_connection.getAllUsers());
 					EintragLöschen();
 					con.disconnect();
+					}
 					break;
 				case "Professor":
-					//Daten aus GUI abziehen und Professorobjekt erstellen
+					if(benutzerAnlegen.fakultät.getText().isEmpty()){
+						//kein DB Eintrag
+						JOptionPane.showMessageDialog(new JFrame(), "Fehler: Matrikelnummer oder Studiengruppe wurden nicht eingetragen!");
+					
+					}else{
+					//Daten aus GUI abziehen und Professorobjekt erstellen	
 					String fakultät = this.benutzerAnlegen.getFakultät();
 					Professor professor;
 					art = 'p';
@@ -123,6 +138,7 @@ public class ButtonHandler implements ActionListener {
 					benutzerAnlegen.tableviewUser.updateSQLTable(DB_connection.getAllUsers());
 					EintragLöschen();
 					con.disconnect();
+					}
 					break;
 				case "Personal":
 					//Daten aus GUI abziehen und Personalobjekt erstellen
@@ -138,6 +154,7 @@ public class ButtonHandler implements ActionListener {
 					EintragLöschen();
 					con.disconnect();
 					break;
+				}
 				}
 				break;
 			//zu ändernden Benutzer auswählen, damit sich die GUI mit den DB-Werten befüllt
