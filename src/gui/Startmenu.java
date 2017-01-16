@@ -14,7 +14,7 @@ public class Startmenu {
 	JPanel panel;
 	JMenuBar bar;
 	JMenu menu;
-	JMenuItem benutzerAnlegen, benutzerÄndern, buchZurückgeben, buchAusleihen;
+	JMenuItem benutzerAnlegen, benutzerÄndern, buchZurückgeben, buchAusleihen, buchInventarisieren, buchStatus;
 	String angemeldeterUser;
 	
 	int x_right = 330;
@@ -26,6 +26,8 @@ public class Startmenu {
 	public final static String ACTION_BENUTZER_ÄNDERN = "BENUTZER_ÄNDERN";
 	public final static String ACTION_BUCH_ZURÜCKGEBEN = "BUCH_ZURÜCKGEBEN";
 	public final static String ACTION_BUCH_AUSLEIHEN = "BUCH_AUSLEIHEN";
+	public final static String ACTION_BUCH_INVENTARISIEREN = "BUCH_INVENTARISIEREN";
+	public final static String ACTION_BUCH_STATUS_ANZEIGEN = "BUCH_STATUS";
 	
 	public MenuHandler controlMenu;
 	
@@ -40,8 +42,11 @@ public class Startmenu {
 		// Erzeugung eines Objektes der Klasse JMenuItem
 		benutzerAnlegen = new JMenuItem("Benutzer anlegen");
 		benutzerÄndern = new JMenuItem("Benutzer ändern");
-		buchZurückgeben = new JMenuItem("Buch zurückgeben");
+		buchInventarisieren = new JMenuItem("Buch inventarisieren");
 		buchAusleihen = new JMenuItem("Buch ausleihen");
+		buchZurückgeben = new JMenuItem("Buch zurückgeben");	
+		buchStatus = new JMenuItem("Buchstatus anzeigen");
+		
 		panel.setLayout(null);
 	}
 	
@@ -58,11 +63,19 @@ public class Startmenu {
 		benutzerÄndern.setActionCommand(ACTION_BENUTZER_ÄNDERN);
 		benutzerÄndern.addActionListener(controlMenu);
 		menu.add(buchZurückgeben);
+		buchInventarisieren.setActionCommand(ACTION_BUCH_INVENTARISIEREN);
+		buchInventarisieren.addActionListener(controlMenu);
+		menu.add(buchInventarisieren);
+		buchAusleihen.setActionCommand(ACTION_BUCH_AUSLEIHEN);
+		buchAusleihen.addActionListener(controlMenu);
+		menu.add(buchAusleihen);
 		buchZurückgeben.setActionCommand(ACTION_BUCH_ZURÜCKGEBEN);
 		buchZurückgeben.addActionListener(controlMenu);
 		menu.add(buchAusleihen);
-		buchAusleihen.setActionCommand(ACTION_BUCH_AUSLEIHEN);
-		buchAusleihen.addActionListener(controlMenu);
+		buchStatus.setActionCommand(ACTION_BUCH_STATUS_ANZEIGEN);
+		buchStatus.addActionListener(controlMenu);
+		menu.add(buchStatus);
+		
 		frame.setTitle("Menu Punkt wählen");
 		frame.setContentPane(panel);
 	}

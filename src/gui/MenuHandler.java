@@ -41,8 +41,15 @@ public class MenuHandler implements ActionListener {
 				BuchAusleihe buchAusleihe = new BuchAusleihe();
 				buchAusleihe.launchBuchAusleihen(this.startmenu.frame);
 				break;
+			case "BUCH_INVENTARISIEREN":
+				BuchInventarisieren buchInventarisieren = new BuchInventarisieren();
+				buchInventarisieren.launchBuchInventarisieren(this.startmenu.frame);
+				break;
+			case "BUCH_STATUS_ANZEIGEN":
+				BuchStatus buchStatus = new BuchStatus();
+				buchStatus.launchBuchStatus(this.startmenu.frame);
+				break;
 				
-			//TODO case "BUCH_AKTUELLER_STATUS:"
 			}
 		} catch (Exception ex){
 			ex.printStackTrace();

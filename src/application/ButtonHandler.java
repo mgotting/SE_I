@@ -20,6 +20,7 @@ public class ButtonHandler implements ActionListener {
 	private BenutzerÄndern benutzerÄndern;
 	private BuchAusleihe buchAusleihen;
 	private BuchRueckgabe buchRückgabe;
+	private BuchInventarisieren buchInventarisieren;
 	private Login login;
 	private DB_connection con;
 	private String name, vorname, benutzername, passwort, straße, ort, hausnummer, angemeldeterUser;
@@ -44,6 +45,10 @@ public class ButtonHandler implements ActionListener {
 	
 	public ButtonHandler(BuchRueckgabe buchRückgabe){
 		this.buchRückgabe = buchRückgabe;
+	}
+	
+	public ButtonHandler(BuchInventarisieren buchInventarisieren){
+		this.buchInventarisieren = buchInventarisieren;
 	}
 	
 	public ButtonHandler(Login login) {
@@ -188,6 +193,7 @@ public class ButtonHandler implements ActionListener {
 					benutzerÄndern.setPasswort(passwort);		
 					
 				switch(art){
+				//Benutzer vom Typ Student (s) wurde ausgewählt
 				case "s":
 				String matrikelnummer = (String)
 					benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 5).toString();		
@@ -201,6 +207,7 @@ public class ButtonHandler implements ActionListener {
 					benutzerÄndern.tfPostleitzahl.setEditable(true);
 					benutzerÄndern.tfOrt.setEditable(true);
 					break;
+				//Benutzer vom Typ Professor (p) wurde ausgewählt
 				case "p":
 					String fakultät = (String)
 					benutzerÄndern.tableviewUser.getSQLTable().getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 7).toString();		
@@ -261,7 +268,7 @@ public class ButtonHandler implements ActionListener {
 
 				
 				switch(art){
-				//Studenten-Infmormationen werden geändert, Matrikelnummer ausgeschlossen (diese wird eimal festgelegt)!
+				//Studenten-Infmormationen werden geändert, Matrikelnummer ausgeschlossen (diese wird einmal festgelegt)!
 				case "s": 
 					String updateStudent = "UPDATE library.student SET Studiengruppe = '"+benutzerÄndern.getStudiengruppe()+"' WHERE library.student.PersonID= ("+benutzerÄndern.getPersonID()+")";
 					boolean studentGeändert =con.executequery(updateStudent);
@@ -275,16 +282,20 @@ public class ButtonHandler implements ActionListener {
 					break;
 				}
 				
+				//Prüfung, ob bereits eine Adresse angelegt wurde
 				if (adressID==-1){
-					System.out.println("LEEEEEEEERRRRR");
+					System.out.println("Keine AdresseID vorhanden");
 					if(benutzerÄndern.tfStraße.getText().isEmpty() || benutzerÄndern.tfHausnummer.getText().isEmpty() || benutzerÄndern.tfPostleitzahl.getText().isEmpty() || benutzerÄndern.tfOrt.getText().isEmpty()){
 						//kein DB Eintrag
 						JOptionPane.showMessageDialog(new JFrame(), "Keine Adresse eingetragen");
 					}else{
 						adresse = new Adresse (this.straße, this.hausnummer, this.postleitzahl, this.ort);
 						
+						//neue Adresse in DB eintragen
 						String insertAdresse = "INSERT INTO adresse(Straße, Hausnummer, Postleitzahl, Ort) VALUES ('"+adresse.getStraße()+"','"+adresse.getHausnummer()+"',"+adresse.getPostleitzahl()+",'"+adresse.getOrt()+"');";
 						generatedAdressID = con.executequery_autoKey(insertAdresse, true);
+						
+						//AdressID zur entsprechenden Person eintragen
 						String updPerson = "UPDATE library.person SET AdressID = "+generatedAdressID+" WHERE library.person.PersonID = "+Integer.parseInt(personID)+";";
 						boolean updPersonVerbucht = con.executequery(updPerson);
 						boolean adresseVerbucht = con.executequery(insertAdresse);
@@ -293,6 +304,7 @@ public class ButtonHandler implements ActionListener {
 					}
 					
 				}else{
+					//wenn bereits eine Adresse vorhanden war, wird diese aktualisiert
 					System.out.println("Welche AdressID hast du? " +adressID);
 					adresse = new Adresse (benutzerÄndern.tfStraße.getText().toString(), benutzerÄndern.tfHausnummer.getText().toString(), Integer.parseInt(benutzerÄndern.tfPostleitzahl.getText().toString()), benutzerÄndern.tfOrt.getText().toString());
 					String updateAdresse = "UPDATE library.adresse SET Straße = '"+adresse.getStraße()+"', Hausnummer = '"+adresse.getHausnummer()+"', Postleitzahl = "+adresse.getPostleitzahl()+", Ort = '"+adresse.getOrt()+"' WHERE library.adresse.AdressID= "+adressID+"";
@@ -309,7 +321,7 @@ public class ButtonHandler implements ActionListener {
 				break;
 			
 			//TODO Was passiert mit klicken auf Button in inventarisieren	
-			case "INVENTAR":
+			case "INVENTARISIEREN":
 			//Check Konsole
 			System.out.println("ActionCommand erhalten: "+e.getActionCommand());
 			//Daten aus der GUI
@@ -400,6 +412,7 @@ public class ButtonHandler implements ActionListener {
 		benutzerAnlegen.setPLZ(null);
 	}
 	
+	// entfernt alle Einträge in GUI nach Aktualisierung/Änderung
 	private void EintragLöschenÄndern(){
 		benutzerÄndern.setName(null);
 		benutzerÄndern.setVorname(null);
