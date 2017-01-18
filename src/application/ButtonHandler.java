@@ -320,7 +320,7 @@ public class ButtonHandler implements ActionListener {
 				con.disconnect();
 				break;
 			
-			
+			//TODO Anzahl Exemplare
 			case "INVENTARISIEREN":
 				GUIDatenInv();
 				con = DB_connection.getDbConnection();
@@ -336,8 +336,9 @@ public class ButtonHandler implements ActionListener {
 					boolean buchInventarisiert = con.executequery(insertBuch);
 					System.out.println("Buch erfolgreich inventarisiert:" + buchInventarisiert);
 					JOptionPane.showMessageDialog(new JFrame(), "Buch wurde erfolgreich verbucht!");
+					
 				}
-				
+//				con.disconnect();			??	
 				break;
 
 			//TODO case "AUSLEIHE:"
