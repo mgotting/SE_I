@@ -23,8 +23,8 @@ public class ButtonHandler implements ActionListener {
 	private BuchInventarisieren buchInventarisieren;
 	private Login login;
 	private DB_connection con;
-	private String name, vorname, benutzername, passwort, straße, ort, hausnummer, angemeldeterUser;
-	private int postleitzahl, generatedID, generatedAdressID, adressID;
+	private String name, vorname, benutzername, passwort, straße, ort, hausnummer, angemeldeterUser, buchtitel, autor;
+	private int postleitzahl, generatedID, generatedAdressID, adressID, isbn;
 	private char art;
 	private Benutzer benutzer;
 	private boolean adresseVorhanden;
@@ -320,17 +320,26 @@ public class ButtonHandler implements ActionListener {
 				con.disconnect();
 				break;
 			
-			//TODO Was passiert mit klicken auf Button in inventarisieren	
-			case "INVENTARISIEREN":
-			//Check Konsole
-			System.out.println("ActionCommand erhalten: "+e.getActionCommand());
-			//Daten aus der GUI
-			//Exemplar exemplar = new Exemplar (status, buch);
-			con = DB_connection.getDbConnection();
-			//1. einfügen in Tabelle
-			//insertBuch = "INSERT INTO Inventar (status, ISBN) VALUES ('"+Exemplar.getStatus()+"', '"+exemplar.getISBN()+"');"
-			break;
 			
+			case "INVENTARISIEREN":
+				GUIDatenInv();
+				con = DB_connection.getDbConnection();
+				if (buchInventarisieren.tfTitel.getText().isEmpty() || buchInventarisieren.tfAutor.getText().isEmpty()
+						|| buchInventarisieren.tfIsbn.getText().isEmpty()) {
+					// kein DB Eintrag
+					JOptionPane.showMessageDialog(new JFrame(), "Fehler: Standardeingaben wurden nicht eingetragen!");
+				} else {
+					Buchtyp buch = new Buchtyp(autor, buchtitel, isbn);
+					System.out.println("ActionCommand erhalten: " + e.getActionCommand());
+					String insertBuch = "INSERT INTO buchtyp VALUES ('" + buch.getISBN() + "','" + buch.getAutor()
+							+ "','" + buch.getTitel() + "');";
+					boolean buchInventarisiert = con.executequery(insertBuch);
+					System.out.println("Buch erfolgreich inventarisiert:" + buchInventarisiert);
+					JOptionPane.showMessageDialog(new JFrame(), "Buch wurde erfolgreich verbucht!");
+				}
+				
+				break;
+
 			//TODO case "AUSLEIHE:"
 			
 			
@@ -370,6 +379,15 @@ public class ButtonHandler implements ActionListener {
 			ort = this.benutzerAnlegen.getOrt();
 		}
 		System.out.println("Adresse vorhanden: "+adresseVorhanden);
+	}
+	
+	private void GUIDatenInv()
+	{
+		buchtitel = this.buchInventarisieren.getBuchtitel();
+		autor = this.buchInventarisieren.getAutor();
+		isbn = this.buchInventarisieren.getISBN();
+	
+		
 	}
 	
 	// befüllt die für jedes Objekt identischen Tabellen

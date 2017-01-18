@@ -44,8 +44,8 @@ public class BuchInventarisieren {
 	int x_widthLibrary = 450;
 	int y_heightLibrary = 100;
 	
-	public JTextField tfTitel, tfAutor, tfIsbn;
-	public JLabel labelTitel, labelAutor, labelISBN;
+	public JTextField tfTitel, tfAutor, tfIsbn, tfAnzahl;
+	public JLabel labelTitel, labelAutor, labelISBN, labelAnzahl;
 	
 	public BuchInventarisieren(){
 		panel = new JPanel();
@@ -61,11 +61,13 @@ public class BuchInventarisieren {
 		labelTitel = new JLabel("Buchtitel:", JLabel.LEFT);
 		labelAutor = new JLabel("Autor:", JLabel.LEFT);
 		labelISBN = new JLabel("ISBN-Nummer:", JLabel.LEFT);
+		labelAnzahl = new JLabel ("Anzahl an Exemplaren:", JLabel.LEFT);
 				
 		//Erzeugung der JTextFields
 		tfTitel = new JTextField(50);
 		tfAutor = new JTextField(45);
 		tfIsbn = new JTextField(20);
+		tfAnzahl = new JTextField(10);
 	}
 		
 	public void launchBuchInventarisieren(JFrame auswahl){
@@ -83,6 +85,7 @@ public class BuchInventarisieren {
 		panel.add(labelAutor);
 		labelISBN.setBounds(x_center, y_south, x_width, y_height);
 		panel.add(labelISBN);
+	
 
 		// JTextField:
 		tfTitel.setBounds(x_center, y_north2, x_width, y_height);
@@ -91,6 +94,7 @@ public class BuchInventarisieren {
 		panel.add(tfAutor);
 		tfIsbn.setBounds(x_center, y_south2, x_width, y_height);
 		panel.add(tfIsbn);
+		
 		
 		//TODO JTableView
 //		if(tableviewBooks==null){
@@ -104,5 +108,23 @@ public class BuchInventarisieren {
 		auswahl.setContentPane(panel);
 	
 	
+	}
+	
+	public String getBuchtitel()
+	{
+		String buchtitel = this.tfTitel.getText();
+		return buchtitel;
+	}
+	
+	public String getAutor()
+	{
+		String autor = this.tfAutor.getText();
+		return autor;
+	}
+	
+	public int getISBN()
+	{
+		int ISBN = Integer.parseInt(this.tfIsbn.getText());
+		return ISBN;
 	}
 }

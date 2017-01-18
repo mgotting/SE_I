@@ -74,7 +74,15 @@ public class DB_connection {
 		return "DELETE FROM library.ausleihe WHERE BUCHID ="+buchID;
 	}
 	
+	public static String buchInventarisieren(String buchID, String ISBN, String Status )
+	{
+		return "INSERT INTO Exemplar VALUES " + buchID +",'"+ISBN+"','"+Status+"'";
+	}
+	
 	//TODO getAllBooks alles was in der JTable angezeigt werden soll
+//	public static String getAllBooks(){
+//		return "SELECT library.exemplar.
+//	}
 	
 	public static String getUserInfo(){
 		return "SELECT library.person.PersonID, Name, Vorname, Benutzername, Passwort, Matrikelnummer, Studiengruppe, Fakult‰t, Straﬂe, Hausnummer, Postleitzahl, Ort, Art, library.adresse.AdressID FROM library.person LEFT JOIN library.adresse ON library.adresse.AdressID=library.person.AdressID JOIN library.benutzer ON library.person.PersonID=library.benutzer.PersonID LEFT JOIN library.student ON library.person.PersonID=library.student.PersonID LEFT JOIN library.professor ON library.person.PersonID=library.professor.PersonID LEFT JOIN library.personal ON library.person.PersonID=library.personal.PersonID";

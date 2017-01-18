@@ -6,13 +6,15 @@ package gui;
  * @author Sandra Speckmeier, Michael Gottinger
  *
  */
-
+ 
 public class test {
-
+   
 	public static void main(String[] args) {
-	       Login gui;
-	       gui = new Login();
-	       gui.launchLogin();
+	 Login gui2;      
+
+	 gui2 = new Login();
+	       gui2.launchLogin();
 	}
 
 }
+

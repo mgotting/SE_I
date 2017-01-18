@@ -12,7 +12,7 @@ import application.ButtonHandler;
  * @author Gotti
  *
  */
-
+ 
 public class Login {
 	public JFrame login;
 	public JPanel panel;
