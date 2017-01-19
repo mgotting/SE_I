@@ -26,12 +26,11 @@ public class BuchStatus {
 //	public final static String ACTION_BUCH_STATUS = "BUCH_STATUS";
 	
 	
-	int y_Library = 250;
-	int x_left = 10;
-	int x_widthLibrary = 450;
+	int x_widthLibrary = 1000;
 	int y_heightLibrary = 100;
+	int x_centerLibrary = 100;
+	int y_south2 = 200;
 	
-
 	
 	public BuchStatus(){
 		panel = new JPanel();
@@ -39,8 +38,7 @@ public class BuchStatus {
 
 //		controlButton = new ButtonHandler(this);
 
-		panel.setLayout(null);
-		
+		panel.setLayout(null);		
 	}
 		
 	public void launchBuchStatus(JFrame auswahl){
@@ -49,13 +47,12 @@ public class BuchStatus {
 		if(tableviewBooks==null){
 			tableviewBooks = new JTableview(DB_connection.getAllBooks());
 			scrollPane = new JScrollPane(tableviewBooks.getSQLTable());
-			scrollPane.setBounds(x_left, y_Library, x_widthLibrary, y_heightLibrary);
+			scrollPane.setBounds(x_centerLibrary, y_south2, x_widthLibrary, y_heightLibrary);
 			panel.add(scrollPane);
 		}	
 		
 		auswahl.setTitle("Buchstatus anzeigen");
-		auswahl.setContentPane(panel);
-	
+		auswahl.setContentPane(panel);	
 	
 	}
 

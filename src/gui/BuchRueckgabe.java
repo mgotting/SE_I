@@ -23,16 +23,14 @@ public class BuchRueckgabe {
 	
 	public final static String ACTION_BUCH_ZURÜCKGEBEN = "BUCH_ZURÜCKGEBEN";
 	
-	int x_right = 330;
-	int y_north = 60;
-	int x_width = 160;
-	int y_height = 20;
-	int x_center = 140;
+	int y_south = 200;
 	int y_bottom = 350;
-	int x_widthLibrary = 450;
+	int x_width = 160;
+	int y_height = 20;		
+	int x_widthLibrary = 1000;
 	int y_heightLibrary = 100;
-	int x_centerLibrary = 90;
-	int y_south2 = 200;
+	int x_centerLibrary = 100;
+	
 	
 	public BuchRueckgabe(String angemeldeterUser){
 		this.angemeldeterUser = angemeldeterUser;
@@ -54,7 +52,7 @@ public class BuchRueckgabe {
 		if(tableview==null){
 			tableview = new JTableview(DB_connection.getAllRentBooks(angemeldeterUser));
 			scrollPane = new JScrollPane(tableview.getSQLTable());
-			scrollPane.setBounds(x_centerLibrary, y_south2, x_widthLibrary, y_heightLibrary);
+			scrollPane.setBounds(x_centerLibrary, y_south, x_widthLibrary, y_heightLibrary);
 			panel.add(scrollPane);
 		}
 		auswahl.setTitle("Buch zurückgeben");

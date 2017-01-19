@@ -27,7 +27,7 @@ public class Startmenu {
 	public final static String ACTION_BUCH_ZURÜCKGEBEN = "BUCH_ZURÜCKGEBEN";
 	public final static String ACTION_BUCH_AUSLEIHEN = "BUCH_AUSLEIHEN";
 	public final static String ACTION_BUCH_INVENTARISIEREN = "BUCH_INVENTARISIEREN";
-	public final static String ACTION_BUCH_STATUS_ANZEIGEN = "BUCH_STATUS";
+	public final static String ACTION_BUCH_STATUS_ANZEIGEN = "BUCH_STATUS_ANZEIGEN";
 	
 	public MenuHandler controlMenu;
 	

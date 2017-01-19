@@ -39,10 +39,8 @@ public class BenutzerÄndern {
 	
 	int x_right = 330;
 	int x_right2=1070;
-	int y_north = 60;
 	int x_width = 160;
 	int y_height = 20;
-	int y_anlegen_center = 200;
 	int x_left = 10;
 	int y_north_label = 100;
 	int y_center = 120;
@@ -59,7 +57,6 @@ public class BenutzerÄndern {
 	int y_north_textField = 100;
 	int y_center_textField = 140;
 	int y_center_textField2 = 160;
-	int y_MENU_north = 10;
 	int x_widthLibrary = 1060;
 	int x_BUTTON_width = 110;
 	int y_heightLibrary = 100;

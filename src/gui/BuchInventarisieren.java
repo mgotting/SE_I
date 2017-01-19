@@ -24,13 +24,10 @@ public class BuchInventarisieren {
 	
 	public final static String ACTION_BUCH_INVENTARISIEREN = "INVENTARISIEREN";
 	
-	int y_north = 60;
-	int y_north2 = 80;
-	int y_center = 120;
-	int y_center2 = 140;
-	int y_south = 180;
-	int y_south2 = 200;
-	int y_south3 = 240;
+	int y_north = 60;	
+	int y_center = 120;	
+	int y_south = 180;	
+	int y_south2 = 240;
 	int y_Library = 310;
 	int x_left = 10;
 	int x_center = 140;
@@ -38,7 +35,7 @@ public class BuchInventarisieren {
 	int x_width = 160;
 	int x_BUTTON_width = 120;
 	int y_height = 20;
-	int x_widthLibrary = 450;
+	int x_widthLibrary = 1000;
 	int y_heightLibrary = 100;
 	
 	public JTextField tfTitel, tfAutor, tfIsbn, tfAnzahl;
@@ -70,7 +67,7 @@ public class BuchInventarisieren {
 	public void launchBuchInventarisieren(JFrame auswahl){
 		auswahl.getContentPane().setVisible(false);
 		// Wir fügen den JButton unserem Panel hinzu:
-		inventarisieren.setBounds(x_right, y_south3, x_BUTTON_width, y_height);
+		inventarisieren.setBounds(x_right, y_south2, x_BUTTON_width, y_height);
 		panel.add(inventarisieren);
 		inventarisieren.setActionCommand(ACTION_BUCH_INVENTARISIEREN);
 		inventarisieren.addActionListener(controlButton);
@@ -82,7 +79,7 @@ public class BuchInventarisieren {
 		panel.add(labelAutor);
 		labelISBN.setBounds(x_left, y_south, x_width, y_height);
 		panel.add(labelISBN);
-		labelAnzahl.setBounds(x_left, y_south3, x_width, y_height);
+		labelAnzahl.setBounds(x_left, y_south2, x_width, y_height);
 		panel.add(labelAnzahl);
 	
 
@@ -93,7 +90,7 @@ public class BuchInventarisieren {
 		panel.add(tfAutor);
 		tfIsbn.setBounds(x_center, y_south, x_width, y_height);
 		panel.add(tfIsbn);
-		tfAnzahl.setBounds(x_center, y_south3, x_width, y_height);
+		tfAnzahl.setBounds(x_center, y_south2, x_width, y_height);
 		panel.add(tfAnzahl);
 		
 		

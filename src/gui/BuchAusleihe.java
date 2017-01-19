@@ -44,10 +44,11 @@ public class BuchAusleihe {
 	int x_left = 10;
 	int x_center = 140;
 	int x_right = 330;
+	int x_right2= 1040;
 	int x_width = 160;
 	int x_BUTTON_width = 120;
 	int y_height = 20;
-	int x_widthLibrary = 450;
+	int x_widthLibrary = 1000;
 	int y_heightLibrary = 100;
 	
 	public JTextField tfTitel, tfAutor, tfIsbn;
@@ -84,7 +85,7 @@ public class BuchAusleihe {
 		panel.add(ausleihen);
 		ausleihen.setActionCommand(ACTION_BUCH_AUSLEIHEN);
 		ausleihen.addActionListener(controlButton);
-		buchAuswählen.setBounds(x_right, y_Library, x_BUTTON_width, y_height);
+		buchAuswählen.setBounds(x_right2, y_Library, x_BUTTON_width, y_height);
 		panel.add(buchAuswählen);
 		buchAuswählen.setActionCommand(ACTION_BUCH_AUSWAHL);
 		buchAuswählen.addActionListener(controlButton);
