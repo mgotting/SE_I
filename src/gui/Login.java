@@ -25,20 +25,24 @@ public class Login {
 	
 	public final static String ACTION_LOGIN = "ANMELDEN";
 	
-	int x_left = 10;
-	int x_right = 330;
+	int x_left = 370;
+	int x_right = 700;
+	int x_center = 500;
 	int y_north = 60;
-	int x_width = 160;
-	int y_height = 20;
-	int x_center = 140;
+	int y_north2 = 80;
 	int y_center = 120;
 	int y_center2 = 140;
-	int y_north2 = 80;
+	int y_south = 200;
+	
+	int x_width = 160;
+	int y_height = 20;
+	
+	
 	int x_anmelden_width = 120;
 	int x_widthLibrary = 450;
 	int y_heightLibrary = 100;
 	int y_Library = 420;
-	int y_south2 = 200;
+	
 	
 	public Login(){
 		controlButton = new ButtonHandler(this);
@@ -83,9 +87,9 @@ public class Login {
 		anmelden.addActionListener(controlButton);
 
 		// JLables:
-		labelBenutzername.setBounds(x_center, y_north, x_width, y_height);
+		labelBenutzername.setBounds(x_left, y_north2, x_width, y_height);
 		panel.add(labelBenutzername);
-		labelPasswort.setBounds(x_center, y_center, x_width, y_height);
+		labelPasswort.setBounds(x_left, y_center2, x_width, y_height);
 		panel.add(labelPasswort);
 
 		// JTextFields:
@@ -102,7 +106,7 @@ public class Login {
 		if(tableview==null){
 			tableview = new JTableview(DB_connection.getAllUsers());
 			scrollPane = new JScrollPane(tableview.getSQLTable());
-			scrollPane.setBounds(x_left, y_south2, x_widthLibrary, y_heightLibrary);
+			scrollPane.setBounds(x_left, y_south, x_widthLibrary, y_heightLibrary);
 			panel.add(scrollPane);
 		}
 	}
