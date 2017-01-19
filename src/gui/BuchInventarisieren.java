@@ -34,7 +34,8 @@ public class BuchInventarisieren {
 	int y_center2 = 140;
 	int y_south = 180;
 	int y_south2 = 200;
-	int y_Library = 250;
+	int y_south3 = 240;
+	int y_Library = 310;
 	int x_left = 10;
 	int x_center = 140;
 	int x_right = 330;
@@ -61,39 +62,43 @@ public class BuchInventarisieren {
 		labelTitel = new JLabel("Buchtitel:", JLabel.LEFT);
 		labelAutor = new JLabel("Autor:", JLabel.LEFT);
 		labelISBN = new JLabel("ISBN-Nummer:", JLabel.LEFT);
-		labelAnzahl = new JLabel ("Anzahl an Exemplaren:", JLabel.LEFT);
+		labelAnzahl = new JLabel ("Anzahl Exemplare:", JLabel.LEFT);
 				
 		//Erzeugung der JTextFields
 		tfTitel = new JTextField(50);
 		tfAutor = new JTextField(45);
 		tfIsbn = new JTextField(20);
-		tfAnzahl = new JTextField(10);
+		tfAnzahl = new JTextField(3);
 	}
 		
 	public void launchBuchInventarisieren(JFrame auswahl){
 		auswahl.getContentPane().setVisible(false);
 		// Wir fügen den JButton unserem Panel hinzu:
-		inventarisieren.setBounds(x_right, y_south2, x_BUTTON_width, y_height);
+		inventarisieren.setBounds(x_right, y_south3, x_BUTTON_width, y_height);
 		panel.add(inventarisieren);
 		inventarisieren.setActionCommand(ACTION_BUCH_INVENTARISIEREN);
 		inventarisieren.addActionListener(controlButton);
 		
 		// Wir fügen die JLabel unserem Panel hinzu:
-		labelTitel.setBounds(x_center, y_north, x_width, y_height);
+		labelTitel.setBounds(x_left, y_north, x_width, y_height);
 		panel.add(labelTitel);
-		labelAutor.setBounds(x_center, y_center, x_width, y_height);
+		labelAutor.setBounds(x_left, y_center, x_width, y_height);
 		panel.add(labelAutor);
-		labelISBN.setBounds(x_center, y_south, x_width, y_height);
+		labelISBN.setBounds(x_left, y_south, x_width, y_height);
 		panel.add(labelISBN);
+		labelAnzahl.setBounds(x_left, y_south3, x_width, y_height);
+		panel.add(labelAnzahl);
 	
 
 		// JTextField:
-		tfTitel.setBounds(x_center, y_north2, x_width, y_height);
+		tfTitel.setBounds(x_center, y_north, x_width, y_height);
 		panel.add(tfTitel);
-		tfAutor.setBounds(x_center, y_center2, x_width, y_height);
+		tfAutor.setBounds(x_center, y_center, x_width, y_height);
 		panel.add(tfAutor);
-		tfIsbn.setBounds(x_center, y_south2, x_width, y_height);
+		tfIsbn.setBounds(x_center, y_south, x_width, y_height);
 		panel.add(tfIsbn);
+		tfAnzahl.setBounds(x_center, y_south3, x_width, y_height);
+		panel.add(tfAnzahl);
 		
 		
 		//TODO JTableView

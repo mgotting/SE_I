@@ -48,7 +48,7 @@ public class BuchRueckgabe {
 	public void launchRückgabe(JFrame auswahl) {
 		auswahl.getContentPane().setVisible(false);
 		// JButtons:
-		zurückgeben.setBounds(x_center, y_bottom, x_width, y_height);
+		zurückgeben.setBounds(x_centerLibrary, y_bottom, x_width, y_height);
 		panel.add(zurückgeben);
 		
 		if(tableview==null){
