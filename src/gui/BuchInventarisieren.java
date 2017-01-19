@@ -29,9 +29,10 @@ public class BuchInventarisieren {
 	int y_south = 180;	
 	int y_south2 = 240;
 	int y_Library = 310;
-	int x_left = 10;
-	int x_center = 140;
-	int x_right = 330;
+	int x_left = 100;
+	int x_left2 = 370;
+	int x_center = 500;
+	int x_right = 700;
 	int x_width = 160;
 	int x_BUTTON_width = 120;
 	int y_height = 20;
@@ -73,13 +74,13 @@ public class BuchInventarisieren {
 		inventarisieren.addActionListener(controlButton);
 		
 		// Wir fügen die JLabel unserem Panel hinzu:
-		labelTitel.setBounds(x_left, y_north, x_width, y_height);
+		labelTitel.setBounds(x_left2, y_north, x_width, y_height);
 		panel.add(labelTitel);
-		labelAutor.setBounds(x_left, y_center, x_width, y_height);
+		labelAutor.setBounds(x_left2, y_center, x_width, y_height);
 		panel.add(labelAutor);
-		labelISBN.setBounds(x_left, y_south, x_width, y_height);
+		labelISBN.setBounds(x_left2, y_south, x_width, y_height);
 		panel.add(labelISBN);
-		labelAnzahl.setBounds(x_left, y_south2, x_width, y_height);
+		labelAnzahl.setBounds(x_left2, y_south2, x_width, y_height);
 		panel.add(labelAnzahl);
 	
 
