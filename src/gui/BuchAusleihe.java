@@ -105,7 +105,7 @@ public class BuchAusleihe {
 		tfIsbn.setBounds(x_center, y_south2, x_width, y_height);
 		panel.add(tfIsbn);
 		
-		//TODO JTableView
+		
 		if(tableviewBooks==null){
 			tableviewBooks = new JTableview(DB_connection.getAllAvailableBooks());
 			scrollPane = new JScrollPane(tableviewBooks.getSQLTable());
