@@ -24,31 +24,27 @@ public class BenutzerAnlegen {
 	
 	public final static String ACTION_CREATE = "ANLEGEN";
 	
-	int x_right = 330;
-	int y_north = 60;
-	int x_width = 160;
-	int y_height = 20;
-	int x_anlegen_width = 120;
-	int x_left = 10;
-	int y_north_label = 100;
+	int x_left = 370;
+	int x_right = 700;
+	int x_center = 500;
+	int y_north = 40;
+	int y_north2 = 100;
 	int y_center = 120;
-	int y_center_label2 = 140;
-	int y_center_label3 = 160;
+	int y_center2 = 140;
+	int y_center3 = 160;
 	int y_south = 200;
 	int y_south_label2 = 220;
 	int y_south_label3 = 260;
 	int y_opt1 = 300;
 	int y_opt2 = 320;
 	int y_opt3 = 340;
-	int y_opt4 = 360;
-	int x_center = 140;
-	int y_north_textField = 100;
-	int y_center_textField = 140;
-	int y_center_textField2 = 160;
-	int y_MENU_north = 10;
+	int y_opt4 = 360;	
+	int x_width = 160;
+	int y_height = 20;
 	int x_widthLibrary = 450;
 	int y_heightLibrary = 100;
 	int y_Library = 420;
+	int x_anlegen_width = 120;
 	
 	public JTextField tfBenutzername, tfPasswort, tfName, tfVorname, tfMatrikelnummer, tfStudiengruppe, tfFakultät, tfStraße, tfHausnummer, tfPostleitzahl, tfOrt;
 	public JLabel labelBenutzername, labelPasswort, labelName, labelVorname, labelMatrikelnummer, labelStudiengruppe, labelFakultät, labelStraße, labelHausnummer, labelPostleitzahl, labelOrt;
@@ -208,13 +204,13 @@ public class BenutzerAnlegen {
 		anlegen.addActionListener(controlButton);
 
 		// Wir fügen die JLabel unserem Panel hinzu:
-		labelName.setBounds(x_left, y_north_label, x_width, y_height);
+		labelName.setBounds(x_left, y_north2, x_width, y_height);
 		panel.add(labelName);
 		labelVorname.setBounds(x_left, y_center, x_width, y_height);
 		panel.add(labelVorname);
-		labelBenutzername.setBounds(x_left, y_center_label2, x_width, y_height);
+		labelBenutzername.setBounds(x_left, y_center2, x_width, y_height);
 		panel.add(labelBenutzername);
-		labelPasswort.setBounds(x_left, y_center_label3, x_width, y_height);
+		labelPasswort.setBounds(x_left, y_center3, x_width, y_height);
 		panel.add(labelPasswort);
 		labelMatrikelnummer.setBounds(x_left, y_south, x_width, y_height);
 		panel.add(labelMatrikelnummer);
@@ -234,13 +230,13 @@ public class BenutzerAnlegen {
 		panel.add(labelOrt);
 
 		// JTextField:
-		tfName.setBounds(x_center, y_north_textField, x_width, y_height);
+		tfName.setBounds(x_center, y_north2, x_width, y_height);
 		panel.add(tfName);
 		tfVorname.setBounds(x_center, y_center, x_width, y_height);
 		panel.add(tfVorname);
-		tfBenutzername.setBounds(x_center, y_center_textField, x_width, y_height);
+		tfBenutzername.setBounds(x_center, y_center2, x_width, y_height);
 		panel.add(tfBenutzername);
-		tfPasswort.setBounds(x_center, y_center_textField2, x_width, y_height);
+		tfPasswort.setBounds(x_center, y_center3, x_width, y_height);
 		panel.add(tfPasswort);
 		tfMatrikelnummer.setBounds(x_center, y_south, x_width, y_height);
 		panel.add(tfMatrikelnummer);
@@ -263,7 +259,7 @@ public class BenutzerAnlegen {
 		panel.add(tfOrt);
 
 		// JComboBoxes:
-		benutzer.setBounds(x_left, y_MENU_north, x_width, y_height);
+		benutzer.setBounds(x_center, y_north, x_width, y_height);
 		panel.add(benutzer);
 		
 		if(tableviewUser==null){
