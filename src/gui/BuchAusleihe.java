@@ -42,8 +42,9 @@ public class BuchAusleihe {
 	int y_south2 = 200;
 	int y_Library = 250;
 	int x_left = 10;
-	int x_center = 140;
-	int x_right = 330;
+	int x_left2 = 370;	
+	int x_center = 500;
+	int x_right = 700;
 	int x_right2= 1040;
 	int x_width = 160;
 	int x_BUTTON_width = 120;
@@ -91,11 +92,11 @@ public class BuchAusleihe {
 		buchAuswählen.addActionListener(controlButton);
 
 		// Wir fügen die JLabel unserem Panel hinzu:
-		labelTitel.setBounds(x_left, y_north2, x_width, y_height);
+		labelTitel.setBounds(x_left2, y_north2, x_width, y_height);
 		panel.add(labelTitel);
-		labelAutor.setBounds(x_left, y_center2, x_width, y_height);
+		labelAutor.setBounds(x_left2, y_center2, x_width, y_height);
 		panel.add(labelAutor);
-		labelISBN.setBounds(x_left, y_south2, x_width, y_height);
+		labelISBN.setBounds(x_left2, y_south2, x_width, y_height);
 		panel.add(labelISBN);
 
 		// JTextField:
