@@ -23,8 +23,8 @@ public class ButtonHandler implements ActionListener {
 	private BuchInventarisieren buchInventarisieren;
 	private Login login;
 	private DB_connection con;
-	private String name, vorname, benutzername, passwort, straße, ort, hausnummer, angemeldeterUser, buchtitel, autor;
-	private int postleitzahl, generatedID, generatedAdressID, adressID, isbn;
+	private String name, vorname, benutzername, passwort, straße, ort, hausnummer, angemeldeterUser, buchtitel, autor, isbn;
+	private int postleitzahl, generatedID, generatedAdressID, adressID, anzahl;
 	private char art;
 	private Benutzer benutzer;
 	private boolean adresseVorhanden;
@@ -320,12 +320,13 @@ public class ButtonHandler implements ActionListener {
 				con.disconnect();
 				break;
 			
-			//TODO Anzahl Exemplare
+//			TODO Fragen: con.disconnect(), Wenn ein Feld leer ist, Status ändern erstelltes Objekt exemplar Java, angemeldeterUser
+				
 			case "INVENTARISIEREN":
 				GUIDatenInv();
 				con = DB_connection.getDbConnection();
 				if (buchInventarisieren.tfTitel.getText().isEmpty() || buchInventarisieren.tfAutor.getText().isEmpty()
-						|| buchInventarisieren.tfIsbn.getText().isEmpty()) {
+						|| buchInventarisieren.tfIsbn.getText().isEmpty() || buchInventarisieren.tfAnzahl.getText().isEmpty()) {
 					// kein DB Eintrag
 					JOptionPane.showMessageDialog(new JFrame(), "Fehler: Standardeingaben wurden nicht eingetragen!");
 				} else {
@@ -333,15 +334,76 @@ public class ButtonHandler implements ActionListener {
 					System.out.println("ActionCommand erhalten: " + e.getActionCommand());
 					String insertBuch = "INSERT INTO buchtyp VALUES ('" + buch.getISBN() + "','" + buch.getAutor()
 							+ "','" + buch.getTitel() + "');";
-					boolean buchInventarisiert = con.executequery(insertBuch);
-					System.out.println("Buch erfolgreich inventarisiert:" + buchInventarisiert);
-					JOptionPane.showMessageDialog(new JFrame(), "Buch wurde erfolgreich verbucht!");
+					con.executequery(insertBuch);					
+					int i = buchInventarisieren.getAnzahl();
+					System.out.println("i = "+i);
+					while(i>0)
+					{
+						Exemplar exemplar = new Exemplar(BuchstatusET.ausleihbar, buch);
+						String insertExemplar = "INSERT INTO exemplar (ISBN,Status) VALUES ('" + exemplar.getISBN() +"','" + exemplar.getStatus()+"');";
+						generatedID = con.executequery_autoKey(insertExemplar, true);
+						System.out.println("Erstellte BuchID: " + generatedID);
+						System.out.println("Exemplar:"+i+" erfolgreich inventarisiert");											
+						i--;
+					}
+					JOptionPane.showMessageDialog(new JFrame(), "Buch und Exemplar(e) wurden erfolgreich verbucht!");
+					buchInventarisieren.tableviewBooks.updateSQLTable(DB_connection.getAllBooks());
+				}
+				break;
+				
+
+			case "AUSLEIHEN":
+				System.out.println("is in Ausleihe drinnen" );
+				GUIDatenAus();
+				con = DB_connection.getDbConnection();
+				if (buchAusleihen.tfTitel.getText().isEmpty() || buchAusleihen.tfAutor.getText().isEmpty()
+						|| buchAusleihen.tfIsbn.getText().isEmpty()) {
+					// kein DB Eintrag
+					JOptionPane.showMessageDialog(new JFrame(), "Fehler: Standardeingaben wurden nicht eingetragen!");
+				}else{
+					int BuchID = Integer.parseInt(buchAusleihen.tableviewBooks.getSQLTable()
+							.getValueAt(buchAusleihen.tableviewBooks.getSQLTable().getSelectedRow(), 3).toString());
+					Ausleihe ausleihe = new Ausleihe(BuchID, angemeldeterUser);
+					System.out.println("ActionCommand erhalten: " + e.getActionCommand());
+					String insertAusleihe = "INSERT INTO ausleihe VALUES('" + ausleihe.getBuchID() +"','" + angemeldeterUser+"');";
+					con.executequery(insertAusleihe);
+					con.executequery("UPDATE library.exemplar SET Status = 'nicht ausleihbar' WHERE library.exemplar.BUCHID="+BuchID);
+					buchAusleihen.tableviewBooks.updateSQLTable(DB_connection.getAllAvailableBooks());
+					JOptionPane.showMessageDialog(new JFrame(), "Der angemeldete User hat das Buch mit der ID: "+BuchID+" erfolgreich ausgeliehen.");
+					System.out.println("Buch erfolgreich ausgeliehen");
+					break;
+					
+					
+					
 					
 				}
-//				con.disconnect();			??	
-				break;
+				
+					
+			case "BUCH_AUSWAHL":
+				if (buchAusleihen.tableviewBooks.getSQLTable().getSelectedRow() == -1)
+					throw new JTableException("Fehler: Zeile nicht markiert!");
 
-			//TODO case "AUSLEIHE:"
+				buchAusleihen.tfTitel.setEditable(false);
+				buchAusleihen.tfAutor.setEditable(false);
+				buchAusleihen.tfIsbn.setEditable(false);
+				
+
+				String titel = (String) buchAusleihen.tableviewBooks.getSQLTable()
+						.getValueAt(buchAusleihen.tableviewBooks.getSQLTable().getSelectedRow(), 0).toString();
+				buchAusleihen.setBuchtitel(titel);
+
+				String autor = (String) buchAusleihen.tableviewBooks.getSQLTable()
+						.getValueAt(buchAusleihen.tableviewBooks.getSQLTable().getSelectedRow(), 1).toString();
+				buchAusleihen.setAutor(autor);
+
+				String isbn = (String) buchAusleihen.tableviewBooks.getSQLTable()
+						.getValueAt(buchAusleihen.tableviewBooks.getSQLTable().getSelectedRow(), 2).toString();
+				buchAusleihen.setIsbn(isbn);
+				
+
+				break;
+				
+				
 			
 			
 			case "BUCH_ZURÜCKGEBEN":
@@ -387,7 +449,17 @@ public class ButtonHandler implements ActionListener {
 		buchtitel = this.buchInventarisieren.getBuchtitel();
 		autor = this.buchInventarisieren.getAutor();
 		isbn = this.buchInventarisieren.getISBN();
+		anzahl = this.buchInventarisieren.getAnzahl();	
+		
+	}
 	
+	private void GUIDatenAus()
+	{
+		buchtitel = this.buchAusleihen.getBuchtitel();
+		autor = this.buchAusleihen.getAutor();
+		isbn = this.buchAusleihen.getISBN();
+		
+		
 		
 	}
 	

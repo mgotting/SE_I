@@ -38,7 +38,7 @@ public class MenuHandler implements ActionListener {
 				buchRückgabe.launchRückgabe(this.startmenu.frame);
 				break;
 			case "BUCH_AUSLEIHEN":
-				BuchAusleihe buchAusleihe = new BuchAusleihe();
+				BuchAusleihe buchAusleihe = new BuchAusleihe(this.startmenu.angemeldeterUser);
 				buchAusleihe.launchBuchAusleihen(this.startmenu.frame);
 				break;
 			case "BUCH_INVENTARISIEREN":

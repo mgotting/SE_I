@@ -27,6 +27,7 @@ public class BuchAusleihe {
 	JButton ausleihen, buchAuswählen;
 	public JTableview tableviewBooks;
 	JScrollPane scrollPane;
+	String angemeldeterUser;
 	
 	ButtonHandler controlButton;
 	
@@ -53,7 +54,8 @@ public class BuchAusleihe {
 	public JLabel labelTitel, labelAutor, labelISBN;
 	//private String benutzerArt;
 	
-	public BuchAusleihe(){
+	public BuchAusleihe(String angemeldeterUser){
+		this.angemeldeterUser = angemeldeterUser;
 		panel = new JPanel();
 		// Erzeugung eines Objektes der Klasse JButton
 		ausleihen = new JButton("ausleihen");
@@ -72,6 +74,7 @@ public class BuchAusleihe {
 		tfTitel = new JTextField(50);
 		tfAutor = new JTextField(45);
 		tfIsbn = new JTextField(20);
+		System.out.println("User: "+angemeldeterUser);
 	}
 		
 	public void launchBuchAusleihen(JFrame auswahl){
@@ -103,13 +106,48 @@ public class BuchAusleihe {
 		panel.add(tfIsbn);
 		
 		//TODO JTableView
-//		if(tableviewBooks==null){
-//			tableviewBooks = new JTableview(DB_connection.getAllBooks());
-//			scrollPane = new JScrollPane(tableviewBooks.getSQLTable());
-//			scrollPane.setBounds(x_left, y_Library, x_widthLibrary, y_heightLibrary);
-//			panel.add(scrollPane);
-//		}	
+		if(tableviewBooks==null){
+			tableviewBooks = new JTableview(DB_connection.getAllAvailableBooks());
+			scrollPane = new JScrollPane(tableviewBooks.getSQLTable());
+			scrollPane.setBounds(x_left, y_Library, x_widthLibrary, y_heightLibrary);
+			panel.add(scrollPane);
+		}	
 		auswahl.setTitle("Buch ausleihen");
 		auswahl.setContentPane(panel);
 	}
+	
+	public String getBuchtitel()
+	{
+		String buchtitel = this.tfTitel.getText();
+		return buchtitel;
+	}
+	
+	public String getAutor()
+	{
+		String autor = this.tfAutor.getText();
+		return autor;
+	}
+	
+	public String getISBN()
+	{
+		String ISBN = this.tfIsbn.getText();
+		return ISBN;
+	}
+	
+	public void setBuchtitel(String titel)
+	{
+		this.tfTitel.setText(titel);
+	}
+	
+	public void setAutor(String autor)
+	{
+		this.tfAutor.setText(autor);
+	}
+	
+	public void setIsbn(String Isbn)
+	{
+		this.tfIsbn.setText(Isbn);
+	}
+	
+	
 }

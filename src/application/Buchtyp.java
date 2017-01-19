@@ -11,21 +11,21 @@ public class Buchtyp {
 	
 	private String Autor;
 	private String Titel;
-	private int ISBN;
+	private String ISBN;
 	
-	public Buchtyp(String Autor, String Titel, int ISBN)
+	public Buchtyp(String Autor, String Titel, String ISBN)
 	{
 		this.Autor = Autor;
 		this.Titel = Titel;
 		this.ISBN = ISBN;
 	}
 	
-	public void setISBN(int ISBN)
+	public void setISBN(String ISBN)
 	{
 		this.ISBN = ISBN;
 	}
 	
-	public int getISBN()
+	public String getISBN()
 	{
 		return this.ISBN;
 	}

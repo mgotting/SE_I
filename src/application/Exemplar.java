@@ -4,7 +4,7 @@ public class Exemplar {
 
 	
 	private BuchstatusET status;
-	private int ISBN;
+	private String ISBN;
 	
 	
 	public Exemplar (BuchstatusET status, Buchtyp buch)  
@@ -30,20 +30,17 @@ public class Exemplar {
 		return this.status;
 	}
 	
-	public int getISBN()
+	public String getISBN()
 	{
 		return this.ISBN;
 	}
 	
-	public void setISBN(int ISBN)
+	public void setISBN(String ISBN)
 	{
 		this.ISBN = ISBN; 
 	}
 	
-	/*public void inventarisieren (Buchtyp buch)
-	{
-		new Exemplar (BuchstatusET.ausleihbar, buch.getISBN());
-	}*/
+	
 	
 	public void ausleihen()
 	{

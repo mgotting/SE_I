@@ -79,10 +79,13 @@ public class DB_connection {
 		return "INSERT INTO Exemplar VALUES " + buchID +",'"+ISBN+"','"+Status+"'";
 	}
 	
-	//TODO getAllBooks alles was in der JTable angezeigt werden soll
-//	public static String getAllBooks(){
-//		return "SELECT library.exemplar.
-//	}
+	public static String getAllBooks(){
+		return "SELECT library.exemplar.BuchID, library.exemplar.ISBN, library.exemplar.Status, Titel, Autor FROM library.exemplar, library.buchtyp WHERE library.exemplar.ISBN = library.buchtyp.ISBN";
+	}
+	
+	public static String getAllAvailableBooks(){
+		return "SELECT Distinct Titel, Autor, library.exemplar.ISBN, library.exemplar.BuchID FROM library.exemplar, library.buchtyp WHERE library.exemplar.ISBN = library.buchtyp.ISBN AND Status = 'ausleihbar'";
+	}
 	
 	public static String getUserInfo(){
 		return "SELECT library.person.PersonID, Name, Vorname, Benutzername, Passwort, Matrikelnummer, Studiengruppe, Fakult‰t, Straﬂe, Hausnummer, Postleitzahl, Ort, Art, library.adresse.AdressID FROM library.person LEFT JOIN library.adresse ON library.adresse.AdressID=library.person.AdressID JOIN library.benutzer ON library.person.PersonID=library.benutzer.PersonID LEFT JOIN library.student ON library.person.PersonID=library.student.PersonID LEFT JOIN library.professor ON library.person.PersonID=library.professor.PersonID LEFT JOIN library.personal ON library.person.PersonID=library.personal.PersonID";

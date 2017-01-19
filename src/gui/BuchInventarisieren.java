@@ -3,15 +3,11 @@
  */
 package gui;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
+import javax.swing.*;
 
-import application.ButtonHandler;
-import connectionToDatabase.JTableview;
+import connectionToDatabase.*;
+import application.*;
+
 
 /**
  * @author Sandra
@@ -102,12 +98,12 @@ public class BuchInventarisieren {
 		
 		
 		//TODO JTableView
-//		if(tableviewBooks==null){
-//			tableviewBooks = new JTableview(DB_connection.getAllBooks());
-//			scrollPane = new JScrollPane(tableviewBooks.getSQLTable());
-//			scrollPane.setBounds(x_left, y_Library, x_widthLibrary, y_heightLibrary);
-//			panel.add(scrollPane);
-//		}	
+		if(tableviewBooks==null){
+			tableviewBooks = new JTableview(DB_connection.getAllBooks());
+			scrollPane = new JScrollPane(tableviewBooks.getSQLTable());
+			scrollPane.setBounds(x_left, y_Library, x_widthLibrary, y_heightLibrary);
+			panel.add(scrollPane);
+		}	
 		
 		auswahl.setTitle("Buch inventarisieren");
 		auswahl.setContentPane(panel);
@@ -127,9 +123,14 @@ public class BuchInventarisieren {
 		return autor;
 	}
 	
-	public int getISBN()
+	public String getISBN()
 	{
-		int ISBN = Integer.parseInt(this.tfIsbn.getText());
+		String ISBN = this.tfIsbn.getText();
 		return ISBN;
+	}
+	
+	public int getAnzahl(){
+		int anzahl = Integer.parseInt(this.tfAnzahl.getText());
+		return anzahl;
 	}
 }
