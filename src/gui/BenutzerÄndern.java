@@ -37,15 +37,17 @@ public class BenutzerÄndern {
 	public final static String ACTION_CHANGE = "ÄNDERN";
 	public final static String ACTION_AUSWAHL = "AUSWÄHLEN";
 	
-	int x_right = 330;
-	int x_right2=1070;
+	int x_right = 700;
+	int x_right2= 1070;
+	int x_center = 500;
+	int x_left = 10;
+	int x_left2 = 370;
 	int x_width = 160;
 	int y_height = 20;
-	int x_left = 10;
-	int y_north_label = 100;
+	int y_north = 100;
 	int y_center = 120;
-	int y_center_label2 = 140;
-	int y_center_label3 = 160;
+	int y_center2 = 140;
+	int y_center3 = 160;
 	int y_south = 200;
 	int y_south_label2 = 220;
 	int y_south_label3 = 260;
@@ -53,10 +55,6 @@ public class BenutzerÄndern {
 	int y_opt2 = 320;
 	int y_opt3 = 340;
 	int y_opt4 = 360;
-	int x_center = 140;
-	int y_north_textField = 100;
-	int y_center_textField = 140;
-	int y_center_textField2 = 160;
 	int x_widthLibrary = 1060;
 	int x_BUTTON_width = 110;
 	int y_heightLibrary = 100;
@@ -234,39 +232,39 @@ public class BenutzerÄndern {
 		
 
 		// Wir fügen die JLabel unserem Panel hinzu:
-		labelName.setBounds(x_left, y_north_label, x_width, y_height);
+		labelName.setBounds(x_left2, y_north, x_width, y_height);
 		panel.add(labelName);
-		labelVorname.setBounds(x_left, y_center, x_width, y_height);
+		labelVorname.setBounds(x_left2, y_center, x_width, y_height);
 		panel.add(labelVorname);
-		labelBenutzername.setBounds(x_left, y_center_label2, x_width, y_height);
+		labelBenutzername.setBounds(x_left2, y_center2, x_width, y_height);
 		panel.add(labelBenutzername);
-		labelPasswort.setBounds(x_left, y_center_label3, x_width, y_height);
+		labelPasswort.setBounds(x_left2, y_center3, x_width, y_height);
 		panel.add(labelPasswort);
-		labelMatrikelnummer.setBounds(x_left, y_south, x_width, y_height);
+		labelMatrikelnummer.setBounds(x_left2, y_south, x_width, y_height);
 		panel.add(labelMatrikelnummer);
-		labelStudiengruppe.setBounds(x_left, y_south_label2, x_width, y_height);
+		labelStudiengruppe.setBounds(x_left2, y_south_label2, x_width, y_height);
 		panel.add(labelStudiengruppe);
-		labelFakultät.setBounds(x_left, y_south_label3, x_width, y_height);
+		labelFakultät.setBounds(x_left2, y_south_label3, x_width, y_height);
 		panel.add(labelFakultät);
 
 		// optional
-		labelStraße.setBounds(x_left, y_opt1, x_width, y_height);
+		labelStraße.setBounds(x_left2, y_opt1, x_width, y_height);
 		panel.add(labelStraße);
-		labelHausnummer.setBounds(x_left, y_opt2, x_width, y_height);
+		labelHausnummer.setBounds(x_left2, y_opt2, x_width, y_height);
 		panel.add(labelHausnummer);
-		labelPostleitzahl.setBounds(x_left, y_opt3, x_width, y_height);
+		labelPostleitzahl.setBounds(x_left2, y_opt3, x_width, y_height);
 		panel.add(labelPostleitzahl);
-		labelOrt.setBounds(x_left, y_opt4, x_width, y_height);
+		labelOrt.setBounds(x_left2, y_opt4, x_width, y_height);
 		panel.add(labelOrt);
 
 		// JTextField:
-		tfName.setBounds(x_center, y_north_textField, x_width, y_height);
+		tfName.setBounds(x_center, y_north, x_width, y_height);
 		panel.add(tfName);
 		tfVorname.setBounds(x_center, y_center, x_width, y_height);
 		panel.add(tfVorname);
-		tfBenutzername.setBounds(x_center, y_center_textField, x_width, y_height);
+		tfBenutzername.setBounds(x_center, y_center2, x_width, y_height);
 		panel.add(tfBenutzername);
-		tfPasswort.setBounds(x_center, y_center_textField2, x_width, y_height);
+		tfPasswort.setBounds(x_center, y_center3, x_width, y_height);
 		panel.add(tfPasswort);
 		tfMatrikelnummer.setBounds(x_center, y_south, x_width, y_height);
 		panel.add(tfMatrikelnummer);
