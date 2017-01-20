@@ -70,6 +70,7 @@ public class ButtonHandler implements ActionListener {
 				con = DB_connection.getDbConnection();
 				if(login.getBenutzername().equals(con.executequery_Value(DB_connection.checkAnmeldung(login.getBenutzername(),login.getPasswort())))){
 				angemeldeterUser = login.getBenutzername();
+				System.out.println(angemeldeterUser);
 				login.panel.setVisible(false);
 				Startmenu startmenu = new Startmenu(angemeldeterUser);
 				startmenu.launchAuswahl(this.login.login);
@@ -376,17 +377,19 @@ public class ButtonHandler implements ActionListener {
 					buchAusleihen.tableviewBooks.updateSQLTable(DB_connection.getAllAvailableBooks());
 					JOptionPane.showMessageDialog(new JFrame(), "Der angemeldete User hat das Buch mit der ID: "+BuchID+" erfolgreich ausgeliehen.");
 					System.out.println("Buch erfolgreich ausgeliehen");
+				}
 					break;
 					
 					
 					
 					
-				}
+				
 				
 					
 			case "BUCH_AUSWAHL":
-				if (buchAusleihen.tableviewBooks.getSQLTable().getSelectedRow() == -1)
+				if (buchAusleihen.tableviewBooks.getSQLTable().getSelectedRow() == -1){
 					throw new JTableException("Fehler: Zeile nicht markiert!");
+				}
 
 				buchAusleihen.tfTitel.setEditable(false);
 				buchAusleihen.tfAutor.setEditable(false);
