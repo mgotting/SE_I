@@ -24,12 +24,15 @@ public class ButtonHandler implements ActionListener {
 	private BuchStatus buchstatus;
 	private Login login;
 	private DB_connection con;
-	private String name, vorname, benutzername, passwort, straﬂe, ort, hausnummer, angemeldeterUser, buchtitel, autor, isbn;
+	private static String angemeldeterUser;
+	private String name, vorname, benutzername, passwort, straﬂe, ort, hausnummer,  buchtitel, autor, isbn;
 	private int postleitzahl, generatedID, generatedAdressID, adressID, anzahl;
 	private char art;
 	private Benutzer benutzer;
 	private boolean adresseVorhanden;
 	private Adresse adresse;
+	private int counter = 0;
+	
 
 	// create reference to GUI
 	public ButtonHandler(BenutzerAnlegen benutzerAnlegen) {
@@ -359,7 +362,12 @@ public class ButtonHandler implements ActionListener {
 				
 
 			case "AUSLEIHEN":
-				System.out.println("is in Ausleihe drinnen" );
+				if(counter == 2)	{
+					JOptionPane.showMessageDialog(new JFrame(), "Sie haben das Maximum von 2 Ausleihen erreicht");
+					return;
+				}
+				counter++;
+				System.out.println("is in Ausleihe drinnen" + angemeldeterUser);
 				GUIDatenAus();
 				con = DB_connection.getDbConnection();
 				if (buchAusleihen.tfTitel.getText().isEmpty() || buchAusleihen.tfAutor.getText().isEmpty()
@@ -371,9 +379,9 @@ public class ButtonHandler implements ActionListener {
 							.getValueAt(buchAusleihen.tableviewBooks.getSQLTable().getSelectedRow(), 3).toString());
 					Ausleihe ausleihe = new Ausleihe(BuchID, angemeldeterUser);
 					System.out.println("ActionCommand erhalten: " + e.getActionCommand());
-					String insertAusleihe = "INSERT INTO ausleihe VALUES('" + ausleihe.getBuchID() +"','" + angemeldeterUser+"');";
+					String insertAusleihe = "INSERT INTO ausleihe VALUES('" + ausleihe.getBuchID() +"','" + angemeldeterUser + "');";
 					con.executequery(insertAusleihe);
-					con.executequery("UPDATE library.exemplar SET Status = 'nicht ausleihbar' WHERE library.exemplar.BUCHID="+BuchID);
+					con.executequery("UPDATE library.exemplar SET Status = 'ausgeliehen' WHERE library.exemplar.BUCHID="+BuchID);
 					buchAusleihen.tableviewBooks.updateSQLTable(DB_connection.getAllAvailableBooks());
 					JOptionPane.showMessageDialog(new JFrame(), "Der angemeldete User hat das Buch mit der ID: "+BuchID+" erfolgreich ausgeliehen.");
 					System.out.println("Buch erfolgreich ausgeliehen");

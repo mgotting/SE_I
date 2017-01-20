@@ -63,7 +63,9 @@ public class BuchInventarisieren {
 		tfAutor = new JTextField(45);
 		tfIsbn = new JTextField(20);
 		tfAnzahl = new JTextField(3);
-	}
+		
+		//JCheckBoxen
+			}
 		
 	public void launchBuchInventarisieren(JFrame auswahl){
 		auswahl.getContentPane().setVisible(false);
@@ -93,9 +95,11 @@ public class BuchInventarisieren {
 		panel.add(tfIsbn);
 		tfAnzahl.setBounds(x_center, y_south2, x_width, y_height);
 		panel.add(tfAnzahl);
+	
 		
 		
-		//TODO JTableView
+		
+//		Tableview
 		if(tableviewBooks==null){
 			tableviewBooks = new JTableview(DB_connection.getAllBooks());
 			scrollPane = new JScrollPane(tableviewBooks.getSQLTable());
