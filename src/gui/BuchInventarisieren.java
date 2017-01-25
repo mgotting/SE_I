@@ -28,7 +28,8 @@ public class BuchInventarisieren {
 	int y_center = 120;	
 	int y_south = 180;	
 	int y_south2 = 240;
-	int y_Library = 310;
+	int y_south3 = 300;
+	int y_Library = 380;
 	int x_left = 100;
 	int x_left2 = 370;
 	int x_center = 500;
@@ -39,8 +40,8 @@ public class BuchInventarisieren {
 	int x_widthLibrary = 1000;
 	int y_heightLibrary = 100;
 	
-	public JTextField tfTitel, tfAutor, tfIsbn, tfAnzahl;
-	public JLabel labelTitel, labelAutor, labelISBN, labelAnzahl;
+	public JTextField tfTitel, tfAutor, tfIsbn, tfAnzahl, tfStatus;
+	public JLabel labelTitel, labelAutor, labelISBN, labelAnzahl, labelStatus;
 	
 	public BuchInventarisieren(){
 		panel = new JPanel();
@@ -57,20 +58,21 @@ public class BuchInventarisieren {
 		labelAutor = new JLabel("Autor:", JLabel.LEFT);
 		labelISBN = new JLabel("ISBN-Nummer:", JLabel.LEFT);
 		labelAnzahl = new JLabel ("Anzahl Exemplare:", JLabel.LEFT);
-				
+		labelStatus = new JLabel ("Status:", JLabel.LEFT);
+		
 		//Erzeugung der JTextFields
 		tfTitel = new JTextField(50);
 		tfAutor = new JTextField(45);
 		tfIsbn = new JTextField(20);
 		tfAnzahl = new JTextField(3);
+		tfStatus = new JTextField(10);
 		
-		//JCheckBoxen
 			}
 		
 	public void launchBuchInventarisieren(JFrame auswahl){
 		auswahl.getContentPane().setVisible(false);
 		// Wir fügen den JButton unserem Panel hinzu:
-		inventarisieren.setBounds(x_right, y_south2, x_BUTTON_width, y_height);
+		inventarisieren.setBounds(x_right, y_south3, x_BUTTON_width, y_height);
 		panel.add(inventarisieren);
 		inventarisieren.setActionCommand(ACTION_BUCH_INVENTARISIEREN);
 		inventarisieren.addActionListener(controlButton);
@@ -84,8 +86,9 @@ public class BuchInventarisieren {
 		panel.add(labelISBN);
 		labelAnzahl.setBounds(x_left2, y_south2, x_width, y_height);
 		panel.add(labelAnzahl);
-	
-
+		labelStatus.setBounds(x_left2, y_south3, x_width, y_height);
+		panel.add(labelStatus);
+		
 		// JTextField:
 		tfTitel.setBounds(x_center, y_north, x_width, y_height);
 		panel.add(tfTitel);
@@ -95,9 +98,8 @@ public class BuchInventarisieren {
 		panel.add(tfIsbn);
 		tfAnzahl.setBounds(x_center, y_south2, x_width, y_height);
 		panel.add(tfAnzahl);
-	
-		
-		
+		tfStatus.setBounds(x_center, y_south3, x_width, y_height);
+		panel.add(tfStatus);		
 		
 //		Tableview
 		if(tableviewBooks==null){
