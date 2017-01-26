@@ -80,7 +80,7 @@ public class DB_connection {
 	}
 	
 	public static String getAllBooks(){
-		return "SELECT library.exemplar.BuchID, library.exemplar.ISBN, library.exemplar.Status, Titel, Autor FROM library.exemplar, library.buchtyp WHERE library.exemplar.ISBN = library.buchtyp.ISBN ORDER BY Status";
+		return "SELECT library.exemplar.BuchID, library.exemplar.ISBN, library.exemplar.Status, Titel, Autor FROM library.exemplar, library.buchtyp WHERE library.exemplar.ISBN = library.buchtyp.ISBN ORDER BY BuchID";
 	}
 	
 	public static String getAllAvailableBooks(){

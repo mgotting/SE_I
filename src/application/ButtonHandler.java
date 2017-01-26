@@ -335,7 +335,9 @@ public class ButtonHandler implements ActionListener {
 				GUIDatenInv();
 				con = DB_connection.getDbConnection();
 				if (buchInventarisieren.tfTitel.getText().isEmpty() || buchInventarisieren.tfAutor.getText().isEmpty()
-						|| buchInventarisieren.tfIsbn.getText().isEmpty() || buchInventarisieren.tfAnzahl.getText().isEmpty()) {
+						|| buchInventarisieren.tfIsbn.getText().isEmpty()
+						|| buchInventarisieren.tfAnzahl.getText().isEmpty()
+						|| buchInventarisieren.tfStatus.getText().isEmpty()) {
 					// kein DB Eintrag
 					JOptionPane.showMessageDialog(new JFrame(), "Fehler: Standardeingaben wurden nicht eingetragen!");
 				} else {
@@ -343,18 +345,18 @@ public class ButtonHandler implements ActionListener {
 					System.out.println("ActionCommand erhalten: " + e.getActionCommand());
 					String insertBuch = "INSERT INTO buchtyp VALUES ('" + buch.getISBN() + "','" + buch.getAutor()
 							+ "','" + buch.getTitel() + "');";
-					con.executequery(insertBuch);					
-					int i = buchInventarisieren.getAnzahl();
-					System.out.println("i = "+i);
-					while(i>0)
-					{
-						Exemplar exemplar = new Exemplar(BuchstatusET.ausleihbar, buch);
-						String insertExemplar = "INSERT INTO exemplar (ISBN,Status) VALUES ('" + exemplar.getISBN() +"','" + exemplar.getStatus()+"');";
-						generatedID = con.executequery_autoKey(insertExemplar, true);
-						System.out.println("Erstellte BuchID: " + generatedID);
-						System.out.println("Exemplar:"+i+" erfolgreich inventarisiert");											
-						i--;
+					con.executequery(insertBuch);
+
+					System.out.println(buchInventarisieren.getStatus());
+
+					if (buchInventarisieren.getStatus().equals("Ja")) {
+						BuchstatusET bstatus = BuchstatusET.ausleihbar;
+						ExemplarErstellung(buch, bstatus);
+					} else {
+						BuchstatusET bstatus = BuchstatusET.nichtausleihbar;
+						ExemplarErstellung(buch, bstatus);
 					}
+
 					JOptionPane.showMessageDialog(new JFrame(), "Buch und Exemplar(e) wurden erfolgreich verbucht!");
 					buchInventarisieren.tableviewBooks.updateSQLTable(DB_connection.getAllBooks());
 				}
@@ -479,6 +481,7 @@ public class ButtonHandler implements ActionListener {
 		
 	}
 	
+	
 	// befüllt die für jedes Objekt identischen Tabellen
 	private void ObjektErstellung(PersonABC person){
 		try{
@@ -501,6 +504,21 @@ public class ButtonHandler implements ActionListener {
 			System.out.println("Benutzer erfolgreich verbucht: "+ benutzerVerbucht);
 		} catch (SQLException sqlEx) {
 			JOptionPane.showMessageDialog(new JFrame(), sqlEx.getMessage());
+		}
+	}
+	
+	private void ExemplarErstellung (Buchtyp buch, BuchstatusET bstatus) throws SQLException
+	{
+		int i = buchInventarisieren.getAnzahl();
+		System.out.println("i = "+i);
+		while(i>0)
+		{						
+			Exemplar exemplar = new Exemplar(bstatus, buch);
+			String insertExemplar = "INSERT INTO exemplar (ISBN,Status) VALUES ('" + exemplar.getISBN() +"','" + exemplar.getStatus()+"');";
+			generatedID = con.executequery_autoKey(insertExemplar, true);
+			System.out.println("Erstellte BuchID: " + generatedID);
+			System.out.println("Exemplar:"+i+" erfolgreich inventarisiert");											
+			i--;
 		}
 	}
 		

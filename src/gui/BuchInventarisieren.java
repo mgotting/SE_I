@@ -58,7 +58,7 @@ public class BuchInventarisieren {
 		labelAutor = new JLabel("Autor:", JLabel.LEFT);
 		labelISBN = new JLabel("ISBN-Nummer:", JLabel.LEFT);
 		labelAnzahl = new JLabel ("Anzahl Exemplare:", JLabel.LEFT);
-		labelStatus = new JLabel ("Status:", JLabel.LEFT);
+		labelStatus = new JLabel ("ausleihbar? (Ja/Nein):", JLabel.LEFT);
 		
 		//Erzeugung der JTextFields
 		tfTitel = new JTextField(50);
@@ -137,4 +137,11 @@ public class BuchInventarisieren {
 		int anzahl = Integer.parseInt(this.tfAnzahl.getText());
 		return anzahl;
 	}
+	
+	public String getStatus(){
+		String status = this.tfStatus.getText();
+		return status;
+	}
+	
+	
 }
