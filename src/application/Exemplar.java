@@ -9,10 +9,8 @@ public class Exemplar {
 	
 	public Exemplar (BuchstatusET status, Buchtyp buch)  
 	{
-			
 		this.status = status;
 		this.ISBN = buch.getISBN();	
-	
 	}
 	
 	public void setStatus( BuchstatusET st)
@@ -39,8 +37,6 @@ public class Exemplar {
 	{
 		this.ISBN = ISBN; 
 	}
-	
-	
 	
 	public void ausleihen()
 	{

@@ -43,6 +43,7 @@ public class Student extends PersonABC  {
 			setStudiengruppe(studiengruppe);
 		}
 	}
+	
 	//nur zum Testen
 	public String toString(){
 		if(getAdresse()!=null){

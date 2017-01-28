@@ -1,7 +1,5 @@
 package connectionToDatabase;
 
-
-
 import java.sql.*;
 
 import javax.swing.JFrame;
@@ -22,6 +20,7 @@ public class DB_connection {
 	private static Connection cn = null;
 	private static Statement st = null;
 	private static ResultSet rs = null;
+	
 	private String sDbDriver = null, sDbUrl = null, sUsr = "", sPwd = "";
 	{
 		sDbDriver = "com.mysql.jdbc.Driver";
@@ -62,14 +61,41 @@ public class DB_connection {
 		return "SELECT library.benutzer.PersonID, Benutzername, Vorname, Name FROM library.benutzer, library.person WHERE library.benutzer.PersonID = library.person.PersonID";
 	}
 	
+	/*
+	 * Methode gibt SQL-Query aus, mit der überprüft wird, ob die Anmeldung erfolgreich war
+	 * 
+	 * @param benutzername, passowrt
+	 *          
+	 * @return SQL-Query
+	 *          
+	 * @author Michael Gottinger
+	 */
 	public static String checkAnmeldung(String benutzername, String passwort){
 		return "SELECT Benutzername FROM library.benutzer WHERE Benutzername='"+benutzername+"' AND Passwort='"+passwort+"'";
 	}
 	
+	/*
+	 * Methode gibt SQL-Query zum Abruf aller ausgeliehenen Bücher des angemeldeten Benutzers aus.
+	 * 
+	 * @param angemeldeter Benutzer
+	 *          
+	 * @return SQL-Query
+	 *          
+	 * @author Michael Gottinger
+	 */
 	public static String getAllRentBooks(String angemeldeterUser) {
 		return "SELECT library.ausleihe.BuchID, Titel, Autor, Status FROM library.exemplar, library.buchtyp, library.ausleihe WHERE library.exemplar.ISBN = library.buchtyp.ISBN AND library.ausleihe.BuchID = library.exemplar.BuchID AND library.exemplar.Status = 'ausgeliehen' AND library.ausleihe.Benutzername ='"+angemeldeterUser+"';";
 	}
 	
+	/*
+	 * Methode gibt SQL-Query aus, um zurückgegebenes Buch zu entfernen
+	 * 
+	 * @param zurückzugebene buchID
+	 *          
+	 * @return SQL-Query
+	 *          
+	 * @author Michael Gottinger
+	 */
 	public static String buchZurückgegeben(String buchID){
 		return "DELETE FROM library.ausleihe WHERE BUCHID ="+buchID;
 	}
@@ -79,6 +105,13 @@ public class DB_connection {
 		return "INSERT INTO Exemplar VALUES " + buchID +",'"+ISBN+"','"+Status+"'";
 	}
 	
+	/*
+	 * Methode gibt SQL-Query zur Anzeige aller Bücher aus.
+	 *          
+	 * @return SQL-Query
+	 *          
+	 * @author Michael Gottinger
+	 */
 	public static String getAllBooks(){
 		return "SELECT library.exemplar.BuchID, library.exemplar.ISBN, library.exemplar.Status, Titel, Autor FROM library.exemplar, library.buchtyp WHERE library.exemplar.ISBN = library.buchtyp.ISBN ORDER BY BuchID";
 	}
@@ -118,6 +151,15 @@ public class DB_connection {
 		return rs;
 	}
 
+	/*
+	 * Methode gibt einen Wert aus Ergebnistabelle aus
+	 * 
+	 * @param SQL-Query die ausgeführt werden soll
+	 *          
+	 * @return erster Wert aus SQL-Tabelle
+	 *          
+	 * @author Michael Gottinger
+	 */
 	public String executequery_Value(String SQLquery) throws SQLException{
 		Statement st = cn.createStatement();
 		ResultSet rs = st.executeQuery(SQLquery);

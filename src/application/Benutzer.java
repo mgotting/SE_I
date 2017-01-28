@@ -8,7 +8,7 @@ public class Benutzer {
 	
 	public Benutzer (String benutzername, String passwort, PersonABC person) throws NullPointerException{
 		if(benutzername==null || passwort==null || person==null){
-			throw new NullPointerException("Es fehlt eine Eingabe");
+			throw new NullPointerException("Benutzer wurde nicht vollständig erfasst!");
 		}else{
 			this.benutzername=benutzername;
 			this.passwort=passwort;

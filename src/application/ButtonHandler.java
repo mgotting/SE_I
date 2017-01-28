@@ -67,7 +67,7 @@ public class ButtonHandler implements ActionListener {
 		try {
 			// Prüfen, welches Kommando kommt
 			switch (e.getActionCommand()) {
-			// Fall anmelden
+//1. Anwendungsfall anmelden:-------------------------------------------------------------------------------------------
 			case "ANMELDEN":
 				con = DB_connection.getDbConnection();
 				if (login.getBenutzername().equals(con.executequery_Value(
@@ -84,7 +84,7 @@ public class ButtonHandler implements ActionListener {
 					login.setPasswort(null);
 				}
 				break;
-			// Fall Student erstellen:
+//2.Anwendungsfall anlegen:--------------------------------------------------------------------------------------------
 			case "ANLEGEN":
 				GUIDaten();
 				con = DB_connection.getDbConnection();
@@ -104,6 +104,7 @@ public class ButtonHandler implements ActionListener {
 					JOptionPane.showMessageDialog(new JFrame(), "Fehler: Standardeingaben wurden nicht eingetragen!");
 				} else {
 					switch (this.benutzerAnlegen.getBenutzerArt()) {
+  //Student anlegen---------------------------------------------------------------------------------------------------------
 					case "Student":
 						if (benutzerAnlegen.tfMatrikelnummer.getText().isEmpty()
 								|| benutzerAnlegen.tfStudiengruppe.getText().isEmpty()) {
@@ -111,11 +112,8 @@ public class ButtonHandler implements ActionListener {
 							JOptionPane.showMessageDialog(new JFrame(),
 									"Fehler: Matrikelnummer oder Studiengruppe wurden nicht eingetragen!");
 						} else {
-							int matrikelnummer = this.benutzerAnlegen.getMatrikelnummer(); // einmal
-																							// festlegen,
-																							// nicht
-																							// mehr
-																							// änderbar
+							// einmal festlegen, nicht mehr änderbar
+							int matrikelnummer = this.benutzerAnlegen.getMatrikelnummer();
 							Studiengruppe studiengruppe = this.benutzerAnlegen.getStudiengruppe();
 							Student student;
 							art = 's';
@@ -142,6 +140,7 @@ public class ButtonHandler implements ActionListener {
 							con.disconnect();
 						}
 						break;
+  //Professor anlegen---------------------------------------------------------------------------------------------------------
 					case "Professor":
 						if (benutzerAnlegen.tfFakultät.getText().isEmpty()) {
 							// kein DB Eintrag
@@ -176,6 +175,7 @@ public class ButtonHandler implements ActionListener {
 							con.disconnect();
 						}
 						break;
+  //Personal anlegen------------------------------------------------------------------------------------------------------
 					case "Personal":
 						// Daten aus GUI abziehen und Personalobjekt erstellen
 						Personal personal = new Personal(name, vorname);
@@ -195,8 +195,7 @@ public class ButtonHandler implements ActionListener {
 					}
 				}
 				break;
-			// zu ändernden Benutzer auswählen, damit sich die GUI mit den
-			// DB-Werten befüllt
+  //zu ändernden Benutzer auswählen, damit sich die GUI mit den DB-Werten befüllt---------------------------------------------
 			case "AUSWÄHLEN":
 
 				if (benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow() == -1)
@@ -228,7 +227,7 @@ public class ButtonHandler implements ActionListener {
 				benutzerÄndern.setPasswort(passwort);
 
 				switch (art) {
-				// Benutzer vom Typ Student (s) wurde ausgewählt
+   // Benutzer vom Typ Student (s) wurde ausgewählt
 				case "s":
 					String matrikelnummer = (String) benutzerÄndern.tableviewUser.getSQLTable()
 							.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 5).toString();
@@ -242,7 +241,7 @@ public class ButtonHandler implements ActionListener {
 					benutzerÄndern.tfPostleitzahl.setEditable(true);
 					benutzerÄndern.tfOrt.setEditable(true);
 					break;
-				// Benutzer vom Typ Professor (p) wurde ausgewählt
+  // Benutzer vom Typ Professor (p) wurde ausgewählt
 				case "p":
 					String fakultät = (String) benutzerÄndern.tableviewUser.getSQLTable()
 							.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 7).toString();
@@ -278,7 +277,7 @@ public class ButtonHandler implements ActionListener {
 
 				break;
 
-			// DB-Werte werden in den jeweiligen Tabellen aktualisiert
+//3. Anwendungsfall ändern. DB-Werte werden in den jeweiligen Tabellen aktualisiert-------------------------------
 			case "ÄNDERN":
 				con = DB_connection.getDbConnection();
 
@@ -307,8 +306,7 @@ public class ButtonHandler implements ActionListener {
 				System.out.println("Benutzer erfolgreich geändert: " + BenutzerGeändert);
 
 				switch (art) {
-				// Studenten-Infmormationen werden geändert, Matrikelnummer
-				// ausgeschlossen (diese wird einmal festgelegt)!
+  // Studenten-Infmormationen werden geändert, Matrikelnummer ausgeschlossen (diese wird einmal festgelegt)!
 				case "s":
 					String updateStudent = "UPDATE library.student SET Studiengruppe = '"
 							+ benutzerÄndern.getStudiengruppe() + "' WHERE library.student.PersonID= ("
@@ -316,7 +314,7 @@ public class ButtonHandler implements ActionListener {
 					boolean studentGeändert = con.executequery(updateStudent);
 					System.out.println("Student erfolgreich geändert: " + studentGeändert);
 					break;
-				// Professoren-Infmormationen werden geändert
+  // Professoren-Infmormationen werden geändert
 				case "p":
 					String updateProfessor = "UPDATE library.professor SET Fakultät = '" + benutzerÄndern.getFakultät()
 							+ "' WHERE library.professor.PersonID= (" + benutzerÄndern.getPersonID() + ")";
@@ -374,7 +372,7 @@ public class ButtonHandler implements ActionListener {
 				EintragLöschenÄndern();
 				con.disconnect();
 				break;
-
+//4. Anwendungsfall inventarisieren--------------------------------------------------------------------------------------
 			case "INVENTARISIEREN":
 				GUIDatenInv();
 				con = DB_connection.getDbConnection();
@@ -398,7 +396,7 @@ public class ButtonHandler implements ActionListener {
 				JOptionPane.showMessageDialog(new JFrame(), "Buch und Exemplar(e) wurden erfolgreich verbucht!");
 				buchInventarisieren.tableviewBooks.updateSQLTable(DB_connection.getAllBooks());
 				break;
-
+//5.Anwendungsfall ausleihen--------------------------------------------------------------------------------------------
 			case "AUSLEIHEN":
 				if (counter == 2) {
 					JOptionPane.showMessageDialog(new JFrame(), "Sie haben das Maximum von 2 Ausleihen erreicht");
@@ -428,7 +426,7 @@ public class ButtonHandler implements ActionListener {
 					System.out.println("Buch erfolgreich ausgeliehen");
 				}
 				break;
-
+  //Buch auswählen----------------------------------------------------------------------------------------------------------
 			case "BUCH_AUSWAHL":
 				if (buchAusleihen.tableviewBooks.getSQLTable().getSelectedRow() == -1) {
 					throw new JTableException("Fehler: Zeile nicht markiert!");
@@ -451,7 +449,7 @@ public class ButtonHandler implements ActionListener {
 				buchAusleihen.setIsbn(isbn);
 
 				break;
-
+//6. Anwendungsfall Buch zurückgeben------------------------------------------------------------------------------------
 			case "BUCH_ZURÜCKGEBEN":
 				String buchID = (String) buchRückgabe.tableview.getSQLTable()
 						.getValueAt(buchRückgabe.tableview.getSQLTable().getSelectedRow(), 0).toString();
@@ -473,8 +471,11 @@ public class ButtonHandler implements ActionListener {
 		}
 	}
 
-	// befüllt für jeden Benutzer die Grundinformationen und prüft ob Adresse
-	// vorhanden.
+	/*
+	 * Methode befüllt für jeden Benutzer die Grundinformationen und überprüft, ob eine Adresse vorhanden ist
+	 *          
+	 * @author Michael Gottinger
+	 */
 	private void GUIDaten() {
 		name = this.benutzerAnlegen.getName();
 		vorname = this.benutzerAnlegen.getVorname();
