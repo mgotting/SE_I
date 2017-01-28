@@ -101,12 +101,20 @@ public class BenutzerAnlegen {
 		this.tfBenutzername.setText(benutzername);
 	}
 	
-	public String getBenutzerArt(){
+	public String getBenutzerArt() throws NullPointerException{
+		if (benutzerArt==null){
+		throw new NullPointerException("Keine Person ausgewählt!");
+		} else {
 		return benutzerArt;
+		}
 	}
 	
 	public void setBenutzerArt(String benutzerArt){
+		if (benutzerArt==null){
+		throw new NullPointerException("Keine Person ausgewählt!");
+		} else {
 		this.benutzerArt = benutzerArt;
+		}
 	}
 	
 	public String getPasswort(){
@@ -143,7 +151,7 @@ public class BenutzerAnlegen {
 		this.tfMatrikelnummer.setText(matrikelnummer);
 	}
 	
-	public Studiengruppe getStudiengruppe(){
+	public Studiengruppe getStudiengruppe() throws NullPointerException{
 		Studiengruppe studiengruppe = Studiengruppe.valueOf(this.tfStudiengruppe.getText());
 		return studiengruppe;
 	}

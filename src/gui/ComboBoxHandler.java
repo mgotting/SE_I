@@ -5,6 +5,9 @@ package gui;
 
 import java.awt.event.*;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  * @author Michael Gottinger
  *
@@ -53,6 +56,6 @@ public class ComboBoxHandler implements ItemListener {
         	this.benutzerAnlegen.tfHausnummer.setEditable(false);
         	this.benutzerAnlegen.tfPostleitzahl.setEditable(false);
         	this.benutzerAnlegen.tfOrt.setEditable(false);
-        }
+        } 
     }
 }

@@ -465,13 +465,13 @@ public class ButtonHandler implements ActionListener {
 			JOptionPane.showMessageDialog(new JFrame(), "AdressException: " + ex.getMessage());
 		} catch (ArrayIndexOutOfBoundsException ex){
 			JOptionPane.showMessageDialog(new JFrame(), "Bitte ein Buch zum zurückgeben auswählen");
-		} catch (NullPointerException ex){
-			JOptionPane.showMessageDialog(new JFrame(),"Bitte wählen Sie aus, welche Art von Person angelegt werden soll");
 		} catch (IllegalArgumentException ex) {
 			JOptionPane.showMessageDialog(new JFrame(), "Bitte Felder korrekt und vollständig ausfüllen");
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(new JFrame(), "SQLException: " + ex.getMessage());
-		}
+		} catch (Exception ex){
+			JOptionPane.showMessageDialog(new JFrame(), ex.getMessage());
+			}
 	}
 	
 
