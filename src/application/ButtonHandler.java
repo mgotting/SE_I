@@ -467,7 +467,6 @@ public class ButtonHandler implements ActionListener {
 		} catch (AdressException ex) {
 			JOptionPane.showMessageDialog(new JFrame(), "AdressException: " + ex.getMessage());
 		} catch (IllegalArgumentException ex) {
-			// this.benutzerAnlegen.setStudiengruppe(null);
 			JOptionPane.showMessageDialog(new JFrame(), "Bitte Felder korrekt und vollständig ausfüllen");
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(new JFrame(), "SQLException: " + ex.getMessage());
