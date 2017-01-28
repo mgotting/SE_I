@@ -449,7 +449,7 @@ public class ButtonHandler implements ActionListener {
 				buchAusleihen.setIsbn(isbn);
 
 				break;
-//6. Anwendungsfall Buch zurückgeben------------------------------------------------------------------------------------
+//F6: Anwendungsfall Buch zurückgeben------------------------------------------------------------------------------------
 			case "BUCH_ZURÜCKGEBEN":
 				String buchID = (String) buchRückgabe.tableview.getSQLTable()
 						.getValueAt(buchRückgabe.tableview.getSQLTable().getSelectedRow(), 0).toString();
@@ -459,11 +459,13 @@ public class ButtonHandler implements ActionListener {
 						"UPDATE library.exemplar SET Status = 'ausleihbar' WHERE library.exemplar.BUCHID=" + buchID);
 				buchRückgabe.tableview.updateSQLTable(DB_connection.getAllRentBooks(angemeldeterUser));
 				JOptionPane.showMessageDialog(new JFrame(),
-						"Der angemeldete User hat das Buch mit der ID: " + buchID + " erfolgreich zurückgegeben.");
+						"Der User "+angemeldeterUser+" hat das Buch mit der ID: " + buchID + " erfolgreich zurückgegeben.");
 				System.out.println("Buch erfolgreich zurückgegeben");
 			}
 		} catch (AdressException ex) {
 			JOptionPane.showMessageDialog(new JFrame(), "AdressException: " + ex.getMessage());
+		} catch (ArrayIndexOutOfBoundsException ex){
+			JOptionPane.showMessageDialog(new JFrame(), "Bitte ein Buch zum zurückgeben auswählen");
 		} catch (IllegalArgumentException ex) {
 			JOptionPane.showMessageDialog(new JFrame(), "Bitte Felder korrekt und vollständig ausfüllen");
 		} catch (SQLException ex) {

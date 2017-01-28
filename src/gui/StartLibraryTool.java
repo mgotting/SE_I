@@ -7,7 +7,7 @@ package gui;
  *
  */
  
-public class test {
+public class StartLibraryTool {
    
 	public static void main(String[] args) {
 	 Login gui2;      
