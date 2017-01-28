@@ -61,10 +61,10 @@ public class DB_connection {
 		return "SELECT library.benutzer.PersonID, Benutzername, Vorname, Name FROM library.benutzer, library.person WHERE library.benutzer.PersonID = library.person.PersonID";
 	}
 	
-	/*
+	/**
 	 * Methode gibt SQL-Query aus, mit der überprüft wird, ob die Anmeldung erfolgreich war
 	 * 
-	 * @param benutzername, passowrt
+	 * @param 
 	 *          
 	 * @return SQL-Query
 	 *          
@@ -74,10 +74,10 @@ public class DB_connection {
 		return "SELECT Benutzername FROM library.benutzer WHERE Benutzername='"+benutzername+"' AND Passwort='"+passwort+"'";
 	}
 	
-	/*
+	/**
 	 * Methode gibt SQL-Query zum Abruf aller ausgeliehenen Bücher des angemeldeten Benutzers aus.
 	 * 
-	 * @param angemeldeter Benutzer
+	 * @param
 	 *          
 	 * @return SQL-Query
 	 *          
@@ -87,10 +87,10 @@ public class DB_connection {
 		return "SELECT library.ausleihe.BuchID, Titel, Autor, Status FROM library.exemplar, library.buchtyp, library.ausleihe WHERE library.exemplar.ISBN = library.buchtyp.ISBN AND library.ausleihe.BuchID = library.exemplar.BuchID AND library.exemplar.Status = 'ausgeliehen' AND library.ausleihe.Benutzername ='"+angemeldeterUser+"';";
 	}
 	
-	/*
+	/**
 	 * Methode gibt SQL-Query aus, um zurückgegebenes Buch zu entfernen
 	 * 
-	 * @param zurückzugebene buchID
+	 * @param zurückzugebene
 	 *          
 	 * @return SQL-Query
 	 *          
@@ -105,7 +105,7 @@ public class DB_connection {
 		return "INSERT INTO Exemplar VALUES " + buchID +",'"+ISBN+"','"+Status+"'";
 	}
 	
-	/*
+	/**
 	 * Methode gibt SQL-Query zur Anzeige aller Bücher aus.
 	 *          
 	 * @return SQL-Query
@@ -151,10 +151,12 @@ public class DB_connection {
 		return rs;
 	}
 
-	/*
+	/**
 	 * Methode gibt einen Wert aus Ergebnistabelle aus
 	 * 
-	 * @param SQL-Query die ausgeführt werden soll
+	 * @param auszuführende
+	 * 
+	 * @throws SQLException
 	 *          
 	 * @return erster Wert aus SQL-Tabelle
 	 *          

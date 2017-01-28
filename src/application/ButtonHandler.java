@@ -67,7 +67,7 @@ public class ButtonHandler implements ActionListener {
 		try {
 			// Prüfen, welches Kommando kommt
 			switch (e.getActionCommand()) {
-//1. Anwendungsfall anmelden:-------------------------------------------------------------------------------------------
+//Anwendungsfall anmelden:-------------------------------------------------------------------------------------------
 			case "ANMELDEN":
 				con = DB_connection.getDbConnection();
 				if (login.getBenutzername().equals(con.executequery_Value(
@@ -84,7 +84,7 @@ public class ButtonHandler implements ActionListener {
 					login.setPasswort(null);
 				}
 				break;
-//2.Anwendungsfall anlegen:--------------------------------------------------------------------------------------------
+//F2: Anwendungsfall anlegen:--------------------------------------------------------------------------------------------
 			case "ANLEGEN":
 				GUIDaten();
 				con = DB_connection.getDbConnection();
@@ -145,8 +145,7 @@ public class ButtonHandler implements ActionListener {
 						if (benutzerAnlegen.tfFakultät.getText().isEmpty()) {
 							// kein DB Eintrag
 							JOptionPane.showMessageDialog(new JFrame(),
-									"Fehler: Matrikelnummer oder Studiengruppe wurden nicht eingetragen!");
-
+									"Fehler: Fakultät wurde nicht eingetragen!");
 						} else {
 							// Daten aus GUI abziehen und Professorobjekt
 							// erstellen
@@ -466,14 +465,17 @@ public class ButtonHandler implements ActionListener {
 			JOptionPane.showMessageDialog(new JFrame(), "AdressException: " + ex.getMessage());
 		} catch (ArrayIndexOutOfBoundsException ex){
 			JOptionPane.showMessageDialog(new JFrame(), "Bitte ein Buch zum zurückgeben auswählen");
+		} catch (NullPointerException ex){
+			JOptionPane.showMessageDialog(new JFrame(),"Bitte wählen Sie aus, welche Art von Person angelegt werden soll");
 		} catch (IllegalArgumentException ex) {
 			JOptionPane.showMessageDialog(new JFrame(), "Bitte Felder korrekt und vollständig ausfüllen");
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(new JFrame(), "SQLException: " + ex.getMessage());
 		}
 	}
+	
 
-	/*
+	/**
 	 * Methode befüllt für jeden Benutzer die Grundinformationen und überprüft, ob eine Adresse vorhanden ist
 	 *          
 	 * @author Michael Gottinger
@@ -511,7 +513,13 @@ public class ButtonHandler implements ActionListener {
 
 	}
 
-	// befüllt die für jedes Objekt identischen Tabellen
+	/**
+	 * Methode befüllt die Tabelle Adresse -sofern Adresse vorhanden-, Person und Benutzer
+	 * 
+	 * @param Person für die Objekte erstellt werden sollen
+	 *          
+	 * @author Michael Gottinger
+	 */
 	private void ObjektErstellung(PersonABC person) {
 		try {
 			String insertPerson;
@@ -554,7 +562,11 @@ public class ButtonHandler implements ActionListener {
 		}
 	}
 
-	// entfernt alle Einträge in GUI nach Verbuchung
+	/**
+	 * Methode entfernt alle Einträge aus der benutzerAnlegen GUI.
+	 *          
+	 * @author Michael Gottinger
+	 */
 	private void EintragLöschen() {
 		benutzerAnlegen.setName(null);
 		benutzerAnlegen.setVorname(null);
