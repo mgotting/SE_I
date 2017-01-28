@@ -334,13 +334,16 @@ public class ButtonHandler implements ActionListener {
 			case "INVENTARISIEREN":
 				GUIDatenInv();
 				con = DB_connection.getDbConnection();
-				if (buchInventarisieren.tfTitel.getText().isEmpty() || buchInventarisieren.tfAutor.getText().isEmpty()
-						|| buchInventarisieren.tfIsbn.getText().isEmpty()
-						|| buchInventarisieren.tfAnzahl.getText().isEmpty()
-						|| buchInventarisieren.tfStatus.getText().isEmpty()) {
+//				if (buchInventarisieren.tfTitel.getText().isEmpty() || buchInventarisieren.tfAutor.getText().isEmpty()
+//						|| buchInventarisieren.tfIsbn.getText().isEmpty()
+//						|| buchInventarisieren.tfAnzahl.getText().isEmpty()
+//						|| buchInventarisieren.tfStatus.getText().isEmpty()) {
 					// kein DB Eintrag
-					JOptionPane.showMessageDialog(new JFrame(), "Fehler: Standardeingaben wurden nicht eingetragen!");
-				} else {
+//					JOptionPane.showMessageDialog(new JFrame(), "Fehler: Standardeingaben wurden nicht eingetragen!");
+			if(buchInventarisieren.tfTitel.getText().equals("")){
+			JOptionPane.showMessageDialog(null, "titel fehlt");
+			
+			} else {
 					Buchtyp buch = new Buchtyp(autor, buchtitel, isbn);
 					System.out.println("ActionCommand erhalten: " + e.getActionCommand());
 					String insertBuch = "INSERT INTO buchtyp VALUES ('" + buch.getISBN() + "','" + buch.getAutor()
@@ -435,13 +438,13 @@ public class ButtonHandler implements ActionListener {
 				System.out.println("Buch erfolgreich zurückgegeben");
 			}
 		} catch (AdressException ex){
-			JOptionPane.showMessageDialog(new JFrame(), ex.getMessage());
+			JOptionPane.showMessageDialog(new JFrame(), "AdressException: "+ ex.getMessage());
 		} catch (IllegalArgumentException ex) {
-			this.benutzerAnlegen.setStudiengruppe(null);
-			JOptionPane.showMessageDialog(new JFrame(), ex.getMessage());
+//			this.benutzerAnlegen.setStudiengruppe(null);
+			JOptionPane.showMessageDialog(new JFrame(), "Bitte Felder korrekt und vollständig ausfüllen");
 		} catch (SQLException ex) {
-			JOptionPane.showMessageDialog(new JFrame(), ex.getMessage());
-		}
+			JOptionPane.showMessageDialog(new JFrame(),"SQLException: " + ex.getMessage());
+		} 
 	}
 
 	// befüllt für jeden Benutzer die Grundinformationen und prüft ob Adresse vorhanden.
