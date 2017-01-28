@@ -5,11 +5,11 @@ public class Professor extends PersonABC {
 	
 	public Professor(String name, String vorname, String fakultaet) throws NullPointerException{
 		super(name, vorname);
-//			if (fakultaet == null){			
-//				throw new NullPointerException("Es wurde keine Fakultät eingetragen!");			
-//			}else{
+			if (fakultaet == null){			
+			throw new NullPointerException("Es wurde keine Fakultät eingetragen!");			
+		}else{
 				this.fakultaet=fakultaet;
-//			}
+			}
 	}
 	
 	public Professor(String name, String vorname, String fakultaet, String stra\u00DFe, String hausnummer, int postleitzahl, String ort) throws NullPointerException, AdressException{
