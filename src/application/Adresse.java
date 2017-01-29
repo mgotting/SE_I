@@ -7,15 +7,11 @@ public class Adresse {
 	private String ort;
 
 
-	public Adresse(String straﬂe, String hausnummer, int postleitzahl, String ort) throws AdressException{
-		if(straﬂe==null || hausnummer==null || ort==null){
-			throw new AdressException("Adresse nicht vollst‰ndig eingegeben!");
-		}else{
+	public Adresse(String straﬂe, String hausnummer, int postleitzahl, String ort){
 			this.straﬂe = straﬂe;
 			this.hausnummer = hausnummer;
 			this.postleitzahl = postleitzahl;
 			this.ort = ort;
-		}
 	}
 
 	public String getStra\u00DFe() {

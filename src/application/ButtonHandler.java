@@ -89,6 +89,7 @@ public class ButtonHandler implements ActionListener {
 				GUIDaten();
 				con = DB_connection.getDbConnection();
 				if (adresseVorhanden == true) {
+				
 					// 4. einfügen in Tabelle Adresse
 					Adresse adresse = new Adresse(straße, hausnummer, postleitzahl, ort);
 					String insertAdresse = "INSERT INTO adresse(Straße, Hausnummer, Postleitzahl, Ort) VALUES ('"
@@ -102,6 +103,36 @@ public class ButtonHandler implements ActionListener {
 						|| benutzerAnlegen.tfPasswort.getText().isEmpty()) {
 					// kein DB Eintrag
 					JOptionPane.showMessageDialog(new JFrame(), "Fehler: Standardeingaben wurden nicht eingetragen!");
+				} //Abfrage, ob ein Feld bei der Adresseingabe unausgefüllt ist und deshalb kein Benutzer mit Adresse angelegt werden kann
+				else if (benutzerAnlegen.tfStraße.getText().isEmpty() == false && benutzerAnlegen.tfHausnummer.getText().isEmpty()
+				&& benutzerAnlegen.tfPostleitzahl.getText().isEmpty() && benutzerAnlegen.tfOrt.getText().isEmpty() 
+				|| benutzerAnlegen.tfStraße.getText().isEmpty() == false && benutzerAnlegen.tfHausnummer.getText().isEmpty()== false 
+				&& benutzerAnlegen.tfPostleitzahl.getText().isEmpty() && benutzerAnlegen.tfOrt.getText().isEmpty() 
+				|| benutzerAnlegen.tfStraße.getText().isEmpty() == false && benutzerAnlegen.tfHausnummer.getText().isEmpty() == false 
+				&& benutzerAnlegen.tfPostleitzahl.getText().isEmpty() == false && benutzerAnlegen.tfOrt.getText().isEmpty() 
+				|| benutzerAnlegen.tfStraße.getText().isEmpty() && benutzerAnlegen.tfHausnummer.getText().isEmpty() == false
+				&& benutzerAnlegen.tfPostleitzahl.getText().isEmpty()&& benutzerAnlegen.tfOrt.getText().isEmpty() 
+				|| benutzerAnlegen.tfStraße.getText().isEmpty() && benutzerAnlegen.tfHausnummer.getText().isEmpty() == false
+				&& benutzerAnlegen.tfPostleitzahl.getText().isEmpty()== false && benutzerAnlegen.tfOrt.getText().isEmpty()
+				|| benutzerAnlegen.tfStraße.getText().isEmpty() && benutzerAnlegen.tfHausnummer.getText().isEmpty() == false
+				&& benutzerAnlegen.tfPostleitzahl.getText().isEmpty()==false && benutzerAnlegen.tfOrt.getText().isEmpty()==false
+				|| benutzerAnlegen.tfStraße.getText().isEmpty() && benutzerAnlegen.tfHausnummer.getText().isEmpty()
+				&& benutzerAnlegen.tfPostleitzahl.getText().isEmpty()==false && benutzerAnlegen.tfOrt.getText().isEmpty()
+				|| benutzerAnlegen.tfStraße.getText().isEmpty() && benutzerAnlegen.tfHausnummer.getText().isEmpty()
+				&& benutzerAnlegen.tfPostleitzahl.getText().isEmpty()&& benutzerAnlegen.tfOrt.getText().isEmpty()==false
+				|| benutzerAnlegen.tfStraße.getText().isEmpty()==false && benutzerAnlegen.tfHausnummer.getText().isEmpty()==false
+				&& benutzerAnlegen.tfPostleitzahl.getText().isEmpty()&& benutzerAnlegen.tfOrt.getText().isEmpty()==false
+				|| benutzerAnlegen.tfStraße.getText().isEmpty()==false && benutzerAnlegen.tfHausnummer.getText().isEmpty()
+				&& benutzerAnlegen.tfPostleitzahl.getText().isEmpty()&& benutzerAnlegen.tfOrt.getText().isEmpty()==false
+				|| benutzerAnlegen.tfStraße.getText().isEmpty() && benutzerAnlegen.tfHausnummer.getText().isEmpty()==false
+				&& benutzerAnlegen.tfPostleitzahl.getText().isEmpty()&& benutzerAnlegen.tfOrt.getText().isEmpty()==false
+				|| benutzerAnlegen.tfStraße.getText().isEmpty()==false && benutzerAnlegen.tfHausnummer.getText().isEmpty()
+				&& benutzerAnlegen.tfPostleitzahl.getText().isEmpty()==false && benutzerAnlegen.tfOrt.getText().isEmpty()
+				|| benutzerAnlegen.tfStraße.getText().isEmpty() && benutzerAnlegen.tfHausnummer.getText().isEmpty()
+				&& benutzerAnlegen.tfPostleitzahl.getText().isEmpty()==false && benutzerAnlegen.tfOrt.getText().isEmpty()==false
+				|| benutzerAnlegen.tfStraße.getText().isEmpty() == false && benutzerAnlegen.tfHausnummer.getText().isEmpty()
+				&& benutzerAnlegen.tfPostleitzahl.getText().isEmpty()==false && benutzerAnlegen.tfOrt.getText().isEmpty()==false){
+						JOptionPane.showMessageDialog(new JFrame(), "Die Adresse ist nicht vollständig eingetragen");
 				} else {
 					switch (this.benutzerAnlegen.getBenutzerArt()) {
   //Student anlegen---------------------------------------------------------------------------------------------------------
@@ -192,11 +223,12 @@ public class ButtonHandler implements ActionListener {
 						con.disconnect();
 						break;
 					}
+				
 				}
 				break;
   //zu ändernden Benutzer auswählen, damit sich die GUI mit den DB-Werten befüllt---------------------------------------------
 			case "AUSWÄHLEN":
-
+				
 				if (benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow() == -1)
 					throw new JTableException("Fehler: Zeile nicht markiert!");
 				String art = (String) benutzerÄndern.tableviewUser.getSQLTable()
@@ -349,8 +381,7 @@ public class ButtonHandler implements ActionListener {
 					}
 
 				} else {
-					// wenn bereits eine Adresse vorhanden war, wird diese
-					// aktualisiert
+					// wenn bereits eine Adresse vorhanden war, wird diese aktualisiert
 					System.out.println("Welche AdressID hast du? " + adressID);
 					adresse = new Adresse(benutzerÄndern.tfStraße.getText().toString(),
 							benutzerÄndern.tfHausnummer.getText().toString(),
@@ -360,7 +391,6 @@ public class ButtonHandler implements ActionListener {
 							+ "', Hausnummer = '" + adresse.getHausnummer() + "', Postleitzahl = "
 							+ adresse.getPostleitzahl() + ", Ort = '" + adresse.getOrt()
 							+ "' WHERE library.adresse.AdressID= " + adressID + "";
-					System.out.println(updateAdresse);
 					boolean adresseGeändert = con.executequery(updateAdresse);
 					System.out.println("Adresse erfolgreich geändert: " + adresseGeändert);
 
@@ -469,9 +499,7 @@ public class ButtonHandler implements ActionListener {
 			JOptionPane.showMessageDialog(new JFrame(), "Bitte Felder korrekt und vollständig ausfüllen");
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(new JFrame(), "SQLException: " + ex.getMessage());
-		} catch (Exception ex){
-			JOptionPane.showMessageDialog(new JFrame(), ex.getMessage());
-			}
+		} 
 	}
 	
 
@@ -485,8 +513,8 @@ public class ButtonHandler implements ActionListener {
 		vorname = this.benutzerAnlegen.getVorname();
 		benutzername = this.benutzerAnlegen.getBenutzername();
 		passwort = this.benutzerAnlegen.getPasswort();
-		if (this.benutzerAnlegen.getStraße().equals("") || this.benutzerAnlegen.getHausnummer().equals("")
-				|| this.benutzerAnlegen.getPLZ() == 0 || this.benutzerAnlegen.getOrt().equals("")) {
+		if (benutzerAnlegen.tfStraße.getText().isEmpty() || benutzerAnlegen.tfHausnummer.getText().isEmpty()
+			&& benutzerAnlegen.tfPostleitzahl.getText().isEmpty()&& benutzerAnlegen.tfOrt.getText().isEmpty()) {
 			adresseVorhanden = false;
 		} else {
 			adresseVorhanden = true;
@@ -581,7 +609,12 @@ public class ButtonHandler implements ActionListener {
 		benutzerAnlegen.setPLZ(null);
 	}
 
-	// entfernt alle Einträge in GUI nach Aktualisierung/Änderung
+	/**
+	 * Methode entfernt alle Einträge aus der benutzerÄndern GUI, nach dem Änderungen durchgeführt wurden.
+	 *          
+	 * @author Sandra Speckmeier
+	 */
+
 	private void EintragLöschenÄndern() {
 		benutzerÄndern.setName(null);
 		benutzerÄndern.setVorname(null);
