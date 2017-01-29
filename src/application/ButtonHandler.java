@@ -421,8 +421,14 @@ public class ButtonHandler implements ActionListener {
 					BuchstatusET bstatus = BuchstatusET.nichtausleihbar;
 					ExemplarErstellung(buch, bstatus);
 				}
-
+				
+				if(this.buchInventarisieren.getAnzahl() == 0)
+				{
+					JOptionPane.showMessageDialog(new JFrame(), "Buch wurde erfolgreich verbucht");
+				}
+				else{
 				JOptionPane.showMessageDialog(new JFrame(), "Buch und Exemplar(e) wurden erfolgreich verbucht!");
+				}
 				buchInventarisieren.tableviewBooks.updateSQLTable(DB_connection.getAllBooks());
 				break;
 //5.Anwendungsfall ausleihen--------------------------------------------------------------------------------------------
