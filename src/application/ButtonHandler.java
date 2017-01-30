@@ -437,7 +437,6 @@ public class ButtonHandler implements ActionListener {
 					JOptionPane.showMessageDialog(new JFrame(), "Sie haben das Maximum von 2 Ausleihen erreicht");
 					return;
 				}
-				counter++;
 				System.out.println("is in Ausleihe drinnen" + angemeldeterUser);
 				GUIDatenAus();
 				con = DB_connection.getDbConnection();
@@ -445,7 +444,9 @@ public class ButtonHandler implements ActionListener {
 						|| buchAusleihen.tfIsbn.getText().isEmpty()) {
 					// kein DB Eintrag
 					JOptionPane.showMessageDialog(new JFrame(), "Fehler: Standardeingaben wurden nicht eingetragen!");
+					return;
 				} else {
+					counter++;
 					int BuchID = Integer.parseInt(buchAusleihen.tableviewBooks.getSQLTable()
 							.getValueAt(buchAusleihen.tableviewBooks.getSQLTable().getSelectedRow(), 3).toString());
 					Ausleihe ausleihe = new Ausleihe(BuchID, angemeldeterUser);
