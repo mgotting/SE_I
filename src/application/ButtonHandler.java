@@ -367,8 +367,8 @@ public class ButtonHandler implements ActionListener {
 
 						// neue Adresse in DB eintragen
 						String insertAdresse = "INSERT INTO adresse(Straße, Hausnummer, Postleitzahl, Ort) VALUES ('"
-								+ adresse.getStraße() + "','" + adresse.getHausnummer() + "',"
-								+ adresse.getPostleitzahl() + ",'" + adresse.getOrt() + "');";
+								+ benutzerÄndern.getStraße() + "','" + benutzerÄndern.getHausnummer() + "',"
+								+ benutzerÄndern.getPLZ() + ",'" + benutzerÄndern.getOrt() + "');";
 						generatedAdressID = con.executequery_autoKey(insertAdresse, true);
 
 						// AdressID zur entsprechenden Person eintragen
