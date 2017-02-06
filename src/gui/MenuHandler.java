@@ -20,7 +20,6 @@ public class MenuHandler implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		try{
 			//Prüfen, welches Kommando kommt
 			switch (e.getActionCommand()){ 

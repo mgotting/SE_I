@@ -64,19 +64,18 @@ public class Startmenu {
 		benutzerÄndern.setActionCommand(ACTION_BENUTZER_ÄNDERN);
 		benutzerÄndern.addActionListener(controlMenu);
 		menu.add(buchInventarisieren);
-		buchAusleihen.setActionCommand(ACTION_BUCH_AUSLEIHEN);
-		buchAusleihen.addActionListener(controlMenu);
-		}
-		menu.add(buchZurückgeben);
 		buchInventarisieren.setActionCommand(ACTION_BUCH_INVENTARISIEREN);
 		buchInventarisieren.addActionListener(controlMenu);
-		menu.add(buchAusleihen);
+		}
+		menu.add(buchZurückgeben);
 		buchZurückgeben.setActionCommand(ACTION_BUCH_ZURÜCKGEBEN);
 		buchZurückgeben.addActionListener(controlMenu);
 		menu.add(buchAusleihen);
+		buchAusleihen.setActionCommand(ACTION_BUCH_AUSLEIHEN);
+		buchAusleihen.addActionListener(controlMenu);
+		menu.add(buchStatus);
 		buchStatus.setActionCommand(ACTION_BUCH_STATUS_ANZEIGEN);
 		buchStatus.addActionListener(controlMenu);
-		menu.add(buchStatus);
 		
 		frame.setTitle("Menu Punkt wählen");
 		frame.setContentPane(panel);
