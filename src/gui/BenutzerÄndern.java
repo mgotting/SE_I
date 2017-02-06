@@ -260,12 +260,16 @@ public class BenutzerÄndern {
 		// JTextField:
 		tfName.setBounds(x_center, y_north, x_width, y_height);
 		panel.add(tfName);
+		tfName.setEditable(false);
 		tfVorname.setBounds(x_center, y_center, x_width, y_height);
 		panel.add(tfVorname);
+		tfVorname.setEditable(false);
 		tfBenutzername.setBounds(x_center, y_center2, x_width, y_height);
 		panel.add(tfBenutzername);
+		tfBenutzername.setEditable(false);
 		tfPasswort.setBounds(x_center, y_center3, x_width, y_height);
 		panel.add(tfPasswort);
+		tfPasswort.setEditable(false);
 		tfMatrikelnummer.setBounds(x_center, y_south, x_width, y_height);
 		panel.add(tfMatrikelnummer);
 		tfMatrikelnummer.setEditable(false);
@@ -284,12 +288,7 @@ public class BenutzerÄndern {
 		tfPostleitzahl.setBounds(x_center, y_opt3, x_width, y_height);
 		panel.add(tfPostleitzahl);
 		tfOrt.setBounds(x_center, y_opt4, x_width, y_height);
-		panel.add(tfOrt);
-		
-		tfMatrikelnummer.setEditable(true);
-    	tfStudiengruppe.setEditable(true);
-    	tfFakultät.setEditable(true);
-		
+		panel.add(tfOrt);		
 
 		if(tableviewUser==null){
 			tableviewUser = new JTableview(DB_connection.getUserInfo());
@@ -300,6 +299,30 @@ public class BenutzerÄndern {
 		
 		auswahl.setTitle("Benutzer ändern");
 		auswahl.setContentPane(panel);
+	}
+	
+	/**
+	 * Gibt Adressfelder zur Eingabe frei
+	 *          
+	 * @author Michael Gottinger
+	 */
+	public void adresseFreigeben(){
+		tfStraße.setEditable(true);
+		tfHausnummer.setEditable(true);
+		tfPostleitzahl.setEditable(true);
+		tfOrt.setEditable(true);
+	}
+	
+	/**
+	 * Sperrt Adressfelder für Eingabe
+	 *          
+	 * @author Michael Gottinger
+	 */
+	public void adresseSperren(){
+		tfStraße.setEditable(false);
+		tfHausnummer.setEditable(false);
+		tfPostleitzahl.setEditable(false);
+		tfOrt.setEditable(false);
 	}
 
 }

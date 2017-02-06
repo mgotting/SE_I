@@ -21,7 +21,6 @@ public class ButtonHandler implements ActionListener {
 	private BuchAusleihe buchAusleihen;
 	private BuchRueckgabe buchRückgabe;
 	private BuchInventarisieren buchInventarisieren;
-	private BuchStatus buchstatus;
 	private Login login;
 	private DB_connection con;
 	private static String angemeldeterUser;
@@ -32,6 +31,7 @@ public class ButtonHandler implements ActionListener {
 	private boolean adresseVorhanden;
 	private Adresse adresse;
 	private int counter = 0;
+	private PersonABC person;
 
 	// create reference to GUI
 	public ButtonHandler(BenutzerAnlegen benutzerAnlegen) {
@@ -54,10 +54,6 @@ public class ButtonHandler implements ActionListener {
 		this.buchInventarisieren = buchInventarisieren;
 	}
 
-	public ButtonHandler(BuchStatus buchstatus) {
-		this.buchstatus = buchstatus;
-	}
-
 	public ButtonHandler(Login login) {
 		this.login = login;
 	}
@@ -70,15 +66,15 @@ public class ButtonHandler implements ActionListener {
 //Anwendungsfall anmelden:-------------------------------------------------------------------------------------------
 			case "ANMELDEN":
 				con = DB_connection.getDbConnection();
-				if (login.getBenutzername().equals(con.executequery_Value(
-						DB_connection.checkAnmeldung(login.getBenutzername(), login.getPasswort())))) {
-					angemeldeterUser = login.getBenutzername();
-					System.out.println(angemeldeterUser);
+				angemeldeterUser = login.getBenutzername();
+				if(PrüfungAnmeldung()==true){
 					login.panel.setVisible(false);
-					Startmenu startmenu = new Startmenu(angemeldeterUser);
-					startmenu.launchAuswahl(this.login.login);
-					System.out.println("Benutzer erfolgreich angemeldet");
+					personAnlegen();
+					Startmenu startmenu = new Startmenu();
+					startmenu.launchStartmenu(this.login.login, art);
+					System.out.println(angemeldeterUser+" erfolgreich angemeldet");
 				} else {
+					System.out.println(angemeldeterUser+" konne nicht angemeldet werden");
 					JOptionPane.showMessageDialog(new JFrame(), "Benutzername / Passwort falsch");
 					login.setBenutzername(null);
 					login.setPasswort(null);
@@ -227,35 +223,31 @@ public class ButtonHandler implements ActionListener {
 				}
 				break;
   //zu ändernden Benutzer auswählen, damit sich die GUI mit den DB-Werten befüllt---------------------------------------------
-			case "AUSWÄHLEN":
-				
+			case "AUSWÄHLEN":	
+				benutzerÄndern.adresseSperren();
 				if (benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow() == -1)
 					throw new JTableException("Fehler: Zeile nicht markiert!");
 				String art = (String) benutzerÄndern.tableviewUser.getSQLTable()
 						.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 12).toString();
 				benutzerÄndern.setBenutzerArt(art);
 				System.out.println("Welcher Benutzer bist du? " + art);
-
-				benutzerÄndern.tfMatrikelnummer.setEditable(false);
-				benutzerÄndern.tfStudiengruppe.setEditable(false);
-				benutzerÄndern.tfFakultät.setEditable(false);
-				benutzerÄndern.tfStraße.setEditable(false);
-				benutzerÄndern.tfHausnummer.setEditable(false);
-				benutzerÄndern.tfPostleitzahl.setEditable(false);
-				benutzerÄndern.tfOrt.setEditable(false);
-
+				
 				String name = (String) benutzerÄndern.tableviewUser.getSQLTable()
 						.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 1).toString();
 				benutzerÄndern.setName(name);
+				benutzerÄndern.tfName.setEditable(true);
 				String vorname = (String) benutzerÄndern.tableviewUser.getSQLTable()
 						.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 2).toString();
 				benutzerÄndern.setVorname(vorname);
+				benutzerÄndern.tfVorname.setEditable(true);
 				String benutzername = (String) benutzerÄndern.tableviewUser.getSQLTable()
 						.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 3).toString();
 				benutzerÄndern.setBenutzername(benutzername);
+				benutzerÄndern.tfBenutzername.setEditable(true);
 				String passwort = (String) benutzerÄndern.tableviewUser.getSQLTable()
 						.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 4).toString();
 				benutzerÄndern.setPasswort(passwort);
+				benutzerÄndern.tfPasswort.setEditable(true);
 
 				switch (art) {
    // Benutzer vom Typ Student (s) wurde ausgewählt
@@ -267,10 +259,7 @@ public class ButtonHandler implements ActionListener {
 							.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 6).toString();
 					benutzerÄndern.setStudiengruppe(studiengruppe);
 					benutzerÄndern.tfStudiengruppe.setEditable(true);
-					benutzerÄndern.tfStraße.setEditable(true);
-					benutzerÄndern.tfHausnummer.setEditable(true);
-					benutzerÄndern.tfPostleitzahl.setEditable(true);
-					benutzerÄndern.tfOrt.setEditable(true);
+					benutzerÄndern.adresseFreigeben();
 					break;
   // Benutzer vom Typ Professor (p) wurde ausgewählt
 				case "p":
@@ -278,10 +267,7 @@ public class ButtonHandler implements ActionListener {
 							.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 7).toString();
 					benutzerÄndern.setFakultät(fakultät);
 					benutzerÄndern.tfFakultät.setEditable(true);
-					benutzerÄndern.tfStraße.setEditable(true);
-					benutzerÄndern.tfHausnummer.setEditable(true);
-					benutzerÄndern.tfPostleitzahl.setEditable(true);
-					benutzerÄndern.tfOrt.setEditable(true);
+					benutzerÄndern.adresseFreigeben();
 					break;
 				}
 
@@ -506,7 +492,9 @@ public class ButtonHandler implements ActionListener {
 			JOptionPane.showMessageDialog(new JFrame(), "Bitte Felder korrekt und vollständig ausfüllen");
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(new JFrame(), "SQLException: " + ex.getMessage());
-		} 
+		} catch (NullPointerException ex){
+			
+		}
 	}
 	
 
@@ -634,5 +622,45 @@ public class ButtonHandler implements ActionListener {
 		benutzerÄndern.setHausnummer(null);
 		benutzerÄndern.setOrt(null);
 		benutzerÄndern.setPLZ(null);
+	}
+	
+	/**
+	 * Methode prüft, ob Anmeldung durchgeführt werden kann
+	 *          
+	 * @author Michael Gottinger
+	 */
+	private boolean PrüfungAnmeldung() throws SQLException{
+		return angemeldeterUser.equals(con.executequery_Value(DB_connection.checkAnmeldung(angemeldeterUser, login.getPasswort()),1));
+	}
+	
+	public static String getAngemeldeterUser(){
+		return angemeldeterUser;
+	}
+	
+	/**
+	 * Methode legt für den anzumeldenden Benutzer die Objekte Person sowie Benutzer an
+	 *          
+	 * @author Michael Gottinger
+	 */
+	private void personAnlegen() throws SQLException{
+		String personID = con.executequery_Value(DB_connection.checkAnmeldung(angemeldeterUser, login.getPasswort()), 3);
+		art = (con.executequery_Value(DB_connection.getPerson(personID), 5)).charAt(0);
+		String vorname = con.executequery_Value(DB_connection.getPerson(personID), 2);
+		String nachname = con.executequery_Value(DB_connection.getPerson(personID), 3);
+		if (art =='s'){
+			int matrikelnummer = Integer.parseInt(con.executequery_Value(DB_connection.getStudent(personID), 3));
+			Studiengruppe studiengruppe = Studiengruppe.valueOf(con.executequery_Value(DB_connection.getStudent(personID), 2));
+			person = new Student(nachname, vorname, matrikelnummer, studiengruppe);
+			System.out.println("Student erstellt");
+		} if (art =='p'){
+			String fakultät = con.executequery_Value(DB_connection.getProfessor(personID), 1);
+			person = new Professor(nachname, vorname, fakultät);
+			System.out.println("Professor erstellt");
+		} else {
+			person = new Personal(nachname, vorname);
+			System.out.println("Personal erstellt");
+		}
+		benutzer = new Benutzer(angemeldeterUser, login.getPasswort(), person);
+		System.out.println("Benutzer erstellt");
 	}
 }

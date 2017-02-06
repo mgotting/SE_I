@@ -62,7 +62,7 @@ public class DB_connection {
 	}
 	
 	/**
-	 * Methode gibt SQL-Query aus, mit der überprüft wird, ob die Anmeldung erfolgreich war
+	 * Methode gibt SQL-Query aus, die Benutzer mit dem eingegebenen Passwort zurückgibt.
 	 * 
 	 * @param 
 	 *          
@@ -71,7 +71,7 @@ public class DB_connection {
 	 * @author Michael Gottinger
 	 */
 	public static String checkAnmeldung(String benutzername, String passwort){
-		return "SELECT Benutzername FROM library.benutzer WHERE Benutzername='"+benutzername+"' AND Passwort='"+passwort+"'";
+		return "SELECT * FROM library.benutzer WHERE Benutzername='"+benutzername+"' AND Passwort='"+passwort+"'";
 	}
 	
 	/**
@@ -114,6 +114,50 @@ public class DB_connection {
 	 */
 	public static String getAllBooks(){
 		return "SELECT library.exemplar.BuchID, library.exemplar.ISBN, library.exemplar.Status, Titel, Autor FROM library.exemplar, library.buchtyp WHERE library.exemplar.ISBN = library.buchtyp.ISBN ORDER BY BuchID";
+	}
+	
+	/**
+	 * SQL-Query zeigt die Person zur übergebenen PersonID an
+	 *        
+	 * @return SQL-Query
+	 *          
+	 * @author Michael Gottinger
+	 */
+	public static String getPerson(String personID){
+		return "SELECT * FROM library.person WHERE library.person.personID = '"+personID+"';";
+	}
+	
+	/**
+	 * SQL-Query zeigt den Studenten zur übergebenen PersonID an
+	 *        
+	 * @return SQL-Query
+	 *          
+	 * @author Michael Gottinger
+	 */
+	public static String getStudent(String personID){
+		return "SELECT * FROM library.student WHERE library.student.personID = '"+personID+"';";
+	}
+		
+	/**
+	 * SQL-Query zeigt den Professor zur übergebenen PersonID an
+	 *        
+	 * @return SQL-Query
+	 *          
+	 * @author Michael Gottinger
+	 */
+	public static String getProfessor(String personID){
+		return "SELECT * FROM library.professor WHERE library.professor.personID = '"+personID+"';";
+	}
+		
+	/**
+	 * SQL-Query zeigt das Personal zur übergebenen PersonID an
+	 *        
+	 * @return SQL-Query
+	 *          
+	 * @author Michael Gottinger
+	 */
+	public static String getPersonal(String personID){
+			return "SELECT * FROM library.personal WHERE library.personal.personID = '"+personID+"';";
 	}
 	
 	public static String getAllAvailableBooks(){
@@ -162,12 +206,12 @@ public class DB_connection {
 	 *          
 	 * @author Michael Gottinger
 	 */
-	public String executequery_Value(String SQLquery) throws SQLException{
+	public String executequery_Value(String SQLquery, int Value) throws SQLException{
 		Statement st = cn.createStatement();
 		ResultSet rs = st.executeQuery(SQLquery);
 		String values = null;
 		if (rs.next())
-			values = rs.getString(1);
+			values = rs.getString(Value);
 		return values;
 	}
 	

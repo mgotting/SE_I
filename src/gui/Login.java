@@ -1,6 +1,3 @@
-/**
- * 
- */
 package gui;
 
 import javax.swing.*;
@@ -9,8 +6,9 @@ import connectionToDatabase.*;
 import application.ButtonHandler;
 
 /**
- * @author Gotti
- *
+ * Klasse zur Erstellung der GUI zum Einloggen
+ * 
+ * @author Michael Gottinger
  */
  
 public class Login {
@@ -19,9 +17,8 @@ public class Login {
 	private JButton anmelden;
 	private ButtonHandler controlButton;
 	private JLabel labelBenutzername, labelPasswort;
-	private JTextField benutzername, passwort;
-	public JTableview tableview;
-	private JScrollPane scrollPane;
+	private JTextField benutzername;
+	private JPasswordField passwort;
 	
 	public final static String ACTION_LOGIN = "ANMELDEN";
 	
@@ -56,7 +53,7 @@ public class Login {
 		labelBenutzername = new JLabel("Benutzername:", JLabel.LEFT);
 		labelPasswort = new JLabel("Passwort:", JLabel.LEFT);
 		benutzername = new JTextField(45);
-		passwort = new JTextField(10);
+		passwort = new JPasswordField(10);
 	}
 	
 	public String getBenutzername(){
@@ -69,6 +66,7 @@ public class Login {
 	}
 	
 	public String getPasswort(){
+		@SuppressWarnings("deprecation")
 		String passwort = this.passwort.getText();
 		return passwort;
 	}
@@ -102,12 +100,5 @@ public class Login {
 		login.setLocation(100, 100);
 		login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Schließen des Fensters ist möglich
 		login.setVisible(true);
-		
-		if(tableview==null){
-			tableview = new JTableview(DB_connection.getAllUsers());
-			scrollPane = new JScrollPane(tableview.getSQLTable());
-			scrollPane.setBounds(x_left, y_south, x_widthLibrary, y_heightLibrary);
-			panel.add(scrollPane);
-		}
 	}
 }

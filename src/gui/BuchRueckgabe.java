@@ -17,7 +17,6 @@ public class BuchRueckgabe {
 	JButton zurückgeben;
 	public JTableview tableview;
 	private JScrollPane scrollPane;
-	String angemeldeterUser;
 	
 	ButtonHandler controlButton;
 	
@@ -32,15 +31,13 @@ public class BuchRueckgabe {
 	int x_centerLibrary = 100;
 	
 	
-	public BuchRueckgabe(String angemeldeterUser){
-		this.angemeldeterUser = angemeldeterUser;
+	public BuchRueckgabe(){
 		panel = new JPanel();
 		zurückgeben = new JButton("zurückgeben");
 		controlButton = new ButtonHandler(this);
 		panel.setLayout(null);
 		zurückgeben.setActionCommand(ACTION_BUCH_ZURÜCKGEBEN);
 		zurückgeben.addActionListener(controlButton);
-		System.out.println("User: "+angemeldeterUser);
 	}
 	
 	public void launchRückgabe(JFrame auswahl) {
@@ -50,7 +47,7 @@ public class BuchRueckgabe {
 		panel.add(zurückgeben);
 		
 		if(tableview==null){
-			tableview = new JTableview(DB_connection.getAllRentBooks(angemeldeterUser));
+			tableview = new JTableview(DB_connection.getAllRentBooks(ButtonHandler.getAngemeldeterUser()));
 			scrollPane = new JScrollPane(tableview.getSQLTable());
 			scrollPane.setBounds(x_centerLibrary, y_south, x_widthLibrary, y_heightLibrary);
 			panel.add(scrollPane);

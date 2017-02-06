@@ -5,6 +5,8 @@ package gui;
 
 import javax.swing.*;
 
+import application.PersonABC;
+
 /**
  * @author Michael Gottinger, Sandra Speckmeier
  *
@@ -15,7 +17,6 @@ public class Startmenu {
 	JMenuBar bar;
 	JMenu menu;
 	JMenuItem benutzerAnlegen, benutzerÄndern, buchZurückgeben, buchAusleihen, buchInventarisieren, buchStatus;
-	String angemeldeterUser;
 	
 	int x_right = 330;
 	int y_north = 60;
@@ -31,8 +32,7 @@ public class Startmenu {
 	
 	public MenuHandler controlMenu;
 	
-	public Startmenu(String angemeldeterUser){
-		this.angemeldeterUser=angemeldeterUser;
+	public Startmenu(){
 		controlMenu = new MenuHandler(this);
 		panel = new JPanel();
 		// Erstellen einer Menüleiste
@@ -50,24 +50,26 @@ public class Startmenu {
 		panel.setLayout(null);
 	}
 	
-	public void launchAuswahl(JFrame frame){
+	public void launchStartmenu(JFrame frame, char art){
 		this.frame = frame;
 		frame.setJMenuBar(bar);
 		// Menü wird der Menüleiste hinzugefügt
 		bar.add(menu);
 		// Wir fügen das JMenuItem unserem JMenu hinzu
+		if(art == 'b'){
 		menu.add(benutzerAnlegen);
 		benutzerAnlegen.setActionCommand(ACTION_BENUTZER_ANLEGEN);
 		benutzerAnlegen.addActionListener(controlMenu);
 		menu.add(benutzerÄndern);
 		benutzerÄndern.setActionCommand(ACTION_BENUTZER_ÄNDERN);
 		benutzerÄndern.addActionListener(controlMenu);
-		menu.add(buchZurückgeben);
-		buchInventarisieren.setActionCommand(ACTION_BUCH_INVENTARISIEREN);
-		buchInventarisieren.addActionListener(controlMenu);
 		menu.add(buchInventarisieren);
 		buchAusleihen.setActionCommand(ACTION_BUCH_AUSLEIHEN);
 		buchAusleihen.addActionListener(controlMenu);
+		}
+		menu.add(buchZurückgeben);
+		buchInventarisieren.setActionCommand(ACTION_BUCH_INVENTARISIEREN);
+		buchInventarisieren.addActionListener(controlMenu);
 		menu.add(buchAusleihen);
 		buchZurückgeben.setActionCommand(ACTION_BUCH_ZURÜCKGEBEN);
 		buchZurückgeben.addActionListener(controlMenu);

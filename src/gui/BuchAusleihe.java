@@ -27,7 +27,6 @@ public class BuchAusleihe {
 	JButton ausleihen, buchAuswählen;
 	public JTableview tableviewBooks;
 	JScrollPane scrollPane;
-	String angemeldeterUser;
 	
 	ButtonHandler controlButton;
 	
@@ -56,8 +55,7 @@ public class BuchAusleihe {
 	public JLabel labelTitel, labelAutor, labelISBN;
 	//private String benutzerArt;
 	
-	public BuchAusleihe(String angemeldeterUser){
-		this.angemeldeterUser = angemeldeterUser;
+	public BuchAusleihe(){
 		panel = new JPanel();
 		// Erzeugung eines Objektes der Klasse JButton
 		ausleihen = new JButton("ausleihen");
@@ -76,7 +74,6 @@ public class BuchAusleihe {
 		tfTitel = new JTextField(50);
 		tfAutor = new JTextField(45);
 		tfIsbn = new JTextField(20);
-		System.out.println("User: "+angemeldeterUser);
 	}
 		
 	public void launchBuchAusleihen(JFrame auswahl){
