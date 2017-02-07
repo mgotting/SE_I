@@ -25,7 +25,7 @@ public class ButtonHandler implements ActionListener {
 	private DB_connection con;
 	private static String angemeldeterUser;
 	private String name, vorname, benutzername, passwort, straße, ort, hausnummer, buchtitel, autor, isbn;
-	private int postleitzahl, generatedID, generatedAdressID, adressID, anzahl;
+	private int postleitzahl, generatedID, generatedAdressID, adressID;
 	private char art;
 	private Benutzer benutzer;
 	private boolean adresseVorhanden;
@@ -63,7 +63,7 @@ public class ButtonHandler implements ActionListener {
 		try {
 			// Prüfen, welches Kommando kommt
 			switch (e.getActionCommand()) {
-//Anwendungsfall anmelden:-------------------------------------------------------------------------------------------
+//Anmeldemaske:-------------------------------------------------------------------------------------------
 			case "ANMELDEN":
 				con = DB_connection.getDbConnection();
 				angemeldeterUser = login.getBenutzername();
@@ -83,53 +83,19 @@ public class ButtonHandler implements ActionListener {
 //F2: Anwendungsfall anlegen:--------------------------------------------------------------------------------------------
 			case "ANLEGEN":
 				GUIDaten();
+				if(adresseNichtKorrektBefüllt()){
+					JOptionPane.showMessageDialog(new JFrame(), "Die Adresse ist nicht vollständig eingetragen");
+					break;
+				}
 				con = DB_connection.getDbConnection();
 				if (adresseVorhanden == true) {
-				
 					// 4. einfügen in Tabelle Adresse
 					Adresse adresse = new Adresse(straße, hausnummer, postleitzahl, ort);
 					String insertAdresse = "INSERT INTO adresse(Straße, Hausnummer, Postleitzahl, Ort) VALUES ('"
 							+ adresse.getStraße() + "','" + adresse.getHausnummer() + "','" + adresse.getPostleitzahl()
 							+ "','" + adresse.getOrt() + "');";
-					generatedAdressID = con.executequery_autoKey(insertAdresse, true);
+					generatedAdressID = con.executequery_autoKey(insertAdresse, true);									
 				}
-
-				if (benutzerAnlegen.tfName.getText().isEmpty() || benutzerAnlegen.tfVorname.getText().isEmpty()
-						|| benutzerAnlegen.tfBenutzername.getText().isEmpty()
-						|| benutzerAnlegen.tfPasswort.getText().isEmpty()) {
-					// kein DB Eintrag
-					JOptionPane.showMessageDialog(new JFrame(), "Fehler: Standardeingaben wurden nicht eingetragen!");
-				} //Abfrage, ob ein Feld bei der Adresseingabe unausgefüllt ist und deshalb kein Benutzer mit Adresse angelegt werden kann
-				else if (benutzerAnlegen.tfStraße.getText().isEmpty() == false && benutzerAnlegen.tfHausnummer.getText().isEmpty()
-				&& benutzerAnlegen.tfPostleitzahl.getText().isEmpty() && benutzerAnlegen.tfOrt.getText().isEmpty() 
-				|| benutzerAnlegen.tfStraße.getText().isEmpty() == false && benutzerAnlegen.tfHausnummer.getText().isEmpty()== false 
-				&& benutzerAnlegen.tfPostleitzahl.getText().isEmpty() && benutzerAnlegen.tfOrt.getText().isEmpty() 
-				|| benutzerAnlegen.tfStraße.getText().isEmpty() == false && benutzerAnlegen.tfHausnummer.getText().isEmpty() == false 
-				&& benutzerAnlegen.tfPostleitzahl.getText().isEmpty() == false && benutzerAnlegen.tfOrt.getText().isEmpty() 
-				|| benutzerAnlegen.tfStraße.getText().isEmpty() && benutzerAnlegen.tfHausnummer.getText().isEmpty() == false
-				&& benutzerAnlegen.tfPostleitzahl.getText().isEmpty()&& benutzerAnlegen.tfOrt.getText().isEmpty() 
-				|| benutzerAnlegen.tfStraße.getText().isEmpty() && benutzerAnlegen.tfHausnummer.getText().isEmpty() == false
-				&& benutzerAnlegen.tfPostleitzahl.getText().isEmpty()== false && benutzerAnlegen.tfOrt.getText().isEmpty()
-				|| benutzerAnlegen.tfStraße.getText().isEmpty() && benutzerAnlegen.tfHausnummer.getText().isEmpty() == false
-				&& benutzerAnlegen.tfPostleitzahl.getText().isEmpty()==false && benutzerAnlegen.tfOrt.getText().isEmpty()==false
-				|| benutzerAnlegen.tfStraße.getText().isEmpty() && benutzerAnlegen.tfHausnummer.getText().isEmpty()
-				&& benutzerAnlegen.tfPostleitzahl.getText().isEmpty()==false && benutzerAnlegen.tfOrt.getText().isEmpty()
-				|| benutzerAnlegen.tfStraße.getText().isEmpty() && benutzerAnlegen.tfHausnummer.getText().isEmpty()
-				&& benutzerAnlegen.tfPostleitzahl.getText().isEmpty()&& benutzerAnlegen.tfOrt.getText().isEmpty()==false
-				|| benutzerAnlegen.tfStraße.getText().isEmpty()==false && benutzerAnlegen.tfHausnummer.getText().isEmpty()==false
-				&& benutzerAnlegen.tfPostleitzahl.getText().isEmpty()&& benutzerAnlegen.tfOrt.getText().isEmpty()==false
-				|| benutzerAnlegen.tfStraße.getText().isEmpty()==false && benutzerAnlegen.tfHausnummer.getText().isEmpty()
-				&& benutzerAnlegen.tfPostleitzahl.getText().isEmpty()&& benutzerAnlegen.tfOrt.getText().isEmpty()==false
-				|| benutzerAnlegen.tfStraße.getText().isEmpty() && benutzerAnlegen.tfHausnummer.getText().isEmpty()==false
-				&& benutzerAnlegen.tfPostleitzahl.getText().isEmpty()&& benutzerAnlegen.tfOrt.getText().isEmpty()==false
-				|| benutzerAnlegen.tfStraße.getText().isEmpty()==false && benutzerAnlegen.tfHausnummer.getText().isEmpty()
-				&& benutzerAnlegen.tfPostleitzahl.getText().isEmpty()==false && benutzerAnlegen.tfOrt.getText().isEmpty()
-				|| benutzerAnlegen.tfStraße.getText().isEmpty() && benutzerAnlegen.tfHausnummer.getText().isEmpty()
-				&& benutzerAnlegen.tfPostleitzahl.getText().isEmpty()==false && benutzerAnlegen.tfOrt.getText().isEmpty()==false
-				|| benutzerAnlegen.tfStraße.getText().isEmpty() == false && benutzerAnlegen.tfHausnummer.getText().isEmpty()
-				&& benutzerAnlegen.tfPostleitzahl.getText().isEmpty()==false && benutzerAnlegen.tfOrt.getText().isEmpty()==false){
-						JOptionPane.showMessageDialog(new JFrame(), "Die Adresse ist nicht vollständig eingetragen");
-				} else {
 					switch (this.benutzerAnlegen.getBenutzerArt()) {
   //Student anlegen---------------------------------------------------------------------------------------------------------
 					case "Student":
@@ -219,8 +185,6 @@ public class ButtonHandler implements ActionListener {
 						con.disconnect();
 						break;
 					}
-				
-				}
 				break;
   //zu ändernden Benutzer auswählen, damit sich die GUI mit den DB-Werten befüllt---------------------------------------------
 			case "AUSWÄHLEN":	
@@ -504,20 +468,30 @@ public class ButtonHandler implements ActionListener {
 	 * @author Michael Gottinger
 	 */
 	private void GUIDaten() {
+		if (benutzerAnlegen.tfName.getText().isEmpty() || benutzerAnlegen.tfVorname.getText().isEmpty()
+				|| benutzerAnlegen.tfBenutzername.getText().isEmpty()
+				|| benutzerAnlegen.tfPasswort.getText().isEmpty()) {
+			// kein DB Eintrag
+			JOptionPane.showMessageDialog(new JFrame(), "Fehler: Standardeingaben wurden nicht eingetragen!");
+		} else {
 		name = this.benutzerAnlegen.getName();
 		vorname = this.benutzerAnlegen.getVorname();
 		benutzername = this.benutzerAnlegen.getBenutzername();
 		passwort = this.benutzerAnlegen.getPasswort();
-		if (benutzerAnlegen.tfStraße.getText().isEmpty() || benutzerAnlegen.tfHausnummer.getText().isEmpty()
-			&& benutzerAnlegen.tfPostleitzahl.getText().isEmpty()&& benutzerAnlegen.tfOrt.getText().isEmpty()) {
+		}
+		if(adresseNichtVorhanden()){
 			adresseVorhanden = false;
-		} else {
+			} else {
+				if(adresseNichtKorrektBefüllt()){
+					adresseVorhanden = false;
+				} else {
 			adresseVorhanden = true;
 			straße = this.benutzerAnlegen.getStraße();
 			hausnummer = this.benutzerAnlegen.getHausnummer();
 			postleitzahl = this.benutzerAnlegen.getPLZ();
 			ort = this.benutzerAnlegen.getOrt();
-		}
+			}
+			}
 		System.out.println("Adresse vorhanden: " + adresseVorhanden);
 	}
 
@@ -525,7 +499,6 @@ public class ButtonHandler implements ActionListener {
 		buchtitel = this.buchInventarisieren.getBuchtitel();
 		autor = this.buchInventarisieren.getAutor();
 		isbn = this.buchInventarisieren.getISBN();
-		anzahl = this.buchInventarisieren.getAnzahl();
 
 	}
 
@@ -662,5 +635,35 @@ public class ButtonHandler implements ActionListener {
 		}
 		benutzer = new Benutzer(angemeldeterUser, login.getPasswort(), person);
 		System.out.println("Benutzer erstellt");
+	}
+	
+	/**
+	 * Methode prüft ob Adresseingabe leer ist
+	 *          
+	 * @author Michael Gottinger
+	 * 
+	 * @return Wahrheitswert ob Adressfelder komplett leer sind
+	 */
+	private boolean adresseNichtVorhanden(){
+		return benutzerAnlegen.tfStraße.getText().isEmpty() && benutzerAnlegen.tfHausnummer.getText().isEmpty()
+				&& benutzerAnlegen.tfPostleitzahl.getText().isEmpty()&& benutzerAnlegen.tfOrt.getText().isEmpty();
+	}
+	
+	/**
+	 * Methode prüft ob Textfeld bei Adresse vollständig befüllt
+	 *          
+	 * @author Michael Gottinger
+	 * 
+	 * @return Wahrheitswert ob Adresse nicht vollständig befüllt wurde
+	 */
+	private boolean adresseNichtKorrektBefüllt(){
+		boolean adresseNichtKorrektBefüllt;
+		if(adresseNichtVorhanden()){
+			adresseNichtKorrektBefüllt = false;
+		} else {
+			adresseNichtKorrektBefüllt = benutzerAnlegen.tfStraße.getText().isEmpty() || benutzerAnlegen.tfHausnummer.getText().isEmpty()
+					|| benutzerAnlegen.tfPostleitzahl.getText().isEmpty() || benutzerAnlegen.tfOrt.getText().isEmpty();
+		}
+		return adresseNichtKorrektBefüllt;
 	}
 }

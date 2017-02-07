@@ -79,6 +79,7 @@ public class Login {
 		login.setBounds(x_right, y_north, x_width, y_height);
 
 		// JButtons:
+		panel.getRootPane().setDefaultButton(anmelden);
 		anmelden.setBounds(x_right, y_center2, x_anmelden_width, y_height);
 		panel.add(anmelden);
 		anmelden.setActionCommand(ACTION_LOGIN);
