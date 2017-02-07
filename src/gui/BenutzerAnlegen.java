@@ -15,7 +15,7 @@ import application.*;
 public class BenutzerAnlegen {
 	JPanel panel;
 	JButton anlegen;
-	JComboBox benutzer;
+	JComboBox benutzer, studiengruppe;
 	public JTableview tableviewUser;
 	JScrollPane scrollPane;
 	
@@ -46,7 +46,7 @@ public class BenutzerAnlegen {
 	int y_Library = 420;
 	int x_anlegen_width = 120;
 	
-	public JTextField tfBenutzername, tfPasswort, tfName, tfVorname, tfMatrikelnummer, tfStudiengruppe, tfFakult‰t, tfStraﬂe, tfHausnummer, tfPostleitzahl, tfOrt;
+	public JTextField tfBenutzername, tfPasswort, tfName, tfVorname, tfMatrikelnummer, tfFakult‰t, tfStraﬂe, tfHausnummer, tfPostleitzahl, tfOrt;
 	public JLabel labelBenutzername, labelPasswort, labelName, labelVorname, labelMatrikelnummer, labelStudiengruppe, labelFakult‰t, labelStraﬂe, labelHausnummer, labelPostleitzahl, labelOrt;
 	private static String[] benutzerliste = { "Benutzer w‰hlen", "Student", "Professor", "Personal" };
 	private String benutzerArt;
@@ -59,6 +59,8 @@ public class BenutzerAnlegen {
 		controlButton = new ButtonHandler(this);
 		// Erzeugung eines Objektes der Klasse JComboBox
 		benutzer = new JComboBox(benutzerliste);
+		studiengruppe = new JComboBox(Studiengruppe.values());
+		studiengruppe.hide();
 		// Erzeugung eines Objekt um
 		controlComboBox = new ComboBoxHandler(this);
 		benutzer.addItemListener(controlComboBox);
@@ -70,8 +72,11 @@ public class BenutzerAnlegen {
 		labelName = new JLabel("Name:", JLabel.LEFT);
 		labelVorname = new JLabel("Vorname:", JLabel.LEFT);
 		labelMatrikelnummer = new JLabel("Matrikelnummer:", JLabel.LEFT);
+		labelMatrikelnummer.hide();
 		labelStudiengruppe = new JLabel("Studiengruppe:", JLabel.LEFT);
+		labelStudiengruppe.hide();
 		labelFakult‰t = new JLabel("Fakult‰t:", JLabel.LEFT);
+		labelFakult‰t.hide();
 		labelStraﬂe = new JLabel("Straﬂe:", JLabel.LEFT);
 		labelHausnummer = new JLabel("Hausnummer:", JLabel.LEFT);
 		labelPostleitzahl = new JLabel("Postleitzahl:", JLabel.LEFT);
@@ -83,8 +88,9 @@ public class BenutzerAnlegen {
 		tfName = new JTextField(45);
 		tfVorname = new JTextField(45);
 		tfMatrikelnummer = new JTextField(10);
-		tfStudiengruppe = new JTextField(4);
+		tfMatrikelnummer.hide();
 		tfFakult‰t = new JTextField(30);
+		tfFakult‰t.hide();
 		tfStraﬂe = new JTextField(80);
 		tfHausnummer = new JTextField(4);
 		tfPostleitzahl = new JTextField(5);
@@ -152,11 +158,7 @@ public class BenutzerAnlegen {
 	}
 	
 	public Studiengruppe getStudiengruppe() throws NullPointerException{
-		Studiengruppe studiengruppe = Studiengruppe.valueOf(this.tfStudiengruppe.getText());
-		return studiengruppe;
-	}
-	public void setStudiengruppe(String studiengruppe){
-		this.tfStudiengruppe.setText(studiengruppe);
+		return (Studiengruppe) this.studiengruppe.getSelectedItem();
 	}
 	
 	public String getFakult‰t(){
@@ -249,9 +251,6 @@ public class BenutzerAnlegen {
 		tfMatrikelnummer.setBounds(x_center, y_south, x_width, y_height);
 		panel.add(tfMatrikelnummer);
 		tfMatrikelnummer.setEditable(false);
-		tfStudiengruppe.setBounds(x_center, y_south_label2, x_width, y_height);
-		panel.add(tfStudiengruppe);
-		tfStudiengruppe.setEditable(false);
 		tfFakult‰t.setBounds(x_center, y_south_label3, x_width, y_height);
 		panel.add(tfFakult‰t);
 		tfFakult‰t.setEditable(false);
@@ -269,6 +268,8 @@ public class BenutzerAnlegen {
 		// JComboBoxes:
 		benutzer.setBounds(x_center, y_north, x_width, y_height);
 		panel.add(benutzer);
+		studiengruppe.setBounds(x_center, y_south_label2, x_width, y_height);
+		panel.add(studiengruppe);
 		
 		if(tableviewUser==null){
 			tableviewUser = new JTableview(DB_connection.getAllUsers());

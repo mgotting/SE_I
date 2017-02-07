@@ -24,7 +24,7 @@ public class ButtonHandler implements ActionListener {
 	private Login login;
 	private DB_connection con;
 	private static String angemeldeterUser;
-	private String name, vorname, benutzername, passwort, straße, ort, hausnummer, buchtitel, autor, isbn;
+	private String name, vorname, benutzername, passwort, straße, ort, hausnummer, buchtitel, autor, isbn, insertAdresse;
 	private int postleitzahl, generatedID, generatedAdressID, adressID;
 	private char art;
 	private Benutzer benutzer;
@@ -63,7 +63,7 @@ public class ButtonHandler implements ActionListener {
 		try {
 			// Prüfen, welches Kommando kommt
 			switch (e.getActionCommand()) {
-//Anmeldemaske:-------------------------------------------------------------------------------------------
+//Anmeldemaske---------------------------------------------------------------------------------------------------
 			case "ANMELDEN":
 				con = DB_connection.getDbConnection();
 				angemeldeterUser = login.getBenutzername();
@@ -80,30 +80,36 @@ public class ButtonHandler implements ActionListener {
 					login.setPasswort(null);
 				}
 				break;
-//F2: Anwendungsfall anlegen:--------------------------------------------------------------------------------------------
+//F2 Anwendungsfall: Benutzer integriert anlegen--------------------------------------------------------------------------------------------
 			case "ANLEGEN":
-				GUIDaten();
-				if(adresseNichtKorrektBefüllt()){
-					JOptionPane.showMessageDialog(new JFrame(), "Die Adresse ist nicht vollständig eingetragen");
+				if(pflichtfelderNichtBefüllt()){
+					JOptionPane.showMessageDialog(new JFrame(), "Fehler: Standardeingaben wurden nicht eingetragen!");
+					System.out.println("Standardeingaben wurden nicht eingetragen");
 					break;
 				}
+				if(adresseNichtKorrektBefüllt()){
+					JOptionPane.showMessageDialog(new JFrame(), "Die Adresse ist nicht vollständig eingetragen");
+					System.out.println("Adresse nicht vollständig eingetragen");
+					break;
+				}
+				GUIDaten();
 				con = DB_connection.getDbConnection();
 				if (adresseVorhanden == true) {
 					// 4. einfügen in Tabelle Adresse
 					Adresse adresse = new Adresse(straße, hausnummer, postleitzahl, ort);
-					String insertAdresse = "INSERT INTO adresse(Straße, Hausnummer, Postleitzahl, Ort) VALUES ('"
+					insertAdresse = "INSERT INTO adresse(Straße, Hausnummer, Postleitzahl, Ort) VALUES ('"
 							+ adresse.getStraße() + "','" + adresse.getHausnummer() + "','" + adresse.getPostleitzahl()
-							+ "','" + adresse.getOrt() + "');";
-					generatedAdressID = con.executequery_autoKey(insertAdresse, true);									
+							+ "','" + adresse.getOrt() + "');";									
 				}
 					switch (this.benutzerAnlegen.getBenutzerArt()) {
-  //Student anlegen---------------------------------------------------------------------------------------------------------
+//------------------Student anlegen---------------------------------------------------------------------------------------------------------
 					case "Student":
 						if (benutzerAnlegen.tfMatrikelnummer.getText().isEmpty()
-								|| benutzerAnlegen.tfStudiengruppe.getText().isEmpty()) {
+								|| benutzerAnlegen.getStudiengruppe().toString().isEmpty()) {
 							// kein DB Eintrag
 							JOptionPane.showMessageDialog(new JFrame(),
 									"Fehler: Matrikelnummer oder Studiengruppe wurden nicht eingetragen!");
+							break;
 						} else {
 							// einmal festlegen, nicht mehr änderbar
 							int matrikelnummer = this.benutzerAnlegen.getMatrikelnummer();
@@ -115,6 +121,7 @@ public class ButtonHandler implements ActionListener {
 							} else {
 								student = new Student(name, vorname, matrikelnummer, studiengruppe, straße, hausnummer,
 										postleitzahl, ort);
+								generatedAdressID = con.executequery_autoKey(insertAdresse, true);
 							}
 							// Wenn Studentenobjekt erfolgreich erstellt, dann
 							// in Datenbank sichern
@@ -133,12 +140,13 @@ public class ButtonHandler implements ActionListener {
 							con.disconnect();
 						}
 						break;
-  //Professor anlegen---------------------------------------------------------------------------------------------------------
+//------------------Professor anlegen---------------------------------------------------------------------------------------------------------
 					case "Professor":
 						if (benutzerAnlegen.tfFakultät.getText().isEmpty()) {
 							// kein DB Eintrag
 							JOptionPane.showMessageDialog(new JFrame(),
 									"Fehler: Fakultät wurde nicht eingetragen!");
+							break;
 						} else {
 							// Daten aus GUI abziehen und Professorobjekt
 							// erstellen
@@ -150,6 +158,7 @@ public class ButtonHandler implements ActionListener {
 							} else {
 								professor = new Professor(name, vorname, fakultät, straße, hausnummer, postleitzahl,
 										ort);
+								generatedAdressID = con.executequery_autoKey(insertAdresse, true);
 							}
 							// Wenn Professorenobjekt erfolgreich erstellt, dann
 							// in Datenbank sichern
@@ -167,7 +176,7 @@ public class ButtonHandler implements ActionListener {
 							con.disconnect();
 						}
 						break;
-  //Personal anlegen------------------------------------------------------------------------------------------------------
+//------------------Personal anlegen------------------------------------------------------------------------------------------------------
 					case "Personal":
 						// Daten aus GUI abziehen und Personalobjekt erstellen
 						Personal personal = new Personal(name, vorname);
@@ -186,7 +195,7 @@ public class ButtonHandler implements ActionListener {
 						break;
 					}
 				break;
-  //zu ändernden Benutzer auswählen, damit sich die GUI mit den DB-Werten befüllt---------------------------------------------
+//zu ändernden Benutzer auswählen, damit sich die GUI mit den DB-Werten befüllt---------------------------------------------
 			case "AUSWÄHLEN":	
 				benutzerÄndern.adresseSperren();
 				if (benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow() == -1)
@@ -468,17 +477,10 @@ public class ButtonHandler implements ActionListener {
 	 * @author Michael Gottinger
 	 */
 	private void GUIDaten() {
-		if (benutzerAnlegen.tfName.getText().isEmpty() || benutzerAnlegen.tfVorname.getText().isEmpty()
-				|| benutzerAnlegen.tfBenutzername.getText().isEmpty()
-				|| benutzerAnlegen.tfPasswort.getText().isEmpty()) {
-			// kein DB Eintrag
-			JOptionPane.showMessageDialog(new JFrame(), "Fehler: Standardeingaben wurden nicht eingetragen!");
-		} else {
 		name = this.benutzerAnlegen.getName();
 		vorname = this.benutzerAnlegen.getVorname();
 		benutzername = this.benutzerAnlegen.getBenutzername();
 		passwort = this.benutzerAnlegen.getPasswort();
-		}
 		if(adresseNichtVorhanden()){
 			adresseVorhanden = false;
 			} else {
@@ -570,7 +572,6 @@ public class ButtonHandler implements ActionListener {
 		benutzerAnlegen.setPasswort(null);
 		benutzerAnlegen.setFakultät(null);
 		benutzerAnlegen.setMatrikelnummer(null);
-		benutzerAnlegen.setStudiengruppe(null);
 		benutzerAnlegen.setStraße(null);
 		benutzerAnlegen.setHausnummer(null);
 		benutzerAnlegen.setOrt(null);
@@ -635,6 +636,19 @@ public class ButtonHandler implements ActionListener {
 		}
 		benutzer = new Benutzer(angemeldeterUser, login.getPasswort(), person);
 		System.out.println("Benutzer erstellt");
+	}
+	
+	/**
+	 * Methode prüft ob alle Pflichtfelder befüllt sind
+	 *          
+	 * @author Michael Gottinger
+	 * 
+	 * @return Wahrheitswert ob Pflichtfeld nicht befüllt ist
+	 */
+	private boolean pflichtfelderNichtBefüllt(){
+		return benutzerAnlegen.tfName.getText().isEmpty() || benutzerAnlegen.tfVorname.getText().isEmpty()
+				|| benutzerAnlegen.tfBenutzername.getText().isEmpty()
+				|| benutzerAnlegen.tfPasswort.getText().isEmpty();
 	}
 	
 	/**

@@ -32,8 +32,13 @@ public class ComboBoxHandler implements ItemListener {
         switch (item){
         case "Student":
         	this.benutzerAnlegen.tfMatrikelnummer.setEditable(true);
-        	this.benutzerAnlegen.tfStudiengruppe.setEditable(true);
-        	this.benutzerAnlegen.tfFakult‰t.setEditable(false);
+        	this.benutzerAnlegen.tfMatrikelnummer.show();
+        	this.benutzerAnlegen.labelMatrikelnummer.show();
+        	this.benutzerAnlegen.studiengruppe.setEditable(true);
+        	this.benutzerAnlegen.studiengruppe.show();
+        	this.benutzerAnlegen.labelStudiengruppe.show();
+        	this.benutzerAnlegen.tfFakult‰t.hide();
+        	this.benutzerAnlegen.labelFakult‰t.hide();
         	this.benutzerAnlegen.tfStraﬂe.setEditable(true);
         	this.benutzerAnlegen.tfHausnummer.setEditable(true);
         	this.benutzerAnlegen.tfPostleitzahl.setEditable(true);
@@ -41,17 +46,24 @@ public class ComboBoxHandler implements ItemListener {
         	break;
         case "Professor":
         	this.benutzerAnlegen.tfFakult‰t.setEditable(true);
-        	this.benutzerAnlegen.tfMatrikelnummer.setEditable(false);
-        	this.benutzerAnlegen.tfStudiengruppe.setEditable(false);
+        	this.benutzerAnlegen.tfFakult‰t.show();
+        	this.benutzerAnlegen.labelFakult‰t.show();
+        	this.benutzerAnlegen.tfMatrikelnummer.hide();
+        	this.benutzerAnlegen.labelMatrikelnummer.hide();
+        	this.benutzerAnlegen.studiengruppe.hide();
+        	this.benutzerAnlegen.labelStudiengruppe.hide();
         	this.benutzerAnlegen.tfStraﬂe.setEditable(true);
         	this.benutzerAnlegen.tfHausnummer.setEditable(true);
         	this.benutzerAnlegen.tfPostleitzahl.setEditable(true);
         	this.benutzerAnlegen.tfOrt.setEditable(true);
         	break;
         case "Personal":
-           	this.benutzerAnlegen.tfFakult‰t.setEditable(false);
-        	this.benutzerAnlegen.tfMatrikelnummer.setEditable(false);
-        	this.benutzerAnlegen.tfStudiengruppe.setEditable(false);
+           	this.benutzerAnlegen.tfFakult‰t.hide();
+           	this.benutzerAnlegen.labelFakult‰t.hide();
+        	this.benutzerAnlegen.tfMatrikelnummer.hide();
+        	this.benutzerAnlegen.labelMatrikelnummer.hide();
+        	this.benutzerAnlegen.studiengruppe.hide();
+        	this.benutzerAnlegen.labelStudiengruppe.hide();
         	this.benutzerAnlegen.tfStraﬂe.setEditable(false);
         	this.benutzerAnlegen.tfHausnummer.setEditable(false);
         	this.benutzerAnlegen.tfPostleitzahl.setEditable(false);
