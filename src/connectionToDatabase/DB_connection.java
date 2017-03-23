@@ -171,6 +171,11 @@ public class DB_connection {
 	public static String getAdress(){
 		return "SELECT AdressID FROM library.adresse, library.person WHERE library.adresse.AdressID=library.person.AdressID";
 	}
+	
+	public static String getAnzahlAusleihe(String angemeldeterUser){
+		return "SELECT COUNT(*) FROM library.ausleihe WHERE Benutzername = '"+ angemeldeterUser +"';";
+	}
+	
 
 	// connect and execute input query and return boolean
 	public boolean executequery(String SQLquery) throws SQLException {
@@ -207,9 +212,11 @@ public class DB_connection {
 	 * @author Michael Gottinger
 	 */
 	public String executequery_Value(String SQLquery, int Value) throws SQLException{
+		System.out.println(SQLquery);
 		Statement st = cn.createStatement();
 		ResultSet rs = st.executeQuery(SQLquery);
 		String values = null;
+		
 		if (rs.next())
 			values = rs.getString(Value);
 		return values;

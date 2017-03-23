@@ -24,7 +24,8 @@ public class ButtonHandler implements ActionListener {
 	private Login login;
 	private DB_connection con;
 	private static String angemeldeterUser;
-	private String name, vorname, benutzername, passwort, straße, ort, hausnummer, buchtitel, autor, isbn, insertAdresse;
+	private String name, vorname, benutzername, passwort, straße, ort, hausnummer, buchtitel, autor, isbn,
+			insertAdresse;
 	private int postleitzahl, generatedID, generatedAdressID, adressID;
 	private char art;
 	private Benutzer benutzer;
@@ -63,31 +64,32 @@ public class ButtonHandler implements ActionListener {
 		try {
 			// Prüfen, welches Kommando kommt
 			switch (e.getActionCommand()) {
-//Anmeldemaske---------------------------------------------------------------------------------------------------
+			// Anmeldemaske---------------------------------------------------------------------------------------------------
 			case "ANMELDEN":
 				con = DB_connection.getDbConnection();
 				angemeldeterUser = login.getBenutzername();
-				if(PrüfungAnmeldung()==true){
+				if (PrüfungAnmeldung() == true) {
 					login.panel.setVisible(false);
 					personAnlegen();
 					Startmenu startmenu = new Startmenu();
 					startmenu.launchStartmenu(this.login.login, art);
-					System.out.println(angemeldeterUser+" erfolgreich angemeldet");
+					System.out.println(angemeldeterUser + " erfolgreich angemeldet");
 				} else {
-					System.out.println(angemeldeterUser+" konne nicht angemeldet werden");
+					System.out.println(angemeldeterUser + " konne nicht angemeldet werden");
 					JOptionPane.showMessageDialog(new JFrame(), "Benutzername / Passwort falsch");
 					login.setBenutzername(null);
 					login.setPasswort(null);
 				}
 				break;
-//F2 Anwendungsfall: Benutzer integriert anlegen--------------------------------------------------------------------------------------------
+			// F2 Anwendungsfall: Benutzer integriert
+			// anlegen--------------------------------------------------------------------------------------------
 			case "ANLEGEN":
-				if(pflichtfelderNichtBefüllt()){
+				if (pflichtfelderNichtBefüllt()) {
 					JOptionPane.showMessageDialog(new JFrame(), "Fehler: Standardeingaben wurden nicht eingetragen!");
 					System.out.println("Standardeingaben wurden nicht eingetragen");
 					break;
 				}
-				if(adresseNichtKorrektBefüllt()){
+				if (adresseNichtKorrektBefüllt()) {
 					JOptionPane.showMessageDialog(new JFrame(), "Die Adresse ist nicht vollständig eingetragen");
 					System.out.println("Adresse nicht vollständig eingetragen");
 					break;
@@ -99,104 +101,106 @@ public class ButtonHandler implements ActionListener {
 					Adresse adresse = new Adresse(straße, hausnummer, postleitzahl, ort);
 					insertAdresse = "INSERT INTO adresse(Straße, Hausnummer, Postleitzahl, Ort) VALUES ('"
 							+ adresse.getStraße() + "','" + adresse.getHausnummer() + "','" + adresse.getPostleitzahl()
-							+ "','" + adresse.getOrt() + "');";									
+							+ "','" + adresse.getOrt() + "');";
 				}
-					switch (this.benutzerAnlegen.getBenutzerArt()) {
-//------------------Student anlegen---------------------------------------------------------------------------------------------------------
-					case "Student":
-						if (benutzerAnlegen.tfMatrikelnummer.getText().isEmpty()
-								|| benutzerAnlegen.getStudiengruppe().toString().isEmpty()) {
-							// kein DB Eintrag
-							JOptionPane.showMessageDialog(new JFrame(),
-									"Fehler: Matrikelnummer oder Studiengruppe wurden nicht eingetragen!");
-							break;
-						} else {
-							// einmal festlegen, nicht mehr änderbar
-							int matrikelnummer = this.benutzerAnlegen.getMatrikelnummer();
-							Studiengruppe studiengruppe = this.benutzerAnlegen.getStudiengruppe();
-							Student student;
-							art = 's';
-							if (adresseVorhanden == false) {
-								student = new Student(name, vorname, matrikelnummer, studiengruppe);
-							} else {
-								student = new Student(name, vorname, matrikelnummer, studiengruppe, straße, hausnummer,
-										postleitzahl, ort);
-								generatedAdressID = con.executequery_autoKey(insertAdresse, true);
-							}
-							// Wenn Studentenobjekt erfolgreich erstellt, dann
-							// in Datenbank sichern
-							ObjektErstellung(student);
-							// 2. einfügen in Tabelle Student
-							String insertStudent = "INSERT INTO student(Matrikelnummer, Studiengruppe, PersonID) VALUES ("
-									+ student.getMatrikelnummer() + ",'" + student.getStudiengruppe().toString() + "',"
-									+ generatedID + ");";
-							boolean studentVerbucht = con.executequery(insertStudent);
-							System.out.println("Student erfolgreich verbucht: " + studentVerbucht);
-							JOptionPane.showMessageDialog(new JFrame(),
-									"Student und Benutzer mit folgenden Daten integriert angelegt:\n\nBenutzername: "
-											+ benutzer.getBenutzername() + student.toString());
-							benutzerAnlegen.tableviewUser.updateSQLTable(DB_connection.getAllUsers());
-							EintragLöschen();
-							con.disconnect();
-						}
-						break;
-//------------------Professor anlegen---------------------------------------------------------------------------------------------------------
-					case "Professor":
-						if (benutzerAnlegen.tfFakultät.getText().isEmpty()) {
-							// kein DB Eintrag
-							JOptionPane.showMessageDialog(new JFrame(),
-									"Fehler: Fakultät wurde nicht eingetragen!");
-							break;
-						} else {
-							// Daten aus GUI abziehen und Professorobjekt
-							// erstellen
-							String fakultät = this.benutzerAnlegen.getFakultät();
-							Professor professor;
-							art = 'p';
-							if (adresseVorhanden == false) {
-								professor = new Professor(name, vorname, fakultät);
-							} else {
-								professor = new Professor(name, vorname, fakultät, straße, hausnummer, postleitzahl,
-										ort);
-								generatedAdressID = con.executequery_autoKey(insertAdresse, true);
-							}
-							// Wenn Professorenobjekt erfolgreich erstellt, dann
-							// in Datenbank sichern
-							ObjektErstellung(professor);
-							// 2. einfügen in Tabelle Professor
-							String insertProfessor = "INSERT INTO professor(Fakultät, PersonID) VALUES ('"
-									+ professor.getFakultaet() + "'," + generatedID + ");";
-							boolean professorVerbucht = con.executequery(insertProfessor);
-							System.out.println("Professert erfolgreich verbucht: " + professorVerbucht);
-							JOptionPane.showMessageDialog(new JFrame(),
-									"Professor und Benutzer mit folgenden Daten integriert angelegt:\n\nBenutzername: "
-											+ benutzer.getBenutzername() + professor.toString());
-							benutzerAnlegen.tableviewUser.updateSQLTable(DB_connection.getAllUsers());
-							EintragLöschen();
-							con.disconnect();
-						}
-						break;
-//------------------Personal anlegen------------------------------------------------------------------------------------------------------
-					case "Personal":
-						// Daten aus GUI abziehen und Personalobjekt erstellen
-						Personal personal = new Personal(name, vorname);
-						art = 'b';
-						ObjektErstellung(personal);
-						// 2. einfügen in Tabelle Personal
-						String insertPersonal = "INSERT INTO personal(PersonID) VALUES (" + generatedID + ");";
-						boolean personalVerbucht = con.executequery(insertPersonal);
-						System.out.println("Personal erfolgreich verbucht: " + personalVerbucht);
+				switch (this.benutzerAnlegen.getBenutzerArt()) {
+				// ------------------Student
+				// anlegen---------------------------------------------------------------------------------------------------------
+				case "Student":
+					if (benutzerAnlegen.tfMatrikelnummer.getText().isEmpty()
+							|| benutzerAnlegen.getStudiengruppe().toString().isEmpty()) {
+						// kein DB Eintrag
 						JOptionPane.showMessageDialog(new JFrame(),
-								"Personal und Benutzer mit folgenden Daten integriert angelegt:\n\nBenutzername: "
-										+ benutzer.getBenutzername() + personal.toString());
-						this.benutzerAnlegen.tableviewUser.updateSQLTable(DB_connection.getAllUsers());
+								"Fehler: Matrikelnummer oder Studiengruppe wurden nicht eingetragen!");
+						break;
+					} else {
+						// einmal festlegen, nicht mehr änderbar
+						int matrikelnummer = this.benutzerAnlegen.getMatrikelnummer();
+						Studiengruppe studiengruppe = this.benutzerAnlegen.getStudiengruppe();
+						Student student;
+						art = 's';
+						if (adresseVorhanden == false) {
+							student = new Student(name, vorname, matrikelnummer, studiengruppe);
+						} else {
+							student = new Student(name, vorname, matrikelnummer, studiengruppe, straße, hausnummer,
+									postleitzahl, ort);
+							generatedAdressID = con.executequery_autoKey(insertAdresse, true);
+						}
+						// Wenn Studentenobjekt erfolgreich erstellt, dann
+						// in Datenbank sichern
+						ObjektErstellung(student);
+						// 2. einfügen in Tabelle Student
+						String insertStudent = "INSERT INTO student(Matrikelnummer, Studiengruppe, PersonID) VALUES ("
+								+ student.getMatrikelnummer() + ",'" + student.getStudiengruppe().toString() + "',"
+								+ generatedID + ");";
+						boolean studentVerbucht = con.executequery(insertStudent);
+						System.out.println("Student erfolgreich verbucht: " + studentVerbucht);
+						JOptionPane.showMessageDialog(new JFrame(),
+								"Student und Benutzer mit folgenden Daten integriert angelegt:\n\nBenutzername: "
+										+ benutzer.getBenutzername() + student.toString());
+						benutzerAnlegen.tableviewUser.updateSQLTable(DB_connection.getAllUsers());
 						EintragLöschen();
 						con.disconnect();
-						break;
 					}
+					break;
+				// ------------------Professor
+				// anlegen---------------------------------------------------------------------------------------------------------
+				case "Professor":
+					if (benutzerAnlegen.tfFakultät.getText().isEmpty()) {
+						// kein DB Eintrag
+						JOptionPane.showMessageDialog(new JFrame(), "Fehler: Fakultät wurde nicht eingetragen!");
+						break;
+					} else {
+						// Daten aus GUI abziehen und Professorobjekt
+						// erstellen
+						String fakultät = this.benutzerAnlegen.getFakultät();
+						Professor professor;
+						art = 'p';
+						if (adresseVorhanden == false) {
+							professor = new Professor(name, vorname, fakultät);
+						} else {
+							professor = new Professor(name, vorname, fakultät, straße, hausnummer, postleitzahl, ort);
+							generatedAdressID = con.executequery_autoKey(insertAdresse, true);
+						}
+						// Wenn Professorenobjekt erfolgreich erstellt, dann
+						// in Datenbank sichern
+						ObjektErstellung(professor);
+						// 2. einfügen in Tabelle Professor
+						String insertProfessor = "INSERT INTO professor(Fakultät, PersonID) VALUES ('"
+								+ professor.getFakultaet() + "'," + generatedID + ");";
+						boolean professorVerbucht = con.executequery(insertProfessor);
+						System.out.println("Professert erfolgreich verbucht: " + professorVerbucht);
+						JOptionPane.showMessageDialog(new JFrame(),
+								"Professor und Benutzer mit folgenden Daten integriert angelegt:\n\nBenutzername: "
+										+ benutzer.getBenutzername() + professor.toString());
+						benutzerAnlegen.tableviewUser.updateSQLTable(DB_connection.getAllUsers());
+						EintragLöschen();
+						con.disconnect();
+					}
+					break;
+				// ------------------Personal
+				// anlegen------------------------------------------------------------------------------------------------------
+				case "Personal":
+					// Daten aus GUI abziehen und Personalobjekt erstellen
+					Personal personal = new Personal(name, vorname);
+					art = 'b';
+					ObjektErstellung(personal);
+					// 2. einfügen in Tabelle Personal
+					String insertPersonal = "INSERT INTO personal(PersonID) VALUES (" + generatedID + ");";
+					boolean personalVerbucht = con.executequery(insertPersonal);
+					System.out.println("Personal erfolgreich verbucht: " + personalVerbucht);
+					JOptionPane.showMessageDialog(new JFrame(),
+							"Personal und Benutzer mit folgenden Daten integriert angelegt:\n\nBenutzername: "
+									+ benutzer.getBenutzername() + personal.toString());
+					this.benutzerAnlegen.tableviewUser.updateSQLTable(DB_connection.getAllUsers());
+					EintragLöschen();
+					con.disconnect();
+					break;
+				}
 				break;
-//zu ändernden Benutzer auswählen, damit sich die GUI mit den DB-Werten befüllt---------------------------------------------
-			case "AUSWÄHLEN":	
+			// zu ändernden Benutzer auswählen, damit sich die GUI mit den
+			// DB-Werten befüllt---------------------------------------------
+			case "AUSWÄHLEN":
 				benutzerÄndern.adresseSperren();
 				if (benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow() == -1)
 					throw new JTableException("Fehler: Zeile nicht markiert!");
@@ -204,7 +208,7 @@ public class ButtonHandler implements ActionListener {
 						.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 12).toString();
 				benutzerÄndern.setBenutzerArt(art);
 				System.out.println("Welcher Benutzer bist du? " + art);
-				
+
 				String name = (String) benutzerÄndern.tableviewUser.getSQLTable()
 						.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 1).toString();
 				benutzerÄndern.setName(name);
@@ -223,7 +227,7 @@ public class ButtonHandler implements ActionListener {
 				benutzerÄndern.tfPasswort.setEditable(true);
 
 				switch (art) {
-   // Benutzer vom Typ Student (s) wurde ausgewählt
+				// Benutzer vom Typ Student (s) wurde ausgewählt
 				case "s":
 					String matrikelnummer = (String) benutzerÄndern.tableviewUser.getSQLTable()
 							.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 5).toString();
@@ -234,7 +238,7 @@ public class ButtonHandler implements ActionListener {
 					benutzerÄndern.tfStudiengruppe.setEditable(true);
 					benutzerÄndern.adresseFreigeben();
 					break;
-  // Benutzer vom Typ Professor (p) wurde ausgewählt
+				// Benutzer vom Typ Professor (p) wurde ausgewählt
 				case "p":
 					String fakultät = (String) benutzerÄndern.tableviewUser.getSQLTable()
 							.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 7).toString();
@@ -267,7 +271,8 @@ public class ButtonHandler implements ActionListener {
 
 				break;
 
-//3. Anwendungsfall ändern. DB-Werte werden in den jeweiligen Tabellen aktualisiert-------------------------------
+			// 3. Anwendungsfall ändern. DB-Werte werden in den jeweiligen
+			// Tabellen aktualisiert-------------------------------
 			case "ÄNDERN":
 				con = DB_connection.getDbConnection();
 
@@ -296,7 +301,8 @@ public class ButtonHandler implements ActionListener {
 				System.out.println("Benutzer erfolgreich geändert: " + BenutzerGeändert);
 
 				switch (art) {
-  // Studenten-Infmormationen werden geändert, Matrikelnummer ausgeschlossen (diese wird einmal festgelegt)!
+				// Studenten-Infmormationen werden geändert, Matrikelnummer
+				// ausgeschlossen (diese wird einmal festgelegt)!
 				case "s":
 					String updateStudent = "UPDATE library.student SET Studiengruppe = '"
 							+ benutzerÄndern.getStudiengruppe() + "' WHERE library.student.PersonID= ("
@@ -304,7 +310,7 @@ public class ButtonHandler implements ActionListener {
 					boolean studentGeändert = con.executequery(updateStudent);
 					System.out.println("Student erfolgreich geändert: " + studentGeändert);
 					break;
-  // Professoren-Infmormationen werden geändert
+				// Professoren-Infmormationen werden geändert
 				case "p":
 					String updateProfessor = "UPDATE library.professor SET Fakultät = '" + benutzerÄndern.getFakultät()
 							+ "' WHERE library.professor.PersonID= (" + benutzerÄndern.getPersonID() + ")";
@@ -340,7 +346,8 @@ public class ButtonHandler implements ActionListener {
 					}
 
 				} else {
-					// wenn bereits eine Adresse vorhanden war, wird diese aktualisiert
+					// wenn bereits eine Adresse vorhanden war, wird diese
+					// aktualisiert
 					System.out.println("Welche AdressID hast du? " + adressID);
 					adresse = new Adresse(benutzerÄndern.tfStraße.getText().toString(),
 							benutzerÄndern.tfHausnummer.getText().toString(),
@@ -360,7 +367,8 @@ public class ButtonHandler implements ActionListener {
 				EintragLöschenÄndern();
 				con.disconnect();
 				break;
-//4. Anwendungsfall inventarisieren--------------------------------------------------------------------------------------
+			// 4. Anwendungsfall
+			// inventarisieren--------------------------------------------------------------------------------------
 			case "INVENTARISIEREN":
 				GUIDatenInv();
 				con = DB_connection.getDbConnection();
@@ -380,23 +388,23 @@ public class ButtonHandler implements ActionListener {
 					BuchstatusET bstatus = BuchstatusET.nichtausleihbar;
 					ExemplarErstellung(buch, bstatus);
 				}
-				
-				if(this.buchInventarisieren.getAnzahl() == 0)
-				{
+
+				if (this.buchInventarisieren.getAnzahl() == 0) {
 					JOptionPane.showMessageDialog(new JFrame(), "Buch wurde erfolgreich verbucht");
-				}
-				else{
-				JOptionPane.showMessageDialog(new JFrame(), "Buch und Exemplar(e) wurden erfolgreich verbucht!");
+				} else {
+					JOptionPane.showMessageDialog(new JFrame(), "Buch und Exemplar(e) wurden erfolgreich verbucht!");
 				}
 				buchInventarisieren.tableviewBooks.updateSQLTable(DB_connection.getAllBooks());
 				break;
-//5.Anwendungsfall ausleihen--------------------------------------------------------------------------------------------
+			// 5.Anwendungsfall
+			// ausleihen--------------------------------------------------------------------------------------------
 			case "AUSLEIHEN":
-				if (counter == 2) {
+				/*if (PrüfungAusleihe(3) == true) {
 					JOptionPane.showMessageDialog(new JFrame(), "Sie haben das Maximum von 2 Ausleihen erreicht");
 					return;
-				}
-				System.out.println("is in Ausleihe drinnen" + angemeldeterUser);
+				}*/
+				System.out.println("test");
+				System.out.println(con.executequery_Value(DB_connection.getAnzahlAusleihe(angemeldeterUser), 1));
 				GUIDatenAus();
 				con = DB_connection.getDbConnection();
 				if (buchAusleihen.tfTitel.getText().isEmpty() || buchAusleihen.tfAutor.getText().isEmpty()
@@ -421,7 +429,8 @@ public class ButtonHandler implements ActionListener {
 					System.out.println("Buch erfolgreich ausgeliehen");
 				}
 				break;
-  //Buch auswählen----------------------------------------------------------------------------------------------------------
+			// Buch
+			// auswählen----------------------------------------------------------------------------------------------------------
 			case "BUCH_AUSWAHL":
 				if (buchAusleihen.tableviewBooks.getSQLTable().getSelectedRow() == -1) {
 					throw new JTableException("Fehler: Zeile nicht markiert!");
@@ -444,7 +453,8 @@ public class ButtonHandler implements ActionListener {
 				buchAusleihen.setIsbn(isbn);
 
 				break;
-//F6: Anwendungsfall Buch zurückgeben------------------------------------------------------------------------------------
+			// F6: Anwendungsfall Buch
+			// zurückgeben------------------------------------------------------------------------------------
 			case "BUCH_ZURÜCKGEBEN":
 				String buchID = (String) buchRückgabe.tableview.getSQLTable()
 						.getValueAt(buchRückgabe.tableview.getSQLTable().getSelectedRow(), 0).toString();
@@ -453,27 +463,28 @@ public class ButtonHandler implements ActionListener {
 				con.executequery(
 						"UPDATE library.exemplar SET Status = 'ausleihbar' WHERE library.exemplar.BUCHID=" + buchID);
 				buchRückgabe.tableview.updateSQLTable(DB_connection.getAllRentBooks(angemeldeterUser));
-				JOptionPane.showMessageDialog(new JFrame(),
-						"Der User "+angemeldeterUser+" hat das Buch mit der ID: " + buchID + " erfolgreich zurückgegeben.");
+				JOptionPane.showMessageDialog(new JFrame(), "Der User " + angemeldeterUser
+						+ " hat das Buch mit der ID: " + buchID + " erfolgreich zurückgegeben.");
 				System.out.println("Buch erfolgreich zurückgegeben");
 			}
 		} catch (AdressException ex) {
 			JOptionPane.showMessageDialog(new JFrame(), "AdressException: " + ex.getMessage());
-		} catch (ArrayIndexOutOfBoundsException ex){
+		} catch (ArrayIndexOutOfBoundsException ex) {
 			JOptionPane.showMessageDialog(new JFrame(), "Bitte ein Buch zum zurückgeben auswählen");
 		} catch (IllegalArgumentException ex) {
 			JOptionPane.showMessageDialog(new JFrame(), "Bitte Felder korrekt und vollständig ausfüllen");
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(new JFrame(), "SQLException: " + ex.getMessage());
-		} catch (NullPointerException ex){
-			
+		} catch (NullPointerException ex) {
+			JOptionPane.showMessageDialog(new JFrame(), "SQLException: " + ex.getMessage());
+
 		}
 	}
-	
 
 	/**
-	 * Methode befüllt für jeden Benutzer die Grundinformationen und überprüft, ob eine Adresse vorhanden ist
-	 *          
+	 * Methode befüllt für jeden Benutzer die Grundinformationen und überprüft,
+	 * ob eine Adresse vorhanden ist
+	 * 
 	 * @author Michael Gottinger
 	 */
 	private void GUIDaten() {
@@ -481,19 +492,19 @@ public class ButtonHandler implements ActionListener {
 		vorname = this.benutzerAnlegen.getVorname();
 		benutzername = this.benutzerAnlegen.getBenutzername();
 		passwort = this.benutzerAnlegen.getPasswort();
-		if(adresseNichtVorhanden()){
+		if (adresseNichtVorhanden()) {
 			adresseVorhanden = false;
+		} else {
+			if (adresseNichtKorrektBefüllt()) {
+				adresseVorhanden = false;
 			} else {
-				if(adresseNichtKorrektBefüllt()){
-					adresseVorhanden = false;
-				} else {
-			adresseVorhanden = true;
-			straße = this.benutzerAnlegen.getStraße();
-			hausnummer = this.benutzerAnlegen.getHausnummer();
-			postleitzahl = this.benutzerAnlegen.getPLZ();
-			ort = this.benutzerAnlegen.getOrt();
+				adresseVorhanden = true;
+				straße = this.benutzerAnlegen.getStraße();
+				hausnummer = this.benutzerAnlegen.getHausnummer();
+				postleitzahl = this.benutzerAnlegen.getPLZ();
+				ort = this.benutzerAnlegen.getOrt();
 			}
-			}
+		}
 		System.out.println("Adresse vorhanden: " + adresseVorhanden);
 	}
 
@@ -512,10 +523,12 @@ public class ButtonHandler implements ActionListener {
 	}
 
 	/**
-	 * Methode befüllt die Tabelle Adresse -sofern Adresse vorhanden-, Person und Benutzer
+	 * Methode befüllt die Tabelle Adresse -sofern Adresse vorhanden-, Person
+	 * und Benutzer
 	 * 
-	 * @param Person für die Objekte erstellt werden sollen
-	 *          
+	 * @param Person
+	 *            für die Objekte erstellt werden sollen
+	 * 
 	 * @author Michael Gottinger
 	 */
 	private void ObjektErstellung(PersonABC person) {
@@ -562,7 +575,7 @@ public class ButtonHandler implements ActionListener {
 
 	/**
 	 * Methode entfernt alle Einträge aus der benutzerAnlegen GUI.
-	 *          
+	 * 
 	 * @author Michael Gottinger
 	 */
 	private void EintragLöschen() {
@@ -579,8 +592,9 @@ public class ButtonHandler implements ActionListener {
 	}
 
 	/**
-	 * Methode entfernt alle Einträge aus der benutzerÄndern GUI, nach dem Änderungen durchgeführt wurden.
-	 *          
+	 * Methode entfernt alle Einträge aus der benutzerÄndern GUI, nach dem
+	 * Änderungen durchgeführt wurden.
+	 * 
 	 * @author Sandra Speckmeier
 	 */
 
@@ -597,36 +611,45 @@ public class ButtonHandler implements ActionListener {
 		benutzerÄndern.setOrt(null);
 		benutzerÄndern.setPLZ(null);
 	}
-	
+
 	/**
 	 * Methode prüft, ob Anmeldung durchgeführt werden kann
-	 *          
+	 * 
 	 * @author Michael Gottinger
 	 */
-	private boolean PrüfungAnmeldung() throws SQLException{
-		return angemeldeterUser.equals(con.executequery_Value(DB_connection.checkAnmeldung(angemeldeterUser, login.getPasswort()),1));
+	private boolean PrüfungAnmeldung() throws SQLException {
+		return angemeldeterUser
+				.equals(con.executequery_Value(DB_connection.checkAnmeldung(angemeldeterUser, login.getPasswort()), 1));
 	}
-	
-	public static String getAngemeldeterUser(){
+
+	private boolean PrüfungAusleihe(int Grenze) throws SQLException {
+		return Grenze == Integer.parseInt(con.executequery_Value(DB_connection.getAnzahlAusleihe(angemeldeterUser), 1));
+	}
+
+	public static String getAngemeldeterUser() {
 		return angemeldeterUser;
 	}
-	
+
 	/**
-	 * Methode legt für den anzumeldenden Benutzer die Objekte Person sowie Benutzer an
-	 *          
+	 * Methode legt für den anzumeldenden Benutzer die Objekte Person sowie
+	 * Benutzer an
+	 * 
 	 * @author Michael Gottinger
 	 */
-	private void personAnlegen() throws SQLException{
-		String personID = con.executequery_Value(DB_connection.checkAnmeldung(angemeldeterUser, login.getPasswort()), 3);
+	private void personAnlegen() throws SQLException {
+		String personID = con.executequery_Value(DB_connection.checkAnmeldung(angemeldeterUser, login.getPasswort()),
+				3);
 		art = (con.executequery_Value(DB_connection.getPerson(personID), 5)).charAt(0);
 		String vorname = con.executequery_Value(DB_connection.getPerson(personID), 2);
 		String nachname = con.executequery_Value(DB_connection.getPerson(personID), 3);
-		if (art =='s'){
+		if (art == 's') {
 			int matrikelnummer = Integer.parseInt(con.executequery_Value(DB_connection.getStudent(personID), 3));
-			Studiengruppe studiengruppe = Studiengruppe.valueOf(con.executequery_Value(DB_connection.getStudent(personID), 2));
+			Studiengruppe studiengruppe = Studiengruppe
+					.valueOf(con.executequery_Value(DB_connection.getStudent(personID), 2));
 			person = new Student(nachname, vorname, matrikelnummer, studiengruppe);
 			System.out.println("Student erstellt");
-		} if (art =='p'){
+		}
+		if (art == 'p') {
 			String fakultät = con.executequery_Value(DB_connection.getProfessor(personID), 1);
 			person = new Professor(nachname, vorname, fakultät);
 			System.out.println("Professor erstellt");
@@ -637,45 +660,45 @@ public class ButtonHandler implements ActionListener {
 		benutzer = new Benutzer(angemeldeterUser, login.getPasswort(), person);
 		System.out.println("Benutzer erstellt");
 	}
-	
+
 	/**
 	 * Methode prüft ob alle Pflichtfelder befüllt sind
-	 *          
+	 * 
 	 * @author Michael Gottinger
 	 * 
 	 * @return Wahrheitswert ob Pflichtfeld nicht befüllt ist
 	 */
-	private boolean pflichtfelderNichtBefüllt(){
+	private boolean pflichtfelderNichtBefüllt() {
 		return benutzerAnlegen.tfName.getText().isEmpty() || benutzerAnlegen.tfVorname.getText().isEmpty()
-				|| benutzerAnlegen.tfBenutzername.getText().isEmpty()
-				|| benutzerAnlegen.tfPasswort.getText().isEmpty();
+				|| benutzerAnlegen.tfBenutzername.getText().isEmpty() || benutzerAnlegen.tfPasswort.getText().isEmpty();
 	}
-	
+
 	/**
 	 * Methode prüft ob Adresseingabe leer ist
-	 *          
+	 * 
 	 * @author Michael Gottinger
 	 * 
 	 * @return Wahrheitswert ob Adressfelder komplett leer sind
 	 */
-	private boolean adresseNichtVorhanden(){
+	private boolean adresseNichtVorhanden() {
 		return benutzerAnlegen.tfStraße.getText().isEmpty() && benutzerAnlegen.tfHausnummer.getText().isEmpty()
-				&& benutzerAnlegen.tfPostleitzahl.getText().isEmpty()&& benutzerAnlegen.tfOrt.getText().isEmpty();
+				&& benutzerAnlegen.tfPostleitzahl.getText().isEmpty() && benutzerAnlegen.tfOrt.getText().isEmpty();
 	}
-	
+
 	/**
 	 * Methode prüft ob Textfeld bei Adresse vollständig befüllt
-	 *          
+	 * 
 	 * @author Michael Gottinger
 	 * 
 	 * @return Wahrheitswert ob Adresse nicht vollständig befüllt wurde
 	 */
-	private boolean adresseNichtKorrektBefüllt(){
+	private boolean adresseNichtKorrektBefüllt() {
 		boolean adresseNichtKorrektBefüllt;
-		if(adresseNichtVorhanden()){
+		if (adresseNichtVorhanden()) {
 			adresseNichtKorrektBefüllt = false;
 		} else {
-			adresseNichtKorrektBefüllt = benutzerAnlegen.tfStraße.getText().isEmpty() || benutzerAnlegen.tfHausnummer.getText().isEmpty()
+			adresseNichtKorrektBefüllt = benutzerAnlegen.tfStraße.getText().isEmpty()
+					|| benutzerAnlegen.tfHausnummer.getText().isEmpty()
 					|| benutzerAnlegen.tfPostleitzahl.getText().isEmpty() || benutzerAnlegen.tfOrt.getText().isEmpty();
 		}
 		return adresseNichtKorrektBefüllt;
