@@ -28,6 +28,7 @@ public class BenutzerÄndern {
 	JButton ändern, auswählen;
 	public JTableview tableviewUser, tableviewAdress;
 	JScrollPane scrollPane;
+	public JComboBox studiengruppe;
 	private String benutzerArt;
 	private String personID;
 	private String adressID;
@@ -60,7 +61,7 @@ public class BenutzerÄndern {
 	int y_heightLibrary = 100;
 	int y_Library = 420;
 	
-	public JTextField tfBenutzername, tfPasswort, tfName, tfVorname, tfMatrikelnummer, tfStudiengruppe, tfFakultät, tfStraße, tfHausnummer, tfPostleitzahl, tfOrt;
+	public JTextField tfBenutzername, tfPasswort, tfName, tfVorname, tfMatrikelnummer, tfFakultät, tfStraße, tfHausnummer, tfPostleitzahl, tfOrt;
 	public JLabel labelBenutzername, labelPasswort, labelName, labelVorname, labelMatrikelnummer, labelStudiengruppe, labelFakultät, labelStraße, labelHausnummer, labelPostleitzahl, labelOrt;
 	
 	public BenutzerÄndern(){
@@ -69,6 +70,7 @@ public class BenutzerÄndern {
 		// Erzeugung eines Objektes der Klasse JButton
 		ändern = new JButton("ändern");
 		auswählen = new JButton("auswählen");
+		studiengruppe = new JComboBox(Studiengruppe.values());
 		// Erzeugung eines Objektes um ActionEvents zu handeln
 		controlButton = new ButtonHandler(this);
 		panel.setLayout(null);
@@ -79,6 +81,7 @@ public class BenutzerÄndern {
 		labelName = new JLabel("Name:", JLabel.LEFT);
 		labelVorname = new JLabel("Vorname:", JLabel.LEFT);
 		labelMatrikelnummer = new JLabel("Matrikelnummer:", JLabel.LEFT);
+		studiengruppe = new JComboBox(Studiengruppe.values());
 		labelStudiengruppe = new JLabel("Studiengruppe:", JLabel.LEFT);
 		labelFakultät = new JLabel("Fakultät:", JLabel.LEFT);
 		labelStraße = new JLabel("Straße:", JLabel.LEFT);
@@ -92,7 +95,6 @@ public class BenutzerÄndern {
 		tfName = new JTextField(45);
 		tfVorname = new JTextField(45);
 		tfMatrikelnummer = new JTextField(10);
-		tfStudiengruppe = new JTextField(4);
 		tfFakultät = new JTextField(30);
 		tfStraße = new JTextField(80);
 		tfHausnummer = new JTextField(4);
@@ -144,12 +146,12 @@ public class BenutzerÄndern {
 		this.tfMatrikelnummer.setText(matrikelnummer);
 	}
 	
-	public Studiengruppe getStudiengruppe(){
-		Studiengruppe studiengruppe = Studiengruppe.valueOf(this.tfStudiengruppe.getText());
-		return studiengruppe;
+	public Studiengruppe getStudiengruppe() throws NullPointerException{
+		return (Studiengruppe) this.studiengruppe.getSelectedItem();
 	}
+	
 	public void setStudiengruppe(String studiengruppe){
-		this.tfStudiengruppe.setText(studiengruppe);
+		this.studiengruppe.getSelectedItem();
 	}
 	
 	public String getFakultät(){
@@ -273,9 +275,6 @@ public class BenutzerÄndern {
 		tfMatrikelnummer.setBounds(x_center, y_south, x_width, y_height);
 		panel.add(tfMatrikelnummer);
 		tfMatrikelnummer.setEditable(false);
-		tfStudiengruppe.setBounds(x_center, y_south_label2, x_width, y_height);
-		panel.add(tfStudiengruppe);
-		tfStudiengruppe.setEditable(false);
 		tfFakultät.setBounds(x_center, y_south_label3, x_width, y_height);
 		panel.add(tfFakultät);
 		tfFakultät.setEditable(false);
@@ -283,18 +282,28 @@ public class BenutzerÄndern {
 		// optional
 		tfStraße.setBounds(x_center, y_opt1, x_width, y_height);
 		panel.add(tfStraße);
+		tfStraße.setEditable(false);
 		tfHausnummer.setBounds(x_center, y_opt2, x_width, y_height);
 		panel.add(tfHausnummer);
+		tfHausnummer.setEditable(false);
 		tfPostleitzahl.setBounds(x_center, y_opt3, x_width, y_height);
 		panel.add(tfPostleitzahl);
+		tfPostleitzahl.setEditable(false);
 		tfOrt.setBounds(x_center, y_opt4, x_width, y_height);
-		panel.add(tfOrt);		
+		panel.add(tfOrt);	
+		tfOrt.setEditable(false);
 
+		//JCombobox
+		studiengruppe.setBounds(x_center, y_south_label2, x_width, y_height);
+		panel.add(studiengruppe);
+		studiengruppe.setEditable(false);
+		
 		if(tableviewUser==null){
 			tableviewUser = new JTableview(DB_connection.getUserInfo());
 			scrollPane = new JScrollPane(tableviewUser.getSQLTable());
 			scrollPane.setBounds(x_left, y_Library, x_widthLibrary, y_heightLibrary);
 			panel.add(scrollPane);
+			
 		}	
 		
 		auswahl.setTitle("Benutzer ändern");

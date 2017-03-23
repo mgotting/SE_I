@@ -235,7 +235,7 @@ public class ButtonHandler implements ActionListener {
 					String studiengruppe = (String) benutzerÄndern.tableviewUser.getSQLTable()
 							.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 6).toString();
 					benutzerÄndern.setStudiengruppe(studiengruppe);
-					benutzerÄndern.tfStudiengruppe.setEditable(true);
+					benutzerÄndern.studiengruppe.setEditable(true);
 					benutzerÄndern.adresseFreigeben();
 					break;
 				// Benutzer vom Typ Professor (p) wurde ausgewählt
