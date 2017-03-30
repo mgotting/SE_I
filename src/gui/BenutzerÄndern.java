@@ -150,8 +150,8 @@ public class BenutzerÄndern {
 		return (Studiengruppe) this.studiengruppe.getSelectedItem();
 	}
 	
-	public void setStudiengruppe(String studiengruppe){
-		this.studiengruppe.getSelectedItem();
+	public void setStudiengruppe(Studiengruppe studiengruppe){
+		this.studiengruppe.setSelectedItem(studiengruppe);
 	}
 	
 	public String getFakultät(){

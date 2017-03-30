@@ -232,8 +232,8 @@ public class ButtonHandler implements ActionListener {
 					String matrikelnummer = (String) benutzerÄndern.tableviewUser.getSQLTable()
 							.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 5).toString();
 					benutzerÄndern.setMatrikelnummer(matrikelnummer);
-					String studiengruppe = (String) benutzerÄndern.tableviewUser.getSQLTable()
-							.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 6).toString();
+					Studiengruppe studiengruppe = Studiengruppe.valueOf( benutzerÄndern.tableviewUser.getSQLTable()
+							.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 6).toString());
 					benutzerÄndern.setStudiengruppe(studiengruppe);
 					benutzerÄndern.studiengruppe.setEditable(true);
 					benutzerÄndern.adresseFreigeben();
