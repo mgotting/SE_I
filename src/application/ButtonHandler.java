@@ -205,7 +205,7 @@ public class ButtonHandler implements ActionListener {
 				if (benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow() == -1)
 					throw new JTableException("Fehler: Zeile nicht markiert!");
 				String art = (String) benutzerÄndern.tableviewUser.getSQLTable()
-						.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 12).toString();
+						.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 11).toString();
 				benutzerÄndern.setBenutzerArt(art);
 				System.out.println("Welcher Benutzer bist du? " + art);
 
@@ -221,8 +221,9 @@ public class ButtonHandler implements ActionListener {
 						.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 3).toString();
 				benutzerÄndern.setBenutzername(benutzername);
 				benutzerÄndern.tfBenutzername.setEditable(true);
-				String passwort = (String) benutzerÄndern.tableviewUser.getSQLTable()
-						.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 4).toString();
+//				String passwort = (String) benutzerÄndern.tableviewUser.getSQLTable()
+//						.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 4).toString();
+				String passwort = (String) DB_connection.Passwörter().toString();
 				benutzerÄndern.setPasswort(passwort);
 				benutzerÄndern.tfPasswort.setEditable(true);
 
@@ -230,10 +231,10 @@ public class ButtonHandler implements ActionListener {
 				// Benutzer vom Typ Student (s) wurde ausgewählt
 				case "s":
 					String matrikelnummer = (String) benutzerÄndern.tableviewUser.getSQLTable()
-							.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 5).toString();
+							.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 4).toString();
 					benutzerÄndern.setMatrikelnummer(matrikelnummer);
 					Studiengruppe studiengruppe = Studiengruppe.valueOf( benutzerÄndern.tableviewUser.getSQLTable()
-							.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 6).toString());
+							.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 5).toString());
 					benutzerÄndern.setStudiengruppe(studiengruppe);
 					benutzerÄndern.studiengruppe.setEditable(true);
 					benutzerÄndern.adresseFreigeben();
@@ -241,7 +242,7 @@ public class ButtonHandler implements ActionListener {
 				// Benutzer vom Typ Professor (p) wurde ausgewählt
 				case "p":
 					String fakultät = (String) benutzerÄndern.tableviewUser.getSQLTable()
-							.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 7).toString();
+							.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 6).toString();
 					benutzerÄndern.setFakultät(fakultät);
 					benutzerÄndern.tfFakultät.setEditable(true);
 					benutzerÄndern.adresseFreigeben();
@@ -249,24 +250,24 @@ public class ButtonHandler implements ActionListener {
 				}
 
 				if (benutzerÄndern.tableviewUser.getSQLTable()
-						.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 13) == null) {
+						.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 12) == null) {
 					adressID = -1;
 				} else {
 					adressID = Integer.parseInt(benutzerÄndern.tableviewUser.getSQLTable()
-							.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 13).toString());
+							.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 12).toString());
 				}
 
 				String straße = (String) benutzerÄndern.tableviewUser.getSQLTable()
-						.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 8).toString();
+						.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 7).toString();
 				benutzerÄndern.setStraße(straße);
 				String hausnummer = (String) benutzerÄndern.tableviewUser.getSQLTable()
-						.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 9).toString();
+						.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 8).toString();
 				benutzerÄndern.setHausnummer(hausnummer);
 				String postleitzahl = (String) benutzerÄndern.tableviewUser.getSQLTable()
-						.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 10).toString();
+						.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 9).toString();
 				benutzerÄndern.setPLZ(postleitzahl);
 				String ort = (String) benutzerÄndern.tableviewUser.getSQLTable()
-						.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 11).toString();
+						.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 10).toString();
 				benutzerÄndern.setOrt(ort);
 
 				break;
@@ -282,7 +283,7 @@ public class ButtonHandler implements ActionListener {
 				System.out.println("Welche PersonID hat der ausgewählte Benutzer: " + personID);
 
 				art = (String) benutzerÄndern.tableviewUser.getSQLTable()
-						.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 12).toString();
+						.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 11).toString();
 				benutzerÄndern.setBenutzerArt(art);
 				System.out.println("Welcher Benutzer bist du? " + art);
 
