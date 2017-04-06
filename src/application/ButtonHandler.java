@@ -275,8 +275,7 @@ public class ButtonHandler implements ActionListener {
 			// 3. Anwendungsfall ändern. DB-Werte werden in den jeweiligen
 			// Tabellen aktualisiert-------------------------------
 			case "ÄNDERN":
-				con = DB_connection.getDbConnection();
-
+				
 				String personID = (String) benutzerÄndern.tableviewUser.getSQLTable()
 						.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 0).toString();
 				benutzerÄndern.setPersonID(personID);
@@ -362,8 +361,8 @@ public class ButtonHandler implements ActionListener {
 					System.out.println("Adresse erfolgreich geändert: " + adresseGeändert);
 
 				}
-
-				benutzerÄndern.tableviewUser.updateSQLTable(DB_connection.getUserInfo());
+				//TODO:Löschen
+				//benutzerÄndern.tableviewUser.updateSQLTable(DB_connection.getUserInfo());
 				JOptionPane.showMessageDialog(new JFrame(), "Änderungen wurden erfolgreich verbucht!");
 				EintragLöschenÄndern();
 				con.disconnect();

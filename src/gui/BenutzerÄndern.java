@@ -3,6 +3,8 @@
  */
 package gui;
 
+import java.sql.SQLException;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -32,6 +34,8 @@ public class BenutzerÄndern {
 	private String benutzerArt;
 	private String personID;
 	private String adressID;
+	private DB_connection con;
+	private Login login;
 	
 	ButtonHandler controlButton;
 	
@@ -297,17 +301,43 @@ public class BenutzerÄndern {
 		studiengruppe.setBounds(x_center, y_south_label2, x_width, y_height);
 		panel.add(studiengruppe);
 		studiengruppe.setEditable(false);
-		
-		if(tableviewUser==null){
-			tableviewUser = new JTableview(DB_connection.getUserInfo());
-			scrollPane = new JScrollPane(tableviewUser.getSQLTable());
-			scrollPane.setBounds(x_left, y_Library, x_widthLibrary, y_heightLibrary);
-			panel.add(scrollPane);
-			
-		}	
+
+//		TODO: Löschen
+//		if(tableviewUser==null){
+//			tableviewUser = new JTableview(DB_connection.getUserInfo());
+//			scrollPane = new JScrollPane(tableviewUser.getSQLTable());
+//			scrollPane.setBounds(x_left, y_Library, x_widthLibrary, y_heightLibrary);
+//			panel.add(scrollPane);
+//			
+//		}	
 		
 		auswahl.setTitle("Benutzer ändern");
 		auswahl.setContentPane(panel);
+		
+		con = DB_connection.getDbConnection();
+		String[] benutzerInfo =new String[13];	
+		try {
+			benutzerInfo = con.executequery_Array(DB_connection.getUserInfo(ButtonHandler.getAngemeldeterUser()));
+			//TODO: Auf Benutzerart abfragen und Tf entsprechend true/false setzen
+//		for(int i=0; i<benutzerInfo.length; i++){
+		setName(benutzerInfo[0]);
+		setVorname(benutzerInfo[1]);
+		setBenutzername(benutzerInfo[2]);
+		setPasswort(benutzerInfo[3]);
+		setMatrikelnummer(benutzerInfo[4]);
+//		setStudiengruppe( (Studiengruppe) benutzerInfo[5].toString());
+		setFakultät(benutzerInfo[6]);
+		setStraße(benutzerInfo[7]);
+		setHausnummer(benutzerInfo[8]);
+		setPLZ(benutzerInfo[9]);
+		setOrt(benutzerInfo[10]);
+		 
+		
+//		}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 	}
 	
 	/**

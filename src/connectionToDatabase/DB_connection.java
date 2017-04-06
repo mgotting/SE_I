@@ -164,8 +164,8 @@ public class DB_connection {
 		return "SELECT Distinct Titel, Autor, library.exemplar.ISBN, library.exemplar.BuchID FROM library.exemplar, library.buchtyp WHERE library.exemplar.ISBN = library.buchtyp.ISBN AND Status = 'ausleihbar'";
 	}
 	
-	public static String getUserInfo(){
-		return "SELECT library.person.PersonID, Name, Vorname, Benutzername, Matrikelnummer, Studiengruppe, Fakultät, Straße, Hausnummer, Postleitzahl, Ort, Art, library.adresse.AdressID FROM library.person LEFT JOIN library.adresse ON library.adresse.AdressID=library.person.AdressID JOIN library.benutzer ON library.person.PersonID=library.benutzer.PersonID LEFT JOIN library.student ON library.person.PersonID=library.student.PersonID LEFT JOIN library.professor ON library.person.PersonID=library.professor.PersonID LEFT JOIN library.personal ON library.person.PersonID=library.personal.PersonID";
+	public static String getUserInfo(String benutzername){
+		return "SELECT Name, Vorname, Benutzername, Passwort, Matrikelnummer, Studiengruppe, Fakultät, Straße, Hausnummer, Postleitzahl, Ort, Art FROM library.person LEFT JOIN library.adresse ON library.adresse.AdressID=library.person.AdressID JOIN library.benutzer ON library.person.PersonID=library.benutzer.PersonID LEFT JOIN library.student ON library.person.PersonID=library.student.PersonID LEFT JOIN library.professor ON library.person.PersonID=library.professor.PersonID LEFT JOIN library.personal ON library.person.PersonID=library.personal.PersonID WHERE library.benutzer.Benutzername='"+benutzername+"';";
 	}
 	public static String Passwörter(){
 		return "SELECT Passwort FROM library.benutzer WHERE library.person.PersonID=library.benutzer.PersonID";
@@ -222,6 +222,21 @@ public class DB_connection {
 		if (rs.next())
 			values = rs.getString(Value);
 		return values;
+	}
+	
+	//TODO:Name für methode
+	public String[] executequery_Array(String SQLquery) throws SQLException{
+		Statement st = cn.createStatement();
+		ResultSet rs = st.executeQuery(SQLquery);
+		String array[]=new String[13];
+		
+		while (rs.next()){
+		for(int i=0; i<12; i++){
+			array[i]=rs.getString(i+1);
+			System.out.println(array[i]);
+			}
+		}
+		return array;
 	}
 	
 	// 2. connect, execute input query and return generatedID of the generated key
