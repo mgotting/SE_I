@@ -21,9 +21,10 @@ public class ButtonHandler implements ActionListener {
 	private BuchAusleihe buchAusleihen;
 	private BuchRueckgabe buchRückgabe;
 	private BuchInventarisieren buchInventarisieren;
-	private Login login;
-	private DB_connection con;
+	private static Login login;
+	private static DB_connection con;
 	private static String angemeldeterUser;
+	public static char benutzerArt;
 	private String name, vorname, benutzername, passwort, straße, ort, hausnummer, buchtitel, autor, isbn,
 			insertAdresse;
 	private int postleitzahl, generatedID, generatedAdressID, adressID;
@@ -628,6 +629,11 @@ public class ButtonHandler implements ActionListener {
 
 	public static String getAngemeldeterUser() {
 		return angemeldeterUser;
+	}
+	
+	public static char getArt()throws SQLException{
+		return benutzerArt = (con.executequery_Value(DB_connection.getPerson(con.executequery_Value(DB_connection.checkAnmeldung(angemeldeterUser, login.getPasswort()),
+				3)), 5)).charAt(0);
 	}
 
 	/**

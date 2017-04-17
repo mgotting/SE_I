@@ -224,7 +224,7 @@ public class DB_connection {
 		return values;
 	}
 	
-	//TODO:Name für methode
+	//TODO: Befüllt Array mit allen vorhandenen Benutzerdaten
 	public String[] executequery_Array(String SQLquery) throws SQLException{
 		Statement st = cn.createStatement();
 		ResultSet rs = st.executeQuery(SQLquery);
@@ -233,7 +233,7 @@ public class DB_connection {
 		while (rs.next()){
 		for(int i=0; i<12; i++){
 			array[i]=rs.getString(i+1);
-			System.out.println(array[i]);
+//			System.out.println(array[i]);
 			}
 		}
 		return array;

@@ -27,7 +27,7 @@ import connectionToDatabase.JTableview;
  */
 public class BenutzerÄndern {
 	JPanel panel;
-	JButton ändern, auswählen;
+	JButton ändern;
 	public JTableview tableviewUser, tableviewAdress;
 	JScrollPane scrollPane;
 	public JComboBox studiengruppe;
@@ -73,7 +73,6 @@ public class BenutzerÄndern {
 		panel = new JPanel();
 		// Erzeugung eines Objektes der Klasse JButton
 		ändern = new JButton("ändern");
-		auswählen = new JButton("auswählen");
 		studiengruppe = new JComboBox(Studiengruppe.values());
 		// Erzeugung eines Objektes um ActionEvents zu handeln
 		controlButton = new ButtonHandler(this);
@@ -85,7 +84,6 @@ public class BenutzerÄndern {
 		labelName = new JLabel("Name:", JLabel.LEFT);
 		labelVorname = new JLabel("Vorname:", JLabel.LEFT);
 		labelMatrikelnummer = new JLabel("Matrikelnummer:", JLabel.LEFT);
-		studiengruppe = new JComboBox(Studiengruppe.values());
 		labelStudiengruppe = new JLabel("Studiengruppe:", JLabel.LEFT);
 		labelFakultät = new JLabel("Fakultät:", JLabel.LEFT);
 		labelStraße = new JLabel("Straße:", JLabel.LEFT);
@@ -224,17 +222,13 @@ public class BenutzerÄndern {
 		this.adressID = adressID;
 	}
 		
-	public void launchBenutzerÄndern(JFrame auswahl){
+	public void launchBenutzerÄndern(JFrame auswahl) throws SQLException{
 		auswahl.getContentPane().setVisible(false);
 		// Wir fügen den JButton unserem Panel hinzu:
 		ändern.setBounds(x_right, y_opt4, x_BUTTON_width, y_height);
 		panel.add(ändern);
 		ändern.setActionCommand(ACTION_CHANGE);
 		ändern.addActionListener(controlButton);
-		auswählen.setBounds(x_right2, y_Library, x_BUTTON_width, y_height);
-		panel.add(auswählen);
-		auswählen.setActionCommand(ACTION_AUSWAHL);
-		auswählen.addActionListener(controlButton);
 		
 
 		// Wir fügen die JLabel unserem Panel hinzu:
@@ -266,42 +260,63 @@ public class BenutzerÄndern {
 		// JTextField:
 		tfName.setBounds(x_center, y_north, x_width, y_height);
 		panel.add(tfName);
-		tfName.setEditable(false);
 		tfVorname.setBounds(x_center, y_center, x_width, y_height);
 		panel.add(tfVorname);
-		tfVorname.setEditable(false);
 		tfBenutzername.setBounds(x_center, y_center2, x_width, y_height);
 		panel.add(tfBenutzername);
-		tfBenutzername.setEditable(false);
 		tfPasswort.setBounds(x_center, y_center3, x_width, y_height);
 		panel.add(tfPasswort);
-		tfPasswort.setEditable(false);
+		
 		tfMatrikelnummer.setBounds(x_center, y_south, x_width, y_height);
 		panel.add(tfMatrikelnummer);
-		tfMatrikelnummer.setEditable(false);
 		tfFakultät.setBounds(x_center, y_south_label3, x_width, y_height);
 		panel.add(tfFakultät);
-		tfFakultät.setEditable(false);
 
 		// optional
 		tfStraße.setBounds(x_center, y_opt1, x_width, y_height);
 		panel.add(tfStraße);
-		tfStraße.setEditable(false);
 		tfHausnummer.setBounds(x_center, y_opt2, x_width, y_height);
 		panel.add(tfHausnummer);
-		tfHausnummer.setEditable(false);
 		tfPostleitzahl.setBounds(x_center, y_opt3, x_width, y_height);
 		panel.add(tfPostleitzahl);
-		tfPostleitzahl.setEditable(false);
 		tfOrt.setBounds(x_center, y_opt4, x_width, y_height);
 		panel.add(tfOrt);	
-		tfOrt.setEditable(false);
 
 		//JCombobox
 		studiengruppe.setBounds(x_center, y_south_label2, x_width, y_height);
 		panel.add(studiengruppe);
-		studiengruppe.setEditable(false);
 
+		
+		char art = ButtonHandler.getArt();
+		System.out.println("Wer bist du? " +art);
+		if(art == 'b'){
+			labelStudiengruppe.hide();
+			studiengruppe.hide();
+			labelMatrikelnummer.hide();
+			tfMatrikelnummer.hide();
+			labelFakultät.hide();
+			tfFakultät.hide();
+			labelStraße.hide();
+			tfStraße.hide();
+			labelHausnummer.hide();
+			tfHausnummer.hide();
+			labelPostleitzahl.hide();
+			tfPostleitzahl.hide();
+			labelOrt.hide();
+			tfOrt.hide();
+			ändern.setBounds(x_right, y_center3, x_BUTTON_width, y_height);
+		}
+		if(art == 's'){
+			labelFakultät.hide();
+			tfFakultät.hide();
+		}
+		if(art == 'p'){
+			labelStudiengruppe.hide();
+			studiengruppe.hide();
+			labelMatrikelnummer.hide();
+			tfMatrikelnummer.hide();
+		}
+		
 //		TODO: Löschen
 //		if(tableviewUser==null){
 //			tableviewUser = new JTableview(DB_connection.getUserInfo());
