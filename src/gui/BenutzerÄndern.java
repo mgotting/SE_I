@@ -333,22 +333,19 @@ public class BenutzerÄndern {
 		String[] benutzerInfo =new String[13];	
 		try {
 			benutzerInfo = con.executequery_Array(DB_connection.getUserInfo(ButtonHandler.getAngemeldeterUser()));
-			//TODO: Auf Benutzerart abfragen und Tf entsprechend true/false setzen
-//		for(int i=0; i<benutzerInfo.length; i++){
-		setName(benutzerInfo[0]);
-		setVorname(benutzerInfo[1]);
-		setBenutzername(benutzerInfo[2]);
-		setPasswort(benutzerInfo[3]);
-		setMatrikelnummer(benutzerInfo[4]);
-//		setStudiengruppe( (Studiengruppe) benutzerInfo[5].toString());
-		setFakultät(benutzerInfo[6]);
-		setStraße(benutzerInfo[7]);
-		setHausnummer(benutzerInfo[8]);
-		setPLZ(benutzerInfo[9]);
-		setOrt(benutzerInfo[10]);
+			
+			setName(benutzerInfo[0]);
+			setVorname(benutzerInfo[1]);
+			setBenutzername(benutzerInfo[2]);
+			setPasswort(benutzerInfo[3]);
+			setMatrikelnummer(benutzerInfo[4]);
+	//		setStudiengruppe( (Studiengruppe) benutzerInfo[5].toString());
+			setFakultät(benutzerInfo[6]);
+			setStraße(benutzerInfo[7]);
+			setHausnummer(benutzerInfo[8]);
+			setPLZ(benutzerInfo[9]);
+			setOrt(benutzerInfo[10]);
 		 
-		
-//		}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
