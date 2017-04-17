@@ -51,6 +51,7 @@ public class BenutzerAnlegen {
 	private static String[] benutzerliste = { "Benutzer wählen", "Student", "Professor", "Personal" };
 	private String benutzerArt;
 	
+	@SuppressWarnings("unchecked")
 	public BenutzerAnlegen(){
 		panel = new JPanel();
 		// Erzeugung eines Objektes der Klasse JButton
