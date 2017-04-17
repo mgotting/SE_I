@@ -364,7 +364,7 @@ public class ButtonHandler implements ActionListener {
 				//TODO:Löschen
 				//benutzerÄndern.tableviewUser.updateSQLTable(DB_connection.getUserInfo());
 				JOptionPane.showMessageDialog(new JFrame(), "Änderungen wurden erfolgreich verbucht!");
-				EintragLöschenÄndern();
+				EintragLöschenÄndern(); 
 				con.disconnect();
 				break;
 			// 4. Anwendungsfall

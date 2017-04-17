@@ -60,13 +60,13 @@ public class Startmenu {
 		menu.add(benutzerAnlegen);
 		benutzerAnlegen.setActionCommand(ACTION_BENUTZER_ANLEGEN);
 		benutzerAnlegen.addActionListener(controlMenu);
-		menu.add(benutzerÄndern);
-		benutzerÄndern.setActionCommand(ACTION_BENUTZER_ÄNDERN);
-		benutzerÄndern.addActionListener(controlMenu);
 		menu.add(buchInventarisieren);
 		buchInventarisieren.setActionCommand(ACTION_BUCH_INVENTARISIEREN);
 		buchInventarisieren.addActionListener(controlMenu);
 		}
+		menu.add(benutzerÄndern);
+		benutzerÄndern.setActionCommand(ACTION_BENUTZER_ÄNDERN);
+		benutzerÄndern.addActionListener(controlMenu);
 		menu.add(buchZurückgeben);
 		buchZurückgeben.setActionCommand(ACTION_BUCH_ZURÜCKGEBEN);
 		buchZurückgeben.addActionListener(controlMenu);
