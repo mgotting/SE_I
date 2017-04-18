@@ -401,7 +401,7 @@ public class ButtonHandler implements ActionListener {
 			// ausleihen--------------------------------------------------------------------------------------------
 			case "AUSLEIHEN":
 				if (PrüfungAusleihe() == 3) {
-					JOptionPane.showMessageDialog(new JFrame(), "Sie haben das Maximum von 2 Ausleihen erreicht");
+					JOptionPane.showMessageDialog(new JFrame(), "Sie haben das Maximum von 3 Ausleihen erreicht");
 					return;
 				}
 				System.out.println("test");
