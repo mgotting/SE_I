@@ -400,10 +400,10 @@ public class ButtonHandler implements ActionListener {
 			// 5.Anwendungsfall
 			// ausleihen--------------------------------------------------------------------------------------------
 			case "AUSLEIHEN":
-				/*if (PrüfungAusleihe(3) == true) {
+				if (PrüfungAusleihe() == 3) {
 					JOptionPane.showMessageDialog(new JFrame(), "Sie haben das Maximum von 2 Ausleihen erreicht");
 					return;
-				}*/
+				}
 				System.out.println("test");
 				System.out.println(con.executequery_Value(DB_connection.getAnzahlAusleihe(angemeldeterUser), 1));
 				GUIDatenAus();
@@ -623,8 +623,8 @@ public class ButtonHandler implements ActionListener {
 				.equals(con.executequery_Value(DB_connection.checkAnmeldung(angemeldeterUser, login.getPasswort()), 1));
 	}
 
-	private boolean PrüfungAusleihe(int Grenze) throws SQLException {
-		return Grenze == Integer.parseInt(con.executequery_Value(DB_connection.getAnzahlAusleihe(angemeldeterUser), 1));
+	private int PrüfungAusleihe() throws SQLException {
+		return Integer.parseInt(con.executequery_Value(DB_connection.getAnzahlAusleihe(angemeldeterUser), 1));
 	}
 
 	public static String getAngemeldeterUser() {
