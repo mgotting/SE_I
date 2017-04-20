@@ -285,6 +285,7 @@ public class BenutzerÄndern {
 		//JCombobox
 		studiengruppe.setBounds(x_center, y_south_label2, x_width, y_height);
 		panel.add(studiengruppe);
+		studiengruppe.setEditable(true);
 
 		
 		char art = ButtonHandler.getArt();
@@ -329,6 +330,7 @@ public class BenutzerÄndern {
 		auswahl.setTitle("Benutzer ändern");
 		auswahl.setContentPane(panel);
 		
+		// Befüllt alle Textfelder mit Daten aus DB
 		con = DB_connection.getDbConnection();
 		String[] benutzerInfo =new String[13];	
 		try {
@@ -339,7 +341,7 @@ public class BenutzerÄndern {
 			setBenutzername(benutzerInfo[2]);
 			setPasswort(benutzerInfo[3]);
 			setMatrikelnummer(benutzerInfo[4]);
-	//		setStudiengruppe( (Studiengruppe) benutzerInfo[5].toString());
+			setStudiengruppe(Studiengruppe.valueOf(benutzerInfo[5]));
 			setFakultät(benutzerInfo[6]);
 			setStraße(benutzerInfo[7]);
 			setHausnummer(benutzerInfo[8]);
