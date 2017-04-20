@@ -200,8 +200,12 @@ public class BenutzerÄndern {
 		this.tfOrt.setText(ort);
 	}
 	
-	public String getBenutzerArt(){
+	public String getBenutzerArt() throws NullPointerException{
+		if (benutzerArt==null){
+		throw new NullPointerException("Keine Person ausgewählt!");
+		} else {
 		return benutzerArt;
+		}
 	}
 	
 	public void setBenutzerArt(String benutzerArt){
@@ -287,7 +291,7 @@ public class BenutzerÄndern {
 		panel.add(studiengruppe);
 		studiengruppe.setEditable(true);
 
-		
+		//Textfelder/Labels werden entsprechend des Benutzers angezeigt
 		char art = ButtonHandler.getArt();
 		System.out.println("Wer bist du? " +art);
 		if(art == 'b'){
@@ -310,6 +314,7 @@ public class BenutzerÄndern {
 		if(art == 's'){
 			labelFakultät.hide();
 			tfFakultät.hide();
+			tfMatrikelnummer.setEditable(false);
 		}
 		if(art == 'p'){
 			labelStudiengruppe.hide();
@@ -332,7 +337,7 @@ public class BenutzerÄndern {
 		
 		// Befüllt alle Textfelder mit Daten aus DB
 		con = DB_connection.getDbConnection();
-		String[] benutzerInfo =new String[13];	
+		String[] benutzerInfo =new String[14];	
 		try {
 			benutzerInfo = con.executequery_Array(DB_connection.getUserInfo(ButtonHandler.getAngemeldeterUser()));
 			
@@ -347,6 +352,8 @@ public class BenutzerÄndern {
 			setHausnummer(benutzerInfo[8]);
 			setPLZ(benutzerInfo[9]);
 			setOrt(benutzerInfo[10]);
+			setBenutzerArt(benutzerInfo[11]);
+			setPersonID(benutzerInfo[12]);
 		 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -165,7 +165,7 @@ public class DB_connection {
 	}
 	
 	public static String getUserInfo(String benutzername){
-		return "SELECT Name, Vorname, Benutzername, Passwort, Matrikelnummer, Studiengruppe, Fakultät, Straße, Hausnummer, Postleitzahl, Ort, Art FROM library.person LEFT JOIN library.adresse ON library.adresse.AdressID=library.person.AdressID JOIN library.benutzer ON library.person.PersonID=library.benutzer.PersonID LEFT JOIN library.student ON library.person.PersonID=library.student.PersonID LEFT JOIN library.professor ON library.person.PersonID=library.professor.PersonID LEFT JOIN library.personal ON library.person.PersonID=library.personal.PersonID WHERE library.benutzer.Benutzername='"+benutzername+"';";
+		return "SELECT Name, Vorname, Benutzername, Passwort, Matrikelnummer, Studiengruppe, Fakultät, Straße, Hausnummer, Postleitzahl, Ort, Art, library.person.PersonID FROM library.person LEFT JOIN library.adresse ON library.adresse.AdressID=library.person.AdressID JOIN library.benutzer ON library.person.PersonID=library.benutzer.PersonID LEFT JOIN library.student ON library.person.PersonID=library.student.PersonID LEFT JOIN library.professor ON library.person.PersonID=library.professor.PersonID LEFT JOIN library.personal ON library.person.PersonID=library.personal.PersonID WHERE library.benutzer.Benutzername='"+benutzername+"';";
 	}
 	public static String Passwörter(){
 		return "SELECT Passwort FROM library.benutzer WHERE library.person.PersonID=library.benutzer.PersonID";
@@ -228,10 +228,10 @@ public class DB_connection {
 	public String[] executequery_Array(String SQLquery) throws SQLException{
 		Statement st = cn.createStatement();
 		ResultSet rs = st.executeQuery(SQLquery);
-		String array[]=new String[13];
+		String array[]=new String[14];
 		
 		while (rs.next()){
-		for(int i=0; i<12; i++){
+		for(int i=0; i<13; i++){
 			array[i]=rs.getString(i+1);
 //			System.out.println(array[i]);
 			}
