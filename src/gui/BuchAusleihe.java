@@ -1,37 +1,28 @@
-/**
- * 
- */
+
 package gui;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
+import javax.swing.*;
+import java.sql.*;
 
 import application.ButtonHandler;
 import connectionToDatabase.DB_connection;
 import connectionToDatabase.JTableview;
 
-/**
- * @author Sandra
- *
- */
+
 public class BuchAusleihe {
+	DB_connection cn = null;
 	JPanel panel;
-	JButton ausleihen, buchAuswählen;
-	public JTableview tableviewBooks;
-	JScrollPane scrollPane;
+	JButton ausleihen, buchAuswählen, bestätigen, abbrechen;
+	public JTableview tableviewBooks, tableviewRentBooks;
+	JScrollPane scrollPane, scrollPane2;
+	public Savepoint svpnt = null;
 	
 	ButtonHandler controlButton;
 	
 	public final static String ACTION_BUCH_AUSLEIHEN = "AUSLEIHEN";
 	public final static String ACTION_BUCH_AUSWAHL = "BUCH_AUSWAHL";
+	public final static String ACTION_BUCH_BESTÄTIGEN = "BESTÄTIGEN";
+	public final static String ACTION_BUCH_ABBRECHEN = "ABBRECHEN";
 	
 	int y_north = 60;
 	int y_north2 = 80;
@@ -60,6 +51,8 @@ public class BuchAusleihe {
 		// Erzeugung eines Objektes der Klasse JButton
 		ausleihen = new JButton("ausleihen");
 		buchAuswählen = new JButton("auswählen");
+		bestätigen = new JButton ("bestätigen");
+		abbrechen = new JButton ("abbrechen");
 		// Erzeugung eines Objektes um ActionEvents zu handeln
 		controlButton = new ButtonHandler(this);
 
@@ -83,10 +76,22 @@ public class BuchAusleihe {
 		panel.add(ausleihen);
 		ausleihen.setActionCommand(ACTION_BUCH_AUSLEIHEN);
 		ausleihen.addActionListener(controlButton);
+		
 		buchAuswählen.setBounds(x_right2, y_Library, x_BUTTON_width, y_height);
 		panel.add(buchAuswählen);
 		buchAuswählen.setActionCommand(ACTION_BUCH_AUSWAHL);
 		buchAuswählen.addActionListener(controlButton);
+		
+		bestätigen.setBounds(x_right2 , y_Library + 150, x_BUTTON_width, y_height );
+		panel.add(bestätigen);
+		bestätigen.setActionCommand(ACTION_BUCH_BESTÄTIGEN);
+		bestätigen.addActionListener(controlButton);
+		
+		abbrechen.setBounds(x_right2, y_Library +220, x_BUTTON_width, y_height);
+		panel.add(abbrechen);
+		abbrechen.setActionCommand(ACTION_BUCH_ABBRECHEN);
+		abbrechen.addActionListener(controlButton);
+		
 
 		// Wir fügen die JLabel unserem Panel hinzu:
 		labelTitel.setBounds(x_left2, y_north2, x_width, y_height);
@@ -110,9 +115,18 @@ public class BuchAusleihe {
 			scrollPane = new JScrollPane(tableviewBooks.getSQLTable());
 			scrollPane.setBounds(x_left, y_Library, x_widthLibrary, y_heightLibrary);
 			panel.add(scrollPane);
-		}	
+		}
+		
+		if(tableviewRentBooks ==null){
+			tableviewRentBooks = new JTableview(DB_connection.getAllRentBooks(ButtonHandler.getAngemeldeterUser()));
+			scrollPane2 = new JScrollPane(tableviewRentBooks.getSQLTable());
+			scrollPane2.setBounds(x_left, y_Library + 150, x_widthLibrary, y_heightLibrary+150);
+			panel.add(scrollPane2);
+		}
 		auswahl.setTitle("Buch ausleihen");
 		auswahl.setContentPane(panel);
+		
+		cn = DB_connection.getDbConnection();
 	}
 	
 	public String getBuchtitel()

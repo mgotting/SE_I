@@ -32,7 +32,6 @@ public class ButtonHandler implements ActionListener {
 	private Benutzer benutzer;
 	private boolean adresseVorhanden;
 	private Adresse adresse;
-	private int counter = 0;
 	private PersonABC person;
 
 	// create reference to GUI
@@ -199,95 +198,124 @@ public class ButtonHandler implements ActionListener {
 					break;
 				}
 				break;
-//			TODO: Löschen
-//			// zu ändernden Benutzer auswählen, damit sich die GUI mit den
-//			// DB-Werten befüllt---------------------------------------------
-//			case "AUSWÄHLEN":
-//				benutzerÄndern.adresseSperren();
-//				if (benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow() == -1)
-//					throw new JTableException("Fehler: Zeile nicht markiert!");
-//				String art = (String) benutzerÄndern.tableviewUser.getSQLTable()
-//						.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 11).toString();
-//				benutzerÄndern.setBenutzerArt(art);
-//				System.out.println("Welcher Benutzer bist du? " + art);
-//
-//				String name = (String) benutzerÄndern.tableviewUser.getSQLTable()
-//						.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 1).toString();
-//				benutzerÄndern.setName(name);
-//				benutzerÄndern.tfName.setEditable(true);
-//				String vorname = (String) benutzerÄndern.tableviewUser.getSQLTable()
-//						.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 2).toString();
-//				benutzerÄndern.setVorname(vorname);
-//				benutzerÄndern.tfVorname.setEditable(true);
-//				String benutzername = (String) benutzerÄndern.tableviewUser.getSQLTable()
-//						.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 3).toString();
-//				benutzerÄndern.setBenutzername(benutzername);
-//				benutzerÄndern.tfBenutzername.setEditable(true);
-////				String passwort = (String) benutzerÄndern.tableviewUser.getSQLTable()
-////						.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 4).toString();
-//				String passwort = (String) DB_connection.Passwörter().toString();
-//				benutzerÄndern.setPasswort(passwort);
-//				benutzerÄndern.tfPasswort.setEditable(true);
-//
-//				switch (art) {
-//				// Benutzer vom Typ Student (s) wurde ausgewählt
-//				case "s":
-//					String matrikelnummer = (String) benutzerÄndern.tableviewUser.getSQLTable()
-//							.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 4).toString();
-//					benutzerÄndern.setMatrikelnummer(matrikelnummer);
-//					Studiengruppe studiengruppe = Studiengruppe.valueOf( benutzerÄndern.tableviewUser.getSQLTable()
-//							.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 5).toString());
-//					benutzerÄndern.setStudiengruppe(studiengruppe);
-//					benutzerÄndern.studiengruppe.setEditable(true);
-//					benutzerÄndern.adresseFreigeben();
-//					break;
-//				// Benutzer vom Typ Professor (p) wurde ausgewählt
-//				case "p":
-//					String fakultät = (String) benutzerÄndern.tableviewUser.getSQLTable()
-//							.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 6).toString();
-//					benutzerÄndern.setFakultät(fakultät);
-//					benutzerÄndern.tfFakultät.setEditable(true);
-//					benutzerÄndern.adresseFreigeben();
-//					break;
-//				}
-//
-//				if (benutzerÄndern.tableviewUser.getSQLTable()
-//						.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 12) == null) {
-//					adressID = -1;
-//				} else {
-//					adressID = Integer.parseInt(benutzerÄndern.tableviewUser.getSQLTable()
-//							.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 12).toString());
-//				}
-//
-//				String straße = (String) benutzerÄndern.tableviewUser.getSQLTable()
-//						.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 7).toString();
-//				benutzerÄndern.setStraße(straße);
-//				String hausnummer = (String) benutzerÄndern.tableviewUser.getSQLTable()
-//						.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 8).toString();
-//				benutzerÄndern.setHausnummer(hausnummer);
-//				String postleitzahl = (String) benutzerÄndern.tableviewUser.getSQLTable()
-//						.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 9).toString();
-//				benutzerÄndern.setPLZ(postleitzahl);
-//				String ort = (String) benutzerÄndern.tableviewUser.getSQLTable()
-//						.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 10).toString();
-//				benutzerÄndern.setOrt(ort);
-//
-//				break;
+			// TODO: Löschen
+			// // zu ändernden Benutzer auswählen, damit sich die GUI mit den
+			// // DB-Werten befüllt---------------------------------------------
+			// case "AUSWÄHLEN":
+			// benutzerÄndern.adresseSperren();
+			// if (benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow()
+			// == -1)
+			// throw new JTableException("Fehler: Zeile nicht markiert!");
+			// String art = (String) benutzerÄndern.tableviewUser.getSQLTable()
+			// .getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(),
+			// 11).toString();
+			// benutzerÄndern.setBenutzerArt(art);
+			// System.out.println("Welcher Benutzer bist du? " + art);
+			//
+			// String name = (String) benutzerÄndern.tableviewUser.getSQLTable()
+			// .getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(),
+			// 1).toString();
+			// benutzerÄndern.setName(name);
+			// benutzerÄndern.tfName.setEditable(true);
+			// String vorname = (String)
+			// benutzerÄndern.tableviewUser.getSQLTable()
+			// .getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(),
+			// 2).toString();
+			// benutzerÄndern.setVorname(vorname);
+			// benutzerÄndern.tfVorname.setEditable(true);
+			// String benutzername = (String)
+			// benutzerÄndern.tableviewUser.getSQLTable()
+			// .getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(),
+			// 3).toString();
+			// benutzerÄndern.setBenutzername(benutzername);
+			// benutzerÄndern.tfBenutzername.setEditable(true);
+			//// String passwort = (String)
+			// benutzerÄndern.tableviewUser.getSQLTable()
+			//// .getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(),
+			// 4).toString();
+			// String passwort = (String) DB_connection.Passwörter().toString();
+			// benutzerÄndern.setPasswort(passwort);
+			// benutzerÄndern.tfPasswort.setEditable(true);
+			//
+			// switch (art) {
+			// // Benutzer vom Typ Student (s) wurde ausgewählt
+			// case "s":
+			// String matrikelnummer = (String)
+			// benutzerÄndern.tableviewUser.getSQLTable()
+			// .getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(),
+			// 4).toString();
+			// benutzerÄndern.setMatrikelnummer(matrikelnummer);
+			// Studiengruppe studiengruppe = Studiengruppe.valueOf(
+			// benutzerÄndern.tableviewUser.getSQLTable()
+			// .getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(),
+			// 5).toString());
+			// benutzerÄndern.setStudiengruppe(studiengruppe);
+			// benutzerÄndern.studiengruppe.setEditable(true);
+			// benutzerÄndern.adresseFreigeben();
+			// break;
+			// // Benutzer vom Typ Professor (p) wurde ausgewählt
+			// case "p":
+			// String fakultät = (String)
+			// benutzerÄndern.tableviewUser.getSQLTable()
+			// .getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(),
+			// 6).toString();
+			// benutzerÄndern.setFakultät(fakultät);
+			// benutzerÄndern.tfFakultät.setEditable(true);
+			// benutzerÄndern.adresseFreigeben();
+			// break;
+			// }
+			//
+			// if (benutzerÄndern.tableviewUser.getSQLTable()
+			// .getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(),
+			// 12) == null) {
+			// adressID = -1;
+			// } else {
+			// adressID =
+			// Integer.parseInt(benutzerÄndern.tableviewUser.getSQLTable()
+			// .getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(),
+			// 12).toString());
+			// }
+			//
+			// String straße = (String)
+			// benutzerÄndern.tableviewUser.getSQLTable()
+			// .getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(),
+			// 7).toString();
+			// benutzerÄndern.setStraße(straße);
+			// String hausnummer = (String)
+			// benutzerÄndern.tableviewUser.getSQLTable()
+			// .getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(),
+			// 8).toString();
+			// benutzerÄndern.setHausnummer(hausnummer);
+			// String postleitzahl = (String)
+			// benutzerÄndern.tableviewUser.getSQLTable()
+			// .getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(),
+			// 9).toString();
+			// benutzerÄndern.setPLZ(postleitzahl);
+			// String ort = (String) benutzerÄndern.tableviewUser.getSQLTable()
+			// .getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(),
+			// 10).toString();
+			// benutzerÄndern.setOrt(ort);
+			//
+			// break;
 
 			// 3. Anwendungsfall ändern. DB-Werte werden in den jeweiligen
 			// Tabellen aktualisiert-------------------------------
 			case "ÄNDERN":
-				
-//				TODO:Löschen
-//				String personID = (String) benutzerÄndern.tableviewUser.getSQLTable()
-//						.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 0).toString();
-//				benutzerÄndern.setPersonID(personID);
-//				System.out.println("Welche PersonID hat der ausgewählte Benutzer: " + personID);
-//
-//				art = (String) benutzerÄndern.tableviewUser.getSQLTable()
-//						.getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(), 11).toString();
-//				benutzerÄndern.setBenutzerArt(art);
-//				System.out.println("Welcher Benutzer bist du? " + art);
+
+				// TODO:Löschen
+				// String personID = (String)
+				// benutzerÄndern.tableviewUser.getSQLTable()
+				// .getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(),
+				// 0).toString();
+				// benutzerÄndern.setPersonID(personID);
+				// System.out.println("Welche PersonID hat der ausgewählte
+				// Benutzer: " + personID);
+				//
+				// art = (String) benutzerÄndern.tableviewUser.getSQLTable()
+				// .getValueAt(benutzerÄndern.tableviewUser.getSQLTable().getSelectedRow(),
+				// 11).toString();
+				// benutzerÄndern.setBenutzerArt(art);
+				// System.out.println("Welcher Benutzer bist du? " + art);
 
 				// Personen-Informationen werden geändert
 				System.out.println(benutzerÄndern.getVorname() + " " + benutzerÄndern.getName());
@@ -341,7 +369,8 @@ public class ButtonHandler implements ActionListener {
 
 						// AdressID zur entsprechenden Person eintragen
 						String updPerson = "UPDATE library.person SET AdressID = " + generatedAdressID
-								+ " WHERE library.person.PersonID = " + Integer.parseInt(benutzerÄndern.getPersonID()) + ";";
+								+ " WHERE library.person.PersonID = " + Integer.parseInt(benutzerÄndern.getPersonID())
+								+ ";";
 						boolean updPersonVerbucht = con.executequery(updPerson);
 						boolean adresseVerbucht = con.executequery(insertAdresse);
 						System.out.println("AdresseID erfolgreich in Tabelle Person verbucht: " + updPersonVerbucht);
@@ -364,10 +393,10 @@ public class ButtonHandler implements ActionListener {
 					System.out.println("Adresse erfolgreich geändert: " + adresseGeändert);
 
 				}
-				//TODO:Löschen
-				//benutzerÄndern.tableviewUser.updateSQLTable(DB_connection.getUserInfo());
+				// TODO:Löschen
+				// benutzerÄndern.tableviewUser.updateSQLTable(DB_connection.getUserInfo());
 				JOptionPane.showMessageDialog(new JFrame(), "Änderungen wurden erfolgreich verbucht!");
-				EintragLöschenÄndern(); 
+				EintragLöschenÄndern();
 				con.disconnect();
 				break;
 			// 4. Anwendungsfall
@@ -399,39 +428,7 @@ public class ButtonHandler implements ActionListener {
 				}
 				buchInventarisieren.tableviewBooks.updateSQLTable(DB_connection.getAllBooks());
 				break;
-			// 5.Anwendungsfall
-			// ausleihen--------------------------------------------------------------------------------------------
-			case "AUSLEIHEN":
-				if (PrüfungAusleihe() == 3) {
-					JOptionPane.showMessageDialog(new JFrame(), "Sie haben das Maximum von 3 Ausleihen erreicht");
-					return;
-				}
-				System.out.println("test");
-				System.out.println(con.executequery_Value(DB_connection.getAnzahlAusleihe(angemeldeterUser), 1));
-				GUIDatenAus();
-				con = DB_connection.getDbConnection();
-				if (buchAusleihen.tfTitel.getText().isEmpty() || buchAusleihen.tfAutor.getText().isEmpty()
-						|| buchAusleihen.tfIsbn.getText().isEmpty()) {
-					// kein DB Eintrag
-					JOptionPane.showMessageDialog(new JFrame(), "Fehler: Standardeingaben wurden nicht eingetragen!");
-					return;
-				} else {
-					counter++;
-					int BuchID = Integer.parseInt(buchAusleihen.tableviewBooks.getSQLTable()
-							.getValueAt(buchAusleihen.tableviewBooks.getSQLTable().getSelectedRow(), 3).toString());
-					Ausleihe ausleihe = new Ausleihe(BuchID, angemeldeterUser);
-					System.out.println("ActionCommand erhalten: " + e.getActionCommand());
-					String insertAusleihe = "INSERT INTO ausleihe VALUES('" + ausleihe.getBuchID() + "','"
-							+ angemeldeterUser + "');";
-					con.executequery(insertAusleihe);
-					con.executequery("UPDATE library.exemplar SET Status = 'ausgeliehen' WHERE library.exemplar.BUCHID="
-							+ BuchID);
-					buchAusleihen.tableviewBooks.updateSQLTable(DB_connection.getAllAvailableBooks());
-					JOptionPane.showMessageDialog(new JFrame(),
-							"Der angemeldete User hat das Buch mit der ID: " + BuchID + " erfolgreich ausgeliehen.");
-					System.out.println("Buch erfolgreich ausgeliehen");
-				}
-				break;
+
 			// Buch
 			// auswählen----------------------------------------------------------------------------------------------------------
 			case "BUCH_AUSWAHL":
@@ -455,6 +452,78 @@ public class ButtonHandler implements ActionListener {
 						.getValueAt(buchAusleihen.tableviewBooks.getSQLTable().getSelectedRow(), 2).toString();
 				buchAusleihen.setIsbn(isbn);
 
+				break;
+
+			// 5.Anwendungsfall
+			// ausleihen--------------------------------------------------------------------------------------------
+			case "AUSLEIHEN":
+				if (PrüfungAusleihe() == 3) {
+					JOptionPane.showMessageDialog(new JFrame(), "Sie haben das Maximum von 3 Ausleihen erreicht");
+					return;
+				}
+				GUIDatenAus();
+				buchAusleihen.svpnt = con.createSavepoint("Ausleihe");
+				con = DB_connection.getDbConnection();
+				if (buchAusleihen.tfTitel.getText().isEmpty() || buchAusleihen.tfAutor.getText().isEmpty()
+						|| buchAusleihen.tfIsbn.getText().isEmpty()) {
+					// kein DB Eintrag
+					JOptionPane.showMessageDialog(new JFrame(), "Fehler: Standardeingaben wurden nicht eingetragen!");
+					return;
+				} else {
+					int BuchID = Integer.parseInt(buchAusleihen.tableviewBooks.getSQLTable()
+							.getValueAt(buchAusleihen.tableviewBooks.getSQLTable().getSelectedRow(), 3).toString());
+					Ausleihe ausleihe = new Ausleihe(BuchID, angemeldeterUser);
+					System.out.println("ActionCommand erhalten: " + e.getActionCommand());
+					String insertAusleihe = "INSERT INTO ausleihe VALUES('" + ausleihe.getBuchID() + "','"
+							+ angemeldeterUser + "');";
+					con.executequery(insertAusleihe);
+					con.executequery("UPDATE library.exemplar SET Status = 'ausgeliehen' WHERE library.exemplar.BUCHID="
+							+ BuchID);
+					buchAusleihen.tableviewBooks.updateSQLTable(DB_connection.getAllAvailableBooks());
+					buchAusleihen.tableviewRentBooks
+							.updateSQLTable(DB_connection.getAllRentBooks(ButtonHandler.getAngemeldeterUser()));
+				}
+				break;
+
+			case "BESTÄTIGEN":
+				try {
+					if (con != null) {
+						con.commit();
+						con.disconnect();
+					}
+
+					JOptionPane.showMessageDialog(new JFrame(), "Bücher erfolgreich ausgeliehen");
+					System.out.println("Buch erfolgreich ausgeliehen");
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+
+				}
+				break;
+
+			case "ABBRECHEN":
+				System.out.println("Trying rollback");
+
+				try {
+
+					if (con != null) {
+						con.rollbackChanges(buchAusleihen.svpnt);
+
+						buchAusleihen.tfAutor.setText(null);
+						buchAusleihen.tfIsbn.setText(null);
+						buchAusleihen.tfTitel.setText(null);
+
+						buchAusleihen.tfTitel.setEditable(true);
+						buchAusleihen.tfAutor.setEditable(true);
+						buchAusleihen.tfIsbn.setEditable(true);
+
+						buchAusleihen.tableviewBooks.updateSQLTable(DB_connection.getAllAvailableBooks());
+						buchAusleihen.tableviewRentBooks
+								.updateSQLTable(DB_connection.getAllRentBooks(ButtonHandler.getAngemeldeterUser()));
+
+					}
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
 				break;
 			// F6: Anwendungsfall Buch
 			// zurückgeben------------------------------------------------------------------------------------
@@ -632,10 +701,12 @@ public class ButtonHandler implements ActionListener {
 	public static String getAngemeldeterUser() {
 		return angemeldeterUser;
 	}
-	
-	public static char getArt()throws SQLException{
-		return benutzerArt = (con.executequery_Value(DB_connection.getPerson(con.executequery_Value(DB_connection.checkAnmeldung(angemeldeterUser, login.getPasswort()),
-				3)), 5)).charAt(0);
+
+	public static char getArt() throws SQLException {
+		return benutzerArt = (con.executequery_Value(
+				DB_connection.getPerson(
+						con.executequery_Value(DB_connection.checkAnmeldung(angemeldeterUser, login.getPasswort()), 3)),
+				5)).charAt(0);
 	}
 
 	/**
